@@ -26,6 +26,13 @@ struct lame_enc {
     int samplerate;
     int channel;
     volatile int state;
+
+    int enc_quality;
+    int stereo_mode;
+    int bitrate_mode;
+    int vbr_quality;
+    int vbr_min_bitrate;
+    int vbr_max_bitrate;
 };
 
 enum {

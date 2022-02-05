@@ -1,3 +1,12 @@
+Version 0.1.32 (2021-10-31)
+---------------------------
+* Radio.co stations can now be easily added to butt
+* Advanced codec settings for mp3, aac, ogg/vorbis and opus can now be adjusted
+* The recordings folder may now contain environment variables like ~, $HOME and %USERPROFILE%
+* Fixed issue with characters like $,%,&,§ in the song name 
+* Fixed connection issue in case the server domain has IPv4+6 addresses but Icecast is only listening on IPv4
+* Fixed missing song duration information in the FLAC header when recording
+
 Version 0.1.31 (2021-07-12)
 ---------------------------
 * A delay can now be added to the automatic song title update

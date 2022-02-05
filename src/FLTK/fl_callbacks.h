@@ -77,7 +77,12 @@ void button_add_srv_save_cb(void);
 void button_add_srv_show_pwd_cb(void);
 void radio_add_srv_shoutcast_cb(void);
 void radio_add_srv_icecast_cb(void);
+void radio_add_srv_radioco_cb(void);
 void button_add_srv_revoke_cert_cb(void);
+void button_add_srv_get_stations_cb(void);
+void button_add_srv_select_all_cb(void);
+void button_add_srv_deselect_all_cb(void);
+
 void button_start_agent_cb(void);
 void button_stop_agent_cb(void);
 void check_update_at_startup_cb(void);
@@ -174,6 +179,48 @@ void choice_cfg_song_delay_cb(void);
 void update_song(void* user_data);
 bool stop_recording(bool ask);
 
+void choice_stream_mp3_enc_quality_cb(void);
+void choice_stream_mp3_stereo_mode_cb(void);
+void choice_stream_mp3_bitrate_mode_cb(void);
+void choice_stream_mp3_vbr_quality_cb(void);
+void choice_stream_mp3_vbr_min_bitrate_cb(void);
+void choice_stream_mp3_vbr_max_bitrate_cb(void);
+
+void choice_stream_vorbis_bitrate_mode_cb(void);
+void choice_stream_vorbis_vbr_quality_cb(void);
+void choice_stream_vorbis_vbr_min_bitrate_cb(void);
+void choice_stream_vorbis_vbr_max_bitrate_cb(void);
+
+void choice_stream_opus_audio_type_cb(void);
+void choice_stream_opus_bitrate_mode_cb(void);
+void choice_stream_opus_quality_cb(void);
+void choice_stream_opus_bandwidth_cb(void);
+
+void choice_stream_aac_profile_cb(void);
+void choice_stream_aac_afterburner_cb(void);
+void choice_stream_aac_bitrate_mode_cb(void);
+
+
+void choice_rec_mp3_enc_quality_cb(void);
+void choice_rec_mp3_stereo_mode_cb(void);
+void choice_rec_mp3_bitrate_mode_cb(void);
+void choice_rec_mp3_vbr_quality_cb(void);
+void choice_rec_mp3_vbr_min_bitrate_cb(void);
+void choice_rec_mp3_vbr_max_bitrate_cb(void);
+
+void choice_rec_vorbis_bitrate_mode_cb(void);
+void choice_rec_vorbis_vbr_quality_cb(void);
+void choice_rec_vorbis_vbr_min_bitrate_cb(void);
+void choice_rec_vorbis_vbr_max_bitrate_cb(void);
+
+void choice_rec_opus_audio_type_cb(void);
+void choice_rec_opus_bitrate_mode_cb(void);
+void choice_rec_opus_quality_cb(void);
+void choice_rec_opus_bandwidth_cb(void);
+
+void choice_rec_aac_profile_cb(void);
+void choice_rec_aac_afterburner_cb(void);
+void choice_rec_aac_bitrate_mode_cb(void);
 
 
 

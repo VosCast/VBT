@@ -29,7 +29,7 @@ void stream_silence_timer(void*);
 void record_silence_timer(void*);
 void stream_signal_timer(void*);
 void record_signal_timer(void*);
-
+void wait_for_radioco_timer(void*);
 
 void display_rotate_timer(void*);
 void app_timer(void*);

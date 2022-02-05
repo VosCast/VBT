@@ -52,12 +52,16 @@
 #include "parseconfig.h"
 #include "vu_meter.h"
 #include "util.h"
+#include "sockfuncs.h"
 #include "flgui.h"
 #include "fl_funcs.h"
 #include "fl_timer_funcs.h"
 #include "command.h"
 #include "update.h"
 #include "tray_agent.h"
+#ifdef WITH_RADIOCO
+ #include "radioco.h"
+#endif
 #ifdef HAVE_LIBFDK_AAC
  #include "aac_encode.h"
 #endif
@@ -176,7 +180,7 @@ int read_cfg(void)
             snprintf(cfg_path, PATH_MAX+strlen(CONFIG_FILE), "%s\\%s", p, CONFIG_FILE);
         }
     }
-#else //UNIX
+#else //UNIX/MacOS
     if((cfg_path == NULL) || (shift_pressed == 1))
     {
         if((p = fl_getenv("HOME")) == NULL)
@@ -326,6 +330,7 @@ void set_locale_from_config(void)
 
 int main(int argc, char *argv[])
 {
+  
     char lcd_buf[33];
     char info_buf[256];
     int opt;
@@ -334,7 +339,8 @@ int main(int argc, char *argv[])
     int server_mode = SERVER_MODE_LOCAL;
     char server_addr[128];
     
-
+  
+    
     cfg_path = NULL;
     command_t command;
     command.cmd = CMD_EMPTY;
@@ -351,6 +357,7 @@ int main(int argc, char *argv[])
     set_locale_from_system();
 #endif
 
+    sock_init();
     
     // Parse command line parameters
     while((opt = getopt(argc, argv, ":hc:Axs:drtnqu:a:p:S")) != -1)
@@ -632,6 +639,10 @@ int main(int argc, char *argv[])
 
 #else
     fl_g->group_agent->deactivate();
+#endif
+
+#ifndef WITH_RADIOCO
+    fl_g->radio_add_srv_radioco->hide();
 #endif
 
 

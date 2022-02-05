@@ -43,17 +43,19 @@
  typedef int socklen_t;
 #endif
 
+void sock_init(void)
+{
+#ifdef WIN32
+    WSADATA wsa;
+    WSAStartup(MAKEWORD(2,2),&wsa);
+#endif
+}
 int sock_connect(const char *addr, unsigned int port, int timout_ms)
 {
     int sock;
     int ret;
     char port_str[8];
     struct addrinfo hints, *infoptr, *p; // So no need to use memset global variables
-    
-#ifdef WIN32
-    WSADATA wsa;
-    WSAStartup(MAKEWORD(2,2),&wsa);
-#endif
     
     snprintf(port_str, sizeof(port_str), "%d", port);
     memset(&hints, 0, sizeof hints);
@@ -252,18 +254,53 @@ int sock_isvalid(int s)
     getsockopt(s, SOL_SOCKET, SO_ERROR, (char*)(&optval), &len);
     
 
-
     if (optval)
         return 0;
 
     return 1;
 }
 
+int sock_listen(int port, int *listen_sock)
+{
+    int conn_sock;
+    int val = 1;
+
+    struct sockaddr_in servaddr;
+  
+    *listen_sock = socket(AF_INET, SOCK_STREAM, 0);
+    if(*listen_sock == -1) {
+          return SOCK_ERR_CREATE;
+    }
+
+    memset(&servaddr, 0, sizeof(servaddr));
+    servaddr.sin_family = AF_INET;
+    servaddr.sin_addr.s_addr = htonl(INADDR_ANY);
+    servaddr.sin_port = htons(port);
+      
+    // Make sure the port can be re-used without waiting for the TIME_WAIT period is over
+    //(https://stackoverflow.com/questions/3229860/what-is-the-meaning-of-so-reuseaddr-setsockopt-option-linux)
+    setsockopt(*listen_sock, SOL_SOCKET, SO_REUSEADDR, (const char*)&val, sizeof(int));
+
+    if (bind(*listen_sock, (struct sockaddr*)&servaddr, sizeof(servaddr)) != 0) {
+        return SOCK_ERR_BIND;
+    }
+    
+    if ((listen(*listen_sock, 1)) != 0) {
+        return SOCK_ERR_LISTEN;
+    }
+
+    conn_sock = accept(*listen_sock, NULL, NULL);
+    
+    if (conn_sock >= 0)
+        sock_close(*listen_sock);
+
+    return conn_sock;
+}
+
 void sock_close(int s)
 {
 #ifdef WIN32
     closesocket(s);
-    WSACleanup();
 #else
     close(s);
 #endif

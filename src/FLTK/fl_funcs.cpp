@@ -39,12 +39,34 @@
 #include "strfuncs.h"
 
 
+int get_bitrate_index(int bitrate)
+{
+    int bitrate_idx[] = { 8, 16, 24, 32, 40, 48, 56, 64, 80, 96, 112,
+                        128, 160, 192, 224, 256, 320 };
+
+    for(int i = 0; i < sizeof(bitrate_idx)/sizeof(int); i++)
+        if(bitrate == bitrate_idx[i])
+            return i;
+
+    return 0;
+}
+
+int get_bitrate_index_vorbis_vbr(int bitrate)
+{
+    int bitrate_idx[] = { 0, 48, 56, 64, 80, 96, 112,
+                        128, 160, 192, 224, 256, 320 };
+
+    for(int i = 0; i < sizeof(bitrate_idx)/sizeof(int); i++)
+        if(bitrate == bitrate_idx[i])
+            return i;
+
+    return 0;
+}
+
 void fill_cfg_widgets(void)
 {
     int i;
 
-    int bitrate[] = { 8, 16, 24, 32, 40, 48, 56, 64, 80, 96, 112,
-                    128, 160, 192, 224, 256, 320, 0 };
 
 #ifndef HAVE_LIBFDK_AAC
     fl_g->menu_item_cfg_aac->hide();
@@ -132,7 +154,6 @@ void fill_cfg_widgets(void)
     {
         fl_g->choice_cfg_codec->value(CHOICE_FLAC);
         fl_g->choice_cfg_bitrate->hide();
-
     }
     
     if (cfg.audio.dev_remember == REMEMBER_BY_ID)
@@ -145,14 +166,7 @@ void fill_cfg_widgets(void)
     else
         fl_g->choice_cfg_channel->value(CHOICE_STEREO);
 
-    for(i = 0; bitrate[i] != 0; i++)
-    {
-        if(cfg.audio.bitrate == bitrate[i])
-        {
-            fl_g->choice_cfg_bitrate->value(i);
-            break;
-        }
-    }
+    fl_g->choice_cfg_bitrate->value(get_bitrate_index(cfg.audio.bitrate));
 
     fl_g->input_cfg_present_level->value(-cfg.audio.signal_level);
     fl_g->input_cfg_absent_level->value(-cfg.audio.silence_level);
@@ -235,9 +249,7 @@ void fill_cfg_widgets(void)
         fl_g->choice_rec_bitrate->hide();
     }
 
-    for(i = 0; bitrate[i] != 0; i++)
-        if(cfg.rec.bitrate == bitrate[i])
-            fl_g->choice_rec_bitrate->value(i);
+    fl_g->choice_rec_bitrate->value(get_bitrate_index(cfg.rec.bitrate));
 
     if(cfg.rec.start_rec)
         fl_g->check_cfg_auto_start_rec->value(1);
@@ -348,6 +360,55 @@ void fill_cfg_widgets(void)
     else
         fl_g->radio_gui_vu_solid->setonly();
 
+
+    //fill mp3 codec settings section
+    fl_g->choice_stream_mp3_enc_quality->value(cfg.mp3_codec_stream.enc_quality);
+    fl_g->choice_stream_mp3_stereo_mode->value(cfg.mp3_codec_stream.stereo_mode);
+    fl_g->choice_stream_mp3_bitrate_mode->value(cfg.mp3_codec_stream.bitrate_mode);
+    fl_g->choice_stream_mp3_vbr_quality->value(cfg.mp3_codec_stream.vbr_quality);
+    fl_g->choice_stream_mp3_vbr_min_bitrate->value(get_bitrate_index(cfg.mp3_codec_stream.vbr_min_bitrate));
+    fl_g->choice_stream_mp3_vbr_max_bitrate->value(get_bitrate_index(cfg.mp3_codec_stream.vbr_max_bitrate));
+
+    fl_g->choice_rec_mp3_enc_quality->value(cfg.mp3_codec_rec.enc_quality);
+    fl_g->choice_rec_mp3_stereo_mode->value(cfg.mp3_codec_rec.stereo_mode);
+    fl_g->choice_rec_mp3_bitrate_mode->value(cfg.mp3_codec_rec.bitrate_mode);
+    fl_g->choice_rec_mp3_vbr_quality->value(cfg.mp3_codec_rec.vbr_quality);
+    fl_g->choice_rec_mp3_vbr_min_bitrate->value(get_bitrate_index(cfg.mp3_codec_rec.vbr_min_bitrate));
+    fl_g->choice_rec_mp3_vbr_max_bitrate->value(get_bitrate_index(cfg.mp3_codec_rec.vbr_max_bitrate));
+
+
+    //fill vorbis codec settings section
+    fl_g->choice_stream_vorbis_bitrate_mode->value(cfg.vorbis_codec_stream.bitrate_mode);
+    fl_g->choice_stream_vorbis_vbr_quality->value(cfg.vorbis_codec_stream.vbr_quality);
+    fl_g->choice_stream_vorbis_vbr_min_bitrate->value(get_bitrate_index_vorbis_vbr(cfg.vorbis_codec_stream.vbr_min_bitrate));
+    fl_g->choice_stream_vorbis_vbr_max_bitrate->value(get_bitrate_index_vorbis_vbr(cfg.vorbis_codec_stream.vbr_max_bitrate));
+
+    fl_g->choice_rec_vorbis_bitrate_mode->value(cfg.vorbis_codec_rec.bitrate_mode);
+    fl_g->choice_rec_vorbis_vbr_quality->value(cfg.vorbis_codec_rec.vbr_quality);
+    fl_g->choice_rec_vorbis_vbr_min_bitrate->value(get_bitrate_index_vorbis_vbr(cfg.vorbis_codec_rec.vbr_min_bitrate));
+    fl_g->choice_rec_vorbis_vbr_max_bitrate->value(get_bitrate_index_vorbis_vbr(cfg.vorbis_codec_rec.vbr_max_bitrate));
+    
+    //fill opus codec settings section
+    fl_g->choice_stream_opus_bitrate_mode->value(cfg.opus_codec_stream.bitrate_mode);
+    fl_g->choice_stream_opus_quality->value(cfg.opus_codec_stream.quality);
+    fl_g->choice_stream_opus_audio_type->value(cfg.opus_codec_stream.audio_type);
+    fl_g->choice_stream_opus_bandwidth->value(cfg.opus_codec_stream.bandwidth);
+
+    fl_g->choice_rec_opus_bitrate_mode->value(cfg.opus_codec_rec.bitrate_mode);
+    fl_g->choice_rec_opus_quality->value(cfg.opus_codec_rec.quality);
+    fl_g->choice_rec_opus_audio_type->value(cfg.opus_codec_rec.audio_type);
+    fl_g->choice_rec_opus_bandwidth->value(cfg.opus_codec_rec.bandwidth);
+    
+
+    //fill aac codec settings section
+    fl_g->choice_stream_aac_bitrate_mode->value(cfg.aac_codec_stream.bitrate_mode);
+    fl_g->choice_stream_aac_afterburner->value(cfg.aac_codec_stream.afterburner);
+    fl_g->choice_stream_aac_profile->value(cfg.aac_codec_stream.profile);
+
+    fl_g->choice_rec_aac_bitrate_mode->value(cfg.aac_codec_rec.bitrate_mode);
+    fl_g->choice_rec_aac_afterburner->value(cfg.aac_codec_rec.afterburner);
+    fl_g->choice_rec_aac_profile->value(cfg.aac_codec_rec.profile);
+
 }
 
 //Updates the samplerate drop down menu for the audio
@@ -399,6 +460,22 @@ void update_channel_lists(void)
     fl_g->choice_cfg_left_channel->value(cfg.audio.left_ch-1);
     fl_g->choice_cfg_right_channel->value(cfg.audio.right_ch-1);    
     
+}
+
+void write_log(const char* message)
+{
+    FILE *log_fd;
+
+    if ((cfg.main.log_file != NULL) && (strlen(cfg.main.log_file) > 0))
+    {
+        log_fd = fl_fopen(cfg.main.log_file, "ab");
+        if (log_fd != NULL)
+        {
+            fprintf(log_fd, "%s", message);
+            fclose(log_fd);
+        }
+    }
+        
 }
 
 void print_info(const char* info, int info_type)
@@ -477,9 +554,9 @@ void print_lcd(const char *text, int len, int home, int clear)
 {
     /*
     if (!strcmp(text, _("idle")))
-        fl_g->radio_logo->show();
+        fl_g->radio_co_logo->show();
     else
-        fl_g->radio_logo->hide();
+        fl_g->radio_co_logo->hide();
     */
     
     if(clear)
@@ -585,31 +662,59 @@ void init_main_gui_and_audio(void)
     lame_stream.channel = cfg.audio.channel;
     lame_stream.bitrate = cfg.audio.bitrate;
     lame_stream.samplerate = cfg.audio.samplerate;
+    lame_stream.enc_quality = cfg.mp3_codec_stream.enc_quality;
+    lame_stream.stereo_mode = cfg.mp3_codec_stream.stereo_mode;
+    lame_stream.bitrate_mode = cfg.mp3_codec_stream.bitrate_mode;
+    lame_stream.vbr_quality = cfg.mp3_codec_stream.vbr_quality;
+    lame_stream.vbr_min_bitrate = cfg.mp3_codec_stream.vbr_min_bitrate;
+    lame_stream.vbr_max_bitrate = cfg.mp3_codec_stream.vbr_max_bitrate;
     lame_enc_reinit(&lame_stream);
 
     lame_rec.channel = cfg.audio.channel;
     lame_rec.bitrate = cfg.rec.bitrate;
     lame_rec.samplerate = cfg.audio.samplerate;
+    lame_rec.enc_quality = cfg.mp3_codec_rec.enc_quality;
+    lame_rec.stereo_mode = cfg.mp3_codec_rec.stereo_mode;
+    lame_rec.bitrate_mode = cfg.mp3_codec_rec.bitrate_mode;
+    lame_rec.vbr_quality = cfg.mp3_codec_rec.vbr_quality;
+    lame_rec.vbr_min_bitrate = cfg.mp3_codec_rec.vbr_min_bitrate;
+    lame_rec.vbr_max_bitrate = cfg.mp3_codec_rec.vbr_max_bitrate;
     lame_enc_reinit(&lame_rec);
 
     vorbis_stream.channel = cfg.audio.channel;
     vorbis_stream.bitrate = cfg.audio.bitrate;
     vorbis_stream.samplerate = cfg.audio.samplerate;
+    vorbis_stream.bitrate_mode = cfg.vorbis_codec_stream.bitrate_mode;
+    vorbis_stream.vbr_quality = 1-(cfg.vorbis_codec_stream.vbr_quality*0.1);
+    vorbis_stream.vbr_min_bitrate = cfg.vorbis_codec_stream.vbr_min_bitrate;
+    vorbis_stream.vbr_max_bitrate = cfg.vorbis_codec_stream.vbr_max_bitrate;
     vorbis_enc_reinit(&vorbis_stream);
 
     vorbis_rec.channel = cfg.audio.channel;
     vorbis_rec.bitrate = cfg.rec.bitrate;
     vorbis_rec.samplerate = cfg.audio.samplerate;
+    vorbis_rec.bitrate_mode = cfg.vorbis_codec_rec.bitrate_mode;
+    vorbis_rec.vbr_quality = 1-(cfg.vorbis_codec_rec.vbr_quality*0.1);
+    vorbis_rec.vbr_min_bitrate = cfg.vorbis_codec_rec.vbr_min_bitrate;
+    vorbis_rec.vbr_max_bitrate = cfg.vorbis_codec_rec.vbr_max_bitrate;
     vorbis_enc_reinit(&vorbis_rec);
     
     opus_stream.channel = cfg.audio.channel;
     opus_stream.bitrate = cfg.audio.bitrate*1000;
     opus_stream.samplerate = cfg.audio.samplerate;
+    opus_stream.bitrate_mode = cfg.opus_codec_stream.bitrate_mode;
+    opus_stream.audio_type = cfg.opus_codec_stream.audio_type;
+    opus_stream.quality = cfg.opus_codec_stream.quality;
+    opus_stream.bandwidth = cfg.opus_codec_stream.bandwidth;
     opus_enc_reinit(&opus_stream);
     
     opus_rec.channel = cfg.audio.channel;
     opus_rec.bitrate = cfg.rec.bitrate*1000;
     opus_rec.samplerate = cfg.audio.samplerate;
+    opus_rec.bitrate_mode = cfg.opus_codec_rec.bitrate_mode;
+    opus_rec.audio_type = cfg.opus_codec_rec.audio_type;
+    opus_rec.quality = cfg.opus_codec_rec.quality;
+    opus_rec.bandwidth = cfg.opus_codec_rec.bandwidth;
     opus_enc_reinit(&opus_rec);
 
 #ifdef HAVE_LIBFDK_AAC
@@ -618,13 +723,17 @@ void init_main_gui_and_audio(void)
         aac_stream.channel = cfg.audio.channel;
         aac_stream.bitrate = cfg.audio.bitrate;
         aac_stream.samplerate = cfg.audio.samplerate;
-        aac_stream.aot = cfg.audio.aac_aot;
+        aac_stream.bitrate_mode = cfg.aac_codec_stream.bitrate_mode;
+        aac_stream.profile = cfg.aac_codec_stream.profile;
+        aac_stream.afterburner = cfg.aac_codec_stream.afterburner == 0 ? 1 : 0;
         aac_enc_reinit(&aac_stream);
         
         aac_rec.channel = cfg.audio.channel;
         aac_rec.bitrate = cfg.rec.bitrate;
         aac_rec.samplerate = cfg.audio.samplerate;
-        aac_rec.aot = cfg.audio.aac_aot;
+        aac_rec.bitrate_mode = cfg.aac_codec_rec.bitrate_mode;
+        aac_rec.profile = cfg.aac_codec_rec.profile;
+        aac_rec.afterburner = cfg.aac_codec_rec.afterburner == 0 ? 1 : 0;
         aac_enc_reinit(&aac_rec);
     }
 #endif

@@ -410,10 +410,10 @@ void *snd_stream_thread(void *data)
     static int new_stream = 0;
 
 
-    if(cfg.srv[cfg.selected_srv]->type == SHOUTCAST)
-        xc_send = &sc_send;
-    else //Icecast
+    if(cfg.srv[cfg.selected_srv]->type == ICECAST)
         xc_send = &ic_send;
+    else //Icecast
+        xc_send = &sc_send;
     
     set_max_thread_priority();
         
@@ -645,7 +645,6 @@ void* snd_rec_thread(void *data)
 #endif
         else
         {
-
             if(rb_filled(&rec_rb) < framepacket_size*sizeof(short))
                 continue;
 
@@ -653,10 +652,8 @@ void* snd_rec_thread(void *data)
             if(rb_bytes_read == 0)
                 continue;
 
-
             if(!strcmp(cfg.rec.codec, "mp3"))
             {
-
                 enc_bytes_read = lame_enc_encode(&lame_rec, (short*)audio_buf, enc_buf,
                         rb_bytes_read/(2*cfg.audio.channel), rec_rb.size*10);
                 kbytes_written += fwrite(enc_buf, 1, enc_bytes_read, cfg.rec.fd)/1024.0;
@@ -693,7 +690,7 @@ void* snd_rec_thread(void *data)
     }
 
     if(!strcmp(cfg.rec.codec, "flac"))  // The flac encoder closes the file
-        flac_enc_close(&flac_rec);
+        flac_enc_close_file(&flac_rec);
     else
         fclose(cfg.rec.fd);
     

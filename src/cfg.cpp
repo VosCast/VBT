@@ -164,8 +164,6 @@ int cfg_write_file(char *path)
             "right_ch = %d\n"
             "codec = %s\n"
             "mono_to_stereo = %d\n"
-            "aac_overwrite_aot = %d\n"
-            "aac_aot = %d\n"
             "resample_mode = %d\n"
             "silence_level = %f\n"
             "signal_level = %f\n"
@@ -180,8 +178,6 @@ int cfg_write_file(char *path)
             cfg.audio.right_ch,
             cfg.audio.codec,
             cfg.audio.mono_to_stereo,
-            cfg.audio.aac_overwrite_aot,
-            cfg.audio.aac_aot,
             cfg.audio.resample_mode,
             cfg.audio.silence_level,
             cfg.audio.signal_level,
@@ -293,6 +289,109 @@ int cfg_write_file(char *path)
             cfg.gui.vu_mode
            );
 
+    fprintf(cfg_fd, 
+            "[mp3_codec_stream]\n"
+            "enc_quality = %d\n"
+            "stereo_mode = %d\n"
+            "bitrate_mode = %d\n"
+            "vbr_quality = %d\n"
+            "vbr_min_bitrate = %d\n"
+            "vbr_max_bitrate = %d\n\n",
+            cfg.mp3_codec_stream.enc_quality,
+            cfg.mp3_codec_stream.stereo_mode,
+            cfg.mp3_codec_stream.bitrate_mode,
+            cfg.mp3_codec_stream.vbr_quality,
+            cfg.mp3_codec_stream.vbr_min_bitrate,
+            cfg.mp3_codec_stream.vbr_max_bitrate
+            );
+
+    fprintf(cfg_fd, 
+            "[mp3_codec_rec]\n"
+            "enc_quality = %d\n"
+            "stereo_mode = %d\n"
+            "bitrate_mode = %d\n"
+            "vbr_quality = %d\n"
+            "vbr_min_bitrate = %d\n"
+            "vbr_max_bitrate = %d\n\n",
+            cfg.mp3_codec_rec.enc_quality,
+            cfg.mp3_codec_rec.stereo_mode,
+            cfg.mp3_codec_rec.bitrate_mode,
+            cfg.mp3_codec_rec.vbr_quality,
+            cfg.mp3_codec_rec.vbr_min_bitrate,
+            cfg.mp3_codec_rec.vbr_max_bitrate
+            );
+
+
+    fprintf(cfg_fd, 
+            "[vorbis_codec_stream]\n"
+            "bitrate_mode = %d\n"
+            "vbr_quality = %d\n"
+            "vbr_min_bitrate = %d\n"
+            "vbr_max_bitrate = %d\n\n",
+            cfg.vorbis_codec_stream.bitrate_mode,
+            cfg.vorbis_codec_stream.vbr_quality,
+            cfg.vorbis_codec_stream.vbr_min_bitrate,
+            cfg.vorbis_codec_stream.vbr_max_bitrate
+            );
+
+    fprintf(cfg_fd, 
+            "[vorbis_codec_rec]\n"
+            "bitrate_mode = %d\n"
+            "vbr_quality = %d\n"
+            "vbr_min_bitrate = %d\n"
+            "vbr_max_bitrate = %d\n\n",
+            cfg.vorbis_codec_rec.bitrate_mode,
+            cfg.vorbis_codec_rec.vbr_quality,
+            cfg.vorbis_codec_rec.vbr_min_bitrate,
+            cfg.vorbis_codec_rec.vbr_max_bitrate
+            );
+    
+    fprintf(cfg_fd,
+            "[opus_codec_stream]\n"
+            "bitrate_mode = %d\n"
+            "quality = %d\n"
+            "audio_type = %d\n"
+            "bandwidth = %d\n\n",
+            cfg.opus_codec_stream.bitrate_mode,
+            cfg.opus_codec_stream.quality,
+            cfg.opus_codec_stream.audio_type,
+            cfg.opus_codec_stream.bandwidth
+            );
+
+    fprintf(cfg_fd,
+            "[opus_codec_rec]\n"
+            "bitrate_mode = %d\n"
+            "quality = %d\n"
+            "audio_type = %d\n"
+            "bandwidth = %d\n\n",
+            cfg.opus_codec_rec.bitrate_mode,
+            cfg.opus_codec_rec.quality,
+            cfg.opus_codec_rec.audio_type,
+            cfg.opus_codec_rec.bandwidth
+            );
+
+     fprintf(cfg_fd,
+            "[aac_codec_stream]\n"
+            "bitrate_mode = %d\n"
+            "afterburner = %d\n"
+            "profile = %d\n\n",
+            cfg.aac_codec_stream.bitrate_mode,
+            cfg.aac_codec_stream.afterburner,
+            cfg.aac_codec_stream.profile
+            );
+
+     fprintf(cfg_fd,
+            "[aac_codec_rec]\n"
+            "bitrate_mode = %d\n"
+            "afterburner = %d\n"
+            "profile = %d\n\n",
+            cfg.aac_codec_rec.bitrate_mode,
+            cfg.aac_codec_rec.afterburner,
+            cfg.aac_codec_rec.profile
+            );
+
+    
+
     for (i = 0; i < cfg.main.num_of_srv; i++)
     {
         fprintf(cfg_fd, 
@@ -372,6 +471,8 @@ int cfg_write_file(char *path)
 
     }
 
+
+
     fclose(cfg_fd);
 
     snprintf(info_buf, sizeof(info_buf), _("Config written to %s"), path);
@@ -407,14 +508,12 @@ int cfg_set_values(char *path)
     cfg.audio.right_ch      = cfg_get_int("audio", "right_ch");
     cfg.audio.codec         = cfg_get_str("audio", "codec");
     cfg.audio.buffer_ms     = cfg_get_int("audio", "buffer_ms");
-    cfg.audio.aac_aot       = cfg_get_int("audio", "aac_aot");
     
     cfg.audio.disable_dithering = cfg_get_int("audio", "disable_dithering");
     cfg.audio.pcm_list   = snd_get_devices(&cfg.audio.dev_count);
     
     cfg.audio.mono_to_stereo = cfg_get_int("audio", "mono_to_stereo");
     cfg.audio.resample_mode  = cfg_get_int("audio", "resample_mode");
-    cfg.audio.aac_overwrite_aot = cfg_get_int("audio", "aac_overwrite_aot");
     
     if(cfg.audio.dev_num < 0)
         cfg.audio.dev_num = 0;
@@ -446,7 +545,7 @@ int cfg_set_values(char *path)
         cfg.audio.codec = (char*)malloc(5*sizeof(char));
         strcpy(cfg.audio.codec, "mp3");
     }
-    else //Make sure that also "opus" and "flac" fits into the codec char array
+    else //Make sure that also "opus" and "flac" fit into the codec char array
         cfg.audio.codec = (char*)realloc((char*)cfg.audio.codec, 5*sizeof(char));
 
     if(!strcmp(cfg.audio.codec, "aac") && g_aac_lib_available == 0) {
@@ -466,20 +565,10 @@ int cfg_set_values(char *path)
     if(cfg.audio.buffer_ms == -1)
         cfg.audio.buffer_ms = 50;
 
-    if(cfg.audio.aac_overwrite_aot == -1)
-        cfg.audio.aac_overwrite_aot = 0;
-    
     if(cfg.audio.disable_dithering == -1)
         cfg.audio.disable_dithering = 0;
     
     
-#ifdef HAVE_LIBFDK_AAC
-    aac_stream.overwrite_aot = cfg.audio.aac_overwrite_aot;
-    aac_rec.overwrite_aot = cfg.audio.aac_overwrite_aot;
-#endif
-
-    if(cfg.audio.aac_aot == -1)
-        cfg.audio.aac_aot = 5;
 
     if(cfg.audio.resample_mode == -1)
         cfg.audio.resample_mode = 0; //SRC_SINC_BEST_QUALITY
@@ -538,11 +627,32 @@ int cfg_set_values(char *path)
         strcpy(cfg.rec.filename, "rec_%Y%m%d-%H%M%S_%i.mp3");
     }
 
+
     if(cfg.rec.folder == NULL)
     {
-        cfg.rec.folder = (char*)malloc(3*sizeof(char));
-        strcpy(cfg.rec.folder, "./");
+        char *p;
+        cfg.rec.folder = (char*)malloc(PATH_MAX*sizeof(char));
+#ifdef WIN32
+        p = fl_getenv("USERPROFILE");
+        if (p != NULL)
+            snprintf(cfg.rec.folder, PATH_MAX, "%s\\Music\\", p);
+        else
+            snprintf(cfg.rec.folder, PATH_MAX, "./");
+#elif __APPLE__
+        p = fl_getenv("HOME");
+        if (p != NULL)
+            snprintf(cfg.rec.folder, PATH_MAX, "%s/Music/", p);
+        else
+            snprintf(cfg.rec.folder, PATH_MAX, "~/");
+#else //UNIX
+        p = fl_getenv("HOME");
+        if (p != NULL)
+            snprintf(cfg.rec.folder, PATH_MAX, "%s/", p);
+        else
+            snprintf(cfg.rec.folder, PATH_MAX, "~/");
+#endif
     }
+    
     
     if(cfg.rec.silence_threshold == -1)
         cfg.rec.silence_threshold = 0;
@@ -934,6 +1044,178 @@ int cfg_set_values(char *path)
     if(cfg.main.txt_color == -1)
         cfg.main.txt_color = -256; //white
 
+
+    //read mp3 codec related stuff
+    cfg.mp3_codec_stream.enc_quality = cfg_get_int("mp3_codec_stream", "enc_quality");
+    if(cfg.mp3_codec_stream.enc_quality == -1)
+        cfg.mp3_codec_stream.enc_quality = 3;
+
+    cfg.mp3_codec_stream.stereo_mode = cfg_get_int("mp3_codec_stream", "stereo_mode");
+    if(cfg.mp3_codec_stream.stereo_mode == -1)
+        cfg.mp3_codec_stream.stereo_mode = 0;
+
+    cfg.mp3_codec_stream.bitrate_mode = cfg_get_int("mp3_codec_stream", "bitrate_mode");
+    if(cfg.mp3_codec_stream.bitrate_mode == -1)
+        cfg.mp3_codec_stream.bitrate_mode = CHOICE_CBR;
+
+    cfg.mp3_codec_stream.vbr_quality = cfg_get_int("mp3_codec_stream", "vbr_quality");
+    if(cfg.mp3_codec_stream.vbr_quality == -1)
+        cfg.mp3_codec_stream.vbr_quality = 4;
+
+    cfg.mp3_codec_stream.vbr_min_bitrate = cfg_get_int("mp3_codec_stream", "vbr_min_bitrate");
+    if(cfg.mp3_codec_stream.vbr_min_bitrate == -1)
+        cfg.mp3_codec_stream.vbr_min_bitrate = 32;
+
+    cfg.mp3_codec_stream.vbr_max_bitrate = cfg_get_int("mp3_codec_stream", "vbr_max_bitrate");
+    if(cfg.mp3_codec_stream.vbr_max_bitrate == -1)
+        cfg.mp3_codec_stream.vbr_max_bitrate = 320;
+
+    cfg.mp3_codec_rec.enc_quality = cfg_get_int("mp3_codec_rec", "enc_quality");
+    if(cfg.mp3_codec_rec.enc_quality == -1)
+        cfg.mp3_codec_rec.enc_quality = 3;
+
+    cfg.mp3_codec_rec.stereo_mode = cfg_get_int("mp3_codec_rec", "stereo_mode");
+    if(cfg.mp3_codec_rec.stereo_mode == -1)
+        cfg.mp3_codec_rec.stereo_mode = 0;
+
+    cfg.mp3_codec_rec.bitrate_mode = cfg_get_int("mp3_codec_rec", "bitrate_mode");
+    if(cfg.mp3_codec_rec.bitrate_mode == -1)
+        cfg.mp3_codec_rec.bitrate_mode = CHOICE_CBR;
+
+    cfg.mp3_codec_rec.vbr_quality = cfg_get_int("mp3_codec_rec", "vbr_quality");
+    if(cfg.mp3_codec_rec.vbr_quality == -1)
+        cfg.mp3_codec_rec.vbr_quality = 4;
+
+    cfg.mp3_codec_rec.vbr_min_bitrate = cfg_get_int("mp3_codec_rec", "vbr_min_bitrate");
+    if(cfg.mp3_codec_rec.vbr_min_bitrate == -1)
+        cfg.mp3_codec_rec.vbr_min_bitrate = 32;
+
+    cfg.mp3_codec_rec.vbr_max_bitrate = cfg_get_int("mp3_codec_rec", "vbr_max_bitrate");
+    if(cfg.mp3_codec_rec.vbr_max_bitrate == -1)
+        cfg.mp3_codec_rec.vbr_max_bitrate = 320;
+
+    
+    //read ogg/vorbis codec related stuff
+    cfg.vorbis_codec_stream.bitrate_mode = cfg_get_int("vorbis_codec_stream", "bitrate_mode");
+    if(cfg.vorbis_codec_stream.bitrate_mode == -1)
+        cfg.vorbis_codec_stream.bitrate_mode = CHOICE_CBR;
+
+    cfg.vorbis_codec_stream.vbr_quality = cfg_get_int("vorbis_codec_stream", "vbr_quality");
+    if(cfg.vorbis_codec_stream.vbr_quality == -1)
+        cfg.vorbis_codec_stream.vbr_quality = 0;
+
+    cfg.vorbis_codec_stream.vbr_min_bitrate = cfg_get_int("vorbis_codec_stream", "vbr_min_bitrate");
+    if(cfg.vorbis_codec_stream.vbr_min_bitrate == -1)
+        cfg.vorbis_codec_stream.vbr_min_bitrate = 0;
+
+    cfg.vorbis_codec_stream.vbr_max_bitrate = cfg_get_int("vorbis_codec_stream", "vbr_max_bitrate");
+    if(cfg.vorbis_codec_stream.vbr_max_bitrate == -1)
+        cfg.vorbis_codec_stream.vbr_max_bitrate = 0;
+
+    cfg.vorbis_codec_rec.bitrate_mode = cfg_get_int("vorbis_codec_rec", "bitrate_mode");
+    if(cfg.vorbis_codec_rec.bitrate_mode == -1)
+        cfg.vorbis_codec_rec.bitrate_mode = CHOICE_CBR;
+
+    cfg.vorbis_codec_rec.vbr_quality = cfg_get_int("vorbis_codec_rec", "vbr_quality");
+    if(cfg.vorbis_codec_rec.vbr_quality == -1)
+        cfg.vorbis_codec_rec.vbr_quality = 0;
+
+    cfg.vorbis_codec_rec.vbr_min_bitrate = cfg_get_int("vorbis_codec_rec", "vbr_min_bitrate");
+    if(cfg.vorbis_codec_rec.vbr_min_bitrate == -1)
+        cfg.vorbis_codec_rec.vbr_min_bitrate = 0;
+
+    cfg.vorbis_codec_rec.vbr_max_bitrate = cfg_get_int("vorbis_codec_rec", "vbr_max_bitrate");
+    if(cfg.vorbis_codec_rec.vbr_max_bitrate == -1)
+        cfg.vorbis_codec_rec.vbr_max_bitrate = 0;
+    
+    
+    //read opus codec related stuff
+    cfg.opus_codec_stream.bitrate_mode = cfg_get_int("opus_codec_stream", "bitrate_mode");
+    if(cfg.opus_codec_stream.bitrate_mode == -1)
+        cfg.opus_codec_stream.bitrate_mode = CHOICE_VBR;
+
+    cfg.opus_codec_stream.quality = cfg_get_int("opus_codec_stream", "quality");
+    if(cfg.opus_codec_stream.quality == -1)
+        cfg.opus_codec_stream.quality = 0;
+
+    cfg.opus_codec_stream.audio_type = cfg_get_int("opus_codec_stream", "audio_type");
+    if(cfg.opus_codec_stream.audio_type == -1)
+        cfg.opus_codec_stream.audio_type = CHOICE_TYPE_MUSIC;
+
+    cfg.opus_codec_stream.bandwidth = cfg_get_int("opus_codec_stream", "bandwidth");
+    if(cfg.opus_codec_stream.bandwidth == -1)
+        cfg.opus_codec_stream.bandwidth = 0;
+    
+    cfg.opus_codec_rec.bitrate_mode = cfg_get_int("opus_codec_rec", "bitrate_mode");
+    if(cfg.opus_codec_rec.bitrate_mode == -1)
+        cfg.opus_codec_rec.bitrate_mode = CHOICE_VBR;
+
+    cfg.opus_codec_rec.quality = cfg_get_int("opus_codec_rec", "quality");
+    if(cfg.opus_codec_rec.quality == -1)
+        cfg.opus_codec_rec.quality = 0;
+
+    cfg.opus_codec_rec.audio_type = cfg_get_int("opus_codec_rec", "audio_type");
+    if(cfg.opus_codec_rec.audio_type == -1)
+        cfg.opus_codec_rec.audio_type = CHOICE_TYPE_MUSIC;
+
+    cfg.opus_codec_rec.bandwidth = cfg_get_int("opus_codec_rec", "bandwidth");
+    if(cfg.opus_codec_rec.bandwidth == -1)
+        cfg.opus_codec_rec.bandwidth = 0;
+
+    //read aac codec related stuff
+    cfg.aac_codec_stream.bitrate_mode = cfg_get_int("aac_codec_stream", "bitrate_mode");
+    if(cfg.aac_codec_stream.bitrate_mode == -1)
+        cfg.aac_codec_stream.bitrate_mode = CHOICE_CBR;
+
+    cfg.aac_codec_stream.profile = cfg_get_int("aac_codec_stream", "profile");
+    if(cfg.aac_codec_stream.profile == -1)
+        cfg.aac_codec_stream.profile = CHOICE_AAC_PROFILE_AUTO;
+
+    cfg.aac_codec_stream.afterburner = cfg_get_int("aac_codec_stream", "afterburner");
+    if(cfg.aac_codec_stream.afterburner == -1)
+        cfg.aac_codec_stream.afterburner = 0; // Afterburner on by default
+
+    cfg.aac_codec_rec.bitrate_mode = cfg_get_int("aac_codec_rec", "bitrate_mode");
+    if(cfg.aac_codec_rec.bitrate_mode == -1)
+        cfg.aac_codec_rec.bitrate_mode = CHOICE_CBR;
+
+    cfg.aac_codec_rec.profile = cfg_get_int("aac_codec_rec", "profile");
+    if(cfg.aac_codec_rec.profile == -1)
+        cfg.aac_codec_rec.profile = CHOICE_AAC_PROFILE_AUTO;
+
+    cfg.aac_codec_rec.afterburner = cfg_get_int("aac_codec_rec", "afterburner");
+    if(cfg.aac_codec_rec.afterburner == -1)
+        cfg.aac_codec_rec.afterburner = 0; // Afterburner on by default
+
+#ifdef HAVE_LIBFDK_AAC
+    // Backward compatability
+    if (cfg_get_int("audio", "aac_overwrite_aot") != -1)
+    {
+        switch (cfg_get_int("audio", "aac_aot"))
+        {
+            case 2:
+                cfg.aac_codec_stream.profile = CHOICE_AAC_PROFILE_AAC_LC;
+                cfg.aac_codec_rec.profile = CHOICE_AAC_PROFILE_AAC_LC;
+                break;
+            case 5:
+                cfg.aac_codec_stream.profile = CHOICE_AAC_PROFILE_HE_AACv1;
+                cfg.aac_codec_rec.profile = CHOICE_AAC_PROFILE_HE_AACv1;
+                break;
+            case 29:
+                cfg.aac_codec_stream.profile = CHOICE_AAC_PROFILE_HE_AACv2;
+                cfg.aac_codec_rec.profile = CHOICE_AAC_PROFILE_HE_AACv2;
+                break;
+            default:
+                cfg.aac_codec_stream.profile = CHOICE_AAC_PROFILE_AUTO;
+                cfg.aac_codec_rec.profile = CHOICE_AAC_PROFILE_AUTO;
+                break;
+        }
+    }
+
+#endif
+
+
+
     return 0;
 }
 
@@ -958,13 +1240,13 @@ int cfg_create_default(void)
     if (p != NULL)
         snprintf(def_rec_folder, PATH_MAX, "%s/Music/", p);
     else
-        snprintf(def_rec_folder, PATH_MAX, "./");
+        snprintf(def_rec_folder, PATH_MAX, "~/");
 #else //UNIX
     p = fl_getenv("HOME");
     if (p != NULL)
         snprintf(def_rec_folder, PATH_MAX, "%s/", p);
     else
-        snprintf(def_rec_folder, PATH_MAX, "./");
+        snprintf(def_rec_folder, PATH_MAX, "~/");
 #endif
 
 
@@ -1007,8 +1289,6 @@ int cfg_create_default(void)
             "codec = mp3\n"
             "mono_to_stereo = 0\n"
             "resample_mode = 0\n" //SRC_SINC_BEST_QUALITY
-            "aac_aot = 5\n" // aac+ v1
-            "aac_overwrite_aot = 0\n"
             "silence_level = 50.0\n"
             "signal_level = 50.0\n"
             "disable_dithering = 0\n"
@@ -1066,6 +1346,72 @@ int cfg_create_default(void)
             "lcd_auto = 0\n"
             "start_minimized = 0\n"
             "lang = 0\n\n"
+            );
+
+    fprintf(cfg_fd, 
+            "[mp3_codec_stream]\n"
+            "enc_quality = 3\n"
+            "stereo_mode = 0\n"
+            "bitrate_mode = 0\n"
+            "vbr_quality = 4\n"
+            "vbr_min_bitrate = 32\n"
+            "vbr_max_bitrate = 320\n\n"
+            );
+
+    fprintf(cfg_fd, 
+            "[mp3_codec_rec]\n"
+            "enc_quality = 3\n"
+            "stereo_mode = 0\n"
+            "bitrate_mode = 0\n"
+            "vbr_quality = 4\n"
+            "vbr_min_bitrate = 32\n"
+            "vbr_max_bitrate = 320\n\n"
+            );
+    
+    fprintf(cfg_fd,
+            "[vorbis_codec_stream]\n"
+            "bitrate_mode = 0\n"
+            "vbr_quality = 0\n"
+            "vbr_min_bitrate = 0\n"
+            "vbr_max_bitrate = 0\n\n"
+            );
+
+    fprintf(cfg_fd,
+            "[vorbis_codec_rec]\n"
+            "bitrate_mode = 0\n"
+            "vbr_quality = 0\n"
+            "vbr_min_bitrate = 0\n"
+            "vbr_max_bitrate = 0\n\n"
+            );
+    
+    fprintf(cfg_fd,
+            "[opus_codec_stream]\n"
+            "bitrate_mode = 1\n"
+            "quality = 0\n"
+            "audio_type = 0\n"
+            "bandwidth = 0\n\n"
+            );
+    
+    fprintf(cfg_fd,
+            "[opus_codec_rec]\n"
+            "bitrate_mode = 1\n"
+            "quality = 0\n"
+            "audio_type = 0\n"
+            "bandwidth = 0\n\n"
+            );
+
+    fprintf(cfg_fd,
+            "[aac_codec_stream]\n"
+            "bitrate_mode = 0\n"
+            "afterburner = 0\n"
+            "profile = 0\n\n"
+            );
+
+    fprintf(cfg_fd,
+            "[aac_codec_rec]\n"
+            "bitrate_mode = 0\n"
+            "afterburner = 0\n"
+            "profile = 0\n\n"
             );
 
     fclose(cfg_fd);

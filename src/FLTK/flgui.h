@@ -28,6 +28,7 @@
 #include <FL/filename.H>
 #include <FL/Fl_Double_Window.H>
 #include <FL/Fl_Int_Input.H>
+#include <FL/Fl_Check_Browser.H>
 #include <FL/Fl_Output.H>
 #include <FL/fl_ask.H>
 
@@ -74,10 +75,10 @@ private:
   inline void cb_slider_gain_i(Fl_My_Value_Slider*, void*);
   static void cb_slider_gain(Fl_My_Value_Slider*, void*);
 public:
-  Fl_Button *radio_logo;
+  Fl_Button *radio_co_logo;
 private:
-  inline void cb_radio_logo_i(Fl_Button*, void*);
-  static void cb_radio_logo(Fl_Button*, void*);
+  inline void cb_radio_co_logo_i(Fl_Button*, void*);
+  static void cb_radio_co_logo(Fl_Button*, void*);
 public:
   Fl_My_Double_Window *window_cfg;
 private:
@@ -227,6 +228,8 @@ public:
 private:
   inline void cb_check_cfg_mono_to_stereo_i(Fl_Check_Button*, void*);
   static void cb_check_cfg_mono_to_stereo(Fl_Check_Button*, void*);
+  inline void cb_1_i(Fl_Button*, void*);
+  static void cb_1(Fl_Button*, void*);
 public:
   Fl_Choice *choice_rec_codec;
   static unsigned char menu_choice_rec_codec_i18n_done;
@@ -254,6 +257,8 @@ private:
   static void cb_choice_rec_bitrate(Fl_Choice*, void*);
   static unsigned char menu_choice_rec_bitrate_i18n_done;
   static Fl_Menu_Item menu_choice_rec_bitrate[];
+  inline void cb_2_i(Fl_Button*, void*);
+  static void cb_2(Fl_Button*, void*);
 public:
   Fl_Button *button_advanced;
 private:
@@ -623,6 +628,11 @@ public:
   Fl_Input *input_add_srv_pwd;
   Fl_Input *input_add_srv_mount;
   Fl_Input *input_add_srv_usr;
+  Fl_Button *button_cfg_show_pw;
+private:
+  inline void cb_button_cfg_show_pw_i(Fl_Button*, void*);
+  static void cb_button_cfg_show_pw(Fl_Button*, void*);
+public:
   Fl_Round_Button *radio_add_srv_shoutcast;
 private:
   inline void cb_radio_add_srv_shoutcast_i(Fl_Round_Button*, void*);
@@ -632,6 +642,11 @@ public:
 private:
   inline void cb_radio_add_srv_icecast_i(Fl_Round_Button*, void*);
   static void cb_radio_add_srv_icecast(Fl_Round_Button*, void*);
+public:
+  Fl_Round_Button *radio_add_srv_radioco;
+private:
+  inline void cb_radio_add_srv_radioco_i(Fl_Round_Button*, void*);
+  static void cb_radio_add_srv_radioco(Fl_Round_Button*, void*);
   inline void cb_Cancel_i(Fl_Button*, void*);
   static void cb_Cancel(Fl_Button*, void*);
 public:
@@ -645,17 +660,28 @@ private:
   inline void cb_button_add_srv_save_i(Fl_Button*, void*);
   static void cb_button_add_srv_save(Fl_Button*, void*);
 public:
-  Fl_Button *button_cfg_show_pw;
-private:
-  inline void cb_button_cfg_show_pw_i(Fl_Button*, void*);
-  static void cb_button_cfg_show_pw(Fl_Button*, void*);
-public:
   Fl_Group *frame_add_srv_tls;
   Fl_Check_Button *check_add_srv_tls;
   Fl_Button *button_add_srv_revoke_cert;
 private:
   inline void cb_button_add_srv_revoke_cert_i(Fl_Button*, void*);
   static void cb_button_add_srv_revoke_cert(Fl_Button*, void*);
+public:
+  Fl_Check_Browser *browser_add_srv_station_list;
+  Fl_Button *button_add_srv_get_stations;
+private:
+  inline void cb_button_add_srv_get_stations_i(Fl_Button*, void*);
+  static void cb_button_add_srv_get_stations(Fl_Button*, void*);
+public:
+  Fl_Button *button_add_srv_select_all;
+private:
+  inline void cb_button_add_srv_select_all_i(Fl_Button*, void*);
+  static void cb_button_add_srv_select_all(Fl_Button*, void*);
+public:
+  Fl_Button *button_add_srv_deselect_all;
+private:
+  inline void cb_button_add_srv_deselect_all_i(Fl_Button*, void*);
+  static void cb_button_add_srv_deselect_all(Fl_Button*, void*);
 public:
   Fl_Double_Window *window_add_icy;
   Fl_Input *input_add_icy_name;
@@ -697,6 +723,248 @@ private:
   static void cb_Copy2(Fl_Button*, void*);
   inline void cb_Close_i(Fl_Button*, void*);
   static void cb_Close(Fl_Button*, void*);
+public:
+  Fl_My_Double_Window *window_stream_codec_settings;
+  Fl_Choice *choice_stream_mp3_enc_quality;
+private:
+  inline void cb_choice_stream_mp3_enc_quality_i(Fl_Choice*, void*);
+  static void cb_choice_stream_mp3_enc_quality(Fl_Choice*, void*);
+  static unsigned char menu_choice_stream_mp3_enc_quality_i18n_done;
+  static Fl_Menu_Item menu_choice_stream_mp3_enc_quality[];
+public:
+  Fl_Choice *choice_stream_mp3_stereo_mode;
+private:
+  inline void cb_choice_stream_mp3_stereo_mode_i(Fl_Choice*, void*);
+  static void cb_choice_stream_mp3_stereo_mode(Fl_Choice*, void*);
+  static unsigned char menu_choice_stream_mp3_stereo_mode_i18n_done;
+  static Fl_Menu_Item menu_choice_stream_mp3_stereo_mode[];
+public:
+  Fl_Choice *choice_stream_mp3_bitrate_mode;
+private:
+  inline void cb_choice_stream_mp3_bitrate_mode_i(Fl_Choice*, void*);
+  static void cb_choice_stream_mp3_bitrate_mode(Fl_Choice*, void*);
+  static unsigned char menu_choice_stream_mp3_bitrate_mode_i18n_done;
+  static Fl_Menu_Item menu_choice_stream_mp3_bitrate_mode[];
+public:
+  Fl_Choice *choice_stream_mp3_vbr_quality;
+private:
+  inline void cb_choice_stream_mp3_vbr_quality_i(Fl_Choice*, void*);
+  static void cb_choice_stream_mp3_vbr_quality(Fl_Choice*, void*);
+  static unsigned char menu_choice_stream_mp3_vbr_quality_i18n_done;
+  static Fl_Menu_Item menu_choice_stream_mp3_vbr_quality[];
+public:
+  Fl_Choice *choice_stream_mp3_vbr_min_bitrate;
+private:
+  inline void cb_choice_stream_mp3_vbr_min_bitrate_i(Fl_Choice*, void*);
+  static void cb_choice_stream_mp3_vbr_min_bitrate(Fl_Choice*, void*);
+  static unsigned char menu_choice_stream_mp3_vbr_min_bitrate_i18n_done;
+  static Fl_Menu_Item menu_choice_stream_mp3_vbr_min_bitrate[];
+public:
+  Fl_Choice *choice_stream_mp3_vbr_max_bitrate;
+private:
+  inline void cb_choice_stream_mp3_vbr_max_bitrate_i(Fl_Choice*, void*);
+  static void cb_choice_stream_mp3_vbr_max_bitrate(Fl_Choice*, void*);
+  static unsigned char menu_choice_stream_mp3_vbr_max_bitrate_i18n_done;
+  static Fl_Menu_Item menu_choice_stream_mp3_vbr_max_bitrate[];
+public:
+  Fl_Choice *choice_stream_vorbis_bitrate_mode;
+private:
+  inline void cb_choice_stream_vorbis_bitrate_mode_i(Fl_Choice*, void*);
+  static void cb_choice_stream_vorbis_bitrate_mode(Fl_Choice*, void*);
+  static unsigned char menu_choice_stream_vorbis_bitrate_mode_i18n_done;
+  static Fl_Menu_Item menu_choice_stream_vorbis_bitrate_mode[];
+public:
+  Fl_Choice *choice_stream_vorbis_vbr_quality;
+private:
+  inline void cb_choice_stream_vorbis_vbr_quality_i(Fl_Choice*, void*);
+  static void cb_choice_stream_vorbis_vbr_quality(Fl_Choice*, void*);
+  static unsigned char menu_choice_stream_vorbis_vbr_quality_i18n_done;
+  static Fl_Menu_Item menu_choice_stream_vorbis_vbr_quality[];
+public:
+  Fl_Choice *choice_stream_vorbis_vbr_min_bitrate;
+private:
+  inline void cb_choice_stream_vorbis_vbr_min_bitrate_i(Fl_Choice*, void*);
+  static void cb_choice_stream_vorbis_vbr_min_bitrate(Fl_Choice*, void*);
+  static unsigned char menu_choice_stream_vorbis_vbr_min_bitrate_i18n_done;
+  static Fl_Menu_Item menu_choice_stream_vorbis_vbr_min_bitrate[];
+public:
+  Fl_Choice *choice_stream_vorbis_vbr_max_bitrate;
+private:
+  inline void cb_choice_stream_vorbis_vbr_max_bitrate_i(Fl_Choice*, void*);
+  static void cb_choice_stream_vorbis_vbr_max_bitrate(Fl_Choice*, void*);
+  static unsigned char menu_choice_stream_vorbis_vbr_max_bitrate_i18n_done;
+  static Fl_Menu_Item menu_choice_stream_vorbis_vbr_max_bitrate[];
+public:
+  Fl_Choice *choice_stream_opus_audio_type;
+private:
+  inline void cb_choice_stream_opus_audio_type_i(Fl_Choice*, void*);
+  static void cb_choice_stream_opus_audio_type(Fl_Choice*, void*);
+  static unsigned char menu_choice_stream_opus_audio_type_i18n_done;
+  static Fl_Menu_Item menu_choice_stream_opus_audio_type[];
+public:
+  Fl_Choice *choice_stream_opus_bitrate_mode;
+private:
+  inline void cb_choice_stream_opus_bitrate_mode_i(Fl_Choice*, void*);
+  static void cb_choice_stream_opus_bitrate_mode(Fl_Choice*, void*);
+  static unsigned char menu_choice_stream_opus_bitrate_mode_i18n_done;
+  static Fl_Menu_Item menu_choice_stream_opus_bitrate_mode[];
+public:
+  Fl_Choice *choice_stream_opus_quality;
+private:
+  inline void cb_choice_stream_opus_quality_i(Fl_Choice*, void*);
+  static void cb_choice_stream_opus_quality(Fl_Choice*, void*);
+  static unsigned char menu_choice_stream_opus_quality_i18n_done;
+  static Fl_Menu_Item menu_choice_stream_opus_quality[];
+public:
+  Fl_Choice *choice_stream_opus_bandwidth;
+private:
+  inline void cb_choice_stream_opus_bandwidth_i(Fl_Choice*, void*);
+  static void cb_choice_stream_opus_bandwidth(Fl_Choice*, void*);
+  static unsigned char menu_choice_stream_opus_bandwidth_i18n_done;
+  static Fl_Menu_Item menu_choice_stream_opus_bandwidth[];
+public:
+  Fl_Group *tab_stream_aac;
+  Fl_Choice *choice_stream_aac_profile;
+private:
+  inline void cb_choice_stream_aac_profile_i(Fl_Choice*, void*);
+  static void cb_choice_stream_aac_profile(Fl_Choice*, void*);
+  static unsigned char menu_choice_stream_aac_profile_i18n_done;
+  static Fl_Menu_Item menu_choice_stream_aac_profile[];
+public:
+  Fl_Choice *choice_stream_aac_afterburner;
+private:
+  inline void cb_choice_stream_aac_afterburner_i(Fl_Choice*, void*);
+  static void cb_choice_stream_aac_afterburner(Fl_Choice*, void*);
+  static unsigned char menu_choice_stream_aac_afterburner_i18n_done;
+  static Fl_Menu_Item menu_choice_stream_aac_afterburner[];
+public:
+  Fl_Choice *choice_stream_aac_bitrate_mode;
+private:
+  inline void cb_choice_stream_aac_bitrate_mode_i(Fl_Choice*, void*);
+  static void cb_choice_stream_aac_bitrate_mode(Fl_Choice*, void*);
+  static unsigned char menu_choice_stream_aac_bitrate_mode_i18n_done;
+  static Fl_Menu_Item menu_choice_stream_aac_bitrate_mode[];
+public:
+  Fl_My_Double_Window *window_rec_codec_settings;
+  Fl_Choice *choice_rec_mp3_enc_quality;
+private:
+  inline void cb_choice_rec_mp3_enc_quality_i(Fl_Choice*, void*);
+  static void cb_choice_rec_mp3_enc_quality(Fl_Choice*, void*);
+  static unsigned char menu_choice_rec_mp3_enc_quality_i18n_done;
+  static Fl_Menu_Item menu_choice_rec_mp3_enc_quality[];
+public:
+  Fl_Choice *choice_rec_mp3_stereo_mode;
+private:
+  inline void cb_choice_rec_mp3_stereo_mode_i(Fl_Choice*, void*);
+  static void cb_choice_rec_mp3_stereo_mode(Fl_Choice*, void*);
+  static unsigned char menu_choice_rec_mp3_stereo_mode_i18n_done;
+  static Fl_Menu_Item menu_choice_rec_mp3_stereo_mode[];
+public:
+  Fl_Choice *choice_rec_mp3_bitrate_mode;
+private:
+  inline void cb_choice_rec_mp3_bitrate_mode_i(Fl_Choice*, void*);
+  static void cb_choice_rec_mp3_bitrate_mode(Fl_Choice*, void*);
+  static unsigned char menu_choice_rec_mp3_bitrate_mode_i18n_done;
+  static Fl_Menu_Item menu_choice_rec_mp3_bitrate_mode[];
+public:
+  Fl_Choice *choice_rec_mp3_vbr_quality;
+private:
+  inline void cb_choice_rec_mp3_vbr_quality_i(Fl_Choice*, void*);
+  static void cb_choice_rec_mp3_vbr_quality(Fl_Choice*, void*);
+  static unsigned char menu_choice_rec_mp3_vbr_quality_i18n_done;
+  static Fl_Menu_Item menu_choice_rec_mp3_vbr_quality[];
+public:
+  Fl_Choice *choice_rec_mp3_vbr_min_bitrate;
+private:
+  inline void cb_choice_rec_mp3_vbr_min_bitrate_i(Fl_Choice*, void*);
+  static void cb_choice_rec_mp3_vbr_min_bitrate(Fl_Choice*, void*);
+  static unsigned char menu_choice_rec_mp3_vbr_min_bitrate_i18n_done;
+  static Fl_Menu_Item menu_choice_rec_mp3_vbr_min_bitrate[];
+public:
+  Fl_Choice *choice_rec_mp3_vbr_max_bitrate;
+private:
+  inline void cb_choice_rec_mp3_vbr_max_bitrate_i(Fl_Choice*, void*);
+  static void cb_choice_rec_mp3_vbr_max_bitrate(Fl_Choice*, void*);
+  static unsigned char menu_choice_rec_mp3_vbr_max_bitrate_i18n_done;
+  static Fl_Menu_Item menu_choice_rec_mp3_vbr_max_bitrate[];
+public:
+  Fl_Choice *choice_rec_vorbis_bitrate_mode;
+private:
+  inline void cb_choice_rec_vorbis_bitrate_mode_i(Fl_Choice*, void*);
+  static void cb_choice_rec_vorbis_bitrate_mode(Fl_Choice*, void*);
+  static unsigned char menu_choice_rec_vorbis_bitrate_mode_i18n_done;
+  static Fl_Menu_Item menu_choice_rec_vorbis_bitrate_mode[];
+public:
+  Fl_Choice *choice_rec_vorbis_vbr_quality;
+private:
+  inline void cb_choice_rec_vorbis_vbr_quality_i(Fl_Choice*, void*);
+  static void cb_choice_rec_vorbis_vbr_quality(Fl_Choice*, void*);
+  static unsigned char menu_choice_rec_vorbis_vbr_quality_i18n_done;
+  static Fl_Menu_Item menu_choice_rec_vorbis_vbr_quality[];
+public:
+  Fl_Choice *choice_rec_vorbis_vbr_min_bitrate;
+private:
+  inline void cb_choice_rec_vorbis_vbr_min_bitrate_i(Fl_Choice*, void*);
+  static void cb_choice_rec_vorbis_vbr_min_bitrate(Fl_Choice*, void*);
+  static unsigned char menu_choice_rec_vorbis_vbr_min_bitrate_i18n_done;
+  static Fl_Menu_Item menu_choice_rec_vorbis_vbr_min_bitrate[];
+public:
+  Fl_Choice *choice_rec_vorbis_vbr_max_bitrate;
+private:
+  inline void cb_choice_rec_vorbis_vbr_max_bitrate_i(Fl_Choice*, void*);
+  static void cb_choice_rec_vorbis_vbr_max_bitrate(Fl_Choice*, void*);
+  static unsigned char menu_choice_rec_vorbis_vbr_max_bitrate_i18n_done;
+  static Fl_Menu_Item menu_choice_rec_vorbis_vbr_max_bitrate[];
+public:
+  Fl_Choice *choice_rec_opus_audio_type;
+private:
+  inline void cb_choice_rec_opus_audio_type_i(Fl_Choice*, void*);
+  static void cb_choice_rec_opus_audio_type(Fl_Choice*, void*);
+  static unsigned char menu_choice_rec_opus_audio_type_i18n_done;
+  static Fl_Menu_Item menu_choice_rec_opus_audio_type[];
+public:
+  Fl_Choice *choice_rec_opus_bitrate_mode;
+private:
+  inline void cb_choice_rec_opus_bitrate_mode_i(Fl_Choice*, void*);
+  static void cb_choice_rec_opus_bitrate_mode(Fl_Choice*, void*);
+  static unsigned char menu_choice_rec_opus_bitrate_mode_i18n_done;
+  static Fl_Menu_Item menu_choice_rec_opus_bitrate_mode[];
+public:
+  Fl_Choice *choice_rec_opus_quality;
+private:
+  inline void cb_choice_rec_opus_quality_i(Fl_Choice*, void*);
+  static void cb_choice_rec_opus_quality(Fl_Choice*, void*);
+  static unsigned char menu_choice_rec_opus_quality_i18n_done;
+  static Fl_Menu_Item menu_choice_rec_opus_quality[];
+public:
+  Fl_Choice *choice_rec_opus_bandwidth;
+private:
+  inline void cb_choice_rec_opus_bandwidth_i(Fl_Choice*, void*);
+  static void cb_choice_rec_opus_bandwidth(Fl_Choice*, void*);
+  static unsigned char menu_choice_rec_opus_bandwidth_i18n_done;
+  static Fl_Menu_Item menu_choice_rec_opus_bandwidth[];
+public:
+  Fl_Group *tab_rec_aac;
+  Fl_Choice *choice_rec_aac_profile;
+private:
+  inline void cb_choice_rec_aac_profile_i(Fl_Choice*, void*);
+  static void cb_choice_rec_aac_profile(Fl_Choice*, void*);
+  static unsigned char menu_choice_rec_aac_profile_i18n_done;
+  static Fl_Menu_Item menu_choice_rec_aac_profile[];
+public:
+  Fl_Choice *choice_rec_aac_afterburner;
+private:
+  inline void cb_choice_rec_aac_afterburner_i(Fl_Choice*, void*);
+  static void cb_choice_rec_aac_afterburner(Fl_Choice*, void*);
+  static unsigned char menu_choice_rec_aac_afterburner_i18n_done;
+  static Fl_Menu_Item menu_choice_rec_aac_afterburner[];
+public:
+  Fl_Choice *choice_rec_aac_bitrate_mode;
+private:
+  inline void cb_choice_rec_aac_bitrate_mode_i(Fl_Choice*, void*);
+  static void cb_choice_rec_aac_bitrate_mode(Fl_Choice*, void*);
+  static unsigned char menu_choice_rec_aac_bitrate_mode_i18n_done;
+  static Fl_Menu_Item menu_choice_rec_aac_bitrate_mode[];
 public:
   ~flgui();
 };

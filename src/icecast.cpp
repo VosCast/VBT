@@ -515,9 +515,7 @@ int ic_update_song(char *song_name)
 #endif
 
     song_buf = strdup(song_name);
-
-    strrpl(&song_buf, (char*)" ", (char*)"%20", MODE_ALL);
-    strrpl(&song_buf, (char*)"&", (char*)"%26", MODE_ALL);
+    strencoderfc3986(&song_buf);
 
     mount = (char*)malloc(strlen(cfg.srv[cfg.selected_srv]->mount)+2);
 

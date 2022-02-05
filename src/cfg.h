@@ -22,7 +22,8 @@
 enum {
 
     SHOUTCAST = 0,
-    ICECAST = 1
+    ICECAST = 1,
+    RADIOCO = 2
 };
 
 enum {
@@ -37,6 +38,24 @@ enum {
     CHOICE_AAC = 3,
     CHOICE_FLAC = 4,
     CHOICE_WAV = 5
+};
+
+enum {
+    CHOICE_CBR = 0,
+    CHOICE_VBR = 1,
+    CHOICE_ABR = 2
+};
+
+enum {
+    CHOICE_TYPE_MUSIC = 0,
+    CHOICE_TYPE_SPEECH = 1
+};
+
+enum {
+    CHOICE_AAC_PROFILE_AUTO = 0,
+    CHOICE_AAC_PROFILE_AAC_LC = 1,
+    CHOICE_AAC_PROFILE_HE_AACv1 = 2,
+    CHOICE_AAC_PROFILE_HE_AACv2 = 3
 };
 
 enum {
@@ -142,10 +161,8 @@ typedef struct
         int mono_to_stereo;
         int buffer_ms;
         int resample_mode;
-        int aac_aot;
         float silence_level;
         float signal_level;
-        int aac_overwrite_aot;
         int disable_dithering;
         char *codec;
     }audio;
@@ -198,6 +215,72 @@ typedef struct
         int vu_mode;
         int start_minimized;
     }gui;
+
+    struct
+    {
+        int enc_quality;
+        int stereo_mode;
+        int bitrate_mode;
+        int vbr_quality;
+        int vbr_min_bitrate;
+        int vbr_max_bitrate;
+    }mp3_codec_stream;
+
+    struct
+    {
+        int enc_quality;
+        int stereo_mode;
+        int bitrate_mode;
+        int vbr_quality;
+        int vbr_min_bitrate;
+        int vbr_max_bitrate;
+    }mp3_codec_rec;
+
+    struct
+    {
+        int bitrate_mode;
+        int vbr_quality;
+        int vbr_min_bitrate;
+        int vbr_max_bitrate;
+    }vorbis_codec_stream;
+
+    struct
+    {
+        int bitrate_mode;
+        int vbr_quality;
+        int vbr_min_bitrate;
+        int vbr_max_bitrate;
+    }vorbis_codec_rec;
+    
+    struct
+    {
+        int bitrate_mode;
+        int quality;
+        int audio_type;
+        int bandwidth;
+    }opus_codec_stream;
+    
+    struct
+    {
+        int bitrate_mode;
+        int quality;
+        int audio_type;
+        int bandwidth;
+    }opus_codec_rec;
+
+    struct
+    {
+        int bitrate_mode;
+        int profile;
+        int afterburner;
+    }aac_codec_stream;
+    
+    struct
+    {
+        int bitrate_mode;
+        int profile;
+        int afterburner;
+    }aac_codec_rec;
 
     server_t **srv;
     icy_t **icy;

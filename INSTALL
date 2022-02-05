@@ -16,8 +16,8 @@ fltk-1.3, portaudio19, libmp3lame, libvorbis, libogg, libflac, libopus, libsampl
 They are quite common and should be included in every popular linux distribution. 
 
 On Ubuntu you can install them with 
-sudo apt-get install libfltk1.3-dev portaudio19-dev libopus-dev libmp3lame-dev libvorbis-dev 
-libogg-dev libflac-dev libfdk-aac-dev libdbus-1-dev libsamplerate0-dev libssl-dev
+sudo apt-get install libfltk1.3-dev portaudio19-dev libopus-dev libmp3lame-dev libvorbis-dev libogg-dev libflac-dev 
+libfdk-aac-dev libdbus-1-dev libsamplerate0-dev libssl-dev
 
 On Distributions which don't have libfdk-aac like Debian you can compile without aac support: 
 ./configure --disable-aac

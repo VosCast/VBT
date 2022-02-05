@@ -23,6 +23,9 @@ butt_SOURCES = butt.cpp butt.h cfg.cpp cfg.h icecast.cpp icecast.h lame_encode.c
 			   FLTK/fl_timer_funcs.cpp FLTK/fl_timer_funcs.h aac_encode.cpp aac_encode.h \
 			   FLTK/Fl_LED.cpp FLTK/Fl_LED.h
 			   
+if WITH_RADIOCO
+nodist_butt_SOURCES = radioco.cpp radioco.h oauth.cpp oauth.h cJSON.cpp cJSON.h url.cpp url.h			  
+endif
 
 if WINDOWS
 butt_SOURCES += resource.rc currentTrack.h currentTrack.cpp

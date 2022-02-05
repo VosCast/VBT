@@ -261,6 +261,15 @@ int flac_enc_reinit(flac_enc *flac)
     return flac_enc_init(flac);
 }
 
+void flac_enc_close_file(flac_enc *flac)
+{
+    if(flac->encoder != NULL)
+    {
+        FLAC__stream_encoder_finish(flac->encoder);
+        flac_enc_close(flac);
+    }
+}
+
 void flac_enc_close(flac_enc *flac)
 {
     if(flac->encoder != NULL)

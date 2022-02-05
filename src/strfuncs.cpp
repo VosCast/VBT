@@ -176,3 +176,32 @@ int strrpl(char **dest, char *search, char *replace, int mode)
     return 0;
 }
 
+// "Percent encode" reserved characters according to RFC3986 section 2.2 for use in URIs
+void strencoderfc3986(char **buf)
+{
+    /* Reserved characters: % :/?#[]@!$&'()*+,;= */
+    /* Results in: %3d%20%3a%2f%3f%23%5b%5d%40%21%24%26%27%28%29%2a%2b%2c%3b%25 */
+
+    strrpl(buf, (char*)"%", (char*)"%25", MODE_ALL); // this must come first
+    strrpl(buf, (char*)" ", (char*)"%20", MODE_ALL);
+    strrpl(buf, (char*)":", (char*)"%3a", MODE_ALL);
+    strrpl(buf, (char*)"/", (char*)"%2f", MODE_ALL);
+    strrpl(buf, (char*)"?", (char*)"%3f", MODE_ALL);
+    strrpl(buf, (char*)"#", (char*)"%23", MODE_ALL);
+    strrpl(buf, (char*)"[", (char*)"%5b", MODE_ALL);
+    strrpl(buf, (char*)"]", (char*)"%5d", MODE_ALL);
+    strrpl(buf, (char*)"@", (char*)"%40", MODE_ALL);
+    strrpl(buf, (char*)"!", (char*)"%21", MODE_ALL);
+    strrpl(buf, (char*)"$", (char*)"%24", MODE_ALL);
+    strrpl(buf, (char*)"&", (char*)"%26", MODE_ALL);
+    strrpl(buf, (char*)"'", (char*)"%27", MODE_ALL);
+    strrpl(buf, (char*)"(", (char*)"%28", MODE_ALL);
+    strrpl(buf, (char*)")", (char*)"%29", MODE_ALL);
+    strrpl(buf, (char*)"*", (char*)"%2a", MODE_ALL);
+    strrpl(buf, (char*)"+", (char*)"%2b", MODE_ALL);
+    strrpl(buf, (char*)",", (char*)"%2c", MODE_ALL);
+    strrpl(buf, (char*)";", (char*)"%3b", MODE_ALL);
+    strrpl(buf, (char*)"=", (char*)"%3d", MODE_ALL);
+}
+
+

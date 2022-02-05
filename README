@@ -2,7 +2,7 @@
 execute as "asciidoctor manual.txt"
 ////
 
-butt (0.1.31) Manual 
+butt (0.1.32) Manual 
 ====================
 :author: Daniel Nöthen
 :doctype: book 
@@ -90,7 +90,7 @@ Install AAC libraries
 ---------------------
 .Windows:
 1. Download libfdk-aac-2.dll from
-https://sourceforge.net/projects/butt/files/butt/butt-0.1.31/AAC/libfdk-aac-2.dll/download[here]
+https://sourceforge.net/projects/butt/files/butt/butt-0.1.32/AAC/libfdk-aac-2.dll/download[here]
 2. Go to the installation directory of butt by typing %LOCALAPPDATA%\butt into the file explorer 
 3. Copy libfdk-aac-2.dll into the installation directory of butt
 4. Restart butt
@@ -98,7 +98,7 @@ https://sourceforge.net/projects/butt/files/butt/butt-0.1.31/AAC/libfdk-aac-2.dl
 
 .MacOS: 
 1. Download libfdk-aac.2.dylib from 
-https://sourceforge.net/projects/butt/files/butt/butt-0.1.31/AAC/libfdk-aac.2.dylib/download[here] +
+https://sourceforge.net/projects/butt/files/butt/butt-0.1.32/AAC/libfdk-aac.2.dylib/download[here] +
 2. Open your Applications folder +
 3. Right click on butt.app +
 4. Select Show Package Contents +

@@ -14,8 +14,8 @@ class flgui {open
   Function {flgui()} {open
   } {
     Fl_Window window_main {
-      callback {window_main_close_cb();} open
-      xywh {655 156 430 380} type Double resizable
+      callback {window_main_close_cb();}
+      xywh {1921 53 430 380} type Double resizable
       code0 {\#include "FL/Fl_My_Double_Window.H"}
       code1 {\#include <stdlib.h> 
 \#include "config.h"}
@@ -81,9 +81,9 @@ class flgui {open
         label {+24 dB}
         xywh {390 173 30 16} labelsize 10
       }
-      Fl_Button radio_logo {
-        callback {fl_open_uri("https://voscast.com");}
-        // image {../xpm/radio_badge.png} xywh {237 29 128 61} box NO_BOX
+      Fl_Button radio_co_logo {
+        callback {fl_open_uri("https://voscat.com");}
+        // image {../xpm/radio_co_badge.png} xywh {237 29 128 61} box NO_BOX
       }
     }
     Fl_Window window_cfg {
@@ -93,7 +93,7 @@ class flgui {open
     window_cfg->hide();
     Fl::remove_timeout(&cfg_win_pos_timer);
 }} open
-      xywh {481 609 400 600} type Double
+      xywh {1516 116 400 600} type Double
       code0 {\#include "FL/Fl_My_Double_Window.H"}
       code1 {\#include "fl_timer_funcs.h"}
       class Fl_My_Double_Window size_range {400 600 400 600} visible
@@ -284,16 +284,16 @@ class flgui {open
             }
             Fl_Button button_cfg_rescan_devices {
               callback {button_cfg_rescan_devices_cb();}
-              tooltip {Rescan audio devices} image {../xpm/refresh.png} xywh {334 78 20 20} box ENGRAVED_FRAME
+              tooltip {Rescan audio devices} image {../xpm/refresh.png} xywh {334 78 20 20} box NO_BOX
             }
           }
           Fl_Group {} {
-            label Streaming
+            label Streaming open
             xywh {37 247 326 60} box ENGRAVED_FRAME align 5
           } {
             Fl_Choice choice_cfg_codec {
               label Codec open
-              tooltip {Select streaming codec} xywh {45 274 125 20} box ENGRAVED_BOX down_box BORDER_BOX align 5
+              tooltip {Select streaming codec} xywh {45 274 125 18} box ENGRAVED_BOX down_box BORDER_BOX align 5
             } {
               MenuItem {} {
                 label MP3
@@ -323,8 +323,8 @@ class flgui {open
             }
             Fl_Choice choice_cfg_bitrate {
               label Bitrate
-              callback {choice_cfg_bitrate_cb();}
-              tooltip {Select streaming bitrate} xywh {240 274 115 20} box ENGRAVED_BOX down_box BORDER_BOX align 5
+              callback {choice_cfg_bitrate_cb();} open
+              tooltip {Select streaming bitrate} xywh {187 274 115 18} box ENGRAVED_BOX down_box BORDER_BOX align 5
             } {
               MenuItem {} {
                 label 8k
@@ -398,7 +398,12 @@ class flgui {open
             Fl_Check_Button check_cfg_mono_to_stereo {
               label {Convert Mono to Stereo}
               callback {check_cfg_mono_to_stereo_cb();}
-              tooltip {Copies a mono channel to both stereo channels} xywh {40 291 170 15} down_box DOWN_BOX hide
+              tooltip {Copies a mono channel to both stereo channels} xywh {40 291 170 1} down_box DOWN_BOX hide
+            }
+            Fl_Button {} {
+              callback {this->window_stream_codec_settings->position(this->window_cfg->x(), this->window_cfg->y());
+this->window_stream_codec_settings->show();}
+              image {../xpm/settings.png} xywh {310 272 22 22} box NO_BOX
             }
           }
           Fl_Group {} {
@@ -443,7 +448,7 @@ class flgui {open
             Fl_Choice choice_rec_bitrate {
               label Bitrate
               callback {choice_rec_bitrate_cb();}
-              tooltip {Select recording bitrate} xywh {240 366 115 20} down_box BORDER_BOX align 5
+              tooltip {Select recording bitrate} xywh {187 366 115 20} down_box BORDER_BOX align 5
             } {
               MenuItem {} {
                 label 8k
@@ -513,6 +518,11 @@ class flgui {open
                 label 320k
                 xywh {160 160 40 25}
               }
+            }
+            Fl_Button {} {
+              callback {this->window_rec_codec_settings->position(this->window_cfg->x(), this->window_cfg->y());
+this->window_rec_codec_settings->show();}
+              image {../xpm/settings.png} xywh {310 364 22 22} box NO_BOX
             }
           }
           Fl_Button button_advanced {
@@ -632,7 +642,7 @@ else
             }
           }
           Fl_Group {} {
-            label {Update song name from application}
+            label {Update song name from application} open
             xywh {37 145 329 65} box ENGRAVED_BOX align 5
           } {
             Fl_Check_Button check_cfg_use_app {
@@ -660,7 +670,7 @@ else
             }
           }
           Fl_Group {} {
-            label Streaming
+            label Streaming open
             xywh {37 472 329 112} box ENGRAVED_FRAME align 5
           } {
             Fl_Check_Button check_cfg_connect {
@@ -716,7 +726,7 @@ else
             }
           }
           Fl_Group {} {
-            label {Update song name delay} open
+            label {Update song name delay}
             xywh {37 295 329 32} box ENGRAVED_FRAME align 5
           } {
             Fl_Choice choice_cfg_song_delay {
@@ -771,7 +781,7 @@ else
           }
         }
         Fl_Group {} {
-          label Record
+          label Record open
           xywh {0 20 400 580} hide
         } {
           Fl_Input input_rec_filename {
@@ -860,7 +870,7 @@ else
           }
         }
         Fl_Group {} {
-          label TLS
+          label TLS open
           xywh {0 20 400 580} hide
         } {
           Fl_Group {} {
@@ -896,7 +906,7 @@ CA, you can leave these fields blank.}
           }
         }
         Fl_Group {} {
-          label DSP
+          label DSP open
           xywh {0 20 400 580} hide
         } {
           Fl_Group {} {
@@ -985,7 +995,7 @@ slider_equalizer7_cb(0);
 slider_equalizer8_cb(0);
 slider_equalizer9_cb(0);
 slider_equalizer10_cb(0);}
-              xywh {165 62 45 19} box ENGRAVED_FRAME labelsize 12
+              xywh {165 62 45 19} box ENGRAVED_BOX labelsize 12
             }
             Fl_Slider equalizerSlider6 {
               label 1kHz
@@ -1108,7 +1118,7 @@ slider_ratio_cb(5);
 slider_attack_cb(0.01);
 slider_release_cb(1);
 slider_makeup_cb(0);}
-              xywh {176 330 45 19} box ENGRAVED_FRAME labelsize 12
+              xywh {176 330 45 19} box ENGRAVED_BOX labelsize 12
             }
             Fl_Slider makeupSlider {
               label MakeupGain
@@ -1133,7 +1143,7 @@ slider_makeup_cb(0);}
           } {}
         }
         Fl_Group {} {
-          label GUI
+          label GUI open
           xywh {0 20 400 580} hide
         } {
           Fl_Group {} {
@@ -1229,7 +1239,7 @@ slider_makeup_cb(0);}
           }
         }
         Fl_Group {} {
-          label Donate
+          label Donate open
           xywh {0 20 400 580} hide
         } {
           Fl_Group {} {
@@ -1269,8 +1279,8 @@ this->window_donate_crypto->show();}
       }
     }
     Fl_Window window_add_srv {
-      label {Add server} open
-      xywh {1364 278 330 380} type Double hide modal
+      label {Add server}
+      xywh {588 444 330 380} type Double hide modal
     } {
       Fl_Input input_add_srv_name {
         label {Name:}
@@ -1301,19 +1311,29 @@ this->window_donate_crypto->show();}
         xywh {180 301 140 25} align 5
         code0 {this->input_add_srv_usr->maximum_size(100);}
       }
+      Fl_Button button_cfg_show_pw {
+        label Show
+        callback {button_add_srv_show_pwd_cb();}
+        tooltip {show/hide password} xywh {250 251 70 25} box ENGRAVED_BOX
+      }
       Fl_Group {} {
-        label Type open
-        xywh {10 120 105 62} box ENGRAVED_BOX align 5
+        label Type
+        xywh {10 96 105 86} box ENGRAVED_BOX align 5
       } {
         Fl_Round_Button radio_add_srv_shoutcast {
-          label ShoutCast
+          label Shoutcast
           callback {radio_add_srv_shoutcast_cb();}
-          xywh {15 130 88 15} type Radio down_box ROUND_DOWN_BOX
+          xywh {15 105 88 15} type Radio down_box ROUND_DOWN_BOX
         }
         Fl_Round_Button radio_add_srv_icecast {
-          label IceCast
+          label Icecast
           callback {radio_add_srv_icecast_cb();}
-          xywh {15 159 80 12} type Radio down_box ROUND_DOWN_BOX
+          xywh {15 132 80 12} type Radio down_box ROUND_DOWN_BOX
+        }
+        Fl_Round_Button radio_add_srv_radioco {
+          label {Radio.co}
+          callback {radio_add_srv_radioco_cb();}
+          xywh {15 157 80 12} type Radio down_box ROUND_DOWN_BOX
         }
       }
       Fl_Button {} {
@@ -1329,16 +1349,11 @@ this->window_donate_crypto->show();}
       Fl_Button button_add_srv_save {
         label {&Save}
         callback {button_add_srv_save_cb();}
-        xywh {246 340 74 25} box ENGRAVED_BOX
-      }
-      Fl_Button button_cfg_show_pw {
-        label Show
-        callback {button_add_srv_show_pwd_cb();}
-        tooltip {show/hide password} xywh {250 251 70 25} box ENGRAVED_BOX
+        xywh {245 340 74 25} box ENGRAVED_BOX
       }
       Fl_Group frame_add_srv_tls {
         label {SSL/TLS} open
-        xywh {125 120 195 62} box ENGRAVED_BOX align 5
+        xywh {125 96 190 86} box ENGRAVED_BOX align 5
       } {
         Fl_Check_Button check_add_srv_tls {
           label {Use SSL/TLS}
@@ -1347,8 +1362,27 @@ this->window_donate_crypto->show();}
         Fl_Button button_add_srv_revoke_cert {
           label {Revoke certificate trust}
           callback {button_add_srv_revoke_cert_cb();}
-          xywh {130 149 185 25} box ENGRAVED_BOX
+          xywh {130 149 180 25} box ENGRAVED_BOX
         }
+      }
+      Fl_Check_Browser browser_add_srv_station_list {
+        label {Radio.co Stations}
+        xywh {125 206 195 84} align 5 hide
+      }
+      Fl_Button button_add_srv_get_stations {
+        label {Get Stations}
+        callback {button_add_srv_get_stations_cb();}
+        xywh {10 205 105 25} box ENGRAVED_BOX hide
+      }
+      Fl_Button button_add_srv_select_all {
+        label {Select all}
+        callback {button_add_srv_select_all_cb();}
+        xywh {125 295 95 20} box ENGRAVED_BOX hide
+      }
+      Fl_Button button_add_srv_deselect_all {
+        label {Deselect all}
+        callback {button_add_srv_deselect_all_cb();}
+        xywh {230 295 88 20} box ENGRAVED_BOX hide
       }
     }
     Fl_Window window_add_icy {
@@ -1423,8 +1457,8 @@ info_visible = 1;
                 
 info_output->show();} {}
     Fl_Window window_donate_crypto {
-      label {Donate Cryptocurrency} open
-      xywh {939 950 460 255} type Double hide
+      label {Donate Cryptocurrency}
+      xywh {778 698 460 255} type Double hide
       class Fl_My_Double_Window
     } {
       Fl_Output output_bitcoin_addr {
@@ -1476,6 +1510,1294 @@ fl_message(_("Monero address has been copied to clipboard."));}
         label {&Close}
         callback {this->window_donate_crypto->hide();}
         xywh {20 217 88 22} box ENGRAVED_BOX
+      }
+    }
+    Fl_Window window_stream_codec_settings {
+      label {Streaming Codec Settings}
+      xywh {724 114 395 305} type Double hide
+      class Fl_My_Double_Window
+    } {
+      Fl_Tabs {} {open
+        xywh {5 0 395 305}
+      } {
+        Fl_Group {} {
+          label MP3 open
+          xywh {5 20 390 285}
+        } {
+          Fl_Choice choice_stream_mp3_enc_quality {
+            label {Encoding Quality}
+            callback {choice_stream_mp3_enc_quality_cb();}
+            xywh {25 50 165 20} down_box BORDER_BOX align 5
+          } {
+            MenuItem {} {
+              label {0 (best)}
+              xywh {0 0 36 21}
+            }
+            MenuItem {} {
+              label 1
+              xywh {10 10 36 21}
+            }
+            MenuItem {} {
+              label 2
+              xywh {20 20 36 21}
+            }
+            MenuItem {} {
+              label {3 (default)}
+              xywh {30 30 36 21}
+            }
+            MenuItem {} {
+              label 4
+              xywh {40 40 36 21}
+            }
+            MenuItem {} {
+              label 5
+              xywh {50 50 36 21}
+            }
+            MenuItem {} {
+              label 6
+              xywh {60 60 36 21}
+            }
+            MenuItem {} {
+              label 7
+              xywh {70 70 36 21}
+            }
+            MenuItem {} {
+              label 8
+              xywh {80 80 36 21}
+            }
+            MenuItem {} {
+              label {9 (worst)}
+              xywh {80 80 36 21}
+            }
+          }
+          Fl_Choice choice_stream_mp3_stereo_mode {
+            label {Stereo Mode}
+            callback {choice_stream_mp3_stereo_mode_cb();}
+            xywh {210 50 165 20} down_box BORDER_BOX align 5
+          } {
+            MenuItem {} {
+              label {Auto (default)}
+              xywh {10 10 36 21}
+            }
+            MenuItem {} {
+              label Stereo
+              xywh {30 30 36 21}
+            }
+            MenuItem {} {
+              label {Joint Stereo}
+              xywh {20 20 36 21}
+            }
+          }
+          Fl_Choice choice_stream_mp3_bitrate_mode {
+            label {Bitrate Mode}
+            callback {choice_stream_mp3_bitrate_mode_cb();}
+            xywh {25 110 165 20} down_box BORDER_BOX align 5
+          } {
+            MenuItem {} {
+              label {CBR (default)}
+              xywh {20 20 36 21}
+            }
+            MenuItem {} {
+              label VBR
+              xywh {30 30 36 21}
+            }
+            MenuItem {} {
+              label ABR
+              xywh {40 40 36 21}
+            }
+          }
+          Fl_Choice choice_stream_mp3_vbr_quality {
+            label {VBR Quality}
+            callback {choice_stream_mp3_vbr_quality_cb();}
+            xywh {210 110 165 20} down_box BORDER_BOX align 5
+          } {
+            MenuItem {} {
+              label {0 (best)}
+              xywh {10 10 36 21}
+            }
+            MenuItem {} {
+              label 1
+              xywh {20 20 36 21}
+            }
+            MenuItem {} {
+              label 2
+              xywh {30 30 36 21}
+            }
+            MenuItem {} {
+              label 3
+              xywh {40 40 36 21}
+            }
+            MenuItem {} {
+              label {4 (default)}
+              xywh {50 50 36 21}
+            }
+            MenuItem {} {
+              label 5
+              xywh {60 60 36 21}
+            }
+            MenuItem {} {
+              label 6
+              xywh {70 70 36 21}
+            }
+            MenuItem {} {
+              label 7
+              xywh {80 80 36 21}
+            }
+            MenuItem {} {
+              label 8
+              xywh {90 90 36 21}
+            }
+            MenuItem {} {
+              label {9 (worst)}
+              xywh {90 90 36 21}
+            }
+          }
+          Fl_Choice choice_stream_mp3_vbr_min_bitrate {
+            label {VBR min. Bitrate}
+            callback {choice_stream_mp3_vbr_min_bitrate_cb();}
+            xywh {25 170 165 20} down_box BORDER_BOX align 5
+          } {
+            MenuItem {} {
+              label 8k
+              xywh {60 60 40 25}
+            }
+            MenuItem {} {
+              label 16k
+              xywh {50 50 40 25}
+            }
+            MenuItem {} {
+              label 24k
+              xywh {60 60 40 25}
+            }
+            MenuItem {} {
+              label {32k (default)}
+              xywh {40 40 40 25}
+            }
+            MenuItem {} {
+              label 40k
+              xywh {50 50 40 25}
+            }
+            MenuItem {} {
+              label 48k
+              xywh {60 60 40 25}
+            }
+            MenuItem {} {
+              label 56k
+              xywh {70 70 40 25}
+            }
+            MenuItem {} {
+              label 64k
+              xywh {80 80 40 25}
+            }
+            MenuItem {} {
+              label 80k
+              xywh {90 90 40 25}
+            }
+            MenuItem {} {
+              label 96k
+              xywh {100 100 40 25}
+            }
+            MenuItem {} {
+              label 112k
+              xywh {40 40 40 25}
+            }
+            MenuItem {} {
+              label 128k
+              xywh {110 110 40 25}
+            }
+            MenuItem {} {
+              label 160k
+              xywh {120 120 40 25}
+            }
+            MenuItem {} {
+              label 192k
+              xywh {130 130 40 25}
+            }
+            MenuItem {} {
+              label 224k
+              xywh {140 140 40 25}
+            }
+            MenuItem {} {
+              label 256k
+              xywh {150 150 40 25}
+            }
+            MenuItem {} {
+              label 320k
+              xywh {160 160 40 25}
+            }
+          }
+          Fl_Choice choice_stream_mp3_vbr_max_bitrate {
+            label {VBR max. Bitrate}
+            callback {choice_stream_mp3_vbr_max_bitrate_cb();}
+            xywh {210 170 165 20} down_box BORDER_BOX align 5
+          } {
+            MenuItem {} {
+              label 8k
+              xywh {70 70 40 25}
+            }
+            MenuItem {} {
+              label 16k
+              xywh {60 60 40 25}
+            }
+            MenuItem {} {
+              label 24k
+              xywh {70 70 40 25}
+            }
+            MenuItem {} {
+              label 32k
+              xywh {50 50 40 25}
+            }
+            MenuItem {} {
+              label 40k
+              xywh {60 60 40 25}
+            }
+            MenuItem {} {
+              label 48k
+              xywh {70 70 40 25}
+            }
+            MenuItem {} {
+              label 56k
+              xywh {80 80 40 25}
+            }
+            MenuItem {} {
+              label 64k
+              xywh {90 90 40 25}
+            }
+            MenuItem {} {
+              label 80k
+              xywh {100 100 40 25}
+            }
+            MenuItem {} {
+              label 96k
+              xywh {110 110 40 25}
+            }
+            MenuItem {} {
+              label 112k
+              xywh {50 50 40 25}
+            }
+            MenuItem {} {
+              label 128k
+              xywh {120 120 40 25}
+            }
+            MenuItem {} {
+              label 160k
+              xywh {130 130 40 25}
+            }
+            MenuItem {} {
+              label 192k
+              xywh {140 140 40 25}
+            }
+            MenuItem {} {
+              label 224k
+              xywh {150 150 40 25}
+            }
+            MenuItem {} {
+              label 256k
+              xywh {160 160 40 25}
+            }
+            MenuItem {} {
+              label {320k (default)}
+              xywh {170 170 40 25}
+            }
+          }
+        }
+        Fl_Group {} {
+          label OGG open
+          xywh {5 20 390 285} hide
+        } {
+          Fl_Choice choice_stream_vorbis_bitrate_mode {
+            label {Bitrate Mode}
+            callback {choice_stream_vorbis_bitrate_mode_cb();} open
+            xywh {25 50 165 20} down_box BORDER_BOX align 5
+          } {
+            MenuItem {} {
+              label {CBR (default)}
+              xywh {40 40 36 21}
+            }
+            MenuItem {} {
+              label VBR
+              xywh {50 50 36 21}
+            }
+            MenuItem {} {
+              label ABR
+              xywh {60 60 36 21}
+            }
+          }
+          Fl_Choice choice_stream_vorbis_vbr_quality {
+            label {VBR Quality}
+            callback {choice_stream_vorbis_vbr_quality_cb();} open
+            xywh {210 50 165 20} down_box BORDER_BOX align 5
+          } {
+            MenuItem {} {
+              label {1.0 (best, default)}
+              xywh {110 110 36 21}
+            }
+            MenuItem {} {
+              label {0.9}
+              xywh {120 120 36 21}
+            }
+            MenuItem {} {
+              label {0.8}
+              xywh {110 110 36 21}
+            }
+            MenuItem {} {
+              label {0.7}
+              xywh {100 100 36 21}
+            }
+            MenuItem {} {
+              label {0.6}
+              xywh {90 90 36 21}
+            }
+            MenuItem {} {
+              label {0.5}
+              xywh {80 80 36 21}
+            }
+            MenuItem {} {
+              label {0.4}
+              xywh {70 70 36 21}
+            }
+            MenuItem {} {
+              label {0.3}
+              xywh {60 60 36 21}
+            }
+            MenuItem {} {
+              label {0.2}
+              xywh {50 50 36 21}
+            }
+            MenuItem {} {
+              label {0.1}
+              xywh {40 40 36 21}
+            }
+            MenuItem {} {
+              label {0.0 (worst)}
+              xywh {30 30 36 21}
+            }
+          }
+          Fl_Choice choice_stream_vorbis_vbr_min_bitrate {
+            label {VBR min. Bitrate}
+            callback {choice_stream_vorbis_vbr_min_bitrate_cb();} open
+            xywh {25 110 165 20} down_box BORDER_BOX align 5 hide
+          } {
+            MenuItem {} {
+              label {Auto (default)}
+              xywh {80 80 40 25}
+            }
+            MenuItem {} {
+              label 48k
+              xywh {80 80 40 25}
+            }
+            MenuItem {} {
+              label 56k
+              xywh {90 90 40 25}
+            }
+            MenuItem {} {
+              label 64k
+              xywh {100 100 40 25}
+            }
+            MenuItem {} {
+              label 80k
+              xywh {110 110 40 25}
+            }
+            MenuItem {} {
+              label 96k
+              xywh {120 120 40 25}
+            }
+            MenuItem {} {
+              label 112k
+              xywh {60 60 40 25}
+            }
+            MenuItem {} {
+              label 128k
+              xywh {130 130 40 25}
+            }
+            MenuItem {} {
+              label 160k
+              xywh {140 140 40 25}
+            }
+            MenuItem {} {
+              label 192k
+              xywh {150 150 40 25}
+            }
+            MenuItem {} {
+              label 224k
+              xywh {160 160 40 25}
+            }
+            MenuItem {} {
+              label 256k
+              xywh {170 170 40 25}
+            }
+            MenuItem {} {
+              label 320k
+              xywh {180 180 40 25}
+            }
+          }
+          Fl_Choice choice_stream_vorbis_vbr_max_bitrate {
+            label {VBR max. Bitrate}
+            callback {choice_stream_vorbis_vbr_max_bitrate_cb();} open
+            xywh {210 110 165 20} down_box BORDER_BOX align 5 hide
+          } {
+            MenuItem {} {
+              label {Auto (default)}
+              xywh {90 90 40 25}
+            }
+            MenuItem {} {
+              label 48k
+              xywh {90 90 40 25}
+            }
+            MenuItem {} {
+              label 56k
+              xywh {100 100 40 25}
+            }
+            MenuItem {} {
+              label 64k
+              xywh {110 110 40 25}
+            }
+            MenuItem {} {
+              label 80k
+              xywh {120 120 40 25}
+            }
+            MenuItem {} {
+              label 96k
+              xywh {130 130 40 25}
+            }
+            MenuItem {} {
+              label 112k
+              xywh {70 70 40 25}
+            }
+            MenuItem {} {
+              label 128k
+              xywh {140 140 40 25}
+            }
+            MenuItem {} {
+              label 160k
+              xywh {150 150 40 25}
+            }
+            MenuItem {} {
+              label 192k
+              xywh {160 160 40 25}
+            }
+            MenuItem {} {
+              label 224k
+              xywh {170 170 40 25}
+            }
+            MenuItem {} {
+              label 256k
+              xywh {180 180 40 25}
+            }
+            MenuItem {} {
+              label 320k
+              xywh {190 190 40 25}
+            }
+          }
+        }
+        Fl_Group {} {
+          label OPUS open
+          xywh {5 20 390 285} hide
+        } {
+          Fl_Choice choice_stream_opus_audio_type {
+            label {Optimize for}
+            callback {choice_stream_opus_audio_type_cb();} open
+            xywh {210 50 165 20} down_box BORDER_BOX align 5
+          } {
+            MenuItem {} {
+              label {Music (default)}
+              xywh {20 20 36 21}
+            }
+            MenuItem {} {
+              label Speech
+              xywh {30 30 36 21}
+            }
+          }
+          Fl_Choice choice_stream_opus_bitrate_mode {
+            label {Bitrate Mode}
+            callback {choice_stream_opus_bitrate_mode_cb();} open
+            xywh {25 110 165 20} down_box BORDER_BOX align 5
+          } {
+            MenuItem {} {
+              label CBR
+              xywh {50 50 36 21}
+            }
+            MenuItem {} {
+              label {VBR (default)}
+              xywh {60 60 36 21}
+            }
+          }
+          Fl_Choice choice_stream_opus_quality {
+            label Quality
+            callback {choice_stream_opus_quality_cb();} open
+            xywh {25 50 165 20} down_box BORDER_BOX align 5
+          } {
+            MenuItem {} {
+              label {10 (best, default)}
+              xywh {100 100 36 21}
+            }
+            MenuItem {} {
+              label 9
+              xywh {90 90 36 21}
+            }
+            MenuItem {} {
+              label 8
+              xywh {90 90 36 21}
+            }
+            MenuItem {} {
+              label 7
+              xywh {80 80 36 21}
+            }
+            MenuItem {} {
+              label 6
+              xywh {70 70 36 21}
+            }
+            MenuItem {} {
+              label 5
+              xywh {60 60 36 21}
+            }
+            MenuItem {} {
+              label 4
+              xywh {50 50 36 21}
+            }
+            MenuItem {} {
+              label 3
+              xywh {40 40 36 21}
+            }
+            MenuItem {} {
+              label 2
+              xywh {30 30 36 21}
+            }
+            MenuItem {} {
+              label 1
+              xywh {20 20 36 21}
+            }
+            MenuItem {} {
+              label {0 (worst)}
+              xywh {10 10 36 21}
+            }
+          }
+          Fl_Choice choice_stream_opus_bandwidth {
+            label {Max. Bandwidth}
+            callback {choice_stream_opus_bandwidth_cb();} open
+            xywh {210 110 165 20} down_box BORDER_BOX align 5
+          } {
+            MenuItem {} {
+              label {20kHz (best,default)}
+              xywh {110 110 36 21}
+            }
+            MenuItem {} {
+              label 12kHz
+              xywh {100 100 36 21}
+            }
+            MenuItem {} {
+              label 8kHz
+              xywh {90 90 36 21}
+            }
+            MenuItem {} {
+              label 6kHz
+              xywh {80 80 36 21}
+            }
+            MenuItem {} {
+              label {4kHz (worst)}
+              xywh {70 70 36 21}
+            }
+          }
+        }
+        Fl_Group tab_stream_aac {
+          label AAC open
+          xywh {5 20 390 285} hide
+        } {
+          Fl_Choice choice_stream_aac_profile {
+            label Profile
+            callback {choice_stream_aac_profile_cb();} open
+            xywh {25 50 165 20} down_box BORDER_BOX align 5
+          } {
+            MenuItem {} {
+              label {Auto (default)}
+              xywh {20 20 36 21}
+            }
+            MenuItem {} {
+              label {AAC-LC}
+              xywh {50 50 36 21}
+            }
+            MenuItem {} {
+              label {HE-AACv1 (AAC+)}
+              xywh {100 100 36 21}
+            }
+            MenuItem {} {
+              label {HE-AACv2 (eAAC+)}
+              xywh {110 110 36 21}
+            }
+          }
+          Fl_Choice choice_stream_aac_afterburner {
+            label Afterburner
+            callback {choice_stream_aac_afterburner_cb();} open
+            xywh {210 50 165 20} down_box BORDER_BOX align 5
+          } {
+            MenuItem {} {
+              label {On (default)}
+              xywh {110 110 36 21}
+            }
+            MenuItem {} {
+              label Off
+              xywh {120 120 36 21}
+            }
+          }
+          Fl_Choice choice_stream_aac_bitrate_mode {
+            label {Bitrate Mode}
+            callback {choice_stream_aac_bitrate_mode_cb();} open
+            xywh {25 110 165 20} down_box BORDER_BOX align 5
+          } {
+            MenuItem {} {
+              label {CBR (default)}
+              xywh {30 30 36 21}
+            }
+            MenuItem {} {
+              label VBR
+              xywh {40 40 36 21}
+            }
+          }
+        }
+      }
+    }
+    Fl_Window window_rec_codec_settings {
+      label {Recording Codec Settings}
+      xywh {1120 114 395 305} type Double hide
+      class Fl_My_Double_Window
+    } {
+      Fl_Tabs {} {open
+        xywh {5 0 395 305}
+      } {
+        Fl_Group {} {
+          label MP3 open
+          xywh {5 20 390 285}
+        } {
+          Fl_Choice choice_rec_mp3_enc_quality {
+            label {Encoding Quality}
+            callback {choice_rec_mp3_enc_quality_cb();}
+            xywh {25 50 165 20} down_box BORDER_BOX align 5
+          } {
+            MenuItem {} {
+              label {0 (best)}
+              xywh {0 0 36 21}
+            }
+            MenuItem {} {
+              label 1
+              xywh {10 10 36 21}
+            }
+            MenuItem {} {
+              label 2
+              xywh {20 20 36 21}
+            }
+            MenuItem {} {
+              label {3 (default)}
+              xywh {30 30 36 21}
+            }
+            MenuItem {} {
+              label 4
+              xywh {40 40 36 21}
+            }
+            MenuItem {} {
+              label 5
+              xywh {50 50 36 21}
+            }
+            MenuItem {} {
+              label 6
+              xywh {60 60 36 21}
+            }
+            MenuItem {} {
+              label 7
+              xywh {70 70 36 21}
+            }
+            MenuItem {} {
+              label 8
+              xywh {80 80 36 21}
+            }
+            MenuItem {} {
+              label {9 (worst)}
+              xywh {80 80 36 21}
+            }
+          }
+          Fl_Choice choice_rec_mp3_stereo_mode {
+            label {Stereo Mode}
+            callback {choice_rec_mp3_stereo_mode_cb();}
+            xywh {210 50 165 20} down_box BORDER_BOX align 5
+          } {
+            MenuItem {} {
+              label {Auto (default)}
+              xywh {10 10 36 21}
+            }
+            MenuItem {} {
+              label Stereo
+              xywh {30 30 36 21}
+            }
+            MenuItem {} {
+              label {Joint Stereo}
+              xywh {20 20 36 21}
+            }
+          }
+          Fl_Choice choice_rec_mp3_bitrate_mode {
+            label {Bitrate Mode}
+            callback {choice_rec_mp3_bitrate_mode_cb();}
+            xywh {25 110 165 20} down_box BORDER_BOX align 5
+          } {
+            MenuItem {} {
+              label {CBR (default)}
+              xywh {20 20 36 21}
+            }
+            MenuItem {} {
+              label VBR
+              xywh {30 30 36 21}
+            }
+            MenuItem {} {
+              label ABR
+              xywh {40 40 36 21}
+            }
+          }
+          Fl_Choice choice_rec_mp3_vbr_quality {
+            label {VBR Quality}
+            callback {choice_rec_mp3_vbr_quality_cb();}
+            xywh {210 110 165 20} down_box BORDER_BOX align 5
+          } {
+            MenuItem {} {
+              label {0 (best)}
+              xywh {10 10 36 21}
+            }
+            MenuItem {} {
+              label 1
+              xywh {20 20 36 21}
+            }
+            MenuItem {} {
+              label 2
+              xywh {30 30 36 21}
+            }
+            MenuItem {} {
+              label 3
+              xywh {40 40 36 21}
+            }
+            MenuItem {} {
+              label {4 (default)}
+              xywh {50 50 36 21}
+            }
+            MenuItem {} {
+              label 5
+              xywh {60 60 36 21}
+            }
+            MenuItem {} {
+              label 6
+              xywh {70 70 36 21}
+            }
+            MenuItem {} {
+              label 7
+              xywh {80 80 36 21}
+            }
+            MenuItem {} {
+              label 8
+              xywh {90 90 36 21}
+            }
+            MenuItem {} {
+              label {9 (worst)}
+              xywh {90 90 36 21}
+            }
+          }
+          Fl_Choice choice_rec_mp3_vbr_min_bitrate {
+            label {VBR min. Bitrate}
+            callback {choice_rec_mp3_vbr_min_bitrate_cb();}
+            xywh {25 170 165 20} down_box BORDER_BOX align 5
+          } {
+            MenuItem {} {
+              label 8k
+              xywh {60 60 40 25}
+            }
+            MenuItem {} {
+              label 16k
+              xywh {50 50 40 25}
+            }
+            MenuItem {} {
+              label 24k
+              xywh {60 60 40 25}
+            }
+            MenuItem {} {
+              label {32k (default)}
+              xywh {40 40 40 25}
+            }
+            MenuItem {} {
+              label 40k
+              xywh {50 50 40 25}
+            }
+            MenuItem {} {
+              label 48k
+              xywh {60 60 40 25}
+            }
+            MenuItem {} {
+              label 56k
+              xywh {70 70 40 25}
+            }
+            MenuItem {} {
+              label 64k
+              xywh {80 80 40 25}
+            }
+            MenuItem {} {
+              label 80k
+              xywh {90 90 40 25}
+            }
+            MenuItem {} {
+              label 96k
+              xywh {100 100 40 25}
+            }
+            MenuItem {} {
+              label 112k
+              xywh {40 40 40 25}
+            }
+            MenuItem {} {
+              label 128k
+              xywh {110 110 40 25}
+            }
+            MenuItem {} {
+              label 160k
+              xywh {120 120 40 25}
+            }
+            MenuItem {} {
+              label 192k
+              xywh {130 130 40 25}
+            }
+            MenuItem {} {
+              label 224k
+              xywh {140 140 40 25}
+            }
+            MenuItem {} {
+              label 256k
+              xywh {150 150 40 25}
+            }
+            MenuItem {} {
+              label 320k
+              xywh {160 160 40 25}
+            }
+          }
+          Fl_Choice choice_rec_mp3_vbr_max_bitrate {
+            label {VBR max. Bitrate}
+            callback {choice_rec_mp3_vbr_max_bitrate_cb();}
+            xywh {210 170 165 20} down_box BORDER_BOX align 5
+          } {
+            MenuItem {} {
+              label 8k
+              xywh {70 70 40 25}
+            }
+            MenuItem {} {
+              label 16k
+              xywh {60 60 40 25}
+            }
+            MenuItem {} {
+              label 24k
+              xywh {70 70 40 25}
+            }
+            MenuItem {} {
+              label 32k
+              xywh {50 50 40 25}
+            }
+            MenuItem {} {
+              label 40k
+              xywh {60 60 40 25}
+            }
+            MenuItem {} {
+              label 48k
+              xywh {70 70 40 25}
+            }
+            MenuItem {} {
+              label 56k
+              xywh {80 80 40 25}
+            }
+            MenuItem {} {
+              label 64k
+              xywh {90 90 40 25}
+            }
+            MenuItem {} {
+              label 80k
+              xywh {100 100 40 25}
+            }
+            MenuItem {} {
+              label 96k
+              xywh {110 110 40 25}
+            }
+            MenuItem {} {
+              label 112k
+              xywh {50 50 40 25}
+            }
+            MenuItem {} {
+              label 128k
+              xywh {120 120 40 25}
+            }
+            MenuItem {} {
+              label 160k
+              xywh {130 130 40 25}
+            }
+            MenuItem {} {
+              label 192k
+              xywh {140 140 40 25}
+            }
+            MenuItem {} {
+              label 224k
+              xywh {150 150 40 25}
+            }
+            MenuItem {} {
+              label 256k
+              xywh {160 160 40 25}
+            }
+            MenuItem {} {
+              label {320k (default)}
+              xywh {170 170 40 25}
+            }
+          }
+        }
+        Fl_Group {} {
+          label OGG
+          xywh {5 20 390 285} hide
+        } {
+          Fl_Choice choice_rec_vorbis_bitrate_mode {
+            label {Bitrate Mode}
+            callback {choice_rec_vorbis_bitrate_mode_cb();} open
+            xywh {25 50 165 20} down_box BORDER_BOX align 5
+          } {
+            MenuItem {} {
+              label {CBR (default)}
+              xywh {40 40 36 21}
+            }
+            MenuItem {} {
+              label VBR
+              xywh {50 50 36 21}
+            }
+            MenuItem {} {
+              label ABR
+              xywh {60 60 36 21}
+            }
+          }
+          Fl_Choice choice_rec_vorbis_vbr_quality {
+            label {VBR Quality}
+            callback {choice_rec_vorbis_vbr_quality_cb();} open
+            xywh {210 50 165 20} down_box BORDER_BOX align 5
+          } {
+            MenuItem {} {
+              label {1.0 (best, default)}
+              xywh {110 110 36 21}
+            }
+            MenuItem {} {
+              label {0.9}
+              xywh {120 120 36 21}
+            }
+            MenuItem {} {
+              label {0.8}
+              xywh {110 110 36 21}
+            }
+            MenuItem {} {
+              label {0.7}
+              xywh {100 100 36 21}
+            }
+            MenuItem {} {
+              label {0.6}
+              xywh {90 90 36 21}
+            }
+            MenuItem {} {
+              label {0.5}
+              xywh {80 80 36 21}
+            }
+            MenuItem {} {
+              label {0.4}
+              xywh {70 70 36 21}
+            }
+            MenuItem {} {
+              label {0.3}
+              xywh {60 60 36 21}
+            }
+            MenuItem {} {
+              label {0.2}
+              xywh {50 50 36 21}
+            }
+            MenuItem {} {
+              label {0.1}
+              xywh {40 40 36 21}
+            }
+            MenuItem {} {
+              label {0.0 (worst)}
+              xywh {30 30 36 21}
+            }
+          }
+          Fl_Choice choice_rec_vorbis_vbr_min_bitrate {
+            label {VBR min. Bitrate}
+            callback {choice_rec_vorbis_vbr_min_bitrate_cb();} open
+            xywh {25 110 165 20} down_box BORDER_BOX align 5 hide
+          } {
+            MenuItem {} {
+              label {Auto (default)}
+              xywh {80 80 40 25}
+            }
+            MenuItem {} {
+              label 48k
+              xywh {80 80 40 25}
+            }
+            MenuItem {} {
+              label 56k
+              xywh {90 90 40 25}
+            }
+            MenuItem {} {
+              label 64k
+              xywh {100 100 40 25}
+            }
+            MenuItem {} {
+              label 80k
+              xywh {110 110 40 25}
+            }
+            MenuItem {} {
+              label 96k
+              xywh {120 120 40 25}
+            }
+            MenuItem {} {
+              label 112k
+              xywh {60 60 40 25}
+            }
+            MenuItem {} {
+              label 128k
+              xywh {130 130 40 25}
+            }
+            MenuItem {} {
+              label 160k
+              xywh {140 140 40 25}
+            }
+            MenuItem {} {
+              label 192k
+              xywh {150 150 40 25}
+            }
+            MenuItem {} {
+              label 224k
+              xywh {160 160 40 25}
+            }
+            MenuItem {} {
+              label 256k
+              xywh {170 170 40 25}
+            }
+            MenuItem {} {
+              label 320k
+              xywh {180 180 40 25}
+            }
+          }
+          Fl_Choice choice_rec_vorbis_vbr_max_bitrate {
+            label {VBR max. Bitrate}
+            callback {choice_rec_vorbis_vbr_max_bitrate_cb();} open
+            xywh {210 110 165 20} down_box BORDER_BOX align 5 hide
+          } {
+            MenuItem {} {
+              label {Auto (default)}
+              xywh {90 90 40 25}
+            }
+            MenuItem {} {
+              label 48k
+              xywh {90 90 40 25}
+            }
+            MenuItem {} {
+              label 56k
+              xywh {100 100 40 25}
+            }
+            MenuItem {} {
+              label 64k
+              xywh {110 110 40 25}
+            }
+            MenuItem {} {
+              label 80k
+              xywh {120 120 40 25}
+            }
+            MenuItem {} {
+              label 96k
+              xywh {130 130 40 25}
+            }
+            MenuItem {} {
+              label 112k
+              xywh {70 70 40 25}
+            }
+            MenuItem {} {
+              label 128k
+              xywh {140 140 40 25}
+            }
+            MenuItem {} {
+              label 160k
+              xywh {150 150 40 25}
+            }
+            MenuItem {} {
+              label 192k
+              xywh {160 160 40 25}
+            }
+            MenuItem {} {
+              label 224k
+              xywh {170 170 40 25}
+            }
+            MenuItem {} {
+              label 256k
+              xywh {180 180 40 25}
+            }
+            MenuItem {} {
+              label 320k
+              xywh {190 190 40 25}
+            }
+          }
+        }
+        Fl_Group {} {
+          label OPUS open
+          xywh {5 20 390 285} hide
+        } {
+          Fl_Choice choice_rec_opus_audio_type {
+            label {Optimize for}
+            callback {choice_rec_opus_audio_type_cb();} open
+            xywh {210 50 165 20} down_box BORDER_BOX align 5
+          } {
+            MenuItem {} {
+              label {Music (default)}
+              xywh {20 20 36 21}
+            }
+            MenuItem {} {
+              label Speech
+              xywh {30 30 36 21}
+            }
+          }
+          Fl_Choice choice_rec_opus_bitrate_mode {
+            label {Bitrate Mode}
+            callback {choice_rec_opus_bitrate_mode_cb();} open
+            xywh {25 110 165 20} down_box BORDER_BOX align 5
+          } {
+            MenuItem {} {
+              label CBR
+              xywh {50 50 36 21}
+            }
+            MenuItem {} {
+              label {VBR (default)}
+              xywh {60 60 36 21}
+            }
+          }
+          Fl_Choice choice_rec_opus_quality {
+            label Quality
+            callback {choice_rec_opus_quality_cb();} open
+            xywh {25 50 165 20} down_box BORDER_BOX align 5
+          } {
+            MenuItem {} {
+              label {10 (best, default)}
+              xywh {100 100 36 21}
+            }
+            MenuItem {} {
+              label 9
+              xywh {90 90 36 21}
+            }
+            MenuItem {} {
+              label 8
+              xywh {90 90 36 21}
+            }
+            MenuItem {} {
+              label 7
+              xywh {80 80 36 21}
+            }
+            MenuItem {} {
+              label 6
+              xywh {70 70 36 21}
+            }
+            MenuItem {} {
+              label 5
+              xywh {60 60 36 21}
+            }
+            MenuItem {} {
+              label 4
+              xywh {50 50 36 21}
+            }
+            MenuItem {} {
+              label 3
+              xywh {40 40 36 21}
+            }
+            MenuItem {} {
+              label 2
+              xywh {30 30 36 21}
+            }
+            MenuItem {} {
+              label 1
+              xywh {20 20 36 21}
+            }
+            MenuItem {} {
+              label {0 (worst)}
+              xywh {10 10 36 21}
+            }
+          }
+          Fl_Choice choice_rec_opus_bandwidth {
+            label {Max. Bandwidth}
+            callback {choice_rec_opus_bandwidth_cb();} open
+            xywh {210 110 165 20} down_box BORDER_BOX align 5
+          } {
+            MenuItem {} {
+              label {20kHz (best,default)}
+              xywh {110 110 36 21}
+            }
+            MenuItem {} {
+              label 12kHz
+              xywh {100 100 36 21}
+            }
+            MenuItem {} {
+              label 8kHz
+              xywh {90 90 36 21}
+            }
+            MenuItem {} {
+              label 6kHz
+              xywh {80 80 36 21}
+            }
+            MenuItem {} {
+              label {4kHz (worst)}
+              xywh {70 70 36 21}
+            }
+          }
+        }
+        Fl_Group tab_rec_aac {
+          label AAC open
+          xywh {5 20 390 285} hide
+        } {
+          Fl_Choice choice_rec_aac_profile {
+            label Profile
+            callback {choice_rec_aac_profile_cb();} open
+            xywh {25 50 165 20} down_box BORDER_BOX align 5
+          } {
+            MenuItem {} {
+              label {Auto (default)}
+              xywh {20 20 36 21}
+            }
+            MenuItem {} {
+              label {AAC-LC}
+              xywh {50 50 36 21}
+            }
+            MenuItem {} {
+              label {HE-AACv1 (AAC+)}
+              xywh {100 100 36 21}
+            }
+            MenuItem {} {
+              label {HE-AACv2 (eAAC+)}
+              xywh {110 110 36 21}
+            }
+          }
+          Fl_Choice choice_rec_aac_afterburner {
+            label Afterburner
+            callback {choice_rec_aac_afterburner_cb();} open
+            xywh {210 50 165 20} down_box BORDER_BOX align 5
+          } {
+            MenuItem {} {
+              label {On (default)}
+              xywh {110 110 36 21}
+            }
+            MenuItem {} {
+              label Off
+              xywh {120 120 36 21}
+            }
+          }
+          Fl_Choice choice_rec_aac_bitrate_mode {
+            label {Bitrate Mode}
+            callback {choice_rec_aac_bitrate_mode_cb();} open
+            xywh {25 110 165 20} down_box BORDER_BOX align 5
+          } {
+            MenuItem {} {
+              label {CBR (default)}
+              xywh {30 30 36 21}
+            }
+            MenuItem {} {
+              label VBR
+              xywh {40 40 36 21}
+            }
+          }
+        }
       }
     }
   }

@@ -154,7 +154,10 @@ am_butt_OBJECTS = butt.$(OBJEXT) cfg.$(OBJEXT) icecast.$(OBJEXT) \
 	FLTK/Fl_vu_meter.$(OBJEXT) FLTK/fl_timer_funcs.$(OBJEXT) \
 	aac_encode.$(OBJEXT) FLTK/Fl_LED.$(OBJEXT) $(am__objects_1) \
 	$(am__objects_2) $(am__objects_3) $(am__objects_4)
-butt_OBJECTS = $(am_butt_OBJECTS)
+@WITH_RADIOCO_TRUE@nodist_butt_OBJECTS = radioco.$(OBJEXT) \
+@WITH_RADIOCO_TRUE@	oauth.$(OBJEXT) cJSON.$(OBJEXT) \
+@WITH_RADIOCO_TRUE@	url.$(OBJEXT)
+butt_OBJECTS = $(am_butt_OBJECTS) $(nodist_butt_OBJECTS)
 butt_LDADD = $(LDADD)
 butt_DEPENDENCIES =
 AM_V_P = $(am__v_P_@AM_V@)
@@ -174,19 +177,21 @@ depcomp = $(SHELL) $(top_srcdir)/depcomp
 am__maybe_remake_depfiles = depfiles
 am__depfiles_remade = ./$(DEPDIR)/Biquad.Po \
 	./$(DEPDIR)/CurrentTrackOSX.Po ./$(DEPDIR)/aac_encode.Po \
-	./$(DEPDIR)/butt.Po ./$(DEPDIR)/cfg.Po ./$(DEPDIR)/command.Po \
-	./$(DEPDIR)/currentTrack.Po ./$(DEPDIR)/currentTrackLinux.Po \
-	./$(DEPDIR)/dsp.Po ./$(DEPDIR)/flac_encode.Po \
-	./$(DEPDIR)/icecast.Po ./$(DEPDIR)/lame_encode.Po \
+	./$(DEPDIR)/butt.Po ./$(DEPDIR)/cJSON.Po ./$(DEPDIR)/cfg.Po \
+	./$(DEPDIR)/command.Po ./$(DEPDIR)/currentTrack.Po \
+	./$(DEPDIR)/currentTrackLinux.Po ./$(DEPDIR)/dsp.Po \
+	./$(DEPDIR)/flac_encode.Po ./$(DEPDIR)/icecast.Po \
+	./$(DEPDIR)/lame_encode.Po ./$(DEPDIR)/oauth.Po \
 	./$(DEPDIR)/opus_encode.Po ./$(DEPDIR)/parseconfig.Po \
-	./$(DEPDIR)/port_audio.Po ./$(DEPDIR)/ringbuffer.Po \
-	./$(DEPDIR)/sha256.Po ./$(DEPDIR)/shoutcast.Po \
-	./$(DEPDIR)/sockfuncs.Po ./$(DEPDIR)/strfuncs.Po \
-	./$(DEPDIR)/timer.Po ./$(DEPDIR)/tls.Po \
-	./$(DEPDIR)/tray_agent.Po ./$(DEPDIR)/update.Po \
-	./$(DEPDIR)/util.Po ./$(DEPDIR)/vorbis_encode.Po \
-	./$(DEPDIR)/vu_meter.Po ./$(DEPDIR)/wav_header.Po \
-	FLTK/$(DEPDIR)/Fl_ILM216.Po FLTK/$(DEPDIR)/Fl_LED.Po \
+	./$(DEPDIR)/port_audio.Po ./$(DEPDIR)/radioco.Po \
+	./$(DEPDIR)/ringbuffer.Po ./$(DEPDIR)/sha256.Po \
+	./$(DEPDIR)/shoutcast.Po ./$(DEPDIR)/sockfuncs.Po \
+	./$(DEPDIR)/strfuncs.Po ./$(DEPDIR)/timer.Po \
+	./$(DEPDIR)/tls.Po ./$(DEPDIR)/tray_agent.Po \
+	./$(DEPDIR)/update.Po ./$(DEPDIR)/url.Po ./$(DEPDIR)/util.Po \
+	./$(DEPDIR)/vorbis_encode.Po ./$(DEPDIR)/vu_meter.Po \
+	./$(DEPDIR)/wav_header.Po FLTK/$(DEPDIR)/Fl_ILM216.Po \
+	FLTK/$(DEPDIR)/Fl_LED.Po \
 	FLTK/$(DEPDIR)/Fl_My_Native_File_Chooser.Po \
 	FLTK/$(DEPDIR)/Fl_vu_meter.Po FLTK/$(DEPDIR)/fl_callbacks.Po \
 	FLTK/$(DEPDIR)/fl_funcs.Po FLTK/$(DEPDIR)/fl_timer_funcs.Po \
@@ -230,7 +235,7 @@ AM_V_CCLD = $(am__v_CCLD_@AM_V@)
 am__v_CCLD_ = $(am__v_CCLD_@AM_DEFAULT_V@)
 am__v_CCLD_0 = @echo "  CCLD    " $@;
 am__v_CCLD_1 = 
-SOURCES = $(butt_SOURCES)
+SOURCES = $(butt_SOURCES) $(nodist_butt_SOURCES)
 DIST_SOURCES = $(am__butt_SOURCES_DIST)
 am__can_run_installinfo = \
   case $$AM_UPDATE_INFO_DIR in \
@@ -410,6 +415,7 @@ butt_SOURCES = butt.cpp butt.h cfg.cpp cfg.h icecast.cpp icecast.h \
 	FLTK/fl_timer_funcs.h aac_encode.cpp aac_encode.h \
 	FLTK/Fl_LED.cpp FLTK/Fl_LED.h $(am__append_1) $(am__append_3) \
 	$(am__append_4) $(am__append_5)
+@WITH_RADIOCO_TRUE@nodist_butt_SOURCES = radioco.cpp radioco.h oauth.cpp oauth.h cJSON.cpp cJSON.h url.cpp url.h			  
 @WINDOWS_TRUE@LDADD = -lintl
 all: all-am
 
@@ -524,6 +530,7 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/CurrentTrackOSX.Po@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/aac_encode.Po@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/butt.Po@am__quote@ # am--include-marker
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/cJSON.Po@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/cfg.Po@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/command.Po@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/currentTrack.Po@am__quote@ # am--include-marker
@@ -532,9 +539,11 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/flac_encode.Po@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/icecast.Po@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/lame_encode.Po@am__quote@ # am--include-marker
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/oauth.Po@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/opus_encode.Po@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/parseconfig.Po@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/port_audio.Po@am__quote@ # am--include-marker
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/radioco.Po@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/ringbuffer.Po@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/sha256.Po@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/shoutcast.Po@am__quote@ # am--include-marker
@@ -544,6 +553,7 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/tls.Po@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/tray_agent.Po@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/update.Po@am__quote@ # am--include-marker
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/url.Po@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/util.Po@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/vorbis_encode.Po@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/vu_meter.Po@am__quote@ # am--include-marker
@@ -743,6 +753,7 @@ distclean: distclean-am
 	-rm -f ./$(DEPDIR)/CurrentTrackOSX.Po
 	-rm -f ./$(DEPDIR)/aac_encode.Po
 	-rm -f ./$(DEPDIR)/butt.Po
+	-rm -f ./$(DEPDIR)/cJSON.Po
 	-rm -f ./$(DEPDIR)/cfg.Po
 	-rm -f ./$(DEPDIR)/command.Po
 	-rm -f ./$(DEPDIR)/currentTrack.Po
@@ -751,9 +762,11 @@ distclean: distclean-am
 	-rm -f ./$(DEPDIR)/flac_encode.Po
 	-rm -f ./$(DEPDIR)/icecast.Po
 	-rm -f ./$(DEPDIR)/lame_encode.Po
+	-rm -f ./$(DEPDIR)/oauth.Po
 	-rm -f ./$(DEPDIR)/opus_encode.Po
 	-rm -f ./$(DEPDIR)/parseconfig.Po
 	-rm -f ./$(DEPDIR)/port_audio.Po
+	-rm -f ./$(DEPDIR)/radioco.Po
 	-rm -f ./$(DEPDIR)/ringbuffer.Po
 	-rm -f ./$(DEPDIR)/sha256.Po
 	-rm -f ./$(DEPDIR)/shoutcast.Po
@@ -763,6 +776,7 @@ distclean: distclean-am
 	-rm -f ./$(DEPDIR)/tls.Po
 	-rm -f ./$(DEPDIR)/tray_agent.Po
 	-rm -f ./$(DEPDIR)/update.Po
+	-rm -f ./$(DEPDIR)/url.Po
 	-rm -f ./$(DEPDIR)/util.Po
 	-rm -f ./$(DEPDIR)/vorbis_encode.Po
 	-rm -f ./$(DEPDIR)/vu_meter.Po
@@ -824,6 +838,7 @@ maintainer-clean: maintainer-clean-am
 	-rm -f ./$(DEPDIR)/CurrentTrackOSX.Po
 	-rm -f ./$(DEPDIR)/aac_encode.Po
 	-rm -f ./$(DEPDIR)/butt.Po
+	-rm -f ./$(DEPDIR)/cJSON.Po
 	-rm -f ./$(DEPDIR)/cfg.Po
 	-rm -f ./$(DEPDIR)/command.Po
 	-rm -f ./$(DEPDIR)/currentTrack.Po
@@ -832,9 +847,11 @@ maintainer-clean: maintainer-clean-am
 	-rm -f ./$(DEPDIR)/flac_encode.Po
 	-rm -f ./$(DEPDIR)/icecast.Po
 	-rm -f ./$(DEPDIR)/lame_encode.Po
+	-rm -f ./$(DEPDIR)/oauth.Po
 	-rm -f ./$(DEPDIR)/opus_encode.Po
 	-rm -f ./$(DEPDIR)/parseconfig.Po
 	-rm -f ./$(DEPDIR)/port_audio.Po
+	-rm -f ./$(DEPDIR)/radioco.Po
 	-rm -f ./$(DEPDIR)/ringbuffer.Po
 	-rm -f ./$(DEPDIR)/sha256.Po
 	-rm -f ./$(DEPDIR)/shoutcast.Po
@@ -844,6 +861,7 @@ maintainer-clean: maintainer-clean-am
 	-rm -f ./$(DEPDIR)/tls.Po
 	-rm -f ./$(DEPDIR)/tray_agent.Po
 	-rm -f ./$(DEPDIR)/update.Po
+	-rm -f ./$(DEPDIR)/url.Po
 	-rm -f ./$(DEPDIR)/util.Po
 	-rm -f ./$(DEPDIR)/vorbis_encode.Po
 	-rm -f ./$(DEPDIR)/vu_meter.Po

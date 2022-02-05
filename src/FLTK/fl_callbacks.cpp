@@ -30,6 +30,8 @@
 
 #include <FL/fl_ask.H>
 #include <FL/Fl_Color_Chooser.H>
+#include <FL/Fl_Browser.H>
+
 #include <samplerate.h>
 
 #include "gettext.h"
@@ -54,7 +56,10 @@
 #include "fl_timer_funcs.h"
 #include "fl_funcs.h"
 #include "update.h"
-
+#ifdef WITH_RADIOCO
+ #include "radioco.h"
+ #include "oauth.h"
+#endif
 
 flgui *fl_g; 
 int display_info = STREAM_TIME;
@@ -68,10 +73,10 @@ void *connect_thread(void *data)
     int (*xc_connect)() = NULL;
 
 
-    if (cfg.srv[cfg.selected_srv]->type == SHOUTCAST)
-        xc_connect = &sc_connect;
-    else //(cfg.srv[cfg.selected_srv]->type == ICECAST)
+    if (cfg.srv[cfg.selected_srv]->type == ICECAST)
         xc_connect = &ic_connect;
+    else //(cfg.srv[cfg.selected_srv]->type == SHOUTCAST)
+        xc_connect = &sc_connect;
 
     //try to connect as long as xc_connect returns non-zero and try_to_connect == 1
     while ( ((ret = xc_connect()) != IC_OK) && (try_to_connect == 1) ) //xc_connect returns 0 when connected
@@ -81,8 +86,8 @@ void *connect_thread(void *data)
         {
             fl_g->lcd->clear();
             fl_g->lcd->print((const uchar*)_("idle"), strlen(_("idle")));
-            // fl_g->radio_logo->show();
-            // fl_g->radio_logo->redraw();
+            // fl_g->radio_co_logo->show();
+            // fl_g->radio_co_logo->redraw();
             break;
         }
         if (ret == IC_ASK)
@@ -97,8 +102,8 @@ void *connect_thread(void *data)
                 fl_g->lcd->print((const uchar*)_("idle"), strlen(_("idle")));
                 
                 
-                // fl_g->radio_logo->show();
-                // fl_g->radio_logo->redraw();
+                // fl_g->radio_co_logo->show();
+                // fl_g->radio_co_logo->redraw();
                 ask_user_reset();
                 break;
             }
@@ -174,7 +179,7 @@ void button_connect_cb(void)
     {
         if( (!strcmp(cfg.audio.codec, "ogg")) || (!strcmp(cfg.audio.codec, "opus")) )
         {
-            snprintf(text_buf, sizeof(text_buf), _("Warning: %s is not supported by every ShoutCast version"), cfg.audio.codec);
+            snprintf(text_buf, sizeof(text_buf), _("Warning: %s is not supported by every Shoutcast version"), cfg.audio.codec);
             print_info(text_buf, 1);
         }
         if(!strcmp(cfg.audio.codec, "flac"))
@@ -183,20 +188,28 @@ void button_connect_cb(void)
             return;
         }
     }
+    
+    if(cfg.srv[cfg.selected_srv]->type == RADIOCO)
+    {
+        if( (strcmp(cfg.audio.codec, "mp3")) && (strcmp(cfg.audio.codec, "aac")) )
+        {
+            snprintf(text_buf, sizeof(text_buf), _("Error: Radio.co supports only mp3 and aac"));
+            print_info(text_buf, 1);
+            return;
+        }
+    }
 
-
-    if(cfg.srv[cfg.selected_srv]->type == SHOUTCAST)
+    if(cfg.srv[cfg.selected_srv]->type == ICECAST)
+        snprintf(text_buf, sizeof(text_buf), _("Connecting to %s:%u ..."),
+                 cfg.srv[cfg.selected_srv]->addr,
+                 cfg.srv[cfg.selected_srv]->port);
+    else
         snprintf(text_buf, sizeof(text_buf), _("Connecting to %s:%u (%u) ..."),
             cfg.srv[cfg.selected_srv]->addr,
             cfg.srv[cfg.selected_srv]->port+1,
             cfg.srv[cfg.selected_srv]->port);
-    else
-        snprintf(text_buf, sizeof(text_buf), _("Connecting to %s:%u ..."),
-            cfg.srv[cfg.selected_srv]->addr,
-            cfg.srv[cfg.selected_srv]->port);
 
     print_info(text_buf, 0);
-
 
     //Clear libsamplerate state
     snd_reset_samplerate_conv(SND_STREAM);
@@ -244,6 +257,22 @@ void button_connect_cb(void)
         snprintf(bitrate_str, sizeof(bitrate_str), "%dkbps", cfg.audio.bitrate);
         
     
+    char server_type[32];
+    switch(cfg.srv[cfg.selected_srv]->type)
+    {
+        case ICECAST:
+            snprintf(server_type, sizeof(server_type), "Icecast");
+            break;
+        case SHOUTCAST:
+            snprintf(server_type, sizeof(server_type), "Shoutcast");
+            break;
+        case RADIOCO:
+            snprintf(server_type, sizeof(server_type), "Radio.co");
+            break;
+        default:
+            snprintf(server_type, sizeof(server_type), "Unknown");
+            break;
+    }
     print_info(_("Connection established"), 0);
     snprintf(text_buf, sizeof(text_buf),
             "Settings:\n"
@@ -251,7 +280,7 @@ void button_connect_cb(void)
             "Codec:\t\t%s\n"
             "Bitrate:\t%s\n"
             "Samplerate:\t%dHz\n",
-            cfg.srv[cfg.selected_srv]->type == SHOUTCAST ? "ShoutCast" : "IceCast",
+            server_type,
             cfg.audio.codec,
             bitrate_str,
             strcmp(cfg.audio.codec, "opus") == 0 ? 48000 : cfg.audio.samplerate
@@ -383,8 +412,106 @@ void button_cfg_cb(void)
 // add server
 void button_add_srv_add_cb(void)
 {
-    int i;
+    int i, j, k;
+    int server_exists;
+    
+#ifdef WITH_RADIOCO
+    if (fl_g->radio_add_srv_radioco->value())
+    {
+        if (fl_g->browser_add_srv_station_list->nchecked() == 0)
+            return;
+    
+        radioco_stations_t stations;
+        radioco_get_station_list(&stations);
+        for (i = 0; i < stations.num_of_stations; i++)
+        {
+            if (fl_g->browser_add_srv_station_list->checked(i+1) == 0)
+                continue;
+            
+            server_exists = 0;
+            //check if the name already exists
+            for(j = 0; j < cfg.main.num_of_srv; j++)
+            {
+                if(!strcmp(stations.name[i], cfg.srv[j]->name))
+                {
+                    server_exists = 1;
+                    break;
+                }
+            }
+            if (server_exists == 1)
+                continue;
+            
+            k = cfg.main.num_of_srv;
+            cfg.main.num_of_srv++;
 
+            cfg.srv = (server_t**)realloc(cfg.srv, cfg.main.num_of_srv * sizeof(server_t*));
+            cfg.srv[k] = (server_t*)malloc(sizeof(server_t));
+
+            cfg.srv[k]->name = (char*)malloc(strlen(stations.name[i])+1);
+            strcpy(cfg.srv[k]->name, stations.name[i]);
+            strrpl(&cfg.srv[k]->name, (char*)"[", (char*)"", MODE_ALL);
+            strrpl(&cfg.srv[k]->name, (char*)"]", (char*)"", MODE_ALL);
+            strrpl(&cfg.srv[k]->name, (char*)"/", (char*)"", MODE_ALL);
+            strrpl(&cfg.srv[k]->name, (char*)"\\", (char*)"", MODE_ALL);
+            strrpl(&cfg.srv[k]->name, (char*)";", (char*)"", MODE_ALL);
+
+            
+            cfg.srv[k]->addr = (char*)malloc(strlen(stations.host[i])+1);
+            strcpy(cfg.srv[k]->addr, stations.host[i]);
+            
+            
+            cfg.srv[k]->pwd = (char*)malloc(strlen(stations.password[i])+1);
+            strcpy(cfg.srv[k]->pwd, stations.password[i]);
+
+            cfg.srv[k]->port = stations.port[i];
+            
+            cfg.srv[k]->cert_hash = NULL;
+            cfg.srv[k]->mount = NULL;
+            cfg.srv[k]->usr = NULL;
+            cfg.srv[k]->type = RADIOCO;
+            cfg.srv[k]->tls = 0;
+            
+            if(cfg.main.num_of_srv > 1)
+            {
+                cfg.main.srv_ent = (char*)realloc(cfg.main.srv_ent,
+                                                 strlen(cfg.main.srv_ent) +
+                                                 strlen(cfg.srv[k]->name) +2);
+                sprintf(cfg.main.srv_ent, "%s;%s", cfg.main.srv_ent, cfg.srv[k]->name);
+                cfg.main.srv = (char*)realloc(cfg.main.srv, strlen(cfg.srv[k]->name)+1);
+            }
+            else
+            {
+                cfg.main.srv_ent = (char*)malloc(strlen(cfg.srv[k]->name) +1);
+                sprintf(cfg.main.srv_ent, "%s", cfg.srv[k]->name);
+                cfg.main.srv = (char*)malloc(strlen(cfg.srv[k]->name)+1);
+            }
+            
+            fl_g->choice_cfg_act_srv->add(cfg.srv[k]->name);
+            fl_g->choice_cfg_act_srv->redraw();
+            strcpy(cfg.main.srv, cfg.srv[k]->name);
+            fl_g->choice_cfg_act_srv->value(k);
+
+        }
+        
+        //Activate del and edit buttons
+        fl_g->button_cfg_edit_srv->activate();
+        fl_g->button_cfg_del_srv->activate();
+        
+        fl_g->choice_cfg_act_srv->activate();
+
+        // make last added server the active server
+        choice_cfg_act_srv_cb();
+        
+        fl_g->browser_add_srv_station_list->clear();
+        
+        fl_g->window_add_srv->hide();
+        
+        return;
+    }
+#endif
+    
+    
+    
     //error checking
     if((fl_g->radio_add_srv_icecast->value()) && (strlen(fl_g->input_add_srv_mount->value()) == 0))
     {
@@ -410,9 +537,9 @@ void button_add_srv_add_cb(void)
             return;
         }
     }
-    if(strpbrk(fl_g->input_add_srv_name->value(), ";\\/\n\r") != NULL)
+    if(strpbrk(fl_g->input_add_srv_name->value(), "[];\\/\n\r") != NULL)
     {
-        fl_alert(_("No newline characters and ;/\\ are allowed in the name field"));
+        fl_alert(_("Newline characters and [];/\\ are not allowed within the server name"));
         return;
     }
     if(strlen(fl_g->input_add_srv_addr->value()) == 0)
@@ -489,6 +616,8 @@ void button_add_srv_add_cb(void)
     }
 
     cfg.srv[i]->tls = fl_g->check_add_srv_tls->value();
+    
+    
 
     if(cfg.main.num_of_srv > 1)
     {
@@ -679,8 +808,8 @@ void button_disconnect_cb(void)
     {
         fl_g->lcd->clear();
         fl_g->lcd->print((const uchar*)_("idle"), strlen(_("idle")));
-        // fl_g->radio_logo->show();
-        // fl_g->radio_logo->redraw();
+        // fl_g->radio_co_logo->show();
+        // fl_g->radio_co_logo->redraw();
     }
 
     // We are not trying to connect anymore
@@ -716,10 +845,10 @@ void button_disconnect_cb(void)
         Fl::remove_timeout(&stream_silence_timer);
         snd_stop_stream();
 
-        if(cfg.srv[cfg.selected_srv]->type == SHOUTCAST)
-            sc_disconnect();
-        else
+        if(cfg.srv[cfg.selected_srv]->type == ICECAST)
             ic_disconnect();
+        else
+            sc_disconnect();
         
         fl_g->window_main->label(PACKAGE_STRING);
 
@@ -763,8 +892,8 @@ bool stop_recording(bool ask)
         
         fl_g->lcd->clear();
         fl_g->lcd->print((const uchar*)_("idle"), strlen(_("idle")));
-        // fl_g->radio_logo->show();
-        // fl_g->radio_logo->redraw();
+        // fl_g->radio_co_logo->show();
+        // fl_g->radio_co_logo->redraw();
         Fl::remove_timeout(&display_info_timer);
     }
     else
@@ -783,6 +912,7 @@ void button_record_cb(void)
     int cancel = 0;
     char mode[3];
     char i_str[12];
+    char expanded_rec_folder[PATH_MAX];
     bool index = 0;
     char *path_with_placeholder = NULL;
     char *path_for_index_loop = NULL;
@@ -802,11 +932,12 @@ void button_record_cb(void)
         return;
     }
 
-
-    cfg.rec.path = (char*) malloc((strlen(cfg.rec.folder) +
+    fl_filename_expand(expanded_rec_folder, sizeof(expanded_rec_folder), cfg.rec.folder);
+    
+    cfg.rec.path = (char*) malloc((strlen(expanded_rec_folder) +
                 strlen(cfg.rec.filename)) * sizeof(char) + 10);
 
-    strcpy(cfg.rec.path, cfg.rec.folder);
+    strcpy(cfg.rec.path, expanded_rec_folder);
     strcat(cfg.rec.path, cfg.rec.filename);
 
     cfg.rec.path_fmt = strdup(cfg.rec.path);
@@ -997,7 +1128,7 @@ void choice_cfg_act_srv_cb(void)
                                   strlen(cfg.srv[cfg.selected_srv]->name)+1);
 
     strcpy(cfg.main.srv, cfg.srv[cfg.selected_srv]->name);
-
+    
 }
 
 void choice_cfg_act_icy_cb(void)
@@ -1031,6 +1162,20 @@ void button_cfg_add_srv_cb(void)
     fl_g->window_add_srv->position(fl_g->window_cfg->x(), fl_g->window_cfg->y());
     fl_g->input_add_srv_name->take_focus();
     fl_g->window_add_srv->show();
+    
+    fl_g->radio_add_srv_radioco->activate();
+
+    fl_g->input_add_srv_pwd->show();
+    fl_g->input_add_srv_port->show();
+    fl_g->input_add_srv_addr->show();
+    fl_g->button_cfg_show_pw->show();
+    fl_g->input_add_srv_mount->show();
+    fl_g->input_add_srv_usr->show();
+    
+    fl_g->browser_add_srv_station_list->hide();
+    fl_g->button_add_srv_get_stations->hide();
+    fl_g->button_add_srv_select_all->hide();
+    fl_g->button_add_srv_deselect_all->hide();
 }
 
 void button_cfg_edit_srv_cb(void)
@@ -1041,10 +1186,17 @@ void button_cfg_edit_srv_cb(void)
 
     if(cfg.main.num_of_srv < 1)
         return;
+    
 
     fl_g->window_add_srv->label(_("Edit Server"));
 
     srv = fl_g->choice_cfg_act_srv->value();
+    
+    if (cfg.srv[srv]->type == RADIOCO)
+    {
+        fl_message(_("Radio.co stations cannot be edited."));
+        return;
+    }
 
     fl_g->input_add_srv_name->value(cfg.srv[srv]->name);
     fl_g->input_add_srv_addr->value(cfg.srv[srv]->addr);
@@ -1057,6 +1209,19 @@ void button_cfg_edit_srv_cb(void)
     fl_g->input_add_srv_pwd->redraw();
     fl_g->button_cfg_show_pw->label(_("Show"));
 
+    fl_g->radio_add_srv_radioco->deactivate();
+    
+    fl_g->input_add_srv_pwd->show();
+    fl_g->input_add_srv_port->show();
+    fl_g->input_add_srv_addr->show();
+    fl_g->button_cfg_show_pw->show();
+    fl_g->input_add_srv_mount->show();
+    fl_g->input_add_srv_usr->show();
+    
+    fl_g->browser_add_srv_station_list->hide();
+    fl_g->button_add_srv_get_stations->hide();
+    fl_g->button_add_srv_select_all->hide();
+    fl_g->button_add_srv_deselect_all->hide();
 
     if(cfg.srv[srv]->type == SHOUTCAST)
     {
@@ -1170,10 +1335,10 @@ void update_song(void* user_data)
             flac_set_initial_song_title(&flac_stream, song_buf);
     }
     
-    if (cfg.srv[cfg.selected_srv]->type == SHOUTCAST)
-        xc_update_song = &sc_update_song;
-    else //if(cfg.srv[cfg.selected_srv]->type == ICECAST)
+    if (cfg.srv[cfg.selected_srv]->type == ICECAST)
         xc_update_song = &ic_update_song;
+    else //if(cfg.srv[cfg.selected_srv]->type == SHOUTCAST)
+        xc_update_song = &sc_update_song;
     
     if (xc_update_song(song_buf) == 0)
     {
@@ -1299,14 +1464,39 @@ void choice_cfg_resample_mode_cb(void)
 
 void radio_add_srv_shoutcast_cb(void)
 {
+    fl_g->input_add_srv_name->activate();
+
+    fl_g->input_add_srv_pwd->show();
+    fl_g->input_add_srv_port->show();
+    fl_g->input_add_srv_addr->show();
+    fl_g->button_cfg_show_pw->show();
+    
+    
+    fl_g->input_add_srv_mount->show();
+    fl_g->input_add_srv_usr->show();
     fl_g->input_add_srv_mount->deactivate();
     fl_g->input_add_srv_usr->deactivate();
     fl_g->check_add_srv_tls->deactivate();
     fl_g->frame_add_srv_tls->deactivate();
+    
+    fl_g->browser_add_srv_station_list->hide();
+    fl_g->button_add_srv_get_stations->hide();
+    fl_g->button_add_srv_select_all->hide();
+    fl_g->button_add_srv_deselect_all->hide();
+    
 }
 
 void radio_add_srv_icecast_cb(void)
 {
+    fl_g->input_add_srv_name->activate();
+
+    fl_g->input_add_srv_pwd->show();
+    fl_g->input_add_srv_port->show();
+    fl_g->input_add_srv_addr->show();
+    fl_g->button_cfg_show_pw->show();
+    fl_g->input_add_srv_mount->show();
+    fl_g->input_add_srv_usr->show();
+    
     fl_g->input_add_srv_mount->activate();
     fl_g->input_add_srv_usr->activate();
 
@@ -1320,7 +1510,59 @@ void radio_add_srv_icecast_cb(void)
     fl_g->check_add_srv_tls->deactivate();
     fl_g->frame_add_srv_tls->deactivate();
 #endif
+    
+    fl_g->browser_add_srv_station_list->hide();
+    fl_g->button_add_srv_get_stations->hide();
+    fl_g->button_add_srv_select_all->hide();
+    fl_g->button_add_srv_deselect_all->hide();
 
+}
+
+void radio_add_srv_radioco_cb(void)
+{
+    fl_g->input_add_srv_pwd->hide();
+    fl_g->input_add_srv_port->hide();
+    fl_g->input_add_srv_addr->hide();
+    
+    fl_g->input_add_srv_mount->hide();
+    fl_g->input_add_srv_usr->hide();
+    fl_g->button_cfg_show_pw->hide();
+    
+    fl_g->input_add_srv_name->deactivate();
+    
+    fl_g->check_add_srv_tls->deactivate();
+    fl_g->frame_add_srv_tls->deactivate();
+    
+    fl_g->browser_add_srv_station_list->show();
+    fl_g->button_add_srv_get_stations->show();
+    fl_g->button_add_srv_select_all->show();
+    fl_g->button_add_srv_deselect_all->show();
+    
+}
+
+void button_add_srv_get_stations_cb(void)
+{
+    
+#ifdef WITH_RADIOCO
+    if (fl_choice(_("butt will open Radio.co in a new browser window.\n\n"
+                  "Login to Radio.co and allow butt access to your account."), _("Cancel"), _("OK"), NULL) == 0)
+    { // Cancel
+        return;
+    }
+    
+    radioco_request_access();
+    
+    Fl::add_timeout(1, &wait_for_radioco_timer);
+#endif
+}
+
+void button_add_srv_select_all_cb(void)
+{
+    fl_g->browser_add_srv_station_list->check_all();
+}
+void button_add_srv_deselect_all_cb(void)
+{
+    fl_g->browser_add_srv_station_list->check_none();
 }
 
 void button_add_srv_show_pwd_cb(void)
@@ -1392,9 +1634,9 @@ void button_add_srv_save_cb(void)
             return;
         }
     }
-    if(strpbrk(fl_g->input_add_srv_name->value(), ";\\/\n\r") != NULL)
+    if(strpbrk(fl_g->input_add_srv_name->value(), "[];\\/\n\r") != NULL)
     {
-        fl_alert(_("No newline characters and ;/\\ are allowed in the name field"));
+        fl_alert(_("Newline characters and [];/\\ are not allowed within the server name"));
         return;
     }
     if(strlen(fl_g->input_add_srv_addr->value()) == 0)
@@ -1541,9 +1783,9 @@ void button_add_icy_save_cb(void)
             return;
         }
     }
-    if(strpbrk(fl_g->input_add_icy_name->value(), ";\\/\n\r") != NULL)
+    if(strpbrk(fl_g->input_add_icy_name->value(), "[];\\/\n\r") != NULL)
     {
-        fl_alert(_("No newline characters and ;/\\ are allowed in the name field"));
+        fl_alert(_("Newline characters and [];/\\ are not allowed within the icy name"));
         return;
     }
     
@@ -2182,6 +2424,11 @@ void choice_cfg_channel_mono_cb(void)
 
 void button_add_srv_cancel_cb(void)
 {
+#ifdef WITH_RADIOCO
+    if (radioco_get_state() == RADIOCO_STATE_WAITING)
+        radioco_cancel();
+#endif
+    
     fl_g->input_add_srv_name->value("");
     fl_g->input_add_srv_addr->value("");
     fl_g->input_add_srv_port->value("");
@@ -2189,8 +2436,9 @@ void button_add_srv_cancel_cb(void)
     fl_g->input_add_srv_mount->value("");
     fl_g->input_add_srv_usr->value("");
     fl_g->check_add_srv_tls->value(0);
-
+    fl_g->browser_add_srv_station_list->clear();
     fl_g->window_add_srv->hide();
+
 }
 
 void button_add_icy_add_cb(void)
@@ -2212,9 +2460,9 @@ void button_add_icy_add_cb(void)
             return;
         }
     }
-    if(strpbrk(fl_g->input_add_icy_name->value(), ";\\/\n\r") != NULL)
+    if(strpbrk(fl_g->input_add_icy_name->value(), "[];\\/\n\r") != NULL)
     {
-        fl_alert(_("No newline characters and ;/\\ are allowed in the name field"));
+        fl_alert(_("Newline characters and [];/\\ are not allowed within the icy name"));
         return;
     }
 
@@ -3107,7 +3355,7 @@ void button_gui_bg_color_cb(void)
     fl_g->button_gui_bg_color->color(cfg.main.bg_color, fl_lighter((Fl_Color)cfg.main.bg_color));
     fl_g->button_gui_bg_color->redraw();
     fl_g->lcd->redraw();
-    // fl_g->radio_logo->redraw();
+    // fl_g->radio_co_logo->redraw();
 }
 
 void button_gui_text_color_cb(void)
@@ -3130,7 +3378,7 @@ void button_gui_text_color_cb(void)
     fl_g->button_gui_text_color->color(cfg.main.txt_color, fl_lighter((Fl_Color)cfg.main.txt_color));
     fl_g->button_gui_text_color->redraw();
     fl_g->lcd->redraw();
-    // fl_g->radio_logo->redraw();
+    // fl_g->radio_co_logo->redraw();
 }
 
 void choice_gui_language_cb(void)
@@ -3168,7 +3416,7 @@ void check_cfg_auto_start_rec_cb(void)
 {
     cfg.rec.start_rec = fl_g->check_cfg_auto_start_rec->value();
     fl_g->lcd->redraw();  //update the little record icon
-    // fl_g->radio_logo->redraw();
+    // fl_g->radio_co_logo->redraw();
 }
 void check_cfg_auto_stop_rec_cb(void)
 {
@@ -3780,5 +4028,819 @@ void slider_makeup_cb(double v)
     snprintf(str, 10, "%+.1f", v);
     fl_g->makeup->label(str);
     fl_g->makeupSlider->value_cb2("dB");
+}
+
+void choice_stream_mp3_enc_quality_cb(void)
+{
+    lame_enc test_enc;
+       
+    test_enc = lame_stream;
+    test_enc.gfp = NULL;
+    test_enc.enc_quality = fl_g->choice_stream_mp3_enc_quality->value();
+
+    if (lame_enc_init(&test_enc) == 0) 
+    {
+        cfg.mp3_codec_stream.enc_quality = fl_g->choice_stream_mp3_enc_quality->value();
+        lame_stream.enc_quality = fl_g->choice_stream_mp3_enc_quality->value();
+
+        lame_enc_reinit(&lame_stream);
+        lame_enc_close(&test_enc);
+    }
+    else
+    {
+        printf("choice_stream_mp3_enc_quality_cb: Illegal value\n");
+    }
+}
+void choice_stream_mp3_stereo_mode_cb(void)
+{
+    lame_enc test_enc;
+       
+    test_enc = lame_stream;
+    test_enc.gfp = NULL;
+    test_enc.stereo_mode = fl_g->choice_stream_mp3_stereo_mode->value()-1;
+
+    if (lame_enc_init(&test_enc) == 0) 
+    {
+        cfg.mp3_codec_stream.stereo_mode = fl_g->choice_stream_mp3_stereo_mode->value();
+        lame_stream.stereo_mode = fl_g->choice_stream_mp3_stereo_mode->value()-1;
+
+        lame_enc_reinit(&lame_stream);
+        lame_enc_close(&test_enc);
+    }
+    else
+    {
+        printf("choice_stream_mp3_stereo_mode_cb: Illegal value\n");
+    }
+
+}
+void choice_stream_mp3_bitrate_mode_cb(void)
+{
+    lame_enc test_enc;
+       
+    test_enc = lame_stream;
+    test_enc.gfp = NULL;
+    test_enc.bitrate_mode = fl_g->choice_stream_mp3_bitrate_mode->value();
+
+    if (lame_enc_init(&test_enc) == 0) 
+    {
+        cfg.mp3_codec_stream.bitrate_mode = fl_g->choice_stream_mp3_bitrate_mode->value();
+        lame_stream.bitrate_mode = fl_g->choice_stream_mp3_bitrate_mode->value();
+
+        lame_enc_reinit(&lame_stream);
+        lame_enc_close(&test_enc);
+    }
+    else
+    {
+        printf("choice_stream_mp3_bitrate_mode_cb: Illegal value\n");
+    }
+
+
+}
+void choice_stream_mp3_vbr_quality_cb(void)
+{
+    lame_enc test_enc;
+       
+    test_enc = lame_stream;
+    test_enc.gfp = NULL;
+    test_enc.vbr_quality = fl_g->choice_stream_mp3_vbr_quality->value();
+
+    if (lame_enc_init(&test_enc) == 0) 
+    {
+        cfg.mp3_codec_stream.vbr_quality = fl_g->choice_stream_mp3_vbr_quality->value();
+        lame_stream.vbr_quality = fl_g->choice_stream_mp3_vbr_quality->value();
+
+        lame_enc_reinit(&lame_stream);
+        lame_enc_close(&test_enc);
+    }
+    else
+    {
+        printf("choice_stream_mp3_vbr_quality_cb: Illegal value\n");
+    }
+
+
+}
+void choice_stream_mp3_vbr_min_bitrate_cb(void)
+{
+    int br_list[] = { 8, 16, 24, 32, 40, 48, 56, 64, 80, 96,
+                      112, 128, 160, 192, 224, 256, 320 };
+
+    lame_enc test_enc;
+       
+    test_enc = lame_stream;
+    test_enc.gfp = NULL;
+    test_enc.vbr_min_bitrate = br_list[fl_g->choice_stream_mp3_vbr_min_bitrate->value()];
+
+    if (lame_enc_init(&test_enc) == 0) 
+    {
+        cfg.mp3_codec_stream.vbr_min_bitrate = br_list[fl_g->choice_stream_mp3_vbr_min_bitrate->value()];
+        lame_stream.vbr_min_bitrate = br_list[fl_g->choice_stream_mp3_vbr_min_bitrate->value()];
+
+        printf("real codec\n");
+        lame_enc_reinit(&lame_stream);
+        lame_enc_close(&test_enc);
+    }
+    else
+    {
+        printf("choice_stream_mp3_vbr_min_bitrate_cb: Illegal value\n");
+    }
+}
+void choice_stream_mp3_vbr_max_bitrate_cb(void)
+{
+    int br_list[] = { 8, 16, 24, 32, 40, 48, 56, 64, 80, 96,
+                      112, 128, 160, 192, 224, 256, 320 };
+
+    lame_enc test_enc;
+       
+    test_enc = lame_stream;
+    test_enc.gfp = NULL;
+    test_enc.vbr_max_bitrate = br_list[fl_g->choice_stream_mp3_vbr_max_bitrate->value()];
+
+    if (lame_enc_init(&test_enc) == 0) 
+    {
+        cfg.mp3_codec_stream.vbr_max_bitrate = br_list[fl_g->choice_stream_mp3_vbr_max_bitrate->value()];
+        lame_stream.vbr_max_bitrate = br_list[fl_g->choice_stream_mp3_vbr_max_bitrate->value()];
+
+        printf("real codec\n");
+        lame_enc_reinit(&lame_stream);
+        lame_enc_close(&test_enc);
+    }
+    else
+    {
+        printf("choice_stream_mp3_vbr_max_bitrate_cb: Illegal value\n");
+    }
+}
+
+void choice_stream_vorbis_bitrate_mode_cb(void)
+{
+    vorbis_enc test_enc;
+       
+    test_enc = vorbis_stream;
+    test_enc.bitrate_mode = fl_g->choice_stream_vorbis_bitrate_mode->value();
+
+    if (vorbis_enc_init(&test_enc) == 0) 
+    {
+        cfg.vorbis_codec_stream.bitrate_mode = fl_g->choice_stream_vorbis_bitrate_mode->value();
+        vorbis_stream.bitrate_mode = fl_g->choice_stream_vorbis_bitrate_mode->value();
+
+        vorbis_enc_reinit(&vorbis_stream);
+        vorbis_enc_close(&test_enc);
+    }
+    else
+    {
+        fl_g->choice_stream_vorbis_bitrate_mode->value(cfg.vorbis_codec_stream.bitrate_mode);
+        printf("choice_stream_vorbis_bitrate_mode_cb: Illegal value\n");
+    }
+}
+
+void choice_stream_vorbis_vbr_quality_cb(void)
+{
+    vorbis_enc test_enc;
+       
+    test_enc = vorbis_stream;
+    test_enc.vbr_quality = 1.0-(fl_g->choice_stream_vorbis_vbr_quality->value()*0.1);
+
+    if (vorbis_enc_init(&test_enc) == 0)
+    {
+        cfg.vorbis_codec_stream.vbr_quality = fl_g->choice_stream_vorbis_vbr_quality->value();
+        vorbis_stream.vbr_quality = 1.0-(fl_g->choice_stream_vorbis_vbr_quality->value()*0.1);
+
+        vorbis_enc_reinit(&vorbis_stream);
+        vorbis_enc_close(&test_enc);
+    }
+    else
+    {
+        fl_g->choice_stream_vorbis_vbr_quality->value(cfg.vorbis_codec_stream.vbr_quality);
+        printf("choice_stream_vorbis_vbr_quality_cb: Illegal value\n");
+    }
+}
+
+void choice_stream_vorbis_vbr_min_bitrate_cb(void)
+{
+    int i;
+    int br_list[] = { 0, 48, 56, 64, 80, 96, 112, 128, 160, 192, 224, 256, 320 };
+    
+    vorbis_enc test_enc;
+       
+    test_enc = vorbis_stream;
+    test_enc.vbr_min_bitrate = br_list[fl_g->choice_stream_vorbis_vbr_min_bitrate->value()];
+
+    if (vorbis_enc_init(&test_enc) == 0)
+    {
+        cfg.vorbis_codec_stream.vbr_min_bitrate = br_list[fl_g->choice_stream_vorbis_vbr_min_bitrate->value()];
+        vorbis_stream.vbr_min_bitrate = br_list[fl_g->choice_stream_vorbis_vbr_min_bitrate->value()];
+
+        vorbis_enc_reinit(&vorbis_stream);
+        vorbis_enc_close(&test_enc);
+    }
+    else
+    {
+        for (i = 0; i < sizeof(br_list)/sizeof(int); i++)
+        {
+            if (cfg.vorbis_codec_stream.vbr_min_bitrate == br_list[i])
+                break;
+        }
+        fl_g->choice_stream_vorbis_vbr_min_bitrate->value(i);
+        printf("choice_stream_vorbis_vbr_min_bitrate_cb: Illegal value\n");
+    }
+}
+
+void choice_stream_vorbis_vbr_max_bitrate_cb(void)
+{
+    int i;
+    int br_list[] = { 0, 48, 56, 64, 80, 96, 112, 128, 160, 192, 224, 256, 320 };
+    
+    vorbis_enc test_enc;
+       
+    test_enc = vorbis_stream;
+    test_enc.vbr_max_bitrate = br_list[fl_g->choice_stream_vorbis_vbr_max_bitrate->value()];
+
+    if (vorbis_enc_init(&test_enc) == 0)
+    {
+        cfg.vorbis_codec_stream.vbr_max_bitrate = br_list[fl_g->choice_stream_vorbis_vbr_max_bitrate->value()];
+        vorbis_stream.vbr_max_bitrate = br_list[fl_g->choice_stream_vorbis_vbr_max_bitrate->value()];
+
+        vorbis_enc_reinit(&vorbis_stream);
+        vorbis_enc_close(&test_enc);
+    }
+    else
+    {
+        for (i = 0; i < sizeof(br_list)/sizeof(int); i++)
+        {
+            if (cfg.vorbis_codec_stream.vbr_max_bitrate == br_list[i])
+                break;
+        }
+        fl_g->choice_stream_vorbis_vbr_max_bitrate->value(i);
+        printf("choice_stream_vorbis_vbr_max_bitrate_cb: Illegal value\n");
+    }
+}
+
+
+void choice_stream_opus_bitrate_mode_cb(void)
+{
+    opus_enc test_enc;
+       
+    test_enc = opus_stream;
+    test_enc.bitrate_mode = fl_g->choice_stream_opus_bitrate_mode->value();
+
+    if (opus_enc_init(&test_enc) == 0)
+    {
+        cfg.opus_codec_stream.bitrate_mode = fl_g->choice_stream_opus_bitrate_mode->value();
+        opus_stream.bitrate_mode = fl_g->choice_stream_opus_bitrate_mode->value();
+
+        opus_enc_init(&opus_stream);
+        opus_enc_close(&test_enc);
+    }
+    else
+    {
+        fl_g->choice_stream_opus_bitrate_mode->value(cfg.opus_codec_stream.bitrate_mode);
+        printf("choice_stream_opus_bitrate_mode_cb: Illegal value\n");
+    }
+}
+
+void choice_stream_opus_audio_type_cb(void)
+{
+    opus_enc test_enc;
+       
+    test_enc = opus_stream;
+    test_enc.audio_type = fl_g->choice_stream_opus_audio_type->value();
+
+    if (opus_enc_init(&test_enc) == 0)
+    {
+        cfg.opus_codec_stream.audio_type = fl_g->choice_stream_opus_audio_type->value();
+        opus_stream.audio_type = fl_g->choice_stream_opus_audio_type->value();
+
+        opus_enc_init(&opus_stream);
+        opus_enc_close(&test_enc);
+    }
+    else
+    {
+        fl_g->choice_stream_opus_audio_type->value(cfg.opus_codec_stream.audio_type);
+        printf("choice_stream_opus_audio_type_cb: Illegal value\n");
+    }
+}
+
+void choice_stream_opus_quality_cb(void)
+{
+    opus_enc test_enc;
+       
+    test_enc = opus_stream;
+    test_enc.quality = fl_g->choice_stream_opus_quality->value();
+
+    if (opus_enc_init(&test_enc) == 0)
+    {
+        cfg.opus_codec_stream.quality = fl_g->choice_stream_opus_quality->value();
+        opus_stream.quality = fl_g->choice_stream_opus_quality->value();
+
+        opus_enc_init(&opus_stream);
+        opus_enc_close(&test_enc);
+    }
+    else
+    {
+        fl_g->choice_stream_opus_quality->value(cfg.opus_codec_stream.quality);
+        printf("choice_stream_opus_quality_cb: Illegal value\n");
+    }
+}
+
+void choice_stream_opus_bandwidth_cb(void)
+{
+    opus_enc test_enc;
+       
+    test_enc = opus_stream;
+    test_enc.bandwidth = fl_g->choice_stream_opus_bandwidth->value();
+
+    if (opus_enc_init(&test_enc) == 0)
+    {
+        cfg.opus_codec_stream.bandwidth = fl_g->choice_stream_opus_bandwidth->value();
+        opus_stream.bandwidth = fl_g->choice_stream_opus_bandwidth->value();
+
+        opus_enc_init(&opus_stream);
+        opus_enc_close(&test_enc);
+    }
+    else
+    {
+        fl_g->choice_stream_opus_bandwidth->value(cfg.opus_codec_stream.bandwidth);
+        printf("choice_stream_opus_bandwidth_cb: Illegal value\n");
+    }
+}
+
+
+void choice_stream_aac_profile_cb(void)
+{
+#ifdef HAVE_LIBFDK_AAC
+    aac_enc test_enc;
+       
+    test_enc = aac_stream;
+    test_enc.profile = fl_g->choice_stream_aac_profile->value();
+
+    if (aac_enc_init(&test_enc) == 0)
+    {
+        cfg.aac_codec_stream.profile = fl_g->choice_stream_aac_profile->value();
+        aac_stream.profile = fl_g->choice_stream_aac_profile->value();
+
+        aac_enc_init(&aac_stream);
+        aac_enc_close(&test_enc);
+    }
+    else
+    {
+        fl_g->choice_stream_aac_profile->value(cfg.aac_codec_stream.profile);
+        printf("choice_stream_aac_profile_cb: Illegal value\n");
+    }
+#endif
+}
+
+void choice_stream_aac_afterburner_cb(void)
+{
+#ifdef HAVE_LIBFDK_AAC
+    aac_enc test_enc;
+       
+    test_enc = aac_stream;
+    test_enc.afterburner = fl_g->choice_stream_aac_afterburner->value() == 0 ? 1 : 0;
+
+    if (aac_enc_init(&test_enc) == 0)
+    {
+        cfg.aac_codec_stream.afterburner = fl_g->choice_stream_aac_afterburner->value();
+        aac_stream.afterburner = fl_g->choice_stream_aac_afterburner->value() == 0 ? 1 : 0;
+
+        aac_enc_init(&aac_stream);
+        aac_enc_close(&test_enc);
+    }
+    else
+    {
+        fl_g->choice_stream_aac_afterburner->value(cfg.aac_codec_stream.afterburner);
+        printf("choice_stream_aac_afterburner_cb: Illegal value\n");
+    }
+#endif
+}
+
+void choice_stream_aac_bitrate_mode_cb(void)
+{
+#ifdef HAVE_LIBFDK_AAC
+    aac_enc test_enc;
+       
+    test_enc = aac_stream;
+    test_enc.bitrate_mode = fl_g->choice_stream_aac_bitrate_mode->value();
+
+    if (aac_enc_init(&test_enc) == 0)
+    {
+        cfg.aac_codec_stream.bitrate_mode = fl_g->choice_stream_aac_bitrate_mode->value();
+        aac_stream.bitrate_mode = fl_g->choice_stream_aac_bitrate_mode->value();
+
+        aac_enc_init(&aac_stream);
+        aac_enc_close(&test_enc);
+    }
+    else
+    {
+        fl_g->choice_stream_aac_bitrate_mode->value(cfg.aac_codec_stream.bitrate_mode);
+        printf("choice_stream_aac_bitrate_mode_cb: Illegal value\n");
+    }
+#endif
+}
+
+void choice_rec_mp3_enc_quality_cb(void)
+{
+    lame_enc test_enc;
+       
+    test_enc = lame_rec;
+    test_enc.gfp = NULL;
+    test_enc.enc_quality = fl_g->choice_rec_mp3_enc_quality->value();
+
+    if (lame_enc_init(&test_enc) == 0) 
+    {
+        cfg.mp3_codec_rec.enc_quality = fl_g->choice_rec_mp3_enc_quality->value();
+        lame_rec.enc_quality = fl_g->choice_rec_mp3_enc_quality->value();
+
+        lame_enc_reinit(&lame_rec);
+        lame_enc_close(&test_enc);
+    }
+    else
+    {
+        printf("choice_rec_mp3_enc_quality_cb: Illegal value\n");
+    }
+}
+void choice_rec_mp3_stereo_mode_cb(void)
+{
+    lame_enc test_enc;
+       
+    test_enc = lame_rec;
+    test_enc.gfp = NULL;
+    test_enc.stereo_mode = fl_g->choice_rec_mp3_stereo_mode->value()-1;
+
+    if (lame_enc_init(&test_enc) == 0) 
+    {
+        cfg.mp3_codec_rec.stereo_mode = fl_g->choice_rec_mp3_stereo_mode->value();
+        lame_rec.stereo_mode = fl_g->choice_rec_mp3_stereo_mode->value()-1;
+
+        lame_enc_reinit(&lame_rec);
+        lame_enc_close(&test_enc);
+    }
+    else
+    {
+        printf("choice_rec_mp3_stereo_mode_cb: Illegal value\n");
+    }
+
+}
+void choice_rec_mp3_bitrate_mode_cb(void)
+{
+    lame_enc test_enc;
+       
+    test_enc = lame_rec;
+    test_enc.gfp = NULL;
+    test_enc.bitrate_mode = fl_g->choice_rec_mp3_bitrate_mode->value();
+
+    if (lame_enc_init(&test_enc) == 0) 
+    {
+        cfg.mp3_codec_rec.bitrate_mode = fl_g->choice_rec_mp3_bitrate_mode->value();
+        lame_rec.bitrate_mode = fl_g->choice_rec_mp3_bitrate_mode->value();
+
+        lame_enc_reinit(&lame_rec);
+        lame_enc_close(&test_enc);
+    }
+    else
+    {
+        printf("choice_rec_mp3_bitrate_mode_cb: Illegal value\n");
+    }
+
+
+}
+void choice_rec_mp3_vbr_quality_cb(void)
+{
+    lame_enc test_enc;
+       
+    test_enc = lame_rec;
+    test_enc.gfp = NULL;
+    test_enc.vbr_quality = fl_g->choice_rec_mp3_vbr_quality->value();
+
+    if (lame_enc_init(&test_enc) == 0) 
+    {
+        cfg.mp3_codec_rec.vbr_quality = fl_g->choice_rec_mp3_vbr_quality->value();
+        lame_rec.vbr_quality = fl_g->choice_rec_mp3_vbr_quality->value();
+
+        lame_enc_reinit(&lame_rec);
+        lame_enc_close(&test_enc);
+    }
+    else
+    {
+        printf("choice_rec_mp3_vbr_quality_cb: Illegal value\n");
+    }
+
+
+}
+void choice_rec_mp3_vbr_min_bitrate_cb(void)
+{
+    int br_list[] = { 8, 16, 24, 32, 40, 48, 56, 64, 80, 96,
+                      112, 128, 160, 192, 224, 256, 320 };
+
+    lame_enc test_enc;
+       
+    test_enc = lame_rec;
+    test_enc.gfp = NULL;
+    test_enc.vbr_min_bitrate = br_list[fl_g->choice_rec_mp3_vbr_min_bitrate->value()];
+
+    if (lame_enc_init(&test_enc) == 0) 
+    {
+        cfg.mp3_codec_rec.vbr_min_bitrate = br_list[fl_g->choice_rec_mp3_vbr_min_bitrate->value()];
+        lame_rec.vbr_min_bitrate = br_list[fl_g->choice_rec_mp3_vbr_min_bitrate->value()];
+
+        printf("real codec\n");
+        lame_enc_reinit(&lame_rec);
+        lame_enc_close(&test_enc);
+    }
+    else
+    {
+        printf("choice_rec_mp3_vbr_min_bitrate_cb: Illegal value\n");
+    }
+}
+void choice_rec_mp3_vbr_max_bitrate_cb(void)
+{
+    int br_list[] = { 8, 16, 24, 32, 40, 48, 56, 64, 80, 96,
+                      112, 128, 160, 192, 224, 256, 320 };
+
+    lame_enc test_enc;
+       
+    test_enc = lame_rec;
+    test_enc.gfp = NULL;
+    test_enc.vbr_max_bitrate = br_list[fl_g->choice_rec_mp3_vbr_max_bitrate->value()];
+
+    if (lame_enc_init(&test_enc) == 0) 
+    {
+        cfg.mp3_codec_rec.vbr_max_bitrate = br_list[fl_g->choice_rec_mp3_vbr_max_bitrate->value()];
+        lame_rec.vbr_max_bitrate = br_list[fl_g->choice_rec_mp3_vbr_max_bitrate->value()];
+
+        printf("real codec\n");
+        lame_enc_reinit(&lame_rec);
+        lame_enc_close(&test_enc);
+    }
+    else
+    {
+        printf("choice_rec_mp3_vbr_max_bitrate_cb: Illegal value\n");
+    }
+}
+
+
+void choice_rec_vorbis_bitrate_mode_cb(void)
+{
+    vorbis_enc test_enc;
+       
+    test_enc = vorbis_rec;
+    test_enc.bitrate_mode = fl_g->choice_rec_vorbis_bitrate_mode->value();
+
+    if (vorbis_enc_init(&test_enc) == 0)
+    {
+        cfg.vorbis_codec_rec.bitrate_mode = fl_g->choice_rec_vorbis_bitrate_mode->value();
+        vorbis_rec.bitrate_mode = fl_g->choice_rec_vorbis_bitrate_mode->value();
+
+        vorbis_enc_reinit(&vorbis_rec);
+        vorbis_enc_close(&test_enc);
+    }
+    else
+    {
+        fl_g->choice_rec_vorbis_bitrate_mode->value(cfg.vorbis_codec_rec.bitrate_mode);
+        printf("choice_rec_vorbis_bitrate_mode_cb: Illegal value\n");
+    }
+}
+
+void choice_rec_vorbis_vbr_quality_cb(void)
+{
+    vorbis_enc test_enc;
+       
+    test_enc = vorbis_rec;
+    test_enc.vbr_quality = 1.0-(fl_g->choice_rec_vorbis_vbr_quality->value()*0.1);
+
+    if (vorbis_enc_init(&test_enc) == 0)
+    {
+        cfg.vorbis_codec_rec.vbr_quality = fl_g->choice_rec_vorbis_vbr_quality->value();
+        vorbis_rec.vbr_quality = 1.0-(fl_g->choice_rec_vorbis_vbr_quality->value()*0.1);
+
+        vorbis_enc_reinit(&vorbis_rec);
+        vorbis_enc_close(&test_enc);
+    }
+    else
+    {
+        fl_g->choice_rec_vorbis_vbr_quality->value(cfg.vorbis_codec_rec.vbr_quality);
+        printf("choice_rec_vorbis_vbr_quality_cb: Illegal value\n");
+    }
+}
+
+void choice_rec_vorbis_vbr_min_bitrate_cb(void)
+{
+    int i;
+    int br_list[] = { 0, 48, 56, 64, 80, 96, 112, 128, 160, 192, 224, 256, 320 };
+    
+    vorbis_enc test_enc;
+       
+    test_enc = vorbis_rec;
+    test_enc.vbr_min_bitrate = br_list[fl_g->choice_rec_vorbis_vbr_min_bitrate->value()];
+
+    if (vorbis_enc_init(&test_enc) == 0)
+    {
+        cfg.vorbis_codec_rec.vbr_min_bitrate = br_list[fl_g->choice_rec_vorbis_vbr_min_bitrate->value()];
+        vorbis_rec.vbr_min_bitrate = br_list[fl_g->choice_rec_vorbis_vbr_min_bitrate->value()];
+
+        vorbis_enc_reinit(&vorbis_rec);
+        vorbis_enc_close(&test_enc);
+    }
+    else
+    {
+        for (i = 0; i < sizeof(br_list)/sizeof(int); i++)
+        {
+            if (cfg.vorbis_codec_rec.vbr_min_bitrate == br_list[i])
+                break;
+        }
+        fl_g->choice_rec_vorbis_vbr_min_bitrate->value(i);
+        printf("choice_rec_vorbis_vbr_min_bitrate_cb: Illegal value\n");
+    }
+}
+
+void choice_rec_vorbis_vbr_max_bitrate_cb(void)
+{
+    int i;
+    int br_list[] = { 0, 48, 56, 64, 80, 96, 112, 128, 160, 192, 224, 256, 320 };
+    
+    vorbis_enc test_enc;
+       
+    test_enc = vorbis_rec;
+    test_enc.vbr_max_bitrate = br_list[fl_g->choice_rec_vorbis_vbr_max_bitrate->value()];
+
+    if (vorbis_enc_init(&test_enc) == 0)
+    {
+        cfg.vorbis_codec_rec.vbr_max_bitrate = br_list[fl_g->choice_rec_vorbis_vbr_max_bitrate->value()];
+        vorbis_rec.vbr_max_bitrate = br_list[fl_g->choice_rec_vorbis_vbr_max_bitrate->value()];
+
+        vorbis_enc_reinit(&vorbis_rec);
+        vorbis_enc_close(&test_enc);
+    }
+    else
+    {
+        for (i = 0; i < sizeof(br_list)/sizeof(int); i++)
+        {
+            if (cfg.vorbis_codec_rec.vbr_max_bitrate == br_list[i])
+                break;
+        }
+        fl_g->choice_rec_vorbis_vbr_max_bitrate->value(i);
+        printf("choice_rec_vorbis_vbr_max_bitrate_cb: Illegal value\n");
+    }
+}
+
+
+void choice_rec_opus_bitrate_mode_cb(void)
+{
+    opus_enc test_enc;
+       
+    test_enc = opus_rec;
+    test_enc.bitrate_mode = fl_g->choice_rec_opus_bitrate_mode->value();
+
+    if (opus_enc_init(&test_enc) == 0)
+    {
+        cfg.opus_codec_rec.bitrate_mode = fl_g->choice_rec_opus_bitrate_mode->value();
+        opus_rec.bitrate_mode = fl_g->choice_rec_opus_bitrate_mode->value();
+
+        opus_enc_init(&opus_rec);
+        opus_enc_close(&test_enc);
+    }
+    else
+    {
+        fl_g->choice_rec_opus_bitrate_mode->value(cfg.opus_codec_rec.bitrate_mode);
+        printf("choice_rec_opus_bitrate_mode_cb: Illegal value\n");
+    }
+}
+
+void choice_rec_opus_audio_type_cb(void)
+{
+    opus_enc test_enc;
+       
+    test_enc = opus_rec;
+    test_enc.audio_type = fl_g->choice_rec_opus_audio_type->value();
+
+    if (opus_enc_init(&test_enc) == 0)
+    {
+        cfg.opus_codec_rec.audio_type = fl_g->choice_rec_opus_audio_type->value();
+        opus_rec.audio_type = fl_g->choice_rec_opus_audio_type->value();
+
+        opus_enc_init(&opus_rec);
+        opus_enc_close(&test_enc);
+    }
+    else
+    {
+        fl_g->choice_rec_opus_audio_type->value(cfg.opus_codec_rec.audio_type);
+        printf("choice_rec_opus_audio_type_cb: Illegal value\n");
+    }
+}
+
+void choice_rec_opus_quality_cb(void)
+{
+    opus_enc test_enc;
+       
+    test_enc = opus_rec;
+    test_enc.quality = fl_g->choice_rec_opus_quality->value();
+
+    if (opus_enc_init(&test_enc) == 0)
+    {
+        cfg.opus_codec_rec.quality = fl_g->choice_rec_opus_quality->value();
+        opus_rec.quality = fl_g->choice_rec_opus_quality->value();
+
+        opus_enc_init(&opus_rec);
+        opus_enc_close(&test_enc);
+    }
+    else
+    {
+        fl_g->choice_rec_opus_quality->value(cfg.opus_codec_rec.quality);
+        printf("choice_rec_opus_quality_cb: Illegal value\n");
+    }
+}
+
+void choice_rec_opus_bandwidth_cb(void)
+{
+    opus_enc test_enc;
+       
+    test_enc = opus_rec;
+    test_enc.bandwidth = fl_g->choice_rec_opus_bandwidth->value();
+
+    if (opus_enc_init(&test_enc) == 0)
+    {
+        cfg.opus_codec_rec.bandwidth = fl_g->choice_rec_opus_bandwidth->value();
+        opus_rec.bandwidth = fl_g->choice_rec_opus_bandwidth->value();
+
+        opus_enc_init(&opus_rec);
+        opus_enc_close(&test_enc);
+    }
+    else
+    {
+        fl_g->choice_rec_opus_bandwidth->value(cfg.opus_codec_rec.bandwidth);
+        printf("choice_rec_opus_bandwidth_cb: Illegal value\n");
+    }
+}
+
+
+void choice_rec_aac_profile_cb(void)
+{
+#ifdef HAVE_LIBFDK_AAC
+    aac_enc test_enc;
+       
+    test_enc = aac_rec;
+    test_enc.profile = fl_g->choice_rec_aac_profile->value();
+
+    if (aac_enc_init(&test_enc) == 0)
+    {
+        cfg.aac_codec_rec.profile = fl_g->choice_rec_aac_profile->value();
+        aac_rec.profile = fl_g->choice_rec_aac_profile->value();
+
+        aac_enc_init(&aac_rec);
+        aac_enc_close(&test_enc);
+    }
+    else
+    {
+        fl_g->choice_rec_aac_profile->value(cfg.aac_codec_rec.profile);
+        printf("choice_rec_aac_profile_cb: Illegal value\n");
+    }
+#endif
+}
+
+void choice_rec_aac_afterburner_cb(void)
+{
+#ifdef HAVE_LIBFDK_AAC
+    aac_enc test_enc;
+       
+    test_enc = aac_rec;
+    test_enc.afterburner = fl_g->choice_rec_aac_afterburner->value() == 0 ? 1 : 0;
+
+    if (aac_enc_init(&test_enc) == 0)
+    {
+        cfg.aac_codec_rec.afterburner = fl_g->choice_rec_aac_afterburner->value();
+        aac_rec.afterburner = fl_g->choice_rec_aac_afterburner->value() == 0 ? 1 : 0;
+
+        aac_enc_init(&aac_rec);
+        aac_enc_close(&test_enc);
+    }
+    else
+    {
+        fl_g->choice_rec_aac_afterburner->value(cfg.aac_codec_rec.afterburner);
+        printf("choice_rec_aac_afterburner_cb: Illegal value\n");
+    }
+#endif
+}
+
+void choice_rec_aac_bitrate_mode_cb(void)
+{
+#ifdef HAVE_LIBFDK_AAC
+    aac_enc test_enc;
+       
+    test_enc = aac_rec;
+    test_enc.bitrate_mode = fl_g->choice_rec_aac_bitrate_mode->value();
+
+    if (aac_enc_init(&test_enc) == 0)
+    {
+        cfg.aac_codec_rec.bitrate_mode = fl_g->choice_rec_aac_bitrate_mode->value();
+        aac_rec.bitrate_mode = fl_g->choice_rec_aac_bitrate_mode->value();
+
+        aac_enc_init(&aac_rec);
+        aac_enc_close(&test_enc);
+    }
+    else
+    {
+        fl_g->choice_rec_aac_bitrate_mode->value(cfg.aac_codec_rec.bitrate_mode);
+        printf("choice_rec_aac_bitrate_mode_cb: Illegal value\n");
+    }
+
+#endif
 }
 

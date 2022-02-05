@@ -29,11 +29,12 @@
 struct aac_enc {
     HANDLE_AACENCODER handle;
     AACENC_InfoStruct info;
-    int aot;
-    int overwrite_aot;
     int bitrate;
     int samplerate;
     int channel;
+    int bitrate_mode;
+    int afterburner;
+    int profile;
     volatile int state;
 };
 

@@ -32,6 +32,11 @@ struct vorbis_enc {
     int samplerate;
     int channel;
     int state;
+    
+    int bitrate_mode;
+    float vbr_quality;
+    int vbr_min_bitrate;
+    int vbr_max_bitrate;
 };
 
 enum {

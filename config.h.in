@@ -40,6 +40,9 @@
 /* Define to 1 if you have the `crypto' library (-lcrypto). */
 #undef HAVE_LIBCRYPTO
 
+/* Define to 1 if you have the `curl' library (-lcurl). */
+#undef HAVE_LIBCURL
+
 /* Define to 1 if you have the `fdk-aac' library (-lfdk-aac). */
 #undef HAVE_LIBFDK_AAC
 
@@ -173,6 +176,9 @@
 
 /* Version number of package */
 #undef VERSION
+
+/* Enable support for Radio.co authentification */
+#undef WITH_RADIOCO
 
 /* Define to `__inline__' or `__inline' if that's what the C compiler
    calls it, or to nothing if 'inline' is not supported under any name.  */

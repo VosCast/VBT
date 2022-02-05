@@ -59,17 +59,18 @@ void flgui::cb_slider_gain(Fl_My_Value_Slider* o, void* v) {
   ((flgui*)(o->parent()->user_data()))->cb_slider_gain_i(o,v);
 }
 
-void flgui::cb_radio_logo_i(Fl_Button*, void*) {
+void flgui::cb_radio_co_logo_i(Fl_Button*, void*) {
   fl_open_uri("https://voscast.com");
 }
-void flgui::cb_radio_logo(Fl_Button* o, void* v) {
-  ((flgui*)(o->parent()->user_data()))->cb_radio_logo_i(o,v);
+void flgui::cb_radio_co_logo(Fl_Button* o, void* v) {
+  ((flgui*)(o->parent()->user_data()))->cb_radio_co_logo_i(o,v);
 }
 
 #include <FL/Fl_Image.H>
-static const unsigned char idata_radio_badge[] = {};
-static Fl_Image *image_radio_badge() {
-  static Fl_Image *image = new Fl_RGB_Image(idata_radio_badge, 124, 61, 4, 0);
+static const unsigned char idata_radio_co_badge[] =
+{};
+static Fl_Image *image_radio_co_badge() {
+  static Fl_Image *image = new Fl_RGB_Image(idata_radio_co_badge, 124, 61, 4, 0);
   return image;
 }
 
@@ -469,6 +470,85 @@ void flgui::cb_check_cfg_mono_to_stereo(Fl_Check_Button* o, void* v) {
   ((flgui*)(o->parent()->parent()->parent()->parent()->user_data()))->cb_check_cfg_mono_to_stereo_i(o,v);
 }
 
+void flgui::cb_1_i(Fl_Button*, void*) {
+  this->window_stream_codec_settings->position(this->window_cfg->x(), this->window_cfg->y());
+this->window_stream_codec_settings->show();
+}
+void flgui::cb_1(Fl_Button* o, void* v) {
+  ((flgui*)(o->parent()->parent()->parent()->parent()->user_data()))->cb_1_i(o,v);
+}
+
+static const unsigned char idata_settings[] =
+{0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+112,0,0,0,255,0,0,0,255,0,0,0,255,0,0,0,255,0,0,0,110,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,161,0,0,0,255,0,0,0,255,0,0,0,
+255,0,0,0,255,0,0,0,159,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,42,0,0,0,223,0,0,0,255,0,0,0,55,0,0,0,55,0,0,0,255,0,0,0,223,0,0,0,42,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,1,0,0,0,193,0,0,0,174,0,0,0,86,0,0,0,148,0,0,0,254,0,0,0,255,
+0,0,0,251,0,0,0,9,0,0,0,9,0,0,0,251,0,0,0,255,0,0,0,253,0,0,0,148,0,0,0,86,0,
+0,0,174,0,0,0,193,0,0,0,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,95,0,0,0,255,0,0,0,255,0,0,0,255,0,0,0,255,0,0,0,248,0,0,0,146,0,0,0,41,0,0,
+0,0,0,0,0,0,0,0,0,41,0,0,0,147,0,0,0,248,0,0,0,255,0,0,0,255,0,0,0,255,0,0,0,
+255,0,0,0,95,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,12,0,0,0,230,0,0,0,
+255,0,0,0,155,0,0,0,199,0,0,0,219,0,0,0,46,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,46,0,0,0,219,0,0,0,199,0,0,0,155,0,0,0,255,0,0,0,230,0,0,0,
+13,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,134,0,0,0,255,0,0,0,230,0,0,0,5,0,0,0,
+0,0,0,0,3,0,0,0,0,0,0,0,38,0,0,0,174,0,0,0,242,0,0,0,242,0,0,0,173,0,0,0,37,0,
+0,0,0,0,0,0,2,0,0,0,0,0,0,0,5,0,0,0,231,0,0,0,255,0,0,0,135,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,81,0,0,0,245,0,0,0,255,0,0,0,183,0,0,0,12,0,0,0,0,0,0,0,
+38,0,0,0,238,0,0,0,255,0,0,0,255,0,0,0,255,0,0,0,255,0,0,0,236,0,0,0,27,0,0,0,
+0,0,0,0,12,0,0,0,184,0,0,0,255,0,0,0,245,0,0,0,80,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,54,0,0,0,246,0,0,0,255,0,0,0,44,0,0,0,0,0,0,0,174,0,0,0,255,
+0,0,0,179,0,0,0,27,0,0,0,28,0,0,0,181,0,0,0,255,0,0,0,169,0,0,0,0,0,0,0,44,0,
+0,0,255,0,0,0,246,0,0,0,54,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,244,0,0,0,255,0,0,0,11,0,0,0,0,0,0,0,242,0,0,0,255,0,0,0,27,0,0,0,
+0,0,0,0,0,0,0,0,29,0,0,0,255,0,0,0,240,0,0,0,0,0,0,0,12,0,0,0,255,0,0,0,244,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,244,0,0,0,
+255,0,0,0,11,0,0,0,0,0,0,0,241,0,0,0,255,0,0,0,28,0,0,0,0,0,0,0,0,0,0,0,29,0,0,
+0,255,0,0,0,240,0,0,0,0,0,0,0,12,0,0,0,255,0,0,0,244,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,54,0,0,0,246,0,0,0,255,0,0,0,44,0,0,0,0,
+0,0,0,173,0,0,0,255,0,0,0,181,0,0,0,28,0,0,0,29,0,0,0,182,0,0,0,255,0,0,0,171,
+0,0,0,0,0,0,0,45,0,0,0,255,0,0,0,246,0,0,0,54,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,80,0,0,0,245,0,0,0,255,0,0,0,183,0,0,0,12,0,0,0,0,0,0,0,37,0,0,
+0,236,0,0,0,255,0,0,0,255,0,0,0,255,0,0,0,255,0,0,0,237,0,0,0,36,0,0,0,0,0,0,
+0,12,0,0,0,184,0,0,0,255,0,0,0,245,0,0,0,80,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,135,0,0,0,255,0,0,0,230,0,0,0,5,0,0,0,0,0,0,0,2,0,0,0,0,0,0,0,27,0,0,0,
+169,0,0,0,241,0,0,0,241,0,0,0,171,0,0,0,36,0,0,0,0,0,0,0,2,0,0,0,0,0,0,0,5,0,0,
+0,231,0,0,0,255,0,0,0,135,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,13,0,0,0,230,
+0,0,0,255,0,0,0,155,0,0,0,199,0,0,0,219,0,0,0,46,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,47,0,0,0,219,0,0,0,198,0,0,0,156,0,0,0,255,0,0,0,
+230,0,0,0,13,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,95,0,0,0,255,0,0,0,
+255,0,0,0,255,0,0,0,255,0,0,0,248,0,0,0,147,0,0,0,41,0,0,0,0,0,0,0,0,0,0,0,42,0,
+0,0,148,0,0,0,249,0,0,0,255,0,0,0,255,0,0,0,255,0,0,0,255,0,0,0,95,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,192,0,0,0,173,0,0,0,86,0,
+0,0,147,0,0,0,253,0,0,0,255,0,0,0,251,0,0,0,9,0,0,0,10,0,0,0,251,0,0,0,255,0,
+0,0,253,0,0,0,147,0,0,0,86,0,0,0,173,0,0,0,192,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,41,0,
+0,0,223,0,0,0,255,0,0,0,55,0,0,0,56,0,0,0,255,0,0,0,223,0,0,0,41,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,160,0,0,0,255,0,0,0,255,0,
+0,0,255,0,0,0,255,0,0,0,158,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,111,0,0,0,255,0,0,0,255,0,0,0,255,0,0,0,255,0,0,0,109,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0};
+static Fl_Image *image_settings() {
+  static Fl_Image *image = new Fl_RGB_Image(idata_settings, 24, 24, 4, 0);
+  return image;
+}
+
 void flgui::cb_MP31_i(Fl_Menu_*, void*) {
   choice_rec_codec_mp3_cb();
 }
@@ -551,6 +631,14 @@ Fl_Menu_Item flgui::menu_choice_rec_bitrate[] = {
  {"320k", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 14, 0},
  {0,0,0,0,0,0,0,0,0}
 };
+
+void flgui::cb_2_i(Fl_Button*, void*) {
+  this->window_rec_codec_settings->position(this->window_cfg->x(), this->window_cfg->y());
+this->window_rec_codec_settings->show();
+}
+void flgui::cb_2(Fl_Button* o, void* v) {
+  ((flgui*)(o->parent()->parent()->parent()->parent()->user_data()))->cb_2_i(o,v);
+}
 
 void flgui::cb_button_advanced_i(Fl_Button*, void*) {
   static int show_advanced = 0;
@@ -1126,6 +1214,13 @@ void flgui::cb_Bitcoin(Fl_Button* o, void* v) {
   ((flgui*)(o->parent()->parent()->parent()->parent()->user_data()))->cb_Bitcoin_i(o,v);
 }
 
+void flgui::cb_button_cfg_show_pw_i(Fl_Button*, void*) {
+  button_add_srv_show_pwd_cb();
+}
+void flgui::cb_button_cfg_show_pw(Fl_Button* o, void* v) {
+  ((flgui*)(o->parent()->user_data()))->cb_button_cfg_show_pw_i(o,v);
+}
+
 void flgui::cb_radio_add_srv_shoutcast_i(Fl_Round_Button*, void*) {
   radio_add_srv_shoutcast_cb();
 }
@@ -1138,6 +1233,13 @@ void flgui::cb_radio_add_srv_icecast_i(Fl_Round_Button*, void*) {
 }
 void flgui::cb_radio_add_srv_icecast(Fl_Round_Button* o, void* v) {
   ((flgui*)(o->parent()->parent()->user_data()))->cb_radio_add_srv_icecast_i(o,v);
+}
+
+void flgui::cb_radio_add_srv_radioco_i(Fl_Round_Button*, void*) {
+  radio_add_srv_radioco_cb();
+}
+void flgui::cb_radio_add_srv_radioco(Fl_Round_Button* o, void* v) {
+  ((flgui*)(o->parent()->parent()->user_data()))->cb_radio_add_srv_radioco_i(o,v);
 }
 
 void flgui::cb_Cancel_i(Fl_Button*, void*) {
@@ -1161,18 +1263,32 @@ void flgui::cb_button_add_srv_save(Fl_Button* o, void* v) {
   ((flgui*)(o->parent()->user_data()))->cb_button_add_srv_save_i(o,v);
 }
 
-void flgui::cb_button_cfg_show_pw_i(Fl_Button*, void*) {
-  button_add_srv_show_pwd_cb();
-}
-void flgui::cb_button_cfg_show_pw(Fl_Button* o, void* v) {
-  ((flgui*)(o->parent()->user_data()))->cb_button_cfg_show_pw_i(o,v);
-}
-
 void flgui::cb_button_add_srv_revoke_cert_i(Fl_Button*, void*) {
   button_add_srv_revoke_cert_cb();
 }
 void flgui::cb_button_add_srv_revoke_cert(Fl_Button* o, void* v) {
   ((flgui*)(o->parent()->parent()->user_data()))->cb_button_add_srv_revoke_cert_i(o,v);
+}
+
+void flgui::cb_button_add_srv_get_stations_i(Fl_Button*, void*) {
+  button_add_srv_get_stations_cb();
+}
+void flgui::cb_button_add_srv_get_stations(Fl_Button* o, void* v) {
+  ((flgui*)(o->parent()->user_data()))->cb_button_add_srv_get_stations_i(o,v);
+}
+
+void flgui::cb_button_add_srv_select_all_i(Fl_Button*, void*) {
+  button_add_srv_select_all_cb();
+}
+void flgui::cb_button_add_srv_select_all(Fl_Button* o, void* v) {
+  ((flgui*)(o->parent()->user_data()))->cb_button_add_srv_select_all_i(o,v);
+}
+
+void flgui::cb_button_add_srv_deselect_all_i(Fl_Button*, void*) {
+  button_add_srv_deselect_all_cb();
+}
+void flgui::cb_button_add_srv_deselect_all(Fl_Button* o, void* v) {
+  ((flgui*)(o->parent()->user_data()))->cb_button_add_srv_deselect_all_i(o,v);
 }
 
 void flgui::cb_Cancel1_i(Fl_Button*, void*) {
@@ -1235,6 +1351,670 @@ void flgui::cb_Close_i(Fl_Button*, void*) {
 void flgui::cb_Close(Fl_Button* o, void* v) {
   ((flgui*)(o->parent()->user_data()))->cb_Close_i(o,v);
 }
+
+void flgui::cb_choice_stream_mp3_enc_quality_i(Fl_Choice*, void*) {
+  choice_stream_mp3_enc_quality_cb();
+}
+void flgui::cb_choice_stream_mp3_enc_quality(Fl_Choice* o, void* v) {
+  ((flgui*)(o->parent()->parent()->parent()->user_data()))->cb_choice_stream_mp3_enc_quality_i(o,v);
+}
+
+unsigned char flgui::menu_choice_stream_mp3_enc_quality_i18n_done = 0;
+Fl_Menu_Item flgui::menu_choice_stream_mp3_enc_quality[] = {
+ {"0 (best)", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 14, 0},
+ {"1", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 14, 0},
+ {"2", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 14, 0},
+ {"3 (default)", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 14, 0},
+ {"4", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 14, 0},
+ {"5", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 14, 0},
+ {"6", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 14, 0},
+ {"7", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 14, 0},
+ {"8", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 14, 0},
+ {"9 (worst)", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 14, 0},
+ {0,0,0,0,0,0,0,0,0}
+};
+
+void flgui::cb_choice_stream_mp3_stereo_mode_i(Fl_Choice*, void*) {
+  choice_stream_mp3_stereo_mode_cb();
+}
+void flgui::cb_choice_stream_mp3_stereo_mode(Fl_Choice* o, void* v) {
+  ((flgui*)(o->parent()->parent()->parent()->user_data()))->cb_choice_stream_mp3_stereo_mode_i(o,v);
+}
+
+unsigned char flgui::menu_choice_stream_mp3_stereo_mode_i18n_done = 0;
+Fl_Menu_Item flgui::menu_choice_stream_mp3_stereo_mode[] = {
+ {"Auto (default)", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 14, 0},
+ {"Stereo", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 14, 0},
+ {"Joint Stereo", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 14, 0},
+ {0,0,0,0,0,0,0,0,0}
+};
+
+void flgui::cb_choice_stream_mp3_bitrate_mode_i(Fl_Choice*, void*) {
+  choice_stream_mp3_bitrate_mode_cb();
+}
+void flgui::cb_choice_stream_mp3_bitrate_mode(Fl_Choice* o, void* v) {
+  ((flgui*)(o->parent()->parent()->parent()->user_data()))->cb_choice_stream_mp3_bitrate_mode_i(o,v);
+}
+
+unsigned char flgui::menu_choice_stream_mp3_bitrate_mode_i18n_done = 0;
+Fl_Menu_Item flgui::menu_choice_stream_mp3_bitrate_mode[] = {
+ {"CBR (default)", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 14, 0},
+ {"VBR", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 14, 0},
+ {"ABR", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 14, 0},
+ {0,0,0,0,0,0,0,0,0}
+};
+
+void flgui::cb_choice_stream_mp3_vbr_quality_i(Fl_Choice*, void*) {
+  choice_stream_mp3_vbr_quality_cb();
+}
+void flgui::cb_choice_stream_mp3_vbr_quality(Fl_Choice* o, void* v) {
+  ((flgui*)(o->parent()->parent()->parent()->user_data()))->cb_choice_stream_mp3_vbr_quality_i(o,v);
+}
+
+unsigned char flgui::menu_choice_stream_mp3_vbr_quality_i18n_done = 0;
+Fl_Menu_Item flgui::menu_choice_stream_mp3_vbr_quality[] = {
+ {"0 (best)", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 14, 0},
+ {"1", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 14, 0},
+ {"2", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 14, 0},
+ {"3", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 14, 0},
+ {"4 (default)", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 14, 0},
+ {"5", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 14, 0},
+ {"6", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 14, 0},
+ {"7", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 14, 0},
+ {"8", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 14, 0},
+ {"9 (worst)", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 14, 0},
+ {0,0,0,0,0,0,0,0,0}
+};
+
+void flgui::cb_choice_stream_mp3_vbr_min_bitrate_i(Fl_Choice*, void*) {
+  choice_stream_mp3_vbr_min_bitrate_cb();
+}
+void flgui::cb_choice_stream_mp3_vbr_min_bitrate(Fl_Choice* o, void* v) {
+  ((flgui*)(o->parent()->parent()->parent()->user_data()))->cb_choice_stream_mp3_vbr_min_bitrate_i(o,v);
+}
+
+unsigned char flgui::menu_choice_stream_mp3_vbr_min_bitrate_i18n_done = 0;
+Fl_Menu_Item flgui::menu_choice_stream_mp3_vbr_min_bitrate[] = {
+ {"8k", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 14, 0},
+ {"16k", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 14, 0},
+ {"24k", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 14, 0},
+ {"32k (default)", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 14, 0},
+ {"40k", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 14, 0},
+ {"48k", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 14, 0},
+ {"56k", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 14, 0},
+ {"64k", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 14, 0},
+ {"80k", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 14, 0},
+ {"96k", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 14, 0},
+ {"112k", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 14, 0},
+ {"128k", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 14, 0},
+ {"160k", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 14, 0},
+ {"192k", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 14, 0},
+ {"224k", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 14, 0},
+ {"256k", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 14, 0},
+ {"320k", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 14, 0},
+ {0,0,0,0,0,0,0,0,0}
+};
+
+void flgui::cb_choice_stream_mp3_vbr_max_bitrate_i(Fl_Choice*, void*) {
+  choice_stream_mp3_vbr_max_bitrate_cb();
+}
+void flgui::cb_choice_stream_mp3_vbr_max_bitrate(Fl_Choice* o, void* v) {
+  ((flgui*)(o->parent()->parent()->parent()->user_data()))->cb_choice_stream_mp3_vbr_max_bitrate_i(o,v);
+}
+
+unsigned char flgui::menu_choice_stream_mp3_vbr_max_bitrate_i18n_done = 0;
+Fl_Menu_Item flgui::menu_choice_stream_mp3_vbr_max_bitrate[] = {
+ {"8k", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 14, 0},
+ {"16k", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 14, 0},
+ {"24k", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 14, 0},
+ {"32k", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 14, 0},
+ {"40k", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 14, 0},
+ {"48k", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 14, 0},
+ {"56k", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 14, 0},
+ {"64k", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 14, 0},
+ {"80k", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 14, 0},
+ {"96k", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 14, 0},
+ {"112k", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 14, 0},
+ {"128k", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 14, 0},
+ {"160k", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 14, 0},
+ {"192k", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 14, 0},
+ {"224k", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 14, 0},
+ {"256k", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 14, 0},
+ {"320k (default)", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 14, 0},
+ {0,0,0,0,0,0,0,0,0}
+};
+
+void flgui::cb_choice_stream_vorbis_bitrate_mode_i(Fl_Choice*, void*) {
+  choice_stream_vorbis_bitrate_mode_cb();
+}
+void flgui::cb_choice_stream_vorbis_bitrate_mode(Fl_Choice* o, void* v) {
+  ((flgui*)(o->parent()->parent()->parent()->user_data()))->cb_choice_stream_vorbis_bitrate_mode_i(o,v);
+}
+
+unsigned char flgui::menu_choice_stream_vorbis_bitrate_mode_i18n_done = 0;
+Fl_Menu_Item flgui::menu_choice_stream_vorbis_bitrate_mode[] = {
+ {"CBR (default)", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 14, 0},
+ {"VBR", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 14, 0},
+ {"ABR", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 14, 0},
+ {0,0,0,0,0,0,0,0,0}
+};
+
+void flgui::cb_choice_stream_vorbis_vbr_quality_i(Fl_Choice*, void*) {
+  choice_stream_vorbis_vbr_quality_cb();
+}
+void flgui::cb_choice_stream_vorbis_vbr_quality(Fl_Choice* o, void* v) {
+  ((flgui*)(o->parent()->parent()->parent()->user_data()))->cb_choice_stream_vorbis_vbr_quality_i(o,v);
+}
+
+unsigned char flgui::menu_choice_stream_vorbis_vbr_quality_i18n_done = 0;
+Fl_Menu_Item flgui::menu_choice_stream_vorbis_vbr_quality[] = {
+ {"1.0 (best, default)", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 14, 0},
+ {"0.9", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 14, 0},
+ {"0.8", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 14, 0},
+ {"0.7", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 14, 0},
+ {"0.6", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 14, 0},
+ {"0.5", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 14, 0},
+ {"0.4", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 14, 0},
+ {"0.3", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 14, 0},
+ {"0.2", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 14, 0},
+ {"0.1", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 14, 0},
+ {"0.0 (worst)", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 14, 0},
+ {0,0,0,0,0,0,0,0,0}
+};
+
+void flgui::cb_choice_stream_vorbis_vbr_min_bitrate_i(Fl_Choice*, void*) {
+  choice_stream_vorbis_vbr_min_bitrate_cb();
+}
+void flgui::cb_choice_stream_vorbis_vbr_min_bitrate(Fl_Choice* o, void* v) {
+  ((flgui*)(o->parent()->parent()->parent()->user_data()))->cb_choice_stream_vorbis_vbr_min_bitrate_i(o,v);
+}
+
+unsigned char flgui::menu_choice_stream_vorbis_vbr_min_bitrate_i18n_done = 0;
+Fl_Menu_Item flgui::menu_choice_stream_vorbis_vbr_min_bitrate[] = {
+ {"Auto (default)", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 14, 0},
+ {"48k", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 14, 0},
+ {"56k", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 14, 0},
+ {"64k", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 14, 0},
+ {"80k", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 14, 0},
+ {"96k", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 14, 0},
+ {"112k", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 14, 0},
+ {"128k", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 14, 0},
+ {"160k", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 14, 0},
+ {"192k", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 14, 0},
+ {"224k", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 14, 0},
+ {"256k", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 14, 0},
+ {"320k", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 14, 0},
+ {0,0,0,0,0,0,0,0,0}
+};
+
+void flgui::cb_choice_stream_vorbis_vbr_max_bitrate_i(Fl_Choice*, void*) {
+  choice_stream_vorbis_vbr_max_bitrate_cb();
+}
+void flgui::cb_choice_stream_vorbis_vbr_max_bitrate(Fl_Choice* o, void* v) {
+  ((flgui*)(o->parent()->parent()->parent()->user_data()))->cb_choice_stream_vorbis_vbr_max_bitrate_i(o,v);
+}
+
+unsigned char flgui::menu_choice_stream_vorbis_vbr_max_bitrate_i18n_done = 0;
+Fl_Menu_Item flgui::menu_choice_stream_vorbis_vbr_max_bitrate[] = {
+ {"Auto (default)", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 14, 0},
+ {"48k", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 14, 0},
+ {"56k", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 14, 0},
+ {"64k", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 14, 0},
+ {"80k", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 14, 0},
+ {"96k", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 14, 0},
+ {"112k", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 14, 0},
+ {"128k", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 14, 0},
+ {"160k", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 14, 0},
+ {"192k", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 14, 0},
+ {"224k", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 14, 0},
+ {"256k", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 14, 0},
+ {"320k", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 14, 0},
+ {0,0,0,0,0,0,0,0,0}
+};
+
+void flgui::cb_choice_stream_opus_audio_type_i(Fl_Choice*, void*) {
+  choice_stream_opus_audio_type_cb();
+}
+void flgui::cb_choice_stream_opus_audio_type(Fl_Choice* o, void* v) {
+  ((flgui*)(o->parent()->parent()->parent()->user_data()))->cb_choice_stream_opus_audio_type_i(o,v);
+}
+
+unsigned char flgui::menu_choice_stream_opus_audio_type_i18n_done = 0;
+Fl_Menu_Item flgui::menu_choice_stream_opus_audio_type[] = {
+ {"Music (default)", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 14, 0},
+ {"Speech", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 14, 0},
+ {0,0,0,0,0,0,0,0,0}
+};
+
+void flgui::cb_choice_stream_opus_bitrate_mode_i(Fl_Choice*, void*) {
+  choice_stream_opus_bitrate_mode_cb();
+}
+void flgui::cb_choice_stream_opus_bitrate_mode(Fl_Choice* o, void* v) {
+  ((flgui*)(o->parent()->parent()->parent()->user_data()))->cb_choice_stream_opus_bitrate_mode_i(o,v);
+}
+
+unsigned char flgui::menu_choice_stream_opus_bitrate_mode_i18n_done = 0;
+Fl_Menu_Item flgui::menu_choice_stream_opus_bitrate_mode[] = {
+ {"CBR", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 14, 0},
+ {"VBR (default)", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 14, 0},
+ {0,0,0,0,0,0,0,0,0}
+};
+
+void flgui::cb_choice_stream_opus_quality_i(Fl_Choice*, void*) {
+  choice_stream_opus_quality_cb();
+}
+void flgui::cb_choice_stream_opus_quality(Fl_Choice* o, void* v) {
+  ((flgui*)(o->parent()->parent()->parent()->user_data()))->cb_choice_stream_opus_quality_i(o,v);
+}
+
+unsigned char flgui::menu_choice_stream_opus_quality_i18n_done = 0;
+Fl_Menu_Item flgui::menu_choice_stream_opus_quality[] = {
+ {"10 (best, default)", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 14, 0},
+ {"9", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 14, 0},
+ {"8", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 14, 0},
+ {"7", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 14, 0},
+ {"6", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 14, 0},
+ {"5", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 14, 0},
+ {"4", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 14, 0},
+ {"3", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 14, 0},
+ {"2", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 14, 0},
+ {"1", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 14, 0},
+ {"0 (worst)", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 14, 0},
+ {0,0,0,0,0,0,0,0,0}
+};
+
+void flgui::cb_choice_stream_opus_bandwidth_i(Fl_Choice*, void*) {
+  choice_stream_opus_bandwidth_cb();
+}
+void flgui::cb_choice_stream_opus_bandwidth(Fl_Choice* o, void* v) {
+  ((flgui*)(o->parent()->parent()->parent()->user_data()))->cb_choice_stream_opus_bandwidth_i(o,v);
+}
+
+unsigned char flgui::menu_choice_stream_opus_bandwidth_i18n_done = 0;
+Fl_Menu_Item flgui::menu_choice_stream_opus_bandwidth[] = {
+ {"20kHz (best,default)", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 14, 0},
+ {"12kHz", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 14, 0},
+ {"8kHz", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 14, 0},
+ {"6kHz", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 14, 0},
+ {"4kHz (worst)", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 14, 0},
+ {0,0,0,0,0,0,0,0,0}
+};
+
+void flgui::cb_choice_stream_aac_profile_i(Fl_Choice*, void*) {
+  choice_stream_aac_profile_cb();
+}
+void flgui::cb_choice_stream_aac_profile(Fl_Choice* o, void* v) {
+  ((flgui*)(o->parent()->parent()->parent()->user_data()))->cb_choice_stream_aac_profile_i(o,v);
+}
+
+unsigned char flgui::menu_choice_stream_aac_profile_i18n_done = 0;
+Fl_Menu_Item flgui::menu_choice_stream_aac_profile[] = {
+ {"Auto (default)", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 14, 0},
+ {"AAC-LC", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 14, 0},
+ {"HE-AACv1 (AAC+)", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 14, 0},
+ {"HE-AACv2 (eAAC+)", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 14, 0},
+ {0,0,0,0,0,0,0,0,0}
+};
+
+void flgui::cb_choice_stream_aac_afterburner_i(Fl_Choice*, void*) {
+  choice_stream_aac_afterburner_cb();
+}
+void flgui::cb_choice_stream_aac_afterburner(Fl_Choice* o, void* v) {
+  ((flgui*)(o->parent()->parent()->parent()->user_data()))->cb_choice_stream_aac_afterburner_i(o,v);
+}
+
+unsigned char flgui::menu_choice_stream_aac_afterburner_i18n_done = 0;
+Fl_Menu_Item flgui::menu_choice_stream_aac_afterburner[] = {
+ {"On (default)", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 14, 0},
+ {"Off", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 14, 0},
+ {0,0,0,0,0,0,0,0,0}
+};
+
+void flgui::cb_choice_stream_aac_bitrate_mode_i(Fl_Choice*, void*) {
+  choice_stream_aac_bitrate_mode_cb();
+}
+void flgui::cb_choice_stream_aac_bitrate_mode(Fl_Choice* o, void* v) {
+  ((flgui*)(o->parent()->parent()->parent()->user_data()))->cb_choice_stream_aac_bitrate_mode_i(o,v);
+}
+
+unsigned char flgui::menu_choice_stream_aac_bitrate_mode_i18n_done = 0;
+Fl_Menu_Item flgui::menu_choice_stream_aac_bitrate_mode[] = {
+ {"CBR (default)", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 14, 0},
+ {"VBR", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 14, 0},
+ {0,0,0,0,0,0,0,0,0}
+};
+
+void flgui::cb_choice_rec_mp3_enc_quality_i(Fl_Choice*, void*) {
+  choice_rec_mp3_enc_quality_cb();
+}
+void flgui::cb_choice_rec_mp3_enc_quality(Fl_Choice* o, void* v) {
+  ((flgui*)(o->parent()->parent()->parent()->user_data()))->cb_choice_rec_mp3_enc_quality_i(o,v);
+}
+
+unsigned char flgui::menu_choice_rec_mp3_enc_quality_i18n_done = 0;
+Fl_Menu_Item flgui::menu_choice_rec_mp3_enc_quality[] = {
+ {"0 (best)", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 14, 0},
+ {"1", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 14, 0},
+ {"2", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 14, 0},
+ {"3 (default)", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 14, 0},
+ {"4", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 14, 0},
+ {"5", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 14, 0},
+ {"6", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 14, 0},
+ {"7", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 14, 0},
+ {"8", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 14, 0},
+ {"9 (worst)", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 14, 0},
+ {0,0,0,0,0,0,0,0,0}
+};
+
+void flgui::cb_choice_rec_mp3_stereo_mode_i(Fl_Choice*, void*) {
+  choice_rec_mp3_stereo_mode_cb();
+}
+void flgui::cb_choice_rec_mp3_stereo_mode(Fl_Choice* o, void* v) {
+  ((flgui*)(o->parent()->parent()->parent()->user_data()))->cb_choice_rec_mp3_stereo_mode_i(o,v);
+}
+
+unsigned char flgui::menu_choice_rec_mp3_stereo_mode_i18n_done = 0;
+Fl_Menu_Item flgui::menu_choice_rec_mp3_stereo_mode[] = {
+ {"Auto (default)", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 14, 0},
+ {"Stereo", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 14, 0},
+ {"Joint Stereo", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 14, 0},
+ {0,0,0,0,0,0,0,0,0}
+};
+
+void flgui::cb_choice_rec_mp3_bitrate_mode_i(Fl_Choice*, void*) {
+  choice_rec_mp3_bitrate_mode_cb();
+}
+void flgui::cb_choice_rec_mp3_bitrate_mode(Fl_Choice* o, void* v) {
+  ((flgui*)(o->parent()->parent()->parent()->user_data()))->cb_choice_rec_mp3_bitrate_mode_i(o,v);
+}
+
+unsigned char flgui::menu_choice_rec_mp3_bitrate_mode_i18n_done = 0;
+Fl_Menu_Item flgui::menu_choice_rec_mp3_bitrate_mode[] = {
+ {"CBR (default)", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 14, 0},
+ {"VBR", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 14, 0},
+ {"ABR", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 14, 0},
+ {0,0,0,0,0,0,0,0,0}
+};
+
+void flgui::cb_choice_rec_mp3_vbr_quality_i(Fl_Choice*, void*) {
+  choice_rec_mp3_vbr_quality_cb();
+}
+void flgui::cb_choice_rec_mp3_vbr_quality(Fl_Choice* o, void* v) {
+  ((flgui*)(o->parent()->parent()->parent()->user_data()))->cb_choice_rec_mp3_vbr_quality_i(o,v);
+}
+
+unsigned char flgui::menu_choice_rec_mp3_vbr_quality_i18n_done = 0;
+Fl_Menu_Item flgui::menu_choice_rec_mp3_vbr_quality[] = {
+ {"0 (best)", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 14, 0},
+ {"1", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 14, 0},
+ {"2", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 14, 0},
+ {"3", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 14, 0},
+ {"4 (default)", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 14, 0},
+ {"5", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 14, 0},
+ {"6", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 14, 0},
+ {"7", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 14, 0},
+ {"8", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 14, 0},
+ {"9 (worst)", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 14, 0},
+ {0,0,0,0,0,0,0,0,0}
+};
+
+void flgui::cb_choice_rec_mp3_vbr_min_bitrate_i(Fl_Choice*, void*) {
+  choice_rec_mp3_vbr_min_bitrate_cb();
+}
+void flgui::cb_choice_rec_mp3_vbr_min_bitrate(Fl_Choice* o, void* v) {
+  ((flgui*)(o->parent()->parent()->parent()->user_data()))->cb_choice_rec_mp3_vbr_min_bitrate_i(o,v);
+}
+
+unsigned char flgui::menu_choice_rec_mp3_vbr_min_bitrate_i18n_done = 0;
+Fl_Menu_Item flgui::menu_choice_rec_mp3_vbr_min_bitrate[] = {
+ {"8k", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 14, 0},
+ {"16k", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 14, 0},
+ {"24k", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 14, 0},
+ {"32k (default)", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 14, 0},
+ {"40k", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 14, 0},
+ {"48k", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 14, 0},
+ {"56k", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 14, 0},
+ {"64k", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 14, 0},
+ {"80k", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 14, 0},
+ {"96k", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 14, 0},
+ {"112k", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 14, 0},
+ {"128k", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 14, 0},
+ {"160k", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 14, 0},
+ {"192k", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 14, 0},
+ {"224k", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 14, 0},
+ {"256k", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 14, 0},
+ {"320k", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 14, 0},
+ {0,0,0,0,0,0,0,0,0}
+};
+
+void flgui::cb_choice_rec_mp3_vbr_max_bitrate_i(Fl_Choice*, void*) {
+  choice_rec_mp3_vbr_max_bitrate_cb();
+}
+void flgui::cb_choice_rec_mp3_vbr_max_bitrate(Fl_Choice* o, void* v) {
+  ((flgui*)(o->parent()->parent()->parent()->user_data()))->cb_choice_rec_mp3_vbr_max_bitrate_i(o,v);
+}
+
+unsigned char flgui::menu_choice_rec_mp3_vbr_max_bitrate_i18n_done = 0;
+Fl_Menu_Item flgui::menu_choice_rec_mp3_vbr_max_bitrate[] = {
+ {"8k", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 14, 0},
+ {"16k", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 14, 0},
+ {"24k", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 14, 0},
+ {"32k", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 14, 0},
+ {"40k", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 14, 0},
+ {"48k", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 14, 0},
+ {"56k", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 14, 0},
+ {"64k", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 14, 0},
+ {"80k", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 14, 0},
+ {"96k", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 14, 0},
+ {"112k", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 14, 0},
+ {"128k", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 14, 0},
+ {"160k", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 14, 0},
+ {"192k", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 14, 0},
+ {"224k", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 14, 0},
+ {"256k", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 14, 0},
+ {"320k (default)", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 14, 0},
+ {0,0,0,0,0,0,0,0,0}
+};
+
+void flgui::cb_choice_rec_vorbis_bitrate_mode_i(Fl_Choice*, void*) {
+  choice_rec_vorbis_bitrate_mode_cb();
+}
+void flgui::cb_choice_rec_vorbis_bitrate_mode(Fl_Choice* o, void* v) {
+  ((flgui*)(o->parent()->parent()->parent()->user_data()))->cb_choice_rec_vorbis_bitrate_mode_i(o,v);
+}
+
+unsigned char flgui::menu_choice_rec_vorbis_bitrate_mode_i18n_done = 0;
+Fl_Menu_Item flgui::menu_choice_rec_vorbis_bitrate_mode[] = {
+ {"CBR (default)", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 14, 0},
+ {"VBR", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 14, 0},
+ {"ABR", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 14, 0},
+ {0,0,0,0,0,0,0,0,0}
+};
+
+void flgui::cb_choice_rec_vorbis_vbr_quality_i(Fl_Choice*, void*) {
+  choice_rec_vorbis_vbr_quality_cb();
+}
+void flgui::cb_choice_rec_vorbis_vbr_quality(Fl_Choice* o, void* v) {
+  ((flgui*)(o->parent()->parent()->parent()->user_data()))->cb_choice_rec_vorbis_vbr_quality_i(o,v);
+}
+
+unsigned char flgui::menu_choice_rec_vorbis_vbr_quality_i18n_done = 0;
+Fl_Menu_Item flgui::menu_choice_rec_vorbis_vbr_quality[] = {
+ {"1.0 (best, default)", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 14, 0},
+ {"0.9", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 14, 0},
+ {"0.8", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 14, 0},
+ {"0.7", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 14, 0},
+ {"0.6", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 14, 0},
+ {"0.5", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 14, 0},
+ {"0.4", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 14, 0},
+ {"0.3", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 14, 0},
+ {"0.2", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 14, 0},
+ {"0.1", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 14, 0},
+ {"0.0 (worst)", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 14, 0},
+ {0,0,0,0,0,0,0,0,0}
+};
+
+void flgui::cb_choice_rec_vorbis_vbr_min_bitrate_i(Fl_Choice*, void*) {
+  choice_rec_vorbis_vbr_min_bitrate_cb();
+}
+void flgui::cb_choice_rec_vorbis_vbr_min_bitrate(Fl_Choice* o, void* v) {
+  ((flgui*)(o->parent()->parent()->parent()->user_data()))->cb_choice_rec_vorbis_vbr_min_bitrate_i(o,v);
+}
+
+unsigned char flgui::menu_choice_rec_vorbis_vbr_min_bitrate_i18n_done = 0;
+Fl_Menu_Item flgui::menu_choice_rec_vorbis_vbr_min_bitrate[] = {
+ {"Auto (default)", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 14, 0},
+ {"48k", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 14, 0},
+ {"56k", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 14, 0},
+ {"64k", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 14, 0},
+ {"80k", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 14, 0},
+ {"96k", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 14, 0},
+ {"112k", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 14, 0},
+ {"128k", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 14, 0},
+ {"160k", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 14, 0},
+ {"192k", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 14, 0},
+ {"224k", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 14, 0},
+ {"256k", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 14, 0},
+ {"320k", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 14, 0},
+ {0,0,0,0,0,0,0,0,0}
+};
+
+void flgui::cb_choice_rec_vorbis_vbr_max_bitrate_i(Fl_Choice*, void*) {
+  choice_rec_vorbis_vbr_max_bitrate_cb();
+}
+void flgui::cb_choice_rec_vorbis_vbr_max_bitrate(Fl_Choice* o, void* v) {
+  ((flgui*)(o->parent()->parent()->parent()->user_data()))->cb_choice_rec_vorbis_vbr_max_bitrate_i(o,v);
+}
+
+unsigned char flgui::menu_choice_rec_vorbis_vbr_max_bitrate_i18n_done = 0;
+Fl_Menu_Item flgui::menu_choice_rec_vorbis_vbr_max_bitrate[] = {
+ {"Auto (default)", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 14, 0},
+ {"48k", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 14, 0},
+ {"56k", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 14, 0},
+ {"64k", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 14, 0},
+ {"80k", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 14, 0},
+ {"96k", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 14, 0},
+ {"112k", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 14, 0},
+ {"128k", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 14, 0},
+ {"160k", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 14, 0},
+ {"192k", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 14, 0},
+ {"224k", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 14, 0},
+ {"256k", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 14, 0},
+ {"320k", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 14, 0},
+ {0,0,0,0,0,0,0,0,0}
+};
+
+void flgui::cb_choice_rec_opus_audio_type_i(Fl_Choice*, void*) {
+  choice_rec_opus_audio_type_cb();
+}
+void flgui::cb_choice_rec_opus_audio_type(Fl_Choice* o, void* v) {
+  ((flgui*)(o->parent()->parent()->parent()->user_data()))->cb_choice_rec_opus_audio_type_i(o,v);
+}
+
+unsigned char flgui::menu_choice_rec_opus_audio_type_i18n_done = 0;
+Fl_Menu_Item flgui::menu_choice_rec_opus_audio_type[] = {
+ {"Music (default)", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 14, 0},
+ {"Speech", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 14, 0},
+ {0,0,0,0,0,0,0,0,0}
+};
+
+void flgui::cb_choice_rec_opus_bitrate_mode_i(Fl_Choice*, void*) {
+  choice_rec_opus_bitrate_mode_cb();
+}
+void flgui::cb_choice_rec_opus_bitrate_mode(Fl_Choice* o, void* v) {
+  ((flgui*)(o->parent()->parent()->parent()->user_data()))->cb_choice_rec_opus_bitrate_mode_i(o,v);
+}
+
+unsigned char flgui::menu_choice_rec_opus_bitrate_mode_i18n_done = 0;
+Fl_Menu_Item flgui::menu_choice_rec_opus_bitrate_mode[] = {
+ {"CBR", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 14, 0},
+ {"VBR (default)", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 14, 0},
+ {0,0,0,0,0,0,0,0,0}
+};
+
+void flgui::cb_choice_rec_opus_quality_i(Fl_Choice*, void*) {
+  choice_rec_opus_quality_cb();
+}
+void flgui::cb_choice_rec_opus_quality(Fl_Choice* o, void* v) {
+  ((flgui*)(o->parent()->parent()->parent()->user_data()))->cb_choice_rec_opus_quality_i(o,v);
+}
+
+unsigned char flgui::menu_choice_rec_opus_quality_i18n_done = 0;
+Fl_Menu_Item flgui::menu_choice_rec_opus_quality[] = {
+ {"10 (best, default)", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 14, 0},
+ {"9", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 14, 0},
+ {"8", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 14, 0},
+ {"7", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 14, 0},
+ {"6", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 14, 0},
+ {"5", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 14, 0},
+ {"4", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 14, 0},
+ {"3", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 14, 0},
+ {"2", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 14, 0},
+ {"1", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 14, 0},
+ {"0 (worst)", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 14, 0},
+ {0,0,0,0,0,0,0,0,0}
+};
+
+void flgui::cb_choice_rec_opus_bandwidth_i(Fl_Choice*, void*) {
+  choice_rec_opus_bandwidth_cb();
+}
+void flgui::cb_choice_rec_opus_bandwidth(Fl_Choice* o, void* v) {
+  ((flgui*)(o->parent()->parent()->parent()->user_data()))->cb_choice_rec_opus_bandwidth_i(o,v);
+}
+
+unsigned char flgui::menu_choice_rec_opus_bandwidth_i18n_done = 0;
+Fl_Menu_Item flgui::menu_choice_rec_opus_bandwidth[] = {
+ {"20kHz (best,default)", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 14, 0},
+ {"12kHz", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 14, 0},
+ {"8kHz", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 14, 0},
+ {"6kHz", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 14, 0},
+ {"4kHz (worst)", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 14, 0},
+ {0,0,0,0,0,0,0,0,0}
+};
+
+void flgui::cb_choice_rec_aac_profile_i(Fl_Choice*, void*) {
+  choice_rec_aac_profile_cb();
+}
+void flgui::cb_choice_rec_aac_profile(Fl_Choice* o, void* v) {
+  ((flgui*)(o->parent()->parent()->parent()->user_data()))->cb_choice_rec_aac_profile_i(o,v);
+}
+
+unsigned char flgui::menu_choice_rec_aac_profile_i18n_done = 0;
+Fl_Menu_Item flgui::menu_choice_rec_aac_profile[] = {
+ {"Auto (default)", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 14, 0},
+ {"AAC-LC", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 14, 0},
+ {"HE-AACv1 (AAC+)", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 14, 0},
+ {"HE-AACv2 (eAAC+)", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 14, 0},
+ {0,0,0,0,0,0,0,0,0}
+};
+
+void flgui::cb_choice_rec_aac_afterburner_i(Fl_Choice*, void*) {
+  choice_rec_aac_afterburner_cb();
+}
+void flgui::cb_choice_rec_aac_afterburner(Fl_Choice* o, void* v) {
+  ((flgui*)(o->parent()->parent()->parent()->user_data()))->cb_choice_rec_aac_afterburner_i(o,v);
+}
+
+unsigned char flgui::menu_choice_rec_aac_afterburner_i18n_done = 0;
+Fl_Menu_Item flgui::menu_choice_rec_aac_afterburner[] = {
+ {"On (default)", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 14, 0},
+ {"Off", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 14, 0},
+ {0,0,0,0,0,0,0,0,0}
+};
+
+void flgui::cb_choice_rec_aac_bitrate_mode_i(Fl_Choice*, void*) {
+  choice_rec_aac_bitrate_mode_cb();
+}
+void flgui::cb_choice_rec_aac_bitrate_mode(Fl_Choice* o, void* v) {
+  ((flgui*)(o->parent()->parent()->parent()->user_data()))->cb_choice_rec_aac_bitrate_mode_i(o,v);
+}
+
+unsigned char flgui::menu_choice_rec_aac_bitrate_mode_i18n_done = 0;
+Fl_Menu_Item flgui::menu_choice_rec_aac_bitrate_mode[] = {
+ {"CBR (default)", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 14, 0},
+ {"VBR", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 14, 0},
+ {0,0,0,0,0,0,0,0,0}
+};
 
 flgui::flgui() {
   { window_main = new Fl_My_Double_Window(430, 380);
@@ -1352,11 +2132,11 @@ flgui::flgui() {
     { Fl_Box* o = new Fl_Box(390, 173, 30, 16, gettext("+24 dB"));
       o->labelsize(10);
     } // Fl_Box* o
-    /*{ radio_logo = new Fl_Button(237, 29, 128, 61);
-      radio_logo->box(FL_NO_BOX);
-      radio_logo->image( image_radio_badge() );
-      radio_logo->callback((Fl_Callback*)cb_radio_logo);
-    }*/ // Fl_Button* radio_logo
+    /* { radio_co_logo = new Fl_Button(237, 29, 128, 61);
+      radio_co_logo->box(FL_NO_BOX);
+      radio_co_logo->image( image_radio_co_badge() );
+      radio_co_logo->callback((Fl_Callback*)cb_radio_co_logo);
+    }*/ // Fl_Button* radio_co_logo
     window_main->size_range(430, 155, 430); window_main->is_main_window = true;
     window_main->end();
   } // Fl_My_Double_Window* window_main
@@ -1558,7 +2338,7 @@ flgui::flgui() {
           } // Fl_Group* o
           { button_cfg_rescan_devices = new Fl_Button(334, 78, 20, 20);
             button_cfg_rescan_devices->tooltip(gettext("Rescan audio devices"));
-            button_cfg_rescan_devices->box(FL_ENGRAVED_FRAME);
+            button_cfg_rescan_devices->box(FL_NO_BOX);
             button_cfg_rescan_devices->image( image_refresh() );
             button_cfg_rescan_devices->callback((Fl_Callback*)cb_button_cfg_rescan_devices);
           } // Fl_Button* button_cfg_rescan_devices
@@ -1567,7 +2347,7 @@ flgui::flgui() {
         { Fl_Group* o = new Fl_Group(37, 247, 326, 60, gettext("Streaming"));
           o->box(FL_ENGRAVED_FRAME);
           o->align(Fl_Align(FL_ALIGN_TOP_LEFT));
-          { choice_cfg_codec = new Fl_Choice(45, 274, 125, 20, gettext("Codec"));
+          { choice_cfg_codec = new Fl_Choice(45, 274, 125, 18, gettext("Codec"));
             choice_cfg_codec->tooltip(gettext("Select streaming codec"));
             choice_cfg_codec->box(FL_ENGRAVED_BOX);
             choice_cfg_codec->down_box(FL_BORDER_BOX);
@@ -1581,7 +2361,7 @@ flgui::flgui() {
             }
             choice_cfg_codec->menu(menu_choice_cfg_codec);
           } // Fl_Choice* choice_cfg_codec
-          { choice_cfg_bitrate = new Fl_Choice(240, 274, 115, 20, gettext("Bitrate"));
+          { choice_cfg_bitrate = new Fl_Choice(187, 274, 115, 18, gettext("Bitrate"));
             choice_cfg_bitrate->tooltip(gettext("Select streaming bitrate"));
             choice_cfg_bitrate->box(FL_ENGRAVED_BOX);
             choice_cfg_bitrate->down_box(FL_BORDER_BOX);
@@ -1596,12 +2376,17 @@ flgui::flgui() {
             }
             choice_cfg_bitrate->menu(menu_choice_cfg_bitrate);
           } // Fl_Choice* choice_cfg_bitrate
-          { check_cfg_mono_to_stereo = new Fl_Check_Button(40, 291, 170, 15, gettext("Convert Mono to Stereo"));
+          { check_cfg_mono_to_stereo = new Fl_Check_Button(40, 291, 170, 1, gettext("Convert Mono to Stereo"));
             check_cfg_mono_to_stereo->tooltip(gettext("Copies a mono channel to both stereo channels"));
             check_cfg_mono_to_stereo->down_box(FL_DOWN_BOX);
             check_cfg_mono_to_stereo->callback((Fl_Callback*)cb_check_cfg_mono_to_stereo);
             check_cfg_mono_to_stereo->hide();
           } // Fl_Check_Button* check_cfg_mono_to_stereo
+          { Fl_Button* o = new Fl_Button(310, 272, 22, 22);
+            o->box(FL_NO_BOX);
+            o->image( image_settings() );
+            o->callback((Fl_Callback*)cb_1);
+          } // Fl_Button* o
           o->end();
         } // Fl_Group* o
         { Fl_Group* o = new Fl_Group(37, 339, 326, 60, gettext("Recording"));
@@ -1621,7 +2406,7 @@ flgui::flgui() {
             }
             choice_rec_codec->menu(menu_choice_rec_codec);
           } // Fl_Choice* choice_rec_codec
-          { choice_rec_bitrate = new Fl_Choice(240, 366, 115, 20, gettext("Bitrate"));
+          { choice_rec_bitrate = new Fl_Choice(187, 366, 115, 20, gettext("Bitrate"));
             choice_rec_bitrate->tooltip(gettext("Select recording bitrate"));
             choice_rec_bitrate->down_box(FL_BORDER_BOX);
             choice_rec_bitrate->callback((Fl_Callback*)cb_choice_rec_bitrate);
@@ -1635,6 +2420,11 @@ flgui::flgui() {
             }
             choice_rec_bitrate->menu(menu_choice_rec_bitrate);
           } // Fl_Choice* choice_rec_bitrate
+          { Fl_Button* o = new Fl_Button(310, 364, 22, 22);
+            o->box(FL_NO_BOX);
+            o->image( image_settings() );
+            o->callback((Fl_Callback*)cb_2);
+          } // Fl_Button* o
           o->end();
         } // Fl_Group* o
         { button_advanced = new Fl_Button(37, 345, 89, 25, gettext("Advanced..."));
@@ -2070,7 +2860,7 @@ flgui::flgui() {
             equalizerGain5->labelsize(11);
           } // Fl_Text_Display* equalizerGain5
           { Fl_Button* o = new Fl_Button(165, 62, 45, 19, gettext("Reset"));
-            o->box(FL_ENGRAVED_FRAME);
+            o->box(FL_ENGRAVED_BOX);
             o->labelsize(12);
             o->callback((Fl_Callback*)cb_Reset);
           } // Fl_Button* o
@@ -2275,7 +3065,7 @@ flgui::flgui() {
             release->labelsize(11);
           } // Fl_Text_Display* release
           { Fl_Button* o = new Fl_Button(176, 330, 45, 19, gettext("Reset"));
-            o->box(FL_ENGRAVED_FRAME);
+            o->box(FL_ENGRAVED_BOX);
             o->labelsize(12);
             o->callback((Fl_Callback*)cb_Reset1);
           } // Fl_Button* o
@@ -2468,19 +3258,29 @@ supporting this\nproject.\n\nThank you!"));
       input_add_srv_usr->align(Fl_Align(FL_ALIGN_TOP_LEFT));
       this->input_add_srv_usr->maximum_size(100);
     } // Fl_Input* input_add_srv_usr
-    { Fl_Group* o = new Fl_Group(10, 120, 105, 62, gettext("Type"));
+    { button_cfg_show_pw = new Fl_Button(250, 251, 70, 25, gettext("Show"));
+      button_cfg_show_pw->tooltip(gettext("show/hide password"));
+      button_cfg_show_pw->box(FL_ENGRAVED_BOX);
+      button_cfg_show_pw->callback((Fl_Callback*)cb_button_cfg_show_pw);
+    } // Fl_Button* button_cfg_show_pw
+    { Fl_Group* o = new Fl_Group(10, 96, 105, 86, gettext("Type"));
       o->box(FL_ENGRAVED_BOX);
       o->align(Fl_Align(FL_ALIGN_TOP_LEFT));
-      { radio_add_srv_shoutcast = new Fl_Round_Button(15, 130, 88, 15, gettext("ShoutCast"));
+      { radio_add_srv_shoutcast = new Fl_Round_Button(15, 105, 88, 15, gettext("Shoutcast"));
         radio_add_srv_shoutcast->type(102);
         radio_add_srv_shoutcast->down_box(FL_ROUND_DOWN_BOX);
         radio_add_srv_shoutcast->callback((Fl_Callback*)cb_radio_add_srv_shoutcast);
       } // Fl_Round_Button* radio_add_srv_shoutcast
-      { radio_add_srv_icecast = new Fl_Round_Button(15, 159, 80, 12, gettext("IceCast"));
+      { radio_add_srv_icecast = new Fl_Round_Button(15, 132, 80, 12, gettext("Icecast"));
         radio_add_srv_icecast->type(102);
         radio_add_srv_icecast->down_box(FL_ROUND_DOWN_BOX);
         radio_add_srv_icecast->callback((Fl_Callback*)cb_radio_add_srv_icecast);
       } // Fl_Round_Button* radio_add_srv_icecast
+      /* { radio_add_srv_radioco = new Fl_Round_Button(15, 157, 80, 12, gettext("Radio.co"));
+        radio_add_srv_radioco->type(102);
+        radio_add_srv_radioco->down_box(FL_ROUND_DOWN_BOX);
+        radio_add_srv_radioco->callback((Fl_Callback*)cb_radio_add_srv_radioco);
+      }*/ // Fl_Round_Button* radio_add_srv_radioco
       o->end();
     } // Fl_Group* o
     { Fl_Button* o = new Fl_Button(10, 340, 74, 25, gettext("&Cancel"));
@@ -2491,27 +3291,41 @@ supporting this\nproject.\n\nThank you!"));
       button_add_srv_add->box(FL_ENGRAVED_BOX);
       button_add_srv_add->callback((Fl_Callback*)cb_button_add_srv_add);
     } // Fl_Button* button_add_srv_add
-    { button_add_srv_save = new Fl_Button(246, 340, 74, 25, gettext("&Save"));
+    { button_add_srv_save = new Fl_Button(245, 340, 74, 25, gettext("&Save"));
       button_add_srv_save->box(FL_ENGRAVED_BOX);
       button_add_srv_save->callback((Fl_Callback*)cb_button_add_srv_save);
     } // Fl_Button* button_add_srv_save
-    { button_cfg_show_pw = new Fl_Button(250, 251, 70, 25, gettext("Show"));
-      button_cfg_show_pw->tooltip(gettext("show/hide password"));
-      button_cfg_show_pw->box(FL_ENGRAVED_BOX);
-      button_cfg_show_pw->callback((Fl_Callback*)cb_button_cfg_show_pw);
-    } // Fl_Button* button_cfg_show_pw
-    { frame_add_srv_tls = new Fl_Group(125, 120, 195, 62, gettext("SSL/TLS"));
+    { frame_add_srv_tls = new Fl_Group(125, 96, 190, 86, gettext("SSL/TLS"));
       frame_add_srv_tls->box(FL_ENGRAVED_BOX);
       frame_add_srv_tls->align(Fl_Align(FL_ALIGN_TOP_LEFT));
       { check_add_srv_tls = new Fl_Check_Button(129, 130, 115, 15, gettext("Use SSL/TLS"));
         check_add_srv_tls->down_box(FL_DOWN_BOX);
       } // Fl_Check_Button* check_add_srv_tls
-      { button_add_srv_revoke_cert = new Fl_Button(130, 149, 185, 25, gettext("Revoke certificate trust"));
+      { button_add_srv_revoke_cert = new Fl_Button(130, 149, 180, 25, gettext("Revoke certificate trust"));
         button_add_srv_revoke_cert->box(FL_ENGRAVED_BOX);
         button_add_srv_revoke_cert->callback((Fl_Callback*)cb_button_add_srv_revoke_cert);
       } // Fl_Button* button_add_srv_revoke_cert
       frame_add_srv_tls->end();
     } // Fl_Group* frame_add_srv_tls
+    { browser_add_srv_station_list = new Fl_Check_Browser(125, 206, 195, 84, gettext("Radio.co Stations"));
+      browser_add_srv_station_list->align(Fl_Align(FL_ALIGN_TOP_LEFT));
+      browser_add_srv_station_list->hide();
+    } // Fl_Check_Browser* browser_add_srv_station_list
+    { button_add_srv_get_stations = new Fl_Button(10, 205, 105, 25, gettext("Get Stations"));
+      button_add_srv_get_stations->box(FL_ENGRAVED_BOX);
+      button_add_srv_get_stations->callback((Fl_Callback*)cb_button_add_srv_get_stations);
+      button_add_srv_get_stations->hide();
+    } // Fl_Button* button_add_srv_get_stations
+    { button_add_srv_select_all = new Fl_Button(125, 295, 95, 20, gettext("Select all"));
+      button_add_srv_select_all->box(FL_ENGRAVED_BOX);
+      button_add_srv_select_all->callback((Fl_Callback*)cb_button_add_srv_select_all);
+      button_add_srv_select_all->hide();
+    } // Fl_Button* button_add_srv_select_all
+    { button_add_srv_deselect_all = new Fl_Button(230, 295, 88, 20, gettext("Deselect all"));
+      button_add_srv_deselect_all->box(FL_ENGRAVED_BOX);
+      button_add_srv_deselect_all->callback((Fl_Callback*)cb_button_add_srv_deselect_all);
+      button_add_srv_deselect_all->hide();
+    } // Fl_Button* button_add_srv_deselect_all
     window_add_srv->set_modal();
     window_add_srv->end();
   } // Fl_Double_Window* window_add_srv
@@ -2620,6 +3434,514 @@ supporting this\nproject.\n\nThank you!"));
     } // Fl_Button* o
     window_donate_crypto->end();
   } // Fl_My_Double_Window* window_donate_crypto
+  { window_stream_codec_settings = new Fl_My_Double_Window(395, 305, gettext("Streaming Codec Settings"));
+    window_stream_codec_settings->box(FL_FLAT_BOX);
+    window_stream_codec_settings->color(FL_BACKGROUND_COLOR);
+    window_stream_codec_settings->selection_color(FL_BACKGROUND_COLOR);
+    window_stream_codec_settings->labeltype(FL_NO_LABEL);
+    window_stream_codec_settings->labelfont(0);
+    window_stream_codec_settings->labelsize(14);
+    window_stream_codec_settings->labelcolor(FL_FOREGROUND_COLOR);
+    window_stream_codec_settings->user_data((void*)(this));
+    window_stream_codec_settings->align(Fl_Align(FL_ALIGN_TOP));
+    window_stream_codec_settings->when(FL_WHEN_RELEASE);
+    { Fl_Tabs* o = new Fl_Tabs(5, 0, 395, 305);
+      { Fl_Group* o = new Fl_Group(5, 20, 390, 285, gettext("MP3"));
+        { choice_stream_mp3_enc_quality = new Fl_Choice(25, 50, 165, 20, gettext("Encoding Quality"));
+          choice_stream_mp3_enc_quality->down_box(FL_BORDER_BOX);
+          choice_stream_mp3_enc_quality->callback((Fl_Callback*)cb_choice_stream_mp3_enc_quality);
+          choice_stream_mp3_enc_quality->align(Fl_Align(FL_ALIGN_TOP_LEFT));
+          if (!menu_choice_stream_mp3_enc_quality_i18n_done) {
+            int i=0;
+            for ( ; i<10; i++)
+              if (menu_choice_stream_mp3_enc_quality[i].label())
+                menu_choice_stream_mp3_enc_quality[i].label(gettext(menu_choice_stream_mp3_enc_quality[i].label()));
+            menu_choice_stream_mp3_enc_quality_i18n_done = 1;
+          }
+          choice_stream_mp3_enc_quality->menu(menu_choice_stream_mp3_enc_quality);
+        } // Fl_Choice* choice_stream_mp3_enc_quality
+        { choice_stream_mp3_stereo_mode = new Fl_Choice(210, 50, 165, 20, gettext("Stereo Mode"));
+          choice_stream_mp3_stereo_mode->down_box(FL_BORDER_BOX);
+          choice_stream_mp3_stereo_mode->callback((Fl_Callback*)cb_choice_stream_mp3_stereo_mode);
+          choice_stream_mp3_stereo_mode->align(Fl_Align(FL_ALIGN_TOP_LEFT));
+          if (!menu_choice_stream_mp3_stereo_mode_i18n_done) {
+            int i=0;
+            for ( ; i<3; i++)
+              if (menu_choice_stream_mp3_stereo_mode[i].label())
+                menu_choice_stream_mp3_stereo_mode[i].label(gettext(menu_choice_stream_mp3_stereo_mode[i].label()));
+            menu_choice_stream_mp3_stereo_mode_i18n_done = 1;
+          }
+          choice_stream_mp3_stereo_mode->menu(menu_choice_stream_mp3_stereo_mode);
+        } // Fl_Choice* choice_stream_mp3_stereo_mode
+        { choice_stream_mp3_bitrate_mode = new Fl_Choice(25, 110, 165, 20, gettext("Bitrate Mode"));
+          choice_stream_mp3_bitrate_mode->down_box(FL_BORDER_BOX);
+          choice_stream_mp3_bitrate_mode->callback((Fl_Callback*)cb_choice_stream_mp3_bitrate_mode);
+          choice_stream_mp3_bitrate_mode->align(Fl_Align(FL_ALIGN_TOP_LEFT));
+          if (!menu_choice_stream_mp3_bitrate_mode_i18n_done) {
+            int i=0;
+            for ( ; i<3; i++)
+              if (menu_choice_stream_mp3_bitrate_mode[i].label())
+                menu_choice_stream_mp3_bitrate_mode[i].label(gettext(menu_choice_stream_mp3_bitrate_mode[i].label()));
+            menu_choice_stream_mp3_bitrate_mode_i18n_done = 1;
+          }
+          choice_stream_mp3_bitrate_mode->menu(menu_choice_stream_mp3_bitrate_mode);
+        } // Fl_Choice* choice_stream_mp3_bitrate_mode
+        { choice_stream_mp3_vbr_quality = new Fl_Choice(210, 110, 165, 20, gettext("VBR Quality"));
+          choice_stream_mp3_vbr_quality->down_box(FL_BORDER_BOX);
+          choice_stream_mp3_vbr_quality->callback((Fl_Callback*)cb_choice_stream_mp3_vbr_quality);
+          choice_stream_mp3_vbr_quality->align(Fl_Align(FL_ALIGN_TOP_LEFT));
+          if (!menu_choice_stream_mp3_vbr_quality_i18n_done) {
+            int i=0;
+            for ( ; i<10; i++)
+              if (menu_choice_stream_mp3_vbr_quality[i].label())
+                menu_choice_stream_mp3_vbr_quality[i].label(gettext(menu_choice_stream_mp3_vbr_quality[i].label()));
+            menu_choice_stream_mp3_vbr_quality_i18n_done = 1;
+          }
+          choice_stream_mp3_vbr_quality->menu(menu_choice_stream_mp3_vbr_quality);
+        } // Fl_Choice* choice_stream_mp3_vbr_quality
+        { choice_stream_mp3_vbr_min_bitrate = new Fl_Choice(25, 170, 165, 20, gettext("VBR min. Bitrate"));
+          choice_stream_mp3_vbr_min_bitrate->down_box(FL_BORDER_BOX);
+          choice_stream_mp3_vbr_min_bitrate->callback((Fl_Callback*)cb_choice_stream_mp3_vbr_min_bitrate);
+          choice_stream_mp3_vbr_min_bitrate->align(Fl_Align(FL_ALIGN_TOP_LEFT));
+          if (!menu_choice_stream_mp3_vbr_min_bitrate_i18n_done) {
+            int i=0;
+            for ( ; i<17; i++)
+              if (menu_choice_stream_mp3_vbr_min_bitrate[i].label())
+                menu_choice_stream_mp3_vbr_min_bitrate[i].label(gettext(menu_choice_stream_mp3_vbr_min_bitrate[i].label()));
+            menu_choice_stream_mp3_vbr_min_bitrate_i18n_done = 1;
+          }
+          choice_stream_mp3_vbr_min_bitrate->menu(menu_choice_stream_mp3_vbr_min_bitrate);
+        } // Fl_Choice* choice_stream_mp3_vbr_min_bitrate
+        { choice_stream_mp3_vbr_max_bitrate = new Fl_Choice(210, 170, 165, 20, gettext("VBR max. Bitrate"));
+          choice_stream_mp3_vbr_max_bitrate->down_box(FL_BORDER_BOX);
+          choice_stream_mp3_vbr_max_bitrate->callback((Fl_Callback*)cb_choice_stream_mp3_vbr_max_bitrate);
+          choice_stream_mp3_vbr_max_bitrate->align(Fl_Align(FL_ALIGN_TOP_LEFT));
+          if (!menu_choice_stream_mp3_vbr_max_bitrate_i18n_done) {
+            int i=0;
+            for ( ; i<17; i++)
+              if (menu_choice_stream_mp3_vbr_max_bitrate[i].label())
+                menu_choice_stream_mp3_vbr_max_bitrate[i].label(gettext(menu_choice_stream_mp3_vbr_max_bitrate[i].label()));
+            menu_choice_stream_mp3_vbr_max_bitrate_i18n_done = 1;
+          }
+          choice_stream_mp3_vbr_max_bitrate->menu(menu_choice_stream_mp3_vbr_max_bitrate);
+        } // Fl_Choice* choice_stream_mp3_vbr_max_bitrate
+        o->end();
+      } // Fl_Group* o
+      { Fl_Group* o = new Fl_Group(5, 20, 390, 285, gettext("OGG"));
+        o->hide();
+        { choice_stream_vorbis_bitrate_mode = new Fl_Choice(25, 50, 165, 20, gettext("Bitrate Mode"));
+          choice_stream_vorbis_bitrate_mode->down_box(FL_BORDER_BOX);
+          choice_stream_vorbis_bitrate_mode->callback((Fl_Callback*)cb_choice_stream_vorbis_bitrate_mode);
+          choice_stream_vorbis_bitrate_mode->align(Fl_Align(FL_ALIGN_TOP_LEFT));
+          if (!menu_choice_stream_vorbis_bitrate_mode_i18n_done) {
+            int i=0;
+            for ( ; i<3; i++)
+              if (menu_choice_stream_vorbis_bitrate_mode[i].label())
+                menu_choice_stream_vorbis_bitrate_mode[i].label(gettext(menu_choice_stream_vorbis_bitrate_mode[i].label()));
+            menu_choice_stream_vorbis_bitrate_mode_i18n_done = 1;
+          }
+          choice_stream_vorbis_bitrate_mode->menu(menu_choice_stream_vorbis_bitrate_mode);
+        } // Fl_Choice* choice_stream_vorbis_bitrate_mode
+        { choice_stream_vorbis_vbr_quality = new Fl_Choice(210, 50, 165, 20, gettext("VBR Quality"));
+          choice_stream_vorbis_vbr_quality->down_box(FL_BORDER_BOX);
+          choice_stream_vorbis_vbr_quality->callback((Fl_Callback*)cb_choice_stream_vorbis_vbr_quality);
+          choice_stream_vorbis_vbr_quality->align(Fl_Align(FL_ALIGN_TOP_LEFT));
+          if (!menu_choice_stream_vorbis_vbr_quality_i18n_done) {
+            int i=0;
+            for ( ; i<11; i++)
+              if (menu_choice_stream_vorbis_vbr_quality[i].label())
+                menu_choice_stream_vorbis_vbr_quality[i].label(gettext(menu_choice_stream_vorbis_vbr_quality[i].label()));
+            menu_choice_stream_vorbis_vbr_quality_i18n_done = 1;
+          }
+          choice_stream_vorbis_vbr_quality->menu(menu_choice_stream_vorbis_vbr_quality);
+        } // Fl_Choice* choice_stream_vorbis_vbr_quality
+        { choice_stream_vorbis_vbr_min_bitrate = new Fl_Choice(25, 110, 165, 20, gettext("VBR min. Bitrate"));
+          choice_stream_vorbis_vbr_min_bitrate->down_box(FL_BORDER_BOX);
+          choice_stream_vorbis_vbr_min_bitrate->callback((Fl_Callback*)cb_choice_stream_vorbis_vbr_min_bitrate);
+          choice_stream_vorbis_vbr_min_bitrate->align(Fl_Align(FL_ALIGN_TOP_LEFT));
+          choice_stream_vorbis_vbr_min_bitrate->hide();
+          if (!menu_choice_stream_vorbis_vbr_min_bitrate_i18n_done) {
+            int i=0;
+            for ( ; i<13; i++)
+              if (menu_choice_stream_vorbis_vbr_min_bitrate[i].label())
+                menu_choice_stream_vorbis_vbr_min_bitrate[i].label(gettext(menu_choice_stream_vorbis_vbr_min_bitrate[i].label()));
+            menu_choice_stream_vorbis_vbr_min_bitrate_i18n_done = 1;
+          }
+          choice_stream_vorbis_vbr_min_bitrate->menu(menu_choice_stream_vorbis_vbr_min_bitrate);
+        } // Fl_Choice* choice_stream_vorbis_vbr_min_bitrate
+        { choice_stream_vorbis_vbr_max_bitrate = new Fl_Choice(210, 110, 165, 20, gettext("VBR max. Bitrate"));
+          choice_stream_vorbis_vbr_max_bitrate->down_box(FL_BORDER_BOX);
+          choice_stream_vorbis_vbr_max_bitrate->callback((Fl_Callback*)cb_choice_stream_vorbis_vbr_max_bitrate);
+          choice_stream_vorbis_vbr_max_bitrate->align(Fl_Align(FL_ALIGN_TOP_LEFT));
+          choice_stream_vorbis_vbr_max_bitrate->hide();
+          if (!menu_choice_stream_vorbis_vbr_max_bitrate_i18n_done) {
+            int i=0;
+            for ( ; i<13; i++)
+              if (menu_choice_stream_vorbis_vbr_max_bitrate[i].label())
+                menu_choice_stream_vorbis_vbr_max_bitrate[i].label(gettext(menu_choice_stream_vorbis_vbr_max_bitrate[i].label()));
+            menu_choice_stream_vorbis_vbr_max_bitrate_i18n_done = 1;
+          }
+          choice_stream_vorbis_vbr_max_bitrate->menu(menu_choice_stream_vorbis_vbr_max_bitrate);
+        } // Fl_Choice* choice_stream_vorbis_vbr_max_bitrate
+        o->end();
+      } // Fl_Group* o
+      { Fl_Group* o = new Fl_Group(5, 20, 390, 285, gettext("OPUS"));
+        o->hide();
+        { choice_stream_opus_audio_type = new Fl_Choice(210, 50, 165, 20, gettext("Optimize for"));
+          choice_stream_opus_audio_type->down_box(FL_BORDER_BOX);
+          choice_stream_opus_audio_type->callback((Fl_Callback*)cb_choice_stream_opus_audio_type);
+          choice_stream_opus_audio_type->align(Fl_Align(FL_ALIGN_TOP_LEFT));
+          if (!menu_choice_stream_opus_audio_type_i18n_done) {
+            int i=0;
+            for ( ; i<2; i++)
+              if (menu_choice_stream_opus_audio_type[i].label())
+                menu_choice_stream_opus_audio_type[i].label(gettext(menu_choice_stream_opus_audio_type[i].label()));
+            menu_choice_stream_opus_audio_type_i18n_done = 1;
+          }
+          choice_stream_opus_audio_type->menu(menu_choice_stream_opus_audio_type);
+        } // Fl_Choice* choice_stream_opus_audio_type
+        { choice_stream_opus_bitrate_mode = new Fl_Choice(25, 110, 165, 20, gettext("Bitrate Mode"));
+          choice_stream_opus_bitrate_mode->down_box(FL_BORDER_BOX);
+          choice_stream_opus_bitrate_mode->callback((Fl_Callback*)cb_choice_stream_opus_bitrate_mode);
+          choice_stream_opus_bitrate_mode->align(Fl_Align(FL_ALIGN_TOP_LEFT));
+          if (!menu_choice_stream_opus_bitrate_mode_i18n_done) {
+            int i=0;
+            for ( ; i<2; i++)
+              if (menu_choice_stream_opus_bitrate_mode[i].label())
+                menu_choice_stream_opus_bitrate_mode[i].label(gettext(menu_choice_stream_opus_bitrate_mode[i].label()));
+            menu_choice_stream_opus_bitrate_mode_i18n_done = 1;
+          }
+          choice_stream_opus_bitrate_mode->menu(menu_choice_stream_opus_bitrate_mode);
+        } // Fl_Choice* choice_stream_opus_bitrate_mode
+        { choice_stream_opus_quality = new Fl_Choice(25, 50, 165, 20, gettext("Quality"));
+          choice_stream_opus_quality->down_box(FL_BORDER_BOX);
+          choice_stream_opus_quality->callback((Fl_Callback*)cb_choice_stream_opus_quality);
+          choice_stream_opus_quality->align(Fl_Align(FL_ALIGN_TOP_LEFT));
+          if (!menu_choice_stream_opus_quality_i18n_done) {
+            int i=0;
+            for ( ; i<11; i++)
+              if (menu_choice_stream_opus_quality[i].label())
+                menu_choice_stream_opus_quality[i].label(gettext(menu_choice_stream_opus_quality[i].label()));
+            menu_choice_stream_opus_quality_i18n_done = 1;
+          }
+          choice_stream_opus_quality->menu(menu_choice_stream_opus_quality);
+        } // Fl_Choice* choice_stream_opus_quality
+        { choice_stream_opus_bandwidth = new Fl_Choice(210, 110, 165, 20, gettext("Max. Bandwidth"));
+          choice_stream_opus_bandwidth->down_box(FL_BORDER_BOX);
+          choice_stream_opus_bandwidth->callback((Fl_Callback*)cb_choice_stream_opus_bandwidth);
+          choice_stream_opus_bandwidth->align(Fl_Align(FL_ALIGN_TOP_LEFT));
+          if (!menu_choice_stream_opus_bandwidth_i18n_done) {
+            int i=0;
+            for ( ; i<5; i++)
+              if (menu_choice_stream_opus_bandwidth[i].label())
+                menu_choice_stream_opus_bandwidth[i].label(gettext(menu_choice_stream_opus_bandwidth[i].label()));
+            menu_choice_stream_opus_bandwidth_i18n_done = 1;
+          }
+          choice_stream_opus_bandwidth->menu(menu_choice_stream_opus_bandwidth);
+        } // Fl_Choice* choice_stream_opus_bandwidth
+        o->end();
+      } // Fl_Group* o
+      { tab_stream_aac = new Fl_Group(5, 20, 390, 285, gettext("AAC"));
+        tab_stream_aac->hide();
+        { choice_stream_aac_profile = new Fl_Choice(25, 50, 165, 20, gettext("Profile"));
+          choice_stream_aac_profile->down_box(FL_BORDER_BOX);
+          choice_stream_aac_profile->callback((Fl_Callback*)cb_choice_stream_aac_profile);
+          choice_stream_aac_profile->align(Fl_Align(FL_ALIGN_TOP_LEFT));
+          if (!menu_choice_stream_aac_profile_i18n_done) {
+            int i=0;
+            for ( ; i<4; i++)
+              if (menu_choice_stream_aac_profile[i].label())
+                menu_choice_stream_aac_profile[i].label(gettext(menu_choice_stream_aac_profile[i].label()));
+            menu_choice_stream_aac_profile_i18n_done = 1;
+          }
+          choice_stream_aac_profile->menu(menu_choice_stream_aac_profile);
+        } // Fl_Choice* choice_stream_aac_profile
+        { choice_stream_aac_afterburner = new Fl_Choice(210, 50, 165, 20, gettext("Afterburner"));
+          choice_stream_aac_afterburner->down_box(FL_BORDER_BOX);
+          choice_stream_aac_afterburner->callback((Fl_Callback*)cb_choice_stream_aac_afterburner);
+          choice_stream_aac_afterburner->align(Fl_Align(FL_ALIGN_TOP_LEFT));
+          if (!menu_choice_stream_aac_afterburner_i18n_done) {
+            int i=0;
+            for ( ; i<2; i++)
+              if (menu_choice_stream_aac_afterburner[i].label())
+                menu_choice_stream_aac_afterburner[i].label(gettext(menu_choice_stream_aac_afterburner[i].label()));
+            menu_choice_stream_aac_afterburner_i18n_done = 1;
+          }
+          choice_stream_aac_afterburner->menu(menu_choice_stream_aac_afterburner);
+        } // Fl_Choice* choice_stream_aac_afterburner
+        { choice_stream_aac_bitrate_mode = new Fl_Choice(25, 110, 165, 20, gettext("Bitrate Mode"));
+          choice_stream_aac_bitrate_mode->down_box(FL_BORDER_BOX);
+          choice_stream_aac_bitrate_mode->callback((Fl_Callback*)cb_choice_stream_aac_bitrate_mode);
+          choice_stream_aac_bitrate_mode->align(Fl_Align(FL_ALIGN_TOP_LEFT));
+          if (!menu_choice_stream_aac_bitrate_mode_i18n_done) {
+            int i=0;
+            for ( ; i<2; i++)
+              if (menu_choice_stream_aac_bitrate_mode[i].label())
+                menu_choice_stream_aac_bitrate_mode[i].label(gettext(menu_choice_stream_aac_bitrate_mode[i].label()));
+            menu_choice_stream_aac_bitrate_mode_i18n_done = 1;
+          }
+          choice_stream_aac_bitrate_mode->menu(menu_choice_stream_aac_bitrate_mode);
+        } // Fl_Choice* choice_stream_aac_bitrate_mode
+        tab_stream_aac->end();
+      } // Fl_Group* tab_stream_aac
+      o->end();
+    } // Fl_Tabs* o
+    window_stream_codec_settings->end();
+  } // Fl_My_Double_Window* window_stream_codec_settings
+  { window_rec_codec_settings = new Fl_My_Double_Window(395, 305, gettext("Recording Codec Settings"));
+    window_rec_codec_settings->box(FL_FLAT_BOX);
+    window_rec_codec_settings->color(FL_BACKGROUND_COLOR);
+    window_rec_codec_settings->selection_color(FL_BACKGROUND_COLOR);
+    window_rec_codec_settings->labeltype(FL_NO_LABEL);
+    window_rec_codec_settings->labelfont(0);
+    window_rec_codec_settings->labelsize(14);
+    window_rec_codec_settings->labelcolor(FL_FOREGROUND_COLOR);
+    window_rec_codec_settings->user_data((void*)(this));
+    window_rec_codec_settings->align(Fl_Align(FL_ALIGN_TOP));
+    window_rec_codec_settings->when(FL_WHEN_RELEASE);
+    { Fl_Tabs* o = new Fl_Tabs(5, 0, 395, 305);
+      { Fl_Group* o = new Fl_Group(5, 20, 390, 285, gettext("MP3"));
+        { choice_rec_mp3_enc_quality = new Fl_Choice(25, 50, 165, 20, gettext("Encoding Quality"));
+          choice_rec_mp3_enc_quality->down_box(FL_BORDER_BOX);
+          choice_rec_mp3_enc_quality->callback((Fl_Callback*)cb_choice_rec_mp3_enc_quality);
+          choice_rec_mp3_enc_quality->align(Fl_Align(FL_ALIGN_TOP_LEFT));
+          if (!menu_choice_rec_mp3_enc_quality_i18n_done) {
+            int i=0;
+            for ( ; i<10; i++)
+              if (menu_choice_rec_mp3_enc_quality[i].label())
+                menu_choice_rec_mp3_enc_quality[i].label(gettext(menu_choice_rec_mp3_enc_quality[i].label()));
+            menu_choice_rec_mp3_enc_quality_i18n_done = 1;
+          }
+          choice_rec_mp3_enc_quality->menu(menu_choice_rec_mp3_enc_quality);
+        } // Fl_Choice* choice_rec_mp3_enc_quality
+        { choice_rec_mp3_stereo_mode = new Fl_Choice(210, 50, 165, 20, gettext("Stereo Mode"));
+          choice_rec_mp3_stereo_mode->down_box(FL_BORDER_BOX);
+          choice_rec_mp3_stereo_mode->callback((Fl_Callback*)cb_choice_rec_mp3_stereo_mode);
+          choice_rec_mp3_stereo_mode->align(Fl_Align(FL_ALIGN_TOP_LEFT));
+          if (!menu_choice_rec_mp3_stereo_mode_i18n_done) {
+            int i=0;
+            for ( ; i<3; i++)
+              if (menu_choice_rec_mp3_stereo_mode[i].label())
+                menu_choice_rec_mp3_stereo_mode[i].label(gettext(menu_choice_rec_mp3_stereo_mode[i].label()));
+            menu_choice_rec_mp3_stereo_mode_i18n_done = 1;
+          }
+          choice_rec_mp3_stereo_mode->menu(menu_choice_rec_mp3_stereo_mode);
+        } // Fl_Choice* choice_rec_mp3_stereo_mode
+        { choice_rec_mp3_bitrate_mode = new Fl_Choice(25, 110, 165, 20, gettext("Bitrate Mode"));
+          choice_rec_mp3_bitrate_mode->down_box(FL_BORDER_BOX);
+          choice_rec_mp3_bitrate_mode->callback((Fl_Callback*)cb_choice_rec_mp3_bitrate_mode);
+          choice_rec_mp3_bitrate_mode->align(Fl_Align(FL_ALIGN_TOP_LEFT));
+          if (!menu_choice_rec_mp3_bitrate_mode_i18n_done) {
+            int i=0;
+            for ( ; i<3; i++)
+              if (menu_choice_rec_mp3_bitrate_mode[i].label())
+                menu_choice_rec_mp3_bitrate_mode[i].label(gettext(menu_choice_rec_mp3_bitrate_mode[i].label()));
+            menu_choice_rec_mp3_bitrate_mode_i18n_done = 1;
+          }
+          choice_rec_mp3_bitrate_mode->menu(menu_choice_rec_mp3_bitrate_mode);
+        } // Fl_Choice* choice_rec_mp3_bitrate_mode
+        { choice_rec_mp3_vbr_quality = new Fl_Choice(210, 110, 165, 20, gettext("VBR Quality"));
+          choice_rec_mp3_vbr_quality->down_box(FL_BORDER_BOX);
+          choice_rec_mp3_vbr_quality->callback((Fl_Callback*)cb_choice_rec_mp3_vbr_quality);
+          choice_rec_mp3_vbr_quality->align(Fl_Align(FL_ALIGN_TOP_LEFT));
+          if (!menu_choice_rec_mp3_vbr_quality_i18n_done) {
+            int i=0;
+            for ( ; i<10; i++)
+              if (menu_choice_rec_mp3_vbr_quality[i].label())
+                menu_choice_rec_mp3_vbr_quality[i].label(gettext(menu_choice_rec_mp3_vbr_quality[i].label()));
+            menu_choice_rec_mp3_vbr_quality_i18n_done = 1;
+          }
+          choice_rec_mp3_vbr_quality->menu(menu_choice_rec_mp3_vbr_quality);
+        } // Fl_Choice* choice_rec_mp3_vbr_quality
+        { choice_rec_mp3_vbr_min_bitrate = new Fl_Choice(25, 170, 165, 20, gettext("VBR min. Bitrate"));
+          choice_rec_mp3_vbr_min_bitrate->down_box(FL_BORDER_BOX);
+          choice_rec_mp3_vbr_min_bitrate->callback((Fl_Callback*)cb_choice_rec_mp3_vbr_min_bitrate);
+          choice_rec_mp3_vbr_min_bitrate->align(Fl_Align(FL_ALIGN_TOP_LEFT));
+          if (!menu_choice_rec_mp3_vbr_min_bitrate_i18n_done) {
+            int i=0;
+            for ( ; i<17; i++)
+              if (menu_choice_rec_mp3_vbr_min_bitrate[i].label())
+                menu_choice_rec_mp3_vbr_min_bitrate[i].label(gettext(menu_choice_rec_mp3_vbr_min_bitrate[i].label()));
+            menu_choice_rec_mp3_vbr_min_bitrate_i18n_done = 1;
+          }
+          choice_rec_mp3_vbr_min_bitrate->menu(menu_choice_rec_mp3_vbr_min_bitrate);
+        } // Fl_Choice* choice_rec_mp3_vbr_min_bitrate
+        { choice_rec_mp3_vbr_max_bitrate = new Fl_Choice(210, 170, 165, 20, gettext("VBR max. Bitrate"));
+          choice_rec_mp3_vbr_max_bitrate->down_box(FL_BORDER_BOX);
+          choice_rec_mp3_vbr_max_bitrate->callback((Fl_Callback*)cb_choice_rec_mp3_vbr_max_bitrate);
+          choice_rec_mp3_vbr_max_bitrate->align(Fl_Align(FL_ALIGN_TOP_LEFT));
+          if (!menu_choice_rec_mp3_vbr_max_bitrate_i18n_done) {
+            int i=0;
+            for ( ; i<17; i++)
+              if (menu_choice_rec_mp3_vbr_max_bitrate[i].label())
+                menu_choice_rec_mp3_vbr_max_bitrate[i].label(gettext(menu_choice_rec_mp3_vbr_max_bitrate[i].label()));
+            menu_choice_rec_mp3_vbr_max_bitrate_i18n_done = 1;
+          }
+          choice_rec_mp3_vbr_max_bitrate->menu(menu_choice_rec_mp3_vbr_max_bitrate);
+        } // Fl_Choice* choice_rec_mp3_vbr_max_bitrate
+        o->end();
+      } // Fl_Group* o
+      { Fl_Group* o = new Fl_Group(5, 20, 390, 285, gettext("OGG"));
+        o->hide();
+        { choice_rec_vorbis_bitrate_mode = new Fl_Choice(25, 50, 165, 20, gettext("Bitrate Mode"));
+          choice_rec_vorbis_bitrate_mode->down_box(FL_BORDER_BOX);
+          choice_rec_vorbis_bitrate_mode->callback((Fl_Callback*)cb_choice_rec_vorbis_bitrate_mode);
+          choice_rec_vorbis_bitrate_mode->align(Fl_Align(FL_ALIGN_TOP_LEFT));
+          if (!menu_choice_rec_vorbis_bitrate_mode_i18n_done) {
+            int i=0;
+            for ( ; i<3; i++)
+              if (menu_choice_rec_vorbis_bitrate_mode[i].label())
+                menu_choice_rec_vorbis_bitrate_mode[i].label(gettext(menu_choice_rec_vorbis_bitrate_mode[i].label()));
+            menu_choice_rec_vorbis_bitrate_mode_i18n_done = 1;
+          }
+          choice_rec_vorbis_bitrate_mode->menu(menu_choice_rec_vorbis_bitrate_mode);
+        } // Fl_Choice* choice_rec_vorbis_bitrate_mode
+        { choice_rec_vorbis_vbr_quality = new Fl_Choice(210, 50, 165, 20, gettext("VBR Quality"));
+          choice_rec_vorbis_vbr_quality->down_box(FL_BORDER_BOX);
+          choice_rec_vorbis_vbr_quality->callback((Fl_Callback*)cb_choice_rec_vorbis_vbr_quality);
+          choice_rec_vorbis_vbr_quality->align(Fl_Align(FL_ALIGN_TOP_LEFT));
+          if (!menu_choice_rec_vorbis_vbr_quality_i18n_done) {
+            int i=0;
+            for ( ; i<11; i++)
+              if (menu_choice_rec_vorbis_vbr_quality[i].label())
+                menu_choice_rec_vorbis_vbr_quality[i].label(gettext(menu_choice_rec_vorbis_vbr_quality[i].label()));
+            menu_choice_rec_vorbis_vbr_quality_i18n_done = 1;
+          }
+          choice_rec_vorbis_vbr_quality->menu(menu_choice_rec_vorbis_vbr_quality);
+        } // Fl_Choice* choice_rec_vorbis_vbr_quality
+        { choice_rec_vorbis_vbr_min_bitrate = new Fl_Choice(25, 110, 165, 20, gettext("VBR min. Bitrate"));
+          choice_rec_vorbis_vbr_min_bitrate->down_box(FL_BORDER_BOX);
+          choice_rec_vorbis_vbr_min_bitrate->callback((Fl_Callback*)cb_choice_rec_vorbis_vbr_min_bitrate);
+          choice_rec_vorbis_vbr_min_bitrate->align(Fl_Align(FL_ALIGN_TOP_LEFT));
+          choice_rec_vorbis_vbr_min_bitrate->hide();
+          if (!menu_choice_rec_vorbis_vbr_min_bitrate_i18n_done) {
+            int i=0;
+            for ( ; i<13; i++)
+              if (menu_choice_rec_vorbis_vbr_min_bitrate[i].label())
+                menu_choice_rec_vorbis_vbr_min_bitrate[i].label(gettext(menu_choice_rec_vorbis_vbr_min_bitrate[i].label()));
+            menu_choice_rec_vorbis_vbr_min_bitrate_i18n_done = 1;
+          }
+          choice_rec_vorbis_vbr_min_bitrate->menu(menu_choice_rec_vorbis_vbr_min_bitrate);
+        } // Fl_Choice* choice_rec_vorbis_vbr_min_bitrate
+        { choice_rec_vorbis_vbr_max_bitrate = new Fl_Choice(210, 110, 165, 20, gettext("VBR max. Bitrate"));
+          choice_rec_vorbis_vbr_max_bitrate->down_box(FL_BORDER_BOX);
+          choice_rec_vorbis_vbr_max_bitrate->callback((Fl_Callback*)cb_choice_rec_vorbis_vbr_max_bitrate);
+          choice_rec_vorbis_vbr_max_bitrate->align(Fl_Align(FL_ALIGN_TOP_LEFT));
+          choice_rec_vorbis_vbr_max_bitrate->hide();
+          if (!menu_choice_rec_vorbis_vbr_max_bitrate_i18n_done) {
+            int i=0;
+            for ( ; i<13; i++)
+              if (menu_choice_rec_vorbis_vbr_max_bitrate[i].label())
+                menu_choice_rec_vorbis_vbr_max_bitrate[i].label(gettext(menu_choice_rec_vorbis_vbr_max_bitrate[i].label()));
+            menu_choice_rec_vorbis_vbr_max_bitrate_i18n_done = 1;
+          }
+          choice_rec_vorbis_vbr_max_bitrate->menu(menu_choice_rec_vorbis_vbr_max_bitrate);
+        } // Fl_Choice* choice_rec_vorbis_vbr_max_bitrate
+        o->end();
+      } // Fl_Group* o
+      { Fl_Group* o = new Fl_Group(5, 20, 390, 285, gettext("OPUS"));
+        o->hide();
+        { choice_rec_opus_audio_type = new Fl_Choice(210, 50, 165, 20, gettext("Optimize for"));
+          choice_rec_opus_audio_type->down_box(FL_BORDER_BOX);
+          choice_rec_opus_audio_type->callback((Fl_Callback*)cb_choice_rec_opus_audio_type);
+          choice_rec_opus_audio_type->align(Fl_Align(FL_ALIGN_TOP_LEFT));
+          if (!menu_choice_rec_opus_audio_type_i18n_done) {
+            int i=0;
+            for ( ; i<2; i++)
+              if (menu_choice_rec_opus_audio_type[i].label())
+                menu_choice_rec_opus_audio_type[i].label(gettext(menu_choice_rec_opus_audio_type[i].label()));
+            menu_choice_rec_opus_audio_type_i18n_done = 1;
+          }
+          choice_rec_opus_audio_type->menu(menu_choice_rec_opus_audio_type);
+        } // Fl_Choice* choice_rec_opus_audio_type
+        { choice_rec_opus_bitrate_mode = new Fl_Choice(25, 110, 165, 20, gettext("Bitrate Mode"));
+          choice_rec_opus_bitrate_mode->down_box(FL_BORDER_BOX);
+          choice_rec_opus_bitrate_mode->callback((Fl_Callback*)cb_choice_rec_opus_bitrate_mode);
+          choice_rec_opus_bitrate_mode->align(Fl_Align(FL_ALIGN_TOP_LEFT));
+          if (!menu_choice_rec_opus_bitrate_mode_i18n_done) {
+            int i=0;
+            for ( ; i<2; i++)
+              if (menu_choice_rec_opus_bitrate_mode[i].label())
+                menu_choice_rec_opus_bitrate_mode[i].label(gettext(menu_choice_rec_opus_bitrate_mode[i].label()));
+            menu_choice_rec_opus_bitrate_mode_i18n_done = 1;
+          }
+          choice_rec_opus_bitrate_mode->menu(menu_choice_rec_opus_bitrate_mode);
+        } // Fl_Choice* choice_rec_opus_bitrate_mode
+        { choice_rec_opus_quality = new Fl_Choice(25, 50, 165, 20, gettext("Quality"));
+          choice_rec_opus_quality->down_box(FL_BORDER_BOX);
+          choice_rec_opus_quality->callback((Fl_Callback*)cb_choice_rec_opus_quality);
+          choice_rec_opus_quality->align(Fl_Align(FL_ALIGN_TOP_LEFT));
+          if (!menu_choice_rec_opus_quality_i18n_done) {
+            int i=0;
+            for ( ; i<11; i++)
+              if (menu_choice_rec_opus_quality[i].label())
+                menu_choice_rec_opus_quality[i].label(gettext(menu_choice_rec_opus_quality[i].label()));
+            menu_choice_rec_opus_quality_i18n_done = 1;
+          }
+          choice_rec_opus_quality->menu(menu_choice_rec_opus_quality);
+        } // Fl_Choice* choice_rec_opus_quality
+        { choice_rec_opus_bandwidth = new Fl_Choice(210, 110, 165, 20, gettext("Max. Bandwidth"));
+          choice_rec_opus_bandwidth->down_box(FL_BORDER_BOX);
+          choice_rec_opus_bandwidth->callback((Fl_Callback*)cb_choice_rec_opus_bandwidth);
+          choice_rec_opus_bandwidth->align(Fl_Align(FL_ALIGN_TOP_LEFT));
+          if (!menu_choice_rec_opus_bandwidth_i18n_done) {
+            int i=0;
+            for ( ; i<5; i++)
+              if (menu_choice_rec_opus_bandwidth[i].label())
+                menu_choice_rec_opus_bandwidth[i].label(gettext(menu_choice_rec_opus_bandwidth[i].label()));
+            menu_choice_rec_opus_bandwidth_i18n_done = 1;
+          }
+          choice_rec_opus_bandwidth->menu(menu_choice_rec_opus_bandwidth);
+        } // Fl_Choice* choice_rec_opus_bandwidth
+        o->end();
+      } // Fl_Group* o
+      { tab_rec_aac = new Fl_Group(5, 20, 390, 285, gettext("AAC"));
+        tab_rec_aac->hide();
+        { choice_rec_aac_profile = new Fl_Choice(25, 50, 165, 20, gettext("Profile"));
+          choice_rec_aac_profile->down_box(FL_BORDER_BOX);
+          choice_rec_aac_profile->callback((Fl_Callback*)cb_choice_rec_aac_profile);
+          choice_rec_aac_profile->align(Fl_Align(FL_ALIGN_TOP_LEFT));
+          if (!menu_choice_rec_aac_profile_i18n_done) {
+            int i=0;
+            for ( ; i<4; i++)
+              if (menu_choice_rec_aac_profile[i].label())
+                menu_choice_rec_aac_profile[i].label(gettext(menu_choice_rec_aac_profile[i].label()));
+            menu_choice_rec_aac_profile_i18n_done = 1;
+          }
+          choice_rec_aac_profile->menu(menu_choice_rec_aac_profile);
+        } // Fl_Choice* choice_rec_aac_profile
+        { choice_rec_aac_afterburner = new Fl_Choice(210, 50, 165, 20, gettext("Afterburner"));
+          choice_rec_aac_afterburner->down_box(FL_BORDER_BOX);
+          choice_rec_aac_afterburner->callback((Fl_Callback*)cb_choice_rec_aac_afterburner);
+          choice_rec_aac_afterburner->align(Fl_Align(FL_ALIGN_TOP_LEFT));
+          if (!menu_choice_rec_aac_afterburner_i18n_done) {
+            int i=0;
+            for ( ; i<2; i++)
+              if (menu_choice_rec_aac_afterburner[i].label())
+                menu_choice_rec_aac_afterburner[i].label(gettext(menu_choice_rec_aac_afterburner[i].label()));
+            menu_choice_rec_aac_afterburner_i18n_done = 1;
+          }
+          choice_rec_aac_afterburner->menu(menu_choice_rec_aac_afterburner);
+        } // Fl_Choice* choice_rec_aac_afterburner
+        { choice_rec_aac_bitrate_mode = new Fl_Choice(25, 110, 165, 20, gettext("Bitrate Mode"));
+          choice_rec_aac_bitrate_mode->down_box(FL_BORDER_BOX);
+          choice_rec_aac_bitrate_mode->callback((Fl_Callback*)cb_choice_rec_aac_bitrate_mode);
+          choice_rec_aac_bitrate_mode->align(Fl_Align(FL_ALIGN_TOP_LEFT));
+          if (!menu_choice_rec_aac_bitrate_mode_i18n_done) {
+            int i=0;
+            for ( ; i<2; i++)
+              if (menu_choice_rec_aac_bitrate_mode[i].label())
+                menu_choice_rec_aac_bitrate_mode[i].label(gettext(menu_choice_rec_aac_bitrate_mode[i].label()));
+            menu_choice_rec_aac_bitrate_mode_i18n_done = 1;
+          }
+          choice_rec_aac_bitrate_mode->menu(menu_choice_rec_aac_bitrate_mode);
+        } // Fl_Choice* choice_rec_aac_bitrate_mode
+        tab_rec_aac->end();
+      } // Fl_Group* tab_rec_aac
+      o->end();
+    } // Fl_Tabs* o
+    window_rec_codec_settings->end();
+  } // Fl_My_Double_Window* window_rec_codec_settings
 }
 
 flgui::~flgui() {

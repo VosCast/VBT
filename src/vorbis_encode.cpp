@@ -24,22 +24,62 @@
 int vorbis_enc_init(vorbis_enc *vorbis)
 {
     int ret;
-
-    //TODO: add error handling
+    int min_bitrate, nominal_bitrate, max_bitrate;
+    
     vorbis_info_init(&(vorbis->vi));
+    
+    vorbis->os.body_data = NULL;
 
-    ret = vorbis_encode_init(&(vorbis->vi),
-                  vorbis->channel,
-                  vorbis->samplerate,
-                  vorbis->bitrate*1000,
-                  vorbis->bitrate*1000,
-                  vorbis->bitrate*1000);
-    if(ret)
-        return ret;
+    if (vorbis->bitrate_mode == 0) // CBR
+    {
+        min_bitrate = vorbis->bitrate*1000;
+        nominal_bitrate = vorbis->bitrate*1000;
+        max_bitrate = vorbis->bitrate*1000;
+    }
+    
+    if (vorbis->bitrate_mode == 1) // VBR
+    {
+        min_bitrate = vorbis->vbr_min_bitrate*1000;
+        nominal_bitrate = vorbis->bitrate*1000;
+        max_bitrate = vorbis->vbr_min_bitrate*1000;
+    }
+    
+    if (vorbis->bitrate_mode == 2) // ABR
+    {
+        min_bitrate = -1;
+        nominal_bitrate = vorbis->bitrate*1000;
+        max_bitrate = -1;
+    }
+    
+    
+    if (vorbis->bitrate_mode == 0 || vorbis->bitrate_mode == 2) // CBR or ABR
+    {
+        ret = vorbis_encode_init(&(vorbis->vi),
+                      vorbis->channel,
+                      vorbis->samplerate,
+                      min_bitrate, nominal_bitrate, max_bitrate);
+        if(ret)
+            return ret;
+    }
+    else // VBR
+    {
+        ret = vorbis_encode_init_vbr(&(vorbis->vi), vorbis->channel, vorbis->samplerate, vorbis->vbr_quality);
+
+        if(ret)
+            return ret;
+    }
+    
+    /*
+    printf("vorbis - bitrate_mode: %d\n", vorbis->bitrate_mode);
+    printf("vorbis - quality: %0.2f\n", vorbis->vbr_quality);
+    printf("vorbis - min_bitrate: %d\n", min_bitrate);
+    printf("vorbis - nominal_bitrate: %d\n", nominal_bitrate);
+    printf("vorbis - max_bitrate: %d\n\n", max_bitrate);
+    */
+  
 
     vorbis_comment_init(&(vorbis->vc));
     vorbis_comment_add_tag(&(vorbis->vc), "ENCODER", PACKAGE_STRING);
-//    vorbis_comment_add_tag(&(vorbis->vc), "TITLE", "Hello Song");
 
     vorbis_analysis_init(&(vorbis->vd), &(vorbis->vi));
     vorbis_block_init(&(vorbis->vd), &(vorbis->vb));
@@ -148,7 +188,9 @@ int vorbis_enc_encode(vorbis_enc *vorbis, short *pcm_buf, char *enc_buf, int siz
 
 void vorbis_enc_close(vorbis_enc *vorbis)
 {
-    ogg_stream_clear(&(vorbis->os));
+    if (vorbis->os.body_data != NULL)
+        ogg_stream_clear(&(vorbis->os));
+    
     vorbis_block_clear(&(vorbis->vb));
     vorbis_dsp_clear(&(vorbis->vd));
     vorbis_comment_clear(&(vorbis->vc));

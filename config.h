@@ -7,14 +7,14 @@
 
 /* Define to 1 if you have the Mac OS X function CFLocaleCopyCurrent in the
    CoreFoundation framework. */
-#define HAVE_CFLOCALECOPYCURRENT 1
+/* #undef HAVE_CFLOCALECOPYCURRENT */
 
 /* Define to 1 if you have the Mac OS X function CFPreferencesCopyAppValue in
    the CoreFoundation framework. */
-#define HAVE_CFPREFERENCESCOPYAPPVALUE 1
+/* #undef HAVE_CFPREFERENCESCOPYAPPVALUE */
 
 /* Use dbus to get current tracks */
-/* #undef HAVE_DBUS */
+#define HAVE_DBUS 1
 
 /* Define if the GNU dcgettext() function is already present or preinstalled.
    */
@@ -33,16 +33,19 @@
 #define HAVE_GETTEXT 1
 
 /* Define if you have the iconv() function and it works. */
-#define HAVE_ICONV 1
+/* #undef HAVE_ICONV */
 
 /* Define to 1 if you have the <inttypes.h> header file. */
 #define HAVE_INTTYPES_H 1
 
 /* Define to 1 if you have the `crypto' library (-lcrypto). */
-/* #undef HAVE_LIBCRYPTO */
+#define HAVE_LIBCRYPTO 1
+
+/* Define to 1 if you have the `curl' library (-lcurl). */
+/* #undef HAVE_LIBCURL */
 
 /* Define to 1 if you have the `fdk-aac' library (-lfdk-aac). */
-/* #undef HAVE_LIBFDK_AAC */
+#define HAVE_LIBFDK_AAC 1
 
 /* Define to 1 if you have the `FLAC' library (-lFLAC). */
 #define HAVE_LIBFLAC 1
@@ -66,7 +69,7 @@
 #define HAVE_LIBSAMPLERATE 1
 
 /* Define to 1 if you have the `ssl' library (-lssl). */
-/* #undef HAVE_LIBSSL */
+#define HAVE_LIBSSL 1
 
 /* Define to 1 if you have the `vorbis' library (-lvorbis). */
 #define HAVE_LIBVORBIS 1
@@ -76,6 +79,9 @@
 
 /* Define to 1 if you have the <limits.h> header file. */
 #define HAVE_LIMITS_H 1
+
+/* Define to 1 if you have the <memory.h> header file. */
+#define HAVE_MEMORY_H 1
 
 /* Define to 1 if you have the `memset' function. */
 #define HAVE_MEMSET 1
@@ -87,7 +93,7 @@
 #define HAVE_NETINET_IN_H 1
 
 /* Define to 1 if you have the `pow' function. */
-#define HAVE_POW 1
+/* #undef HAVE_POW */
 
 /* Define to 1 if you have the `select' function. */
 #define HAVE_SELECT 1
@@ -100,9 +106,6 @@
 
 /* Define to 1 if you have the <stdint.h> header file. */
 #define HAVE_STDINT_H 1
-
-/* Define to 1 if you have the <stdio.h> header file. */
-#define HAVE_STDIO_H 1
 
 /* Define to 1 if you have the <stdlib.h> header file. */
 #define HAVE_STDLIB_H 1
@@ -141,7 +144,7 @@
 #define HAVE_UNISTD_H 1
 
 /* Define to 1 if you have the `X509_check_host' function. */
-/* #undef HAVE_X509_CHECK_HOST */
+#define HAVE_X509_CHECK_HOST 1
 
 /* Define to 1 if the system has the type `_Bool'. */
 #define HAVE__BOOL 1
@@ -156,7 +159,7 @@
 #define PACKAGE_NAME "butt"
 
 /* Define to the full name and version of this package. */
-#define PACKAGE_STRING "butt 0.1.31"
+#define PACKAGE_STRING "butt 0.1.32"
 
 /* Define to the one symbol short name of this package. */
 #define PACKAGE_TARNAME "butt"
@@ -165,15 +168,16 @@
 #define PACKAGE_URL ""
 
 /* Define to the version of this package. */
-#define PACKAGE_VERSION "0.1.31"
+#define PACKAGE_VERSION "0.1.32"
 
-/* Define to 1 if all of the C90 standard headers exist (not just the ones
-   required in a freestanding environment). This macro is provided for
-   backward compatibility; new code need not use it. */
+/* Define to 1 if you have the ANSI C header files. */
 #define STDC_HEADERS 1
 
 /* Version number of package */
-#define VERSION "0.1.31"
+#define VERSION "0.1.32"
+
+/* Enable support for Radio.co authentification */
+/* #undef WITH_RADIOCO */
 
 /* Define to `__inline__' or `__inline' if that's what the C compiler
    calls it, or to nothing if 'inline' is not supported under any name.  */

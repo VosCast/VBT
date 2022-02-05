@@ -32,4 +32,8 @@ int strinsrt(char **dest, char *insert, char *pos);
 // finds last occurrence of substring "needle" in string "haystack"
 char *strrstr(char *haystack, char *needle);
 
+// "Percent encode" reserved characters according to RFC3986 section 2.2 for use in URIs
+void strencoderfc3986(char **buf);
+
+
 #endif

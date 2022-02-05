@@ -57,6 +57,11 @@ struct opus_enc {
     int samplerate;
     int channel;
     int state;
+    int bitrate_mode;
+    int quality;
+    int audio_type;
+    int bandwidth;
+    
     
 	unsigned char *buffer;
     

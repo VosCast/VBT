@@ -36,6 +36,8 @@ int g_aac_lib_available = 0;
 int aac_enc_init(aac_enc *aac)
 {
     int rc;
+    int aot;
+    int vbr_mode = 0;
     char info_buf[256];
 
     if (g_aac_lib_available == 0)
@@ -44,26 +46,54 @@ int aac_enc_init(aac_enc *aac)
         print_info(info_buf, 1);
         return 1;
     }
-    
-    if(aac->overwrite_aot == 0)
+
+    switch(aac->profile) 
     {
-        if (aac->bitrate < 48)
-            aac->aot = 29;            // AAC+v2
-        else if (aac->bitrate >= 96)
-            aac->aot = 2;             // AAC-LC
-        else
-            aac->aot = 5;             // AAC+v1
+        case 0: // Auto select profile
+            if (aac->bitrate < 48) {
+                aot = 29;            // AAC+v2
+                vbr_mode = 1;
+            }
+            else if (aac->bitrate >= 96) {
+                aot = 2;             // AAC-LC
+                vbr_mode = 4;
+            }
+            else {
+                aot = 5;             // AAC+v1
+                vbr_mode = 2;
+            }
+            break;
+        case 1:
+            aot = 2;
+            vbr_mode = 4;
+            break;
+        case 2:
+            aot = 5;
+            vbr_mode = 2;
+            break;
+        case 3:
+            aot = 29;
+            vbr_mode = 1;
+            break;
+        default:
+            aot = 5;
+            vbr_mode = 2;
+            break;
     }
 
     
     aacEncOpen_butt(&aac->handle, 0, aac->channel);
-    aacEncoder_SetParam_butt(aac->handle, AACENC_AOT, aac->aot);
+    aacEncoder_SetParam_butt(aac->handle, AACENC_AOT, aot);
     aacEncoder_SetParam_butt(aac->handle, AACENC_SAMPLERATE, aac->samplerate);
     aacEncoder_SetParam_butt(aac->handle, AACENC_CHANNELMODE, aac->channel);
     aacEncoder_SetParam_butt(aac->handle, AACENC_CHANNELORDER, 1);
     aacEncoder_SetParam_butt(aac->handle, AACENC_BITRATE, aac->bitrate*1000);
     aacEncoder_SetParam_butt(aac->handle, AACENC_TRANSMUX, 2);    // taken from the example aac-enc.c
-    aacEncoder_SetParam_butt(aac->handle, AACENC_AFTERBURNER, 1); // enable after burner
+    aacEncoder_SetParam_butt(aac->handle, AACENC_AFTERBURNER, aac->afterburner); 
+
+    if (aac->bitrate_mode == 1) // VBR 
+        aacEncoder_SetParam_butt(aac->handle, AACENC_BITRATEMODE, vbr_mode); 
+
 
 
     if ((rc = aacEncEncode_butt(aac->handle, NULL, NULL, NULL, NULL)) != AACENC_OK)
@@ -74,6 +104,13 @@ int aac_enc_init(aac_enc *aac)
     }
 
     aacEncInfo_butt(aac->handle, &aac->info);
+
+
+    /*
+    printf("AAC profile: %d (aot: %d)\n", aac->profile, aot);
+    printf("AAC afterburner: %d\n", aac->afterburner);
+    printf("AAC bitrate_mode: %d (vbr: %d)\n\n", aac->bitrate_mode, vbr_mode);
+    */
 
     return 0;
 

@@ -15,6 +15,7 @@
 
 #include <string.h>
 #include <stdlib.h>
+#include <stdint.h>
 #include <time.h>
 
 #include "opus_encode.h"
@@ -156,8 +157,12 @@ int opus_header_to_packet(const OpusHeader *h, unsigned char *packet, int len)
 int opus_enc_init(opus_enc *opus)
 {
     int err;
-
+    int ret;
+    int bandwidth;
+    int audio_type;
+    
 	err = 0;
+    ret = OPUS_OK;
 	opus->header = (OpusHeader *)calloc(1, sizeof(OpusHeader));
 	opus->header_data = (unsigned char *)calloc (1, 1024);	
 	opus->tags = (unsigned char *)calloc (1, 1024);
@@ -167,41 +172,95 @@ int opus_enc_init(opus_enc *opus)
 	opus->header->gain = 0;
 	opus->header->channels = opus->channel;
 	
-	if ((opus->bitrate < 8000) || (opus->bitrate > 320000)) {
+	if ((opus->bitrate < 8000) || (opus->bitrate > 320000))
 		opus->bitrate = DEFAULT_OPUS_BITRATE;
-	}
+    
+    if (opus->audio_type == 0)
+        audio_type = OPUS_APPLICATION_AUDIO;
+    else
+        audio_type = OPUS_APPLICATION_VOIP;
+    
 
 	opus->header->input_sample_rate = 48000;
-	opus->encoder = opus_encoder_create (opus->header->input_sample_rate, opus->channel, OPUS_APPLICATION_AUDIO, &err);
-	opus_encoder_ctl (opus->encoder, OPUS_SET_BITRATE(opus->bitrate));
+	opus->encoder = opus_encoder_create (opus->header->input_sample_rate, opus->channel, audio_type, &err);
 	if (opus->encoder == NULL) {
 		printf("Opus Encoder creation error: %s\n", opus_strerror (err));
         fflush(stdout);
 		return 1;
 	}
+    
+    ret |= opus_encoder_ctl (opus->encoder, OPUS_SET_BITRATE(opus->bitrate));
+    
+    if (opus->bitrate_mode == 0) // CBR
+        ret |= opus_encoder_ctl(opus->encoder, OPUS_SET_VBR(0));
+    else
+        ret |= opus_encoder_ctl(opus->encoder, OPUS_SET_VBR(1));
+        
+    ret |= opus_encoder_ctl(opus->encoder, OPUS_SET_COMPLEXITY(10-opus->quality));
+        
+    switch (opus->bandwidth) {
+        case 0:
+            bandwidth = OPUS_BANDWIDTH_FULLBAND; // 20 kHz
+            break;
+        case 1:
+            bandwidth = OPUS_BANDWIDTH_SUPERWIDEBAND; // 12 kHz
+            break;
+        case 2:
+            bandwidth = OPUS_BANDWIDTH_WIDEBAND; // 8 kHz
+            break;
+        case 3:
+            bandwidth = OPUS_BANDWIDTH_MEDIUMBAND; // 6 kHz
+            break;
+        case 4:
+            bandwidth = OPUS_BANDWIDTH_NARROWBAND; // 4 kHz
+            break;
+        default:
+            bandwidth = OPUS_BANDWIDTH_FULLBAND;
+            break;
+    }
+    
+    ret |= opus_encoder_ctl(opus->encoder, OPUS_SET_MAX_BANDWIDTH(bandwidth));
+    
 	opus->last_bitrate = opus->bitrate;
-	opus_encoder_ctl (opus->encoder, OPUS_GET_LOOKAHEAD (&opus->header->preskip));
+    ret |= opus_encoder_ctl (opus->encoder, OPUS_GET_LOOKAHEAD (&opus->header->preskip));
+    
+    if (ret != OPUS_OK)
+        return 1;
+    
 	opus->header_size = opus_header_to_packet (opus->header, opus->header_data, 100);
 
 	opus->tags_size = 8 + 4 + strlen (opus_get_version_string ()) + 4 + 4 + strlen ("ENCODER=") + strlen (PACKAGE_STRING);
 	
 	memcpy (opus->tags, "OpusTags", 8);
-	
 	opus->tags[8] = strlen (opus_get_version_string ());
 	
 	memcpy (opus->tags + 12, opus_get_version_string (), strlen (opus_get_version_string ()));
-
 	opus->tags[12 + strlen (opus_get_version_string ())] = 1;
 
 	opus->tags[12 + strlen (opus_get_version_string ()) + 4] = strlen ("ENCODER=") + strlen (PACKAGE_STRING);
-	
 	memcpy (opus->tags + 12 + strlen (opus_get_version_string ()) + 4 + 4, "ENCODER=", strlen ("ENCODER="));
-	
 	memcpy (opus->tags + 12 + strlen (opus_get_version_string ()) + 4 + 4 + strlen ("ENCODER="),
 			PACKAGE_STRING,
 			strlen (PACKAGE_STRING));	
 
-	//printf("Opus Encoder Created\n");
+    int32_t val;
+
+    /*
+    opus_encoder_ctl (opus->encoder, OPUS_GET_BITRATE(&val));
+    printf("OPUS bitrate: %d\n", val);
+
+    opus_encoder_ctl (opus->encoder, OPUS_GET_COMPLEXITY(&val));
+    printf("OPUS QUALITY: %d\n", val);
+
+    opus_encoder_ctl (opus->encoder, OPUS_GET_APPLICATION(&val));
+    printf("OPUS audio_type: %d\n", opus->audio_type );
+
+    opus_encoder_ctl (opus->encoder, OPUS_GET_MAX_BANDWIDTH(&val));
+    printf("OPUS bandwidth: %d\n", val);
+
+    opus_encoder_ctl (opus->encoder, OPUS_GET_VBR(&val));
+    printf("OPUS VBR: %d\n\n", val);
+    */
 
     return 0;
 }

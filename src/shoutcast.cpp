@@ -242,11 +242,9 @@ int sc_update_song(char *song_name)
     }
 
     song_buf = strdup(song_name);
+    strencoderfc3986(&song_buf);
 
-    strrpl(&song_buf, (char*)" ", (char*)"%20", MODE_ALL);
-    strrpl(&song_buf, (char*)"&", (char*)"%26", MODE_ALL);
-
-    snprintf(send_buf, 500, "GET /admin.cgi?pass=%s&mode=updinfo&song=%s&url= HTTP/1.0\r\n"
+    snprintf(send_buf, sizeof(send_buf), "GET /admin.cgi?pass=%s&mode=updinfo&song=%s&url= HTTP/1.0\r\n"
                       "User-Agent: ShoutcastDSP (Mozilla Compatible)\r\n",
                       cfg.srv[cfg.selected_srv]->pwd,
                       song_buf

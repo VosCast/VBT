@@ -40,9 +40,9 @@ enum {
     RECV_TIMEOUT = 1000
 };
 
-
+void sock_init(void);
 int sock_connect(const char *addr, unsigned int port, int timout_ms);
-int sock_listen(void);
+int sock_listen(int port, int *listen_sock);
 int sock_setbufsize(int s, int send_size, int recv_size);
 int sock_isdisconnected(int s);
 int sock_send(int s, const char *buf, int len, int timout_ms);

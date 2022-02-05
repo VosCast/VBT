@@ -45,6 +45,9 @@
 #include "strfuncs.h"
 #include "fl_timer_funcs.h"
 #include "command.h"
+#ifdef WITH_RADIOCO
+ #include "radioco.h"
+#endif
 
 #if __APPLE__ && __MACH__
  #include "CurrentTrackOSX.h"
@@ -244,10 +247,10 @@ void is_connected_timer(void*)
     if(!connected)
     {
         print_info(_("ERROR: Connection lost\nreconnecting..."), 1);
-        if(cfg.srv[cfg.selected_srv]->type == SHOUTCAST)
-            sc_disconnect();
-        else
+        if(cfg.srv[cfg.selected_srv]->type == ICECAST)
             ic_disconnect();
+        else
+            sc_disconnect();
 
 	
 #ifdef WIN32
@@ -457,6 +460,63 @@ void record_signal_timer(void*)
         timer_reset(&signal_timer);
     
     Fl::repeat_timeout(1, &record_signal_timer);
+}
+
+void wait_for_radioco_timer(void*)
+{
+#ifdef WITH_RADIOCO
+    int error;
+    
+    if (radioco_get_state() == RADIOCO_STATE_WAITING)
+        goto exit;
+        
+    error = radioco_get_thread_error();
+    
+    if (error == RADIOCO_ERR_OK)
+    {
+        error = radioco_request_station_list();
+        if (error == RADIOCO_ERR_OK)
+        {
+            radioco_stations_t stations;
+            radioco_get_station_list(&stations);
+            int nitems = fl_g->browser_add_srv_station_list->nitems();
+            for (int i = 0; i < stations.num_of_stations; i++)
+            {
+                bool exists = false;
+                for (int j = 0; j < nitems; j++) {
+                    char *list_name = fl_g->browser_add_srv_station_list->text(j+1);
+                    if (!strcmp(list_name, stations.name[i])) {
+                        exists = true;
+                        break;
+                    }
+                }
+                
+                if (exists == false)
+                    fl_g->browser_add_srv_station_list->add(stations.name[i], 1);
+            }
+            fl_g->browser_add_srv_station_list->redraw();
+            return;
+        }
+        else
+        {
+            fl_alert("Error during radioco stations request (%d).\nPlease try again.", error);
+            return;
+        }
+    }
+    else if (error == RADIOCO_ERR_CANCELED)
+    {
+        return;
+    }
+    else
+    {
+        fl_alert("Error in radioco thread (%d).\nPlease try again.", error);
+        return;
+    }
+    
+    
+exit:
+    Fl::repeat_timeout(1, &wait_for_radioco_timer);
+#endif
 }
 
 void stream_silence_timer(void*)

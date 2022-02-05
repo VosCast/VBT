@@ -2,7 +2,7 @@
 # Process this file with autoconf to produce a configure script.
 
 AC_PREREQ([2.68])
-AC_INIT([butt], [0.1.31], [BUG-REPORT-ADDRESS])
+AC_INIT([butt], [0.1.32], [BUG-REPORT-ADDRESS])
 AM_INIT_AUTOMAKE([subdir-objects foreign])
 AC_CANONICAL_HOST
 
@@ -19,11 +19,24 @@ AC_PROG_OBJC
 
 LDFLAGS="$LDFLAGS -L/usr/local/lib"
 
+AC_ARG_WITH([radioco],
+    AS_HELP_STRING([--with-radioco], [Include support for Radio.co]))
+
 AC_ARG_ENABLE([aac],
     AS_HELP_STRING([--disable-aac], [Disable aac support]))
 
+
 AC_ARG_ENABLE([ssl],
     AS_HELP_STRING([--disable-ssl], [Disable SSL/TLS support]))
+
+
+AS_IF([test "x$with_radioco" = "xyes"], 
+      [
+       AC_DEFINE([WITH_RADIOCO], [1], [Enable support for Radio.co authentification])
+        AC_CHECK_LIB([curl], [curl_global_init], [],
+		    [AC_MSG_ERROR([**** Could not find libcurl     ****])]
+	        )
+       ])
 
 # Checks for libraries.
 AC_CHECK_LIB([ogg], [ogg_stream_init], [],
@@ -138,6 +151,8 @@ AM_CONDITIONAL([LINUX], [test "$build_linux" = "yes"])
 AM_CONDITIONAL([WINDOWS], [test "$build_windows" = "yes"])
 AM_CONDITIONAL([OSX], [test "$build_mac" = "yes"])
 AM_CONDITIONAL([FREEBSD], [test "$build_freebsd" = "yes"])
+AM_CONDITIONAL([WITH_RADIOCO],  [test "x$with_radioco" = "xyes"])
+
 
 AC_CHECK_PROG([FLTKCONFIG],[fltk-config], [fltk-config])
 

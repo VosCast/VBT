@@ -50,6 +50,7 @@ void flac_set_initial_song_title(flac_enc *flac, char *song_title);
 int flac_enc_reinit(flac_enc *flac);
 FLAC__uint64 flac_enc_get_bytes_written(void);
 void flac_enc_close(flac_enc *flac);
+void flac_enc_close_file(flac_enc *flac);
 
 
 #endif

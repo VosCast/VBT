@@ -26,6 +26,7 @@ void fill_cfg_widgets(void);
 void update_samplerates(void);
 void update_channel_lists(void);
 void print_info(const char* info, int info_type);
+void write_log(const char* message);
 void print_lcd(const char *text, int len, int home, int clear);
 void test_file_extension(void);
 void expand_string(char **str);
