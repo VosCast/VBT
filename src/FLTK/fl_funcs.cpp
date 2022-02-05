@@ -475,10 +475,12 @@ void print_info(const char* info, int info_type)
 
 void print_lcd(const char *text, int len, int home, int clear)
 {
+    /*
     if (!strcmp(text, _("idle")))
-        // fl_g->radio_logo->show();
+        fl_g->radio_logo->show();
     else
-        // fl_g->radio_logo->hide();
+        fl_g->radio_logo->hide();
+    */
     
     if(clear)
         fl_g->lcd->clear();
