@@ -3276,11 +3276,11 @@ supporting this\nproject.\n\nThank you!"));
         radio_add_srv_icecast->down_box(FL_ROUND_DOWN_BOX);
         radio_add_srv_icecast->callback((Fl_Callback*)cb_radio_add_srv_icecast);
       } // Fl_Round_Button* radio_add_srv_icecast
-      /* { radio_add_srv_radioco = new Fl_Round_Button(15, 157, 80, 12, gettext("Radio.co"));
+      { radio_add_srv_radioco = new Fl_Round_Button(15, 157, 80, 12, gettext("Radio.co"));
         radio_add_srv_radioco->type(102);
         radio_add_srv_radioco->down_box(FL_ROUND_DOWN_BOX);
         radio_add_srv_radioco->callback((Fl_Callback*)cb_radio_add_srv_radioco);
-      }*/ // Fl_Round_Button* radio_add_srv_radioco
+      } // Fl_Round_Button* radio_add_srv_radioco
       o->end();
     } // Fl_Group* o
     { Fl_Button* o = new Fl_Button(10, 340, 74, 25, gettext("&Cancel"));

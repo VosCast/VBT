@@ -82,7 +82,7 @@ class flgui {open
         xywh {390 173 30 16} labelsize 10
       }
       Fl_Button radio_co_logo {
-        callback {fl_open_uri("https://voscat.com");}
+        callback {fl_open_uri("https://voscast.com");}
         // image {../xpm/radio_co_badge.png} xywh {237 29 128 61} box NO_BOX
       }
     }
