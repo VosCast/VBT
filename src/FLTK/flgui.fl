@@ -81,6 +81,10 @@ class flgui {open
         label {+24 dB}
         xywh {390 173 30 16} labelsize 10
       }
+      Fl_Button radio_logo {
+        callback {fl_open_uri("https://voscast.com");}
+        // image {../xpm/radio_badge.png} xywh {237 29 128 61} box NO_BOX
+      }
     }
     Fl_Window window_cfg {
       label {butt settings}

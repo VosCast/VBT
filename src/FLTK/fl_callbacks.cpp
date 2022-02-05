@@ -81,6 +81,8 @@ void *connect_thread(void *data)
         {
             fl_g->lcd->clear();
             fl_g->lcd->print((const uchar*)_("idle"), strlen(_("idle")));
+            // fl_g->radio_logo->show();
+            // fl_g->radio_logo->redraw();
             break;
         }
         if (ret == IC_ASK)
@@ -93,6 +95,10 @@ void *connect_thread(void *data)
             {
                 fl_g->lcd->clear();
                 fl_g->lcd->print((const uchar*)_("idle"), strlen(_("idle")));
+                
+                
+                // fl_g->radio_logo->show();
+                // fl_g->radio_logo->redraw();
                 ask_user_reset();
                 break;
             }
@@ -673,6 +679,8 @@ void button_disconnect_cb(void)
     {
         fl_g->lcd->clear();
         fl_g->lcd->print((const uchar*)_("idle"), strlen(_("idle")));
+        // fl_g->radio_logo->show();
+        // fl_g->radio_logo->redraw();
     }
 
     // We are not trying to connect anymore
@@ -755,6 +763,8 @@ bool stop_recording(bool ask)
         
         fl_g->lcd->clear();
         fl_g->lcd->print((const uchar*)_("idle"), strlen(_("idle")));
+        // fl_g->radio_logo->show();
+        // fl_g->radio_logo->redraw();
         Fl::remove_timeout(&display_info_timer);
     }
     else
@@ -3097,6 +3107,7 @@ void button_gui_bg_color_cb(void)
     fl_g->button_gui_bg_color->color(cfg.main.bg_color, fl_lighter((Fl_Color)cfg.main.bg_color));
     fl_g->button_gui_bg_color->redraw();
     fl_g->lcd->redraw();
+    // fl_g->radio_logo->redraw();
 }
 
 void button_gui_text_color_cb(void)
@@ -3119,6 +3130,7 @@ void button_gui_text_color_cb(void)
     fl_g->button_gui_text_color->color(cfg.main.txt_color, fl_lighter((Fl_Color)cfg.main.txt_color));
     fl_g->button_gui_text_color->redraw();
     fl_g->lcd->redraw();
+    // fl_g->radio_logo->redraw();
 }
 
 void choice_gui_language_cb(void)
@@ -3156,6 +3168,7 @@ void check_cfg_auto_start_rec_cb(void)
 {
     cfg.rec.start_rec = fl_g->check_cfg_auto_start_rec->value();
     fl_g->lcd->redraw();  //update the little record icon
+    // fl_g->radio_logo->redraw();
 }
 void check_cfg_auto_stop_rec_cb(void)
 {

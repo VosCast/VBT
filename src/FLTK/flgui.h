@@ -74,6 +74,11 @@ private:
   inline void cb_slider_gain_i(Fl_My_Value_Slider*, void*);
   static void cb_slider_gain(Fl_My_Value_Slider*, void*);
 public:
+  Fl_Button *radio_logo;
+private:
+  inline void cb_radio_logo_i(Fl_Button*, void*);
+  static void cb_radio_logo(Fl_Button*, void*);
+public:
   Fl_My_Double_Window *window_cfg;
 private:
   inline void cb_window_cfg_i(Fl_My_Double_Window*, void*);

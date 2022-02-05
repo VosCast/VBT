@@ -59,6 +59,20 @@ void flgui::cb_slider_gain(Fl_My_Value_Slider* o, void* v) {
   ((flgui*)(o->parent()->user_data()))->cb_slider_gain_i(o,v);
 }
 
+void flgui::cb_radio_logo_i(Fl_Button*, void*) {
+  fl_open_uri("https://voscast.com");
+}
+void flgui::cb_radio_logo(Fl_Button* o, void* v) {
+  ((flgui*)(o->parent()->user_data()))->cb_radio_logo_i(o,v);
+}
+
+#include <FL/Fl_Image.H>
+static const unsigned char idata_radio_badge[] = {};
+static Fl_Image *image_radio_badge() {
+  static Fl_Image *image = new Fl_RGB_Image(idata_radio_badge, 124, 61, 4, 0);
+  return image;
+}
+
 void flgui::cb_window_cfg_i(Fl_My_Double_Window*, void*) {
   if(window_cfg->shown())
 {
@@ -1338,6 +1352,11 @@ flgui::flgui() {
     { Fl_Box* o = new Fl_Box(390, 173, 30, 16, gettext("+24 dB"));
       o->labelsize(10);
     } // Fl_Box* o
+    /*{ radio_logo = new Fl_Button(237, 29, 128, 61);
+      radio_logo->box(FL_NO_BOX);
+      radio_logo->image( image_radio_badge() );
+      radio_logo->callback((Fl_Callback*)cb_radio_logo);
+    }*/ // Fl_Button* radio_logo
     window_main->size_range(430, 155, 430); window_main->is_main_window = true;
     window_main->end();
   } // Fl_My_Double_Window* window_main
