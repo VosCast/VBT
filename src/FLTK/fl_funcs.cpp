@@ -166,7 +166,8 @@ void fill_cfg_widgets(void)
     // Fill stream section
     fl_g->check_song_update_active->value(cfg.main.song_update);
     fl_g->check_read_last_line->value(cfg.main.read_last_line);
-
+    fl_g->choice_cfg_song_delay->value(cfg.main.song_delay/2);
+    
     fl_g->input_cfg_song_file->value(cfg.main.song_path);
     fl_g->input_cfg_signal->value(cfg.main.signal_threshold);
     fl_g->input_cfg_silence->value(cfg.main.silence_threshold);
@@ -287,6 +288,21 @@ void fill_cfg_widgets(void)
     
     slider_equalizer5_cb(cfg.dsp.gain5);
     fl_g->equalizerSlider5->value(cfg.dsp.gain5);
+    
+    slider_equalizer6_cb(cfg.dsp.gain6);
+    fl_g->equalizerSlider6->value(cfg.dsp.gain6);
+    
+    slider_equalizer7_cb(cfg.dsp.gain7);
+    fl_g->equalizerSlider7->value(cfg.dsp.gain7);
+    
+    slider_equalizer8_cb(cfg.dsp.gain8);
+    fl_g->equalizerSlider8->value(cfg.dsp.gain8);
+    
+    slider_equalizer9_cb(cfg.dsp.gain9);
+    fl_g->equalizerSlider9->value(cfg.dsp.gain9);
+    
+    slider_equalizer10_cb(cfg.dsp.gain10);
+    fl_g->equalizerSlider10->value(cfg.dsp.gain10);
 	
 	fl_g->check_activate_drc->value(cfg.dsp.compressor);
     fl_g->check_aggressive_mode->value(cfg.dsp.aggressive_mode);
@@ -307,10 +323,8 @@ void fill_cfg_widgets(void)
     fl_g->makeupSlider->value(cfg.dsp.makeup_gain);
 	
     //fill the GUI section
-    fl_g->button_gui_bg_color->color(cfg.main.bg_color,
-            fl_lighter((Fl_Color)cfg.main.bg_color));
-    fl_g->button_gui_text_color->color(cfg.main.txt_color,
-            fl_lighter((Fl_Color)cfg.main.txt_color));
+    fl_g->button_gui_bg_color->color(cfg.main.bg_color, fl_lighter((Fl_Color)cfg.main.bg_color));
+    fl_g->button_gui_text_color->color(cfg.main.txt_color,fl_lighter((Fl_Color)cfg.main.txt_color));
     fl_g->check_gui_attach->value(cfg.gui.attach);
     fl_g->check_gui_ontop->value(cfg.gui.ontop);
     if(cfg.gui.ontop)
@@ -435,15 +449,22 @@ void print_info(const char* info, int info_type)
 
             strrpl(&infotxt, (char*)":,", (char*)": ", MODE_ALL);
             strrpl(&infotxt, (char*)"\t", (char*)"", MODE_ALL);
-
-            len = strlen(infotxt)-1;
-            // remove trailing commas and spaces 
-            while (infotxt[len] == ',' || infotxt[len] == ' ')
+            
+            
+            len = int(strlen(infotxt))-1;
+            
+            if (len > 0)
             {
-                infotxt[len--] = '\0';
+                // remove trailing commas and spaces
+                while (infotxt[len] == ',' || infotxt[len] == ' ')
+                {
+                    infotxt[len--] = '\0';
+                    if (len < 0)
+                        break;
+                }
+                
+                fprintf(log_fd, "%s %s\n", logtimestamp, infotxt);
             }
-
-            fprintf(log_fd, "%s %s\n", logtimestamp, infotxt);
             fclose(log_fd);
         }
 
@@ -517,16 +538,31 @@ void init_main_gui_and_audio(void)
 {
     if(cfg.gui.remember_pos)
     {
-        int x, y, w, h;
-        x = cfg.gui.x_pos;
-        y = cfg.gui.y_pos;
-        w = fl_g->window_main->w();
-        h = fl_g->window_main->h();
+        int butt_x, butt_y, butt_w, butt_h;
+
+        butt_x = cfg.gui.x_pos;
+        butt_y = cfg.gui.y_pos;
+        butt_w = fl_g->window_main->w();
+        butt_h = fl_g->window_main->h();
+                
+        int sx, sy, sw, sh;
+        int is_visible = 0;
+        for (int i = 0; i < Fl::screen_count(); i++)
+        {
+            Fl::screen_xywh(sx, sy, sw, sh, i);
+            if ((butt_x >= sx-butt_w+50) && (butt_x+50 < (sx+sw)) && (butt_y >= sy-butt_h+50) && (butt_y+50 < (sy+sh))) {
+                is_visible = 1;
+            }
+        }
         
         // Move butt window to the saved position only if at least 50 pixel of butt are visible on the screen
-        if( (x+w > 50) && (x+50 < Fl::w()) && (y+h > 50) && (y+50 < Fl::h()) )
+        if (is_visible)
             fl_g->window_main->position(cfg.gui.x_pos, cfg.gui.y_pos);
+        
+                
+       // if( (butt_x+butt_w > 50) && (butt_x+50 < total_screen_width) && (butt_y+butt_h > 50) && (butt_y+50 < total_screen_height) )
     }
+    
     
     fl_g->slider_gain->value(util_factor_to_db(cfg.main.gain));
     fl_g->window_main->redraw();

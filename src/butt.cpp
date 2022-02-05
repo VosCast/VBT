@@ -601,13 +601,17 @@ int main(int argc, char *argv[])
         int rc;
         char uri[100];
         char *new_version;
-        int ret = update_check_for_new_version();
+        int ret = UPDATE_UP_TO_DATE; //update_check_for_new_version();
 
         if (ret == UPDATE_NEW_VERSION)
         {
             new_version = update_get_version();
-            rc = fl_choice(_("New version available: %s\nYou have version %s"), _("Cancel"), _("Get new version"), NULL, new_version, VERSION);
-            if(rc == 1)
+            rc = fl_choice(_("New version available: %s\nYou have version %s"), _("Don't ask again"), _("Cancel"), _("Get new version"), new_version, VERSION);
+            if(rc == 0)
+            {
+                cfg.main.check_for_update = 0;
+            }
+            if(rc == 2)
             {
                 snprintf(uri, sizeof(uri)-1, "https://danielnoethen.de/butt/index.html#_download");
                 fl_open_uri(uri);

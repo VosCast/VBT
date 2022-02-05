@@ -23,7 +23,7 @@
 
 #include "lame_encode.h"
 
-#define SND_MAX_DEVICES (100)
+#define SND_MAX_DEVICES (256)
 
 typedef struct
 {

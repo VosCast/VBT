@@ -2,7 +2,7 @@
 execute as "asciidoctor manual.txt"
 ////
 
-butt (0.1.30) Manual 
+butt (0.1.31) Manual 
 ====================
 :author: Daniel Nöthen
 :doctype: book 
@@ -90,7 +90,7 @@ Install AAC libraries
 ---------------------
 .Windows:
 1. Download libfdk-aac-2.dll from
-https://sourceforge.net/projects/butt/files/butt/butt-0.1.30/AAC/libfdk-aac-2.dll/download[here]
+https://sourceforge.net/projects/butt/files/butt/butt-0.1.31/AAC/libfdk-aac-2.dll/download[here]
 2. Go to the installation directory of butt by typing %LOCALAPPDATA%\butt into the file explorer 
 3. Copy libfdk-aac-2.dll into the installation directory of butt
 4. Restart butt
@@ -98,7 +98,7 @@ https://sourceforge.net/projects/butt/files/butt/butt-0.1.30/AAC/libfdk-aac-2.dl
 
 .MacOS: 
 1. Download libfdk-aac.2.dylib from 
-https://sourceforge.net/projects/butt/files/butt/butt-0.1.30/AAC/libfdk-aac.2.dylib/download[here] +
+https://sourceforge.net/projects/butt/files/butt/butt-0.1.31/AAC/libfdk-aac.2.dylib/download[here] +
 2. Open your Applications folder +
 3. Right click on butt.app +
 4. Select Show Package Contents +
@@ -199,6 +199,12 @@ song name from an audio player to butt. +
 Supported audio players: +
 Linux: Rhythmbox, Banshee, Clementine, Cantana, Spotify +
 MacOS: iTunes/Music, Vox, Spotify
+
+As broadcasting with Icecast and Shoutcast is not realtime, the +
+listener receives the audio content with a few seconds delay. +
+This delay introduces an offset between the current song name and +
+the actual song that is playing. To prevent confusion on the listener +
+side you can add a delay to the automatic song update. 
 
 In case you want to add a prefix and/or a suffix to your song name +
 you can do that by entering the desired text into the corresponding +
@@ -346,8 +352,9 @@ If you want to split the recording now, just click the '[Split now]' button.
 
 DSP
 ---
-.6-Band Equalizer:
-The equalizer allows you to change the gain of certain freuqncy bands from -15 dB to 15 dB. +
+.10-Band Equalizer:
+The equalizer allows you to change the gain of certain frequency bands from -15 dB to 15 dB. +
+The equalizer uses a Q of 2 on every frequency band. 
 
 .Dynamic Range Compressor:
 Dynamic range compression is used to reduce the difference between +

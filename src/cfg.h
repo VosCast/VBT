@@ -105,6 +105,7 @@ typedef struct
         FILE *song_fd;
         char *song_prefix;
         char *song_suffix;
+        int song_delay;
         int song_update;   //1 = song info will be read from file
         int read_last_line;
         int app_update;
@@ -179,7 +180,7 @@ typedef struct
     struct
     {
         int equalizer;
-        double gain1, gain2, gain3, gain4, gain5;
+        double gain1, gain2, gain3, gain4, gain5, gain6, gain7, gain8, gain9, gain10;
 		int compressor;
         int aggressive_mode;
 		double threshold, ratio, attack, release, makeup_gain;

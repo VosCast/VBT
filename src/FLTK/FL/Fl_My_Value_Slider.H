@@ -45,6 +45,7 @@ public:
         fl_color(FL_BLACK);
         fl_font(labelfont(), labelsize());
         fl_draw(tip, 3, 3, w()-6, h()-6, Fl_Align(FL_ALIGN_LEFT|FL_ALIGN_WRAP));
+        show();
     }
     void value(char* t) {
         strncpy(tip, t, sizeof(tip)-1);

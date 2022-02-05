@@ -1,3 +1,9 @@
+Version 0.1.31 (2021-07-12)
+---------------------------
+* A delay can now be added to the automatic song title update
+* Increased equalizer from 5 to 10 frequency bands
+* Fixed positioning issues on multi screen setups
+* Maximum number of supported audio devices has been increased from 100 to 256
 
 Version 0.1.30 (2021-05-14)
 ---------------------------
@@ -8,7 +14,7 @@ Version 0.1.30 (2021-05-14)
 * You can now rescan for new audio devices manually (no butt restart needed anymore after plugging in a new audio device)
 * Holding the shift key during butt startup allows you to start with a fresh configuration file
 * Updated Portaudio to version v19.7.0
-* Windows: Added support for WINAPI audio driver
+* Windows: Added support for WASAPI audio driver
 * MacOS: Updated FLTK to version 1.3.6 
 * MacOS: Native support for Apple Silicon (arm64) 
 

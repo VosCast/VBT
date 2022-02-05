@@ -1,5 +1,5 @@
 # data file for the Fltk User Interface Designer (fluid)
-version 1.0304
+version 1.0305
 i18n_type 1
 i18n_include "../../gettext.h"
 i18n_function gettext
@@ -15,7 +15,7 @@ class flgui {open
   } {
     Fl_Window window_main {
       callback {window_main_close_cb();} open
-      xywh {815 355 430 380} type Double resizable
+      xywh {655 156 430 380} type Double resizable
       code0 {\#include "FL/Fl_My_Double_Window.H"}
       code1 {\#include <stdlib.h> 
 \#include "config.h"}
@@ -26,7 +26,7 @@ class flgui {open
     } {
       Fl_Box lcd {
         callback {ILM216_cb();}
-        tooltip {press left mouse to toggle lcd info} xywh {10 9 410 95} box ENGRAVED_BOX color 15 selection_color 41
+        tooltip {press left mouse to toggle lcd info} xywh {10 12 410 95} box ENGRAVED_BOX color 32 selection_color 41
         code0 {\#include "Fl_ILM216.h"}
         code1 {\#include "fl_callbacks.h"}
         code3 {\#include "cfg.h"}
@@ -35,25 +35,25 @@ class flgui {open
       Fl_Button button_connect {
         label {@> }
         callback {button_connect_cb();}
-        tooltip {connect to server} xywh {102 121 30 30} box ENGRAVED_BOX down_box ENGRAVED_BOX shortcut 0x40063 color 48 selection_color 40 labelfont 1 labelcolor 7
+        tooltip {connect to server} xywh {102 124 30 30} box ENGRAVED_BOX down_box ENGRAVED_BOX shortcut 0x40063 color 48 selection_color 40 labelfont 1 labelcolor 7
       }
       Fl_Button button_disconnect {
         label {@-3square}
         callback {button_disconnect_cb();}
-        private tooltip {disconnect from server} xywh {62 121 30 30} box ENGRAVED_BOX down_box ENGRAVED_BOX shortcut 0x40064 color 48 selection_color 40 labelfont 1 labelcolor 7
+        private tooltip {disconnect from server} xywh {62 124 30 30} box ENGRAVED_BOX down_box ENGRAVED_BOX shortcut 0x40064 color 48 selection_color 40 labelfont 1 labelcolor 7
       }
       Fl_Button button_record {
         label {@-3circle}
         callback {button_record_cb();}
-        private tooltip {start/stop recording} xywh {10 121 30 30} box ENGRAVED_BOX down_box ENGRAVED_BOX shortcut 0x40072 color 48 selection_color 40 labelfont 1 labelcolor 1
+        private tooltip {start/stop recording} xywh {10 124 30 30} box ENGRAVED_BOX down_box ENGRAVED_BOX shortcut 0x40072 color 48 selection_color 40 labelfont 1 labelcolor 1
       }
       Fl_Button button_info {
         label {Show log}
         callback {button_info_cb();}
-        tooltip {show/hide info window} xywh {340 143 80 15} box ENGRAVED_BOX shortcut 0x40076 color 48 labelsize 10
+        tooltip {show/hide info window} xywh {340 146 80 15} box ENGRAVED_BOX shortcut 0x40076 color 48 labelsize 10
       }
       Fl_Group vumeter {open
-        xywh {156 115 174 43} box BORDER_BOX
+        xywh {156 118 174 43} box BORDER_BOX
         code0 {\#include "Fl_vu_meter.h"}
         class VUMeter
       } {}
@@ -63,23 +63,23 @@ class flgui {open
       Fl_Button button_cfg {
         label Settings
         callback {button_cfg_cb();}
-        tooltip {show/hide config window} xywh {340 114 80 22} box ENGRAVED_BOX shortcut 0x40066 color 48 labelsize 11
+        tooltip {show/hide config window} xywh {340 117 80 22} box ENGRAVED_BOX shortcut 0x40066 color 48 labelsize 11
       }
       Fl_Box {} {
         label {-24 dB}
-        xywh {10 167 30 16} labelsize 10
+        xywh {10 173 30 16} labelsize 10
       }
       Fl_Slider slider_gain {
         label Gain
         callback {slider_gain_cb();}
-        tooltip Gain xywh {50 168 335 15} type {Horz Knob} box NO_BOX labeltype NO_LABEL minimum -24 maximum 24 step 0.1
+        tooltip Gain xywh {50 174 335 15} type {Horz Knob} box NO_BOX labeltype NO_LABEL align 0 minimum -24 maximum 24 step 0.1
         code0 {\#include "FL/Fl_My_Value_Slider.H"}
         code1 {slider_gain->default_value = 0.0;}
         class Fl_My_Value_Slider
       }
       Fl_Box {} {
         label {+24 dB}
-        xywh {390 167 30 16} labelsize 10
+        xywh {390 173 30 16} labelsize 10
       }
     }
     Fl_Window window_cfg {
@@ -89,17 +89,17 @@ class flgui {open
     window_cfg->hide();
     Fl::remove_timeout(&cfg_win_pos_timer);
 }} open
-      xywh {538 636 400 550} type Double
+      xywh {481 609 400 600} type Double
       code0 {\#include "FL/Fl_My_Double_Window.H"}
       code1 {\#include "fl_timer_funcs.h"}
-      class Fl_My_Double_Window size_range {400 550 400 550} visible
+      class Fl_My_Double_Window size_range {400 600 400 600} visible
     } {
       Fl_Tabs Settings {open
-        xywh {0 0 406 560} selection_color 41
+        xywh {0 0 406 600} selection_color 41
       } {
         Fl_Group {} {
           label Main open
-          xywh {0 20 400 530} when 6
+          xywh {0 20 400 580} when 6
         } {
           Fl_Group {} {
             label {Server Settings} open
@@ -222,7 +222,7 @@ class flgui {open
         }
         Fl_Group {} {
           label Audio open
-          xywh {0 20 400 530} hide
+          xywh {0 20 400 580} hide
         } {
           Fl_Group {} {
             label {Main Audio Settings} open
@@ -264,7 +264,7 @@ class flgui {open
               xywh {110 175 55 20} down_box BORDER_BOX align 5
             } {}
             Fl_Group {} {
-              label {Remember Device by} open
+              label {Remember Device by}
               xywh {191 175 162 25} box ENGRAVED_FRAME align 5
             } {
               Fl_Round_Button radio_cfg_ID {
@@ -402,7 +402,7 @@ class flgui {open
             xywh {37 339 326 60} box ENGRAVED_FRAME align 5
           } {
             Fl_Choice choice_rec_codec {
-              label Codec open
+              label Codec
               tooltip {Select recording codec} xywh {45 366 125 20} box ENGRAVED_BOX down_box BORDER_BOX align 5
             } {
               MenuItem {} {
@@ -585,12 +585,12 @@ else
           }
         }
         Fl_Group {} {
-          label Stream
-          xywh {0 20 406 530} hide
+          label Stream open
+          xywh {0 20 406 580} hide
         } {
           Fl_Group {} {
-            label {Update song name from file} open
-            xywh {37 55 326 65} box ENGRAVED_FRAME align 5
+            label {Update song name from file}
+            xywh {37 55 329 65} box ENGRAVED_FRAME align 5
           } {
             Fl_Input input_cfg_song_file {
               callback {input_cfg_song_file_cb();}
@@ -613,108 +613,162 @@ else
             }
           }
           Fl_Group {} {
-            label {Update song name manually}
-            xywh {37 236 326 40} box ENGRAVED_FRAME align 5
+            label {Update song name manually} open
+            xywh {37 232 329 40} box ENGRAVED_FRAME align 5
           } {
             Fl_Input input_cfg_song {
               callback {input_cfg_song_cb();}
-              tooltip {Current song name} xywh {42 244 283 25} align 5 when 1
+              tooltip {Current song name} xywh {42 240 283 25} align 5 when 1
               code0 {this->input_cfg_song->maximum_size(500);}
             }
             Fl_Button {} {
               label OK
               callback {button_cfg_song_go_cb();}
-              tooltip {Send current song name to the server} xywh {330 244 25 25} box ENGRAVED_BOX shortcut 0xff0d labelsize 12
+              tooltip {Send current song name to the server} xywh {330 240 25 25} box ENGRAVED_BOX shortcut 0xff0d labelsize 12
             }
           }
           Fl_Group {} {
-            label {Update song name from application} open
-            xywh {37 144 326 65} box ENGRAVED_BOX align 5
+            label {Update song name from application}
+            xywh {37 145 329 65} box ENGRAVED_BOX align 5
           } {
             Fl_Check_Button check_cfg_use_app {
               label Activate
               callback {check_cfg_use_app_cb();}
-              xywh {40 174 85 33} down_box DOWN_BOX
+              xywh {40 175 85 33} down_box DOWN_BOX
             }
             Fl_Choice choice_cfg_app {
               callback {choice_cfg_app_cb();} open
-              tooltip {Changes the song through an running application} xywh {42 155 203 20} down_box BORDER_BOX
+              tooltip {Changes the song through an running application} xywh {42 156 203 20} down_box BORDER_BOX
             } {}
             Fl_Group {} {open
-              xywh {255 152 105 40}
+              xywh {255 153 105 40}
             } {
               Fl_Round_Button radio_cfg_title_artist {
                 label {Title - Artist}
                 callback {radio_cfg_title_artist_cb();}
-                xywh {255 152 105 20} type Radio down_box ROUND_DOWN_BOX
+                xywh {255 153 105 20} type Radio down_box ROUND_DOWN_BOX
               }
               Fl_Round_Button radio_cfg_artist_title {
                 label {Artist - Title}
                 callback {radio_cfg_artist_title_cb();}
-                xywh {255 177 105 15} type Radio down_box ROUND_DOWN_BOX
+                xywh {255 178 105 15} type Radio down_box ROUND_DOWN_BOX
               }
             }
           }
           Fl_Group {} {
-            label Streaming open
-            xywh {37 418 328 112} box ENGRAVED_FRAME align 5
+            label Streaming
+            xywh {37 472 329 112} box ENGRAVED_FRAME align 5
           } {
             Fl_Check_Button check_cfg_connect {
               label {Start streaming after launch}
               callback {check_cfg_connect_cb();}
-              tooltip {Connect automatically to a server after launch} xywh {42 483 205 18} down_box DOWN_BOX
+              tooltip {Connect automatically to a server after launch} xywh {42 537 205 18} down_box DOWN_BOX
             }
             Fl_Value_Input input_cfg_silence {
               callback {input_cfg_silence_cb();}
-              xywh {238 453 42 19}
+              xywh {238 507 42 19}
             }
             Fl_Value_Input input_cfg_signal {
               callback {input_cfg_signal_cb();}
-              xywh {238 429 42 19}
+              xywh {238 483 42 19}
             }
             Fl_Box {} {
               label seconds
-              xywh {280 429 62 16} align 20
+              xywh {280 483 62 16} align 20
             }
             Fl_Box {} {
               label seconds
-              xywh {280 453 62 16} align 20
+              xywh {280 507 62 16} align 20
             }
             Fl_Box {} {
               label {Start if signal is present for}
-              xywh {42 429 175 16} align 20
+              xywh {42 483 175 16} align 20
             }
             Fl_Box {} {
               label {Stop if signal is absent for}
-              xywh {42 453 175 16} align 20
+              xywh {42 507 175 16} align 20
             }
             Fl_Check_Button check_cfg_force_reconnecting {
               label {Force reconnecting}
               callback {check_cfg_force_reconnecting_cb();}
-              tooltip {If enabled butt keeps reconnecting regardless of the error message} xywh {42 505 205 18} down_box DOWN_BOX
+              tooltip {If enabled butt keeps reconnecting regardless of the error message} xywh {42 559 205 18} down_box DOWN_BOX
             }
           }
           Fl_Group {} {
             label {Extend song name} open
-            xywh {35 302 330 90} box ENGRAVED_FRAME align 5
+            xywh {37 356 329 90} box ENGRAVED_FRAME align 5
           } {
             Fl_Input input_cfg_song_prefix {
               label {Prefix:}
               callback {input_cfg_song_prefix_cb();}
-              xywh {88 318 255 24} when 1
+              xywh {90 372 255 24} when 1
               code0 {this->input_cfg_song_prefix->maximum_size(500);}
             }
             Fl_Input input_cfg_song_suffix {
               label {Suffix:}
               callback {input_cfg_song_suffix_cb();}
-              xywh {88 353 255 24} when 1
+              xywh {90 407 255 24} when 1
               code0 {this->input_cfg_song_suffix->maximum_size(500);}
+            }
+          }
+          Fl_Group {} {
+            label {Update song name delay} open
+            xywh {37 295 329 32} box ENGRAVED_FRAME align 5
+          } {
+            Fl_Choice choice_cfg_song_delay {
+              callback {choice_cfg_song_delay_cb();} open
+              tooltip {Introduces a delay until the song name is actually updated} xywh {42 301 153 20} down_box BORDER_BOX align 8
+            } {
+              MenuItem {} {
+                label {0 seconds}
+                xywh {0 0 31 20}
+              }
+              MenuItem {} {
+                label {2 seconds}
+                xywh {10 10 31 20}
+              }
+              MenuItem {} {
+                label {4 seconds}
+                xywh {20 20 31 20}
+              }
+              MenuItem {} {
+                label {6 seconds}
+                xywh {30 30 31 20}
+              }
+              MenuItem {} {
+                label {8 seconds}
+                xywh {40 40 31 20}
+              }
+              MenuItem {} {
+                label {10 seconds}
+                xywh {50 50 31 20}
+              }
+              MenuItem {} {
+                label {12 seconds}
+                xywh {60 60 31 20}
+              }
+              MenuItem {} {
+                label {14 seconds}
+                xywh {70 70 31 20}
+              }
+              MenuItem {} {
+                label {16 seconds}
+                xywh {80 80 31 20}
+              }
+              MenuItem {} {
+                label {18 seconds}
+                xywh {100 100 31 20}
+              }
+              MenuItem {} {
+                label {20 seconds}
+                xywh {90 90 31 20}
+              }
             }
           }
         }
         Fl_Group {} {
-          label Record open
-          xywh {0 20 400 530} hide
+          label Record
+          xywh {0 20 400 580} hide
         } {
           Fl_Input input_rec_filename {
             label {Record File Name:}
@@ -803,7 +857,7 @@ else
         }
         Fl_Group {} {
           label TLS
-          xywh {0 20 400 530} hide
+          xywh {0 20 400 580} hide
         } {
           Fl_Group {} {
             label {SSL/TLS} open
@@ -838,72 +892,72 @@ CA, you can leave these fields blank.}
           }
         }
         Fl_Group {} {
-          label DSP open
-          xywh {0 20 400 530} hide
+          label DSP
+          xywh {0 20 400 580} hide
         } {
           Fl_Group {} {
             label Equalizer open
-            xywh {36 55 327 210} box ENGRAVED_FRAME align 5
+            xywh {15 55 371 225} box ENGRAVED_FRAME align 5
           } {
             Fl_Check_Button check_activate_eq {
               label Activate
               callback {check_activate_eq_cb();}
-              xywh {40 57 79 25} down_box DOWN_BOX
+              xywh {20 57 79 25} down_box DOWN_BOX
             }
             Fl_Slider equalizerSlider1 {
-              label 100Hz
+              label 32Hz
               callback {slider_equalizer1_cb(o->value());}
-              xywh {86 97 15 150} type {Vert Knob} box NO_BOX labelsize 11 minimum 15 maximum -15 step 0.1
+              xywh {38 105 15 150} type {Vert Knob} box NO_BOX labelsize 11 minimum 15 maximum -15 step 0.1 value -0.3
               code0 {equalizerSlider1->default_value = 0.0;}
               class Fl_My_Value_Slider
             }
             Fl_Slider equalizerSlider2 {
-              label 350Hz
+              label 64Hz
               callback {slider_equalizer2_cb(o->value());}
-              xywh {136 97 15 150} type {Vert Knob} box NO_BOX labelsize 11 minimum 15 maximum -15 step 0.1
+              xywh {73 105 15 150} type {Vert Knob} box NO_BOX labelsize 11 minimum 15 maximum -15 step 0.1
               code0 {equalizerSlider2->default_value = 0.0;}
               class Fl_My_Value_Slider
             }
             Fl_Slider equalizerSlider3 {
-              label 1kHz
+              label 125Hz
               callback {slider_equalizer3_cb(o->value());}
-              xywh {186 97 15 150} type {Vert Knob} box NO_BOX labelsize 11 minimum 15 maximum -15 step 0.1
+              xywh {108 105 15 150} type {Vert Knob} box NO_BOX labelsize 11 minimum 15 maximum -15 step 0.1
               code0 {equalizerSlider3->default_value = 0.0;}
               class Fl_My_Value_Slider
             }
             Fl_Slider equalizerSlider4 {
-              label {3.5kHz}
+              label 250Hz
               callback {slider_equalizer4_cb(o->value());}
-              xywh {236 97 15 150} type {Vert Knob} box NO_BOX labelsize 11 minimum 15 maximum -15 step 0.1
+              xywh {143 105 15 150} type {Vert Knob} box NO_BOX labelsize 11 minimum 15 maximum -15 step 0.1
               code0 {equalizerSlider4->default_value = 0.0;}
               class Fl_My_Value_Slider
             }
             Fl_Slider equalizerSlider5 {
-              label 10kHz
+              label 500Hz
               callback {slider_equalizer5_cb(o->value());}
-              xywh {286 97 15 150} type {Vert Knob} box NO_BOX labelsize 11 minimum 15 maximum -15 step 0.1
+              xywh {178 105 15 150} type {Vert Knob} box NO_BOX labelsize 11 minimum 15 maximum -15 step 0.1
               code0 {equalizerSlider5->default_value = 0.0;}
               class Fl_My_Value_Slider
             }
             Fl_Text_Display equalizerGain1 {
               label {+0.0}
-              xywh {72 97 35 10} box NO_BOX labelsize 11
+              xywh {16 105 51 10} box NO_BOX labelsize 11
             }
             Fl_Text_Display equalizerGain2 {
               label {+0.0}
-              xywh {122 97 35 10} box NO_BOX labelsize 11
+              xywh {59 105 35 10} box NO_BOX labelsize 11
             }
             Fl_Text_Display equalizerGain3 {
               label {+0.0}
-              xywh {172 97 35 10} box NO_BOX labelsize 11
+              xywh {94 105 35 10} box NO_BOX labelsize 11
             }
             Fl_Text_Display equalizerGain4 {
               label {+0.0}
-              xywh {222 97 35 10} box NO_BOX labelsize 11
+              xywh {129 105 35 10} box NO_BOX labelsize 11
             }
             Fl_Text_Display equalizerGain5 {
               label {+0.0}
-              xywh {272 97 35 10} box NO_BOX labelsize 11
+              xywh {164 105 35 10} box NO_BOX labelsize 11
             }
             Fl_Button {} {
               label Reset
@@ -912,66 +966,131 @@ fl_g->equalizerSlider2->value(0);
 fl_g->equalizerSlider3->value(0);
 fl_g->equalizerSlider4->value(0);
 fl_g->equalizerSlider5->value(0);
+fl_g->equalizerSlider6->value(0);
+fl_g->equalizerSlider7->value(0);
+fl_g->equalizerSlider8->value(0);
+fl_g->equalizerSlider9->value(0);
+fl_g->equalizerSlider10->value(0);
 slider_equalizer1_cb(0);
 slider_equalizer2_cb(0);
 slider_equalizer3_cb(0);
 slider_equalizer4_cb(0);
-slider_equalizer5_cb(0);}
-              xywh {310 61 45 19} box ENGRAVED_FRAME labelsize 12
+slider_equalizer5_cb(0);
+slider_equalizer6_cb(0);
+slider_equalizer7_cb(0);
+slider_equalizer8_cb(0);
+slider_equalizer9_cb(0);
+slider_equalizer10_cb(0);}
+              xywh {165 62 45 19} box ENGRAVED_FRAME labelsize 12
+            }
+            Fl_Slider equalizerSlider6 {
+              label 1kHz
+              callback {slider_equalizer6_cb(o->value());}
+              xywh {213 105 15 150} type {Vert Knob} box NO_BOX labelsize 11 minimum 15 maximum -15 step 0.1
+              code0 {equalizerSlider6->default_value = 0.0;}
+              class Fl_My_Value_Slider
+            }
+            Fl_Slider equalizerSlider7 {
+              label 2kHz
+              callback {slider_equalizer7_cb(o->value());}
+              xywh {248 105 15 150} type {Vert Knob} box NO_BOX labelsize 11 minimum 15 maximum -15 step 0.1
+              code0 {equalizerSlider7->default_value = 0.0;}
+              class Fl_My_Value_Slider
+            }
+            Fl_Slider equalizerSlider8 {
+              label 4kHz
+              callback {slider_equalizer8_cb(o->value());}
+              xywh {283 105 15 150} type {Vert Knob} box NO_BOX labelsize 11 minimum 15 maximum -15 step 0.1
+              code0 {equalizerSlider8->default_value = 0.0;}
+              class Fl_My_Value_Slider
+            }
+            Fl_Slider equalizerSlider9 {
+              label 8kHz
+              callback {slider_equalizer9_cb(o->value());}
+              xywh {318 105 15 150} type {Vert Knob} box NO_BOX labelsize 11 minimum 15 maximum -15 step 0.1
+              code0 {equalizerSlider9->default_value = 0.0;}
+              class Fl_My_Value_Slider
+            }
+            Fl_Slider equalizerSlider10 {
+              label 16kHz
+              callback {slider_equalizer10_cb(o->value());}
+              xywh {353 105 15 150} type {Vert Knob} box NO_BOX labelsize 11 minimum 15 maximum -15 step 0.1
+              code0 {equalizerSlider10->default_value = 0.0;}
+              class Fl_My_Value_Slider
+            }
+            Fl_Text_Display equalizerGain6 {
+              label {+0.0}
+              xywh {199 105 35 10} box NO_BOX labelsize 11
+            }
+            Fl_Text_Display equalizerGain7 {
+              label {+0.0}
+              xywh {234 105 35 10} box NO_BOX labelsize 11
+            }
+            Fl_Text_Display equalizerGain8 {
+              label {+0.0}
+              xywh {269 105 35 10} box NO_BOX labelsize 11
+            }
+            Fl_Text_Display equalizerGain9 {
+              label {+0.0}
+              xywh {304 105 35 10} box NO_BOX labelsize 11
+            }
+            Fl_Text_Display equalizerGain10 {
+              label {+0.0}
+              xywh {339 105 35 10} box NO_BOX labelsize 11
             }
           }
           Fl_Group {} {
             label {Dynamic Range Compressor} open
-            xywh {36 295 327 220} box ENGRAVED_FRAME align 5
+            xywh {15 323 370 225} box ENGRAVED_FRAME align 5
           } {
             Fl_Check_Button check_activate_drc {
               label Activate
               callback {check_activate_drc_cb();}
-              xywh {40 297 79 25} down_box DOWN_BOX
+              xywh {20 326 79 25} down_box DOWN_BOX
             }
             Fl_Slider thresholdSlider {
               label Threshold
               callback {slider_threshold_cb(o->value());}
-              xywh {86 337 15 159} type {Vert Knob} box NO_BOX labelsize 11 maximum -60 step 0.1 value -20
+              xywh {53 378 15 150} type {Vert Knob} box NO_BOX labelsize 11 maximum -60 step 0.1 value -20
               code0 {thresholdSlider->default_value = -20.0;}
               class Fl_My_Value_Slider
             }
             Fl_Slider ratioSlider {
               label Ratio
               callback {slider_ratio_cb(o->value());}
-              xywh {136 337 15 159} type {Vert Knob} box NO_BOX labelsize 11 minimum 10 step 0.1 value 5
+              xywh {123 378 15 150} type {Vert Knob} box NO_BOX labelsize 11 minimum 10 step 0.1 value 5
               code0 {ratioSlider->default_value = 5.0;}
               class Fl_My_Value_Slider
             }
             Fl_Slider attackSlider {
               label Attack
               callback {slider_attack_cb(o->value());}
-              xywh {186 337 15 159} type {Vert Knob} box NO_BOX labelsize 11 minimum 1 maximum 0 step 0.001 value 0.01
+              xywh {193 378 15 150} type {Vert Knob} box NO_BOX labelsize 11 minimum 1 maximum 0 step 0.001 value 0.01
               code0 {attackSlider->default_value = 0.01;}
               class Fl_My_Value_Slider
             }
             Fl_Slider releaseSlider {
               label Release
               callback {slider_release_cb(o->value());}
-              xywh {236 337 14 159} type {Vert Knob} box NO_BOX labelsize 11 minimum 10 maximum 0 step 0.01 value 1
+              xywh {263 378 14 150} type {Vert Knob} box NO_BOX labelsize 11 minimum 10 maximum 0 step 0.01 value 1
               code0 {releaseSlider->default_value = 1.0;}
               class Fl_My_Value_Slider
             }
             Fl_Text_Display threshold {
               label {+0.0}
-              xywh {74 337 35 10} box NO_BOX labelsize 11
+              xywh {39 378 35 10} box NO_BOX labelsize 11
             }
             Fl_Text_Display ratio {
               label {+0.0}
-              xywh {122 337 35 10} box NO_BOX labelsize 11
+              xywh {109 378 35 10} box NO_BOX labelsize 11
             }
             Fl_Text_Display attack {
               label {+0.00}
-              xywh {175 337 35 10} box NO_BOX labelsize 11
+              xywh {182 378 35 10} box NO_BOX labelsize 11
             }
             Fl_Text_Display release {
               label {+0.00}
-              xywh {225 337 35 10} box NO_BOX labelsize 11
+              xywh {252 378 35 10} box NO_BOX labelsize 11
             }
             Fl_Button {} {
               label Reset
@@ -985,34 +1104,33 @@ slider_ratio_cb(5);
 slider_attack_cb(0.01);
 slider_release_cb(1);
 slider_makeup_cb(0);}
-              xywh {310 301 45 19} box ENGRAVED_FRAME labelsize 12
+              xywh {176 330 45 19} box ENGRAVED_FRAME labelsize 12
             }
             Fl_Slider makeupSlider {
-              label {Makeup
-Gain}
+              label MakeupGain
               callback {slider_makeup_cb(o->value());}
-              xywh {286 337 15 147} type {Vert Knob} box NO_BOX labelsize 11 minimum 30 maximum 0 step 0.01 value 1
+              xywh {333 378 15 150} type {Vert Knob} box NO_BOX labelsize 11 minimum 30 maximum 0 step 0.01 value 1
               class Fl_My_Value_Slider
             }
             Fl_Text_Display makeup {
               label {+0.0}
-              xywh {272 337 35 10} box NO_BOX labelsize 11
+              xywh {319 378 35 10} box NO_BOX labelsize 11
             }
             Fl_Check_Button check_aggressive_mode {
               label {Aggressive Mode}
               callback {check_aggressive_mode_cb();}
-              xywh {134 297 130 20} down_box DOWN_BOX
+              xywh {250 328 130 20} down_box DOWN_BOX
             }
           }
           Fl_Group LED_comp_threshold {
-            xywh {57 497 10 10} box BORDER_BOX
+            xywh {23 517 10 10} box BORDER_BOX
             code0 {\#include "Fl_LED.h"}
             class LED
           } {}
         }
         Fl_Group {} {
-          label GUI open
-          xywh {0 20 400 530} hide
+          label GUI
+          xywh {0 20 400 580} hide
         } {
           Fl_Group {} {
             label {Display Color} open
@@ -1107,12 +1225,12 @@ Gain}
           }
         }
         Fl_Group {} {
-          label Donate open
-          xywh {0 20 400 530} hide
+          label Donate
+          xywh {0 20 400 580} hide
         } {
           Fl_Group {} {
             label Donation open
-            xywh {37 70 326 310} box ENGRAVED_FRAME align 5
+            xywh {37 70 326 305} box ENGRAVED_FRAME align 5
           } {
             Fl_Box {} {
               label {Keeping this software up to date, adding
@@ -1127,20 +1245,20 @@ Thank you!}
             Fl_Button {} {
               label {&Donate via PayPal}
               callback {fl_open_uri("https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=LTRSQNTWN4L6L&source=url");}
-              xywh {130 240 140 28} box ENGRAVED_BOX
+              xywh {130 225 140 28} box ENGRAVED_BOX
               code0 {\#include <FL/filename.H>}
             }
             Fl_Button {} {
               label {Become a &patron}
               callback {fl_open_uri("https://www.patreon.com/butt_broadcast");}
-              xywh {130 287 140 28} box ENGRAVED_BOX
+              xywh {130 272 140 28} box ENGRAVED_BOX
               code0 {\#include <FL/filename.H>}
             }
             Fl_Button {} {
               label {Bitcoin && Co}
               callback {this->window_donate_crypto->position(this->window_cfg->x(), this->window_cfg->y());
 this->window_donate_crypto->show();}
-              xywh {130 332 140 28} box ENGRAVED_BOX
+              xywh {130 317 140 28} box ENGRAVED_BOX
             }
           }
         }
@@ -1202,12 +1320,12 @@ this->window_donate_crypto->show();}
       Fl_Button button_add_srv_add {
         label {&ADD}
         callback {button_add_srv_add_cb();}
-        xywh {224 340 74 25} box ENGRAVED_BOX
+        xywh {245 340 74 25} box ENGRAVED_BOX
       }
       Fl_Button button_add_srv_save {
         label {&Save}
         callback {button_add_srv_save_cb();}
-        xywh {224 340 74 25} box ENGRAVED_BOX
+        xywh {246 340 74 25} box ENGRAVED_BOX
       }
       Fl_Button button_cfg_show_pw {
         label Show

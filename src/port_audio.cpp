@@ -798,7 +798,6 @@ snd_dev_t **snd_get_devices(int *dev_count)
     snd_dev_t **dev_list;
     dev_list = (snd_dev_t**)malloc(SND_MAX_DEVICES*sizeof(snd_dev_t*));
 
-	//100 sound devices should be enough
     for(i = 0; i < SND_MAX_DEVICES; i++)
         dev_list[i] = (snd_dev_t*)malloc(sizeof(snd_dev_t));
 

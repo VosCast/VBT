@@ -273,6 +273,12 @@ int ic_connect(void)
         ic_send(send_buf, (int)strlen(send_buf));
 
         ret = ic_recv(recv_buf, sizeof(recv_buf));
+        
+        //MARK: DEBUG
+        //sprintf(recv_buf, "FOOHTTP/1.1 100 Continue\nContent-Length: 0\r\n\r\n");
+        //print_info(recv_buf, 1);
+        
+
         if (ret == 0)
         {
             if (try_cnt == 0)
@@ -301,7 +307,6 @@ int ic_connect(void)
             return IC_RETRY;
         }
 
-
         char* temp = strdup(recv_buf);
         //We need to extract the HTTP return value from the HTTP response
         //to see if the login was successfull (HTTP/1.0 200 OK)
@@ -319,7 +324,6 @@ int ic_connect(void)
         
         retval = atoi(http_retval);
         free(temp);
-        
         
         // Workaround for liquidsoap and icecast-kh
         if (retval == 100) {
@@ -427,8 +431,9 @@ int ic_send(char *buf, int buf_len)
     else
     {
         ret = sock_send(stream_socket, buf, buf_len, SEND_TIMEOUT);
-        if (ret == SOCK_TIMEOUT)
-               ret = -1;
+        if (ret == SOCK_TIMEOUT) {
+            ret = -1;
+        }
     }
    
     return ret;

@@ -99,7 +99,7 @@ int cfg_write_file(char *path)
 
     fprintf(cfg_fd, "song_update = %d\n", cfg.main.song_update);
     
-    
+    fprintf(cfg_fd, "song_delay = %d\n", cfg.main.song_delay);
     
     
     if (cfg.main.song_prefix != NULL)
@@ -237,6 +237,11 @@ int cfg_write_file(char *path)
             "gain3 = %f\n"
             "gain4 = %f\n"
             "gain5 = %f\n"
+            "gain6 = %f\n"
+            "gain7 = %f\n"
+            "gain8 = %f\n"
+            "gain9 = %f\n"
+            "gain10 = %f\n"
 			"compressor = %d\n"
             "aggressive_mode = %d\n"
 			"threshold = %f\n"
@@ -250,6 +255,11 @@ int cfg_write_file(char *path)
             cfg.dsp.gain3,
             cfg.dsp.gain4,
             cfg.dsp.gain5,
+            cfg.dsp.gain6,
+            cfg.dsp.gain7,
+            cfg.dsp.gain8,
+            cfg.dsp.gain9,
+            cfg.dsp.gain10,
 			cfg.dsp.compressor,
             cfg.dsp.aggressive_mode,
 			cfg.dsp.threshold,
@@ -729,6 +739,10 @@ int cfg_set_values(char *path)
     if(cfg.main.song_update == -1)
         cfg.main.song_update = 0; //song update from file is default set to off
     
+    cfg.main.song_delay = cfg_get_int("main", "song_delay");
+    if(cfg.main.song_delay == -1)
+        cfg.main.song_delay = 0;
+    
     cfg.main.read_last_line = cfg_get_int("main", "read_last_line");
     if(cfg.main.read_last_line == -1)
         cfg.main.read_last_line = 0; // read first line per default
@@ -766,7 +780,7 @@ int cfg_set_values(char *path)
 
 	cfg.main.check_for_update = cfg_get_int("main", "check_for_update");
 	if(cfg.main.check_for_update == -1)
-		cfg.main.check_for_update = 0;
+		cfg.main.check_for_update = 1;
     
     cfg.main.start_agent = cfg_get_int("main", "start_agent");
     if(cfg.main.start_agent == -1)
@@ -809,6 +823,37 @@ int cfg_set_values(char *path)
     cfg.dsp.gain5 = cfg_get_float("dsp", "gain5");
     if (isnan(cfg.dsp.gain5))
         cfg.dsp.gain5 = 0.0;
+    
+    cfg.dsp.gain6 = cfg_get_float("dsp", "gain6");
+    if (isnan(cfg.dsp.gain6))
+        cfg.dsp.gain6 = 0.0;
+    
+    cfg.dsp.gain7 = cfg_get_float("dsp", "gain7");
+    if (isnan(cfg.dsp.gain7))
+        cfg.dsp.gain7 = 0.0;
+    
+    cfg.dsp.gain8 = cfg_get_float("dsp", "gain8");
+    if (isnan(cfg.dsp.gain8))
+        cfg.dsp.gain8 = 0.0;
+    
+    cfg.dsp.gain9 = cfg_get_float("dsp", "gain9");
+    if (isnan(cfg.dsp.gain9))
+        cfg.dsp.gain9 = 0.0;
+    
+    cfg.dsp.gain10 = cfg_get_float("dsp", "gain10");
+    if (isnan(cfg.dsp.gain10)) {
+        // Reset all EQ gains if band 10 has no config value. This prevents false values when the user updates from an earlier 5-band EQ to the new 10-band EQ
+        cfg.dsp.gain1 = 0.0;
+        cfg.dsp.gain2 = 0.0;
+        cfg.dsp.gain3 = 0.0;
+        cfg.dsp.gain4 = 0.0;
+        cfg.dsp.gain5 = 0.0;
+        cfg.dsp.gain6 = 0.0;
+        cfg.dsp.gain7 = 0.0;
+        cfg.dsp.gain8 = 0.0;
+        cfg.dsp.gain9 = 0.0;
+        cfg.dsp.gain10 = 0.0;
+    }
 	
 	cfg.dsp.compressor = cfg_get_int("dsp", "compressor");
     if (cfg.dsp.compressor == -1)
@@ -883,7 +928,7 @@ int cfg_set_values(char *path)
     //read FLTK related stuff
     cfg.main.bg_color = cfg_get_int("main", "bg_color");
     if(cfg.main.bg_color == -1)
-        cfg.main.bg_color = 151540480; //dark blue
+        cfg.main.bg_color = 252645120; //dark gray
 
     cfg.main.txt_color = cfg_get_int("main", "txt_color");
     if(cfg.main.txt_color == -1)
@@ -934,6 +979,7 @@ int cfg_create_default(void)
             "icy_ent =\n"
             "song_path =\n"
             "song_update = 0\n"
+            "song_delay = 0\n"
             "song_prefix = \n"
             "song_suffix = \n"
             "app_update = 0\n"

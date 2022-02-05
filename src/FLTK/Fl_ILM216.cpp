@@ -389,7 +389,7 @@ void Fl_ILM216::draw(void)
         oc = fl_color_average((Fl_Color)cfg.main.txt_color, (Fl_Color)cfg.main.bg_color, 0.5f);
     }
 
-  //draw the right line 
+    //draw the right line 
     fl_color((Fl_Color)cfg.main.txt_color);
 
     fl_line_style(FL_SOLID, 1, NULL);

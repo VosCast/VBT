@@ -18,17 +18,27 @@ DSPEffects::DSPEffects(uint32_t frames, uint8_t channels, uint32_t sampleRate) :
     dsp_size = frames * channels;
     dsp_buff = new float[dsp_size];
 	
-    band1l = new Biquad(bq_type_peak, 100.0 / double(samplerate), 1.9, cfg.dsp.gain1);
-    band2l = new Biquad(bq_type_peak, 350.0 / double(samplerate), 2, cfg.dsp.gain2);
-    band3l = new Biquad(bq_type_peak, 1000.0 / double(samplerate), 2, cfg.dsp.gain3);
-    band4l = new Biquad(bq_type_peak, 3500.0 / double(samplerate), 2, cfg.dsp.gain4);
-    band5l = new Biquad(bq_type_peak, 10000.0 / double(samplerate), 2, cfg.dsp.gain5);
+    band1l = new Biquad(bq_type_peak, 32.0 / double(samplerate), 2, cfg.dsp.gain1);
+    band2l = new Biquad(bq_type_peak, 64.0 / double(samplerate), 2, cfg.dsp.gain2);
+    band3l = new Biquad(bq_type_peak, 125.0 / double(samplerate), 2, cfg.dsp.gain3);
+    band4l = new Biquad(bq_type_peak, 250.0 / double(samplerate), 2, cfg.dsp.gain4);
+    band5l = new Biquad(bq_type_peak, 500.0 / double(samplerate), 2, cfg.dsp.gain5);
+    band6l = new Biquad(bq_type_peak, 1000.0 / double(samplerate), 2, cfg.dsp.gain6);
+    band7l = new Biquad(bq_type_peak, 2000.0 / double(samplerate), 2, cfg.dsp.gain7);
+    band8l = new Biquad(bq_type_peak, 4000.0 / double(samplerate), 2, cfg.dsp.gain8);
+    band9l = new Biquad(bq_type_peak, 8000.0 / double(samplerate), 2, cfg.dsp.gain9);
+    band10l = new Biquad(bq_type_peak, 16000.0 / double(samplerate), 2, cfg.dsp.gain10);
 	
-	band1r = new Biquad(bq_type_peak, 100.0 / double(samplerate), 1.9, cfg.dsp.gain1);
-    band2r = new Biquad(bq_type_peak, 350.0 / double(samplerate), 2, cfg.dsp.gain2);
-    band3r = new Biquad(bq_type_peak, 1000.0 / double(samplerate), 2, cfg.dsp.gain3);
-    band4r = new Biquad(bq_type_peak, 3500.0 / double(samplerate), 2, cfg.dsp.gain4);
-    band5r = new Biquad(bq_type_peak, 10000.0 / double(samplerate), 2, cfg.dsp.gain5);
+	band1r = new Biquad(bq_type_peak, 32.0 / double(samplerate), 2, cfg.dsp.gain1);
+    band2r = new Biquad(bq_type_peak, 64.0 / double(samplerate), 2, cfg.dsp.gain2);
+    band3r = new Biquad(bq_type_peak, 125.0 / double(samplerate), 2, cfg.dsp.gain3);
+    band4r = new Biquad(bq_type_peak, 250.0 / double(samplerate), 2, cfg.dsp.gain4);
+    band5r = new Biquad(bq_type_peak, 500.0 / double(samplerate), 2, cfg.dsp.gain5);
+    band6r = new Biquad(bq_type_peak, 1000.0 / double(samplerate), 2, cfg.dsp.gain6);
+    band7r = new Biquad(bq_type_peak, 2000.0 / double(samplerate), 2, cfg.dsp.gain7);
+    band8r = new Biquad(bq_type_peak, 4000.0 / double(samplerate), 2, cfg.dsp.gain8);
+    band9r = new Biquad(bq_type_peak, 8000.0 / double(samplerate), 2, cfg.dsp.gain9);
+    band10r = new Biquad(bq_type_peak, 16000.0 / double(samplerate), 2, cfg.dsp.gain10);
 }
 
 bool DSPEffects::hasToProcessSamples() {
@@ -45,12 +55,22 @@ void DSPEffects::processSamples(short *samples) {
         band3l->setPeakGain(cfg.dsp.gain3);
         band4l->setPeakGain(cfg.dsp.gain4);
         band5l->setPeakGain(cfg.dsp.gain5);
+        band6l->setPeakGain(cfg.dsp.gain6);
+        band7l->setPeakGain(cfg.dsp.gain7);
+        band8l->setPeakGain(cfg.dsp.gain8);
+        band9l->setPeakGain(cfg.dsp.gain9);
+        band10l->setPeakGain(cfg.dsp.gain10);
 		
 		band1r->setPeakGain(cfg.dsp.gain1);
         band2r->setPeakGain(cfg.dsp.gain2);
         band3r->setPeakGain(cfg.dsp.gain3);
         band4r->setPeakGain(cfg.dsp.gain4);
         band5r->setPeakGain(cfg.dsp.gain5);
+        band6r->setPeakGain(cfg.dsp.gain6);
+        band7r->setPeakGain(cfg.dsp.gain7);
+        band8r->setPeakGain(cfg.dsp.gain8);
+        band9r->setPeakGain(cfg.dsp.gain9);
+        band10r->setPeakGain(cfg.dsp.gain10);
     }
 
     src_short_to_float_array(samples, dsp_buff, dsp_size);
@@ -82,17 +102,27 @@ void DSPEffects::processSamples(short *samples) {
     
 	for(uint32_t sample = 0; sample < dsp_size; sample += chans) {
         if(cfg.dsp.equalizer) {
-            float s = band5l->process(dsp_buff[sample]);
+            float s = band10l->process(dsp_buff[sample]);
+            s = band9l->process(s);
+            s = band8l->process(s);
+            s = band7l->process(s);
+            s = band6l->process(s);
+            s = band5l->process(s);
             s = band4l->process(s);
             s = band3l->process(s);
             s = band2l->process(s);
             dsp_buff[sample] = band1l->process(s);
 			
 			if (chans == 2) {
-				float s = band5r->process(dsp_buff[sample+1]);
-				s = band4r->process(s);
-				s = band3r->process(s);
-				s = band2r->process(s);
+				float s = band10r->process(dsp_buff[sample+1]);
+                s = band9r->process(s);
+                s = band8r->process(s);
+                s = band7r->process(s);
+                s = band6r->process(s);
+                s = band5r->process(s);
+                s = band4r->process(s);
+                s = band3r->process(s);
+                s = band2r->process(s);
 				dsp_buff[sample+1] = band1r->process(s);
 			}
         }
@@ -108,12 +138,23 @@ DSPEffects::~DSPEffects() {
     delete band3l;
     delete band4l;
     delete band5l;
+    delete band6l;
+    delete band7l;
+    delete band8l;
+    delete band9l;
+    delete band10l;
+
 	
 	delete band1r;
     delete band2r;
     delete band3r;
     delete band4r;
     delete band5r;
+    delete band6r;
+    delete band7r;
+    delete band8r;
+    delete band9r;
+    delete band10r;
 }
 
 

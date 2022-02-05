@@ -110,7 +110,7 @@ void cmd_timer(void*)
         case CMD_UPDATE_SONGNAME:
             cfg.main.song = (char*)realloc(cfg.main.song, command.param_size+1);
             strcpy(cfg.main.song, (char*)command.param);
-            update_song(0);
+            Fl::add_timeout(cfg.main.song_delay, &update_song);
             Fl::repeat_timeout(0.25, &cmd_timer);
             break;
         case CMD_GET_STATUS:
@@ -630,7 +630,9 @@ void songfile_timer(void* user_data)
             cfg.main.song = (char*) realloc(cfg.main.song, strlen(last_line) +1);
             strcpy(cfg.main.song, last_line);
         }
-        update_song(0);
+
+        Fl::add_timeout(cfg.main.song_delay, &update_song);
+
     }
     else
     {
@@ -657,7 +659,7 @@ void songfile_timer(void* user_data)
                 strcpy(cfg.main.song, song);
             }
             
-            update_song(0);
+            Fl::add_timeout(cfg.main.song_delay, &update_song);
         }
     }
 
@@ -687,7 +689,7 @@ void app_timer(void* user_data)
             {
                 cfg.main.song = (char*) realloc(cfg.main.song, strlen(track) + 1);
                 strcpy(cfg.main.song, track);
-                update_song(0);
+                Fl::add_timeout(cfg.main.song_delay, &update_song);
             }
             free((void*)track);
         }
@@ -697,7 +699,7 @@ void app_timer(void* user_data)
             {
                 cfg.main.song = (char*) realloc(cfg.main.song, 1);
                 strcpy(cfg.main.song, "");
-                update_song(0);
+                Fl::add_timeout(cfg.main.song_delay, &update_song);
             }
         }
     }

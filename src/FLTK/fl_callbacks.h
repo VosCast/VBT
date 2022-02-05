@@ -137,6 +137,11 @@ void slider_equalizer2_cb(double);
 void slider_equalizer3_cb(double);
 void slider_equalizer4_cb(double);
 void slider_equalizer5_cb(double);
+void slider_equalizer6_cb(double);
+void slider_equalizer7_cb(double);
+void slider_equalizer8_cb(double);
+void slider_equalizer9_cb(double);
+void slider_equalizer10_cb(double);
 
 void check_activate_drc_cb(void);
 void check_aggressive_mode_cb(void);
@@ -154,7 +159,6 @@ void check_cfg_rec_hourly_cb(void);
 void check_cfg_connect_cb(void);
 void check_cfg_force_reconnecting_cb(void);
 
-
 void lcd_rotate(void*);
 void ILM216_cb(void);
 void window_main_close_cb(void);
@@ -164,7 +168,10 @@ void choice_cfg_app_cb(void);
 void radio_cfg_artist_title_cb(void);
 void radio_cfg_title_artist_cb(void);
 
-void update_song(int called_from_connect_cb);
+void choice_cfg_song_delay_cb(void);
+
+
+void update_song(void* user_data);
 bool stop_recording(bool ask);
 
 

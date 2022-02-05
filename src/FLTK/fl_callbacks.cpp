@@ -264,8 +264,9 @@ void button_connect_cb(void)
 
     print_info(text_buf, 0);
 
+    static int called_from_connect_cb = 1;
     if (!cfg.main.song_update && !cfg.main.app_update)
-	    update_song(1);
+        Fl::add_timeout(cfg.main.song_delay, &update_song, &called_from_connect_cb);
 
     //the user may not change the audio device while streaming
     fl_g->choice_cfg_dev->deactivate();
@@ -1105,8 +1106,7 @@ void button_cfg_add_icy_cb(void)
     fl_g->window_add_icy->show();
 }
 
-
-void update_song(int called_from_connect_cb)
+void update_song(void* user_data)
 {
     static int is_updating = 0;
 
@@ -1117,7 +1117,12 @@ void update_song(int called_from_connect_cb)
     song_buf[0] = '\0';
     
     int (*xc_update_song)(char *song_name) = NULL;
-    
+
+    int called_from_connect_cb;
+    if (user_data != NULL)
+        called_from_connect_cb = *((int*)user_data);
+    else
+        called_from_connect_cb = 0;
     
     if(!connected || cfg.main.song == NULL)
         return;
@@ -1128,6 +1133,8 @@ void update_song(int called_from_connect_cb)
         return;
     
     is_updating = 1;
+    
+
     
     
     if (cfg.main.song_prefix != NULL)
@@ -1182,7 +1189,7 @@ void button_cfg_song_go_cb(void)
     cfg.main.song = (char*)realloc(cfg.main.song, strlen(fl_g->input_cfg_song->value())+1);
     strcpy(cfg.main.song, fl_g->input_cfg_song->value());
     
-    update_song(0);
+    Fl::add_timeout(cfg.main.song_delay, &update_song);
 
     // Set focus on the song input field and mark the whole text
     fl_g->input_cfg_song->take_focus();
@@ -1446,10 +1453,9 @@ void button_add_srv_save_cb(void)
     strcpy(cfg.srv[srv_num]->addr, fl_g->input_add_srv_addr->value());
     
     //strip leading http:// from addr
-    if(strstr(cfg.srv[srv_num]->addr, "http://"))
-        cfg.srv[srv_num]->addr += strlen("http://");
-    if(strstr(cfg.srv[srv_num]->addr, "https://"))
-        cfg.srv[srv_num]->addr += strlen("https://");
+    strrpl(&cfg.srv[srv_num]->addr, (char*)"http://", (char*)"", MODE_ALL);
+    strrpl(&cfg.srv[srv_num]->addr, (char*)"https://", (char*)"", MODE_ALL);
+
 
     //update current server port
     cfg.srv[srv_num]->port = (unsigned int)atoi(fl_g->input_add_srv_port->value());
@@ -3321,6 +3327,7 @@ void slider_gain_cb(void)
         cfg.main.gain = util_db_to_factor(gain_db);
 
     fl_g->slider_gain->value_cb2("dB");
+    
 }
 
 void input_rec_split_time_cb(void)
@@ -3589,6 +3596,11 @@ void radio_cfg_title_artist_cb(void)
     cfg.main.app_artist_title_order = APP_TITLE_FIRST;
 }
 
+void choice_cfg_song_delay_cb(void)
+{
+    cfg.main.song_delay = 2*fl_g->choice_cfg_song_delay->value();
+}
+
 void check_activate_eq_cb(void)
 {
     cfg.dsp.equalizer = fl_g->check_activate_eq->value();
@@ -3638,6 +3650,51 @@ void slider_equalizer5_cb(double v)
     snprintf(str, 10, "%+.1f", v);
     fl_g->equalizerGain5->label(str);
     fl_g->equalizerSlider5->value_cb2("dB");
+}
+
+void slider_equalizer6_cb(double v)
+{
+    static char str[10];
+    cfg.dsp.gain6 = v;
+    snprintf(str, 10, "%+.1f", v);
+    fl_g->equalizerGain6->label(str);
+    fl_g->equalizerSlider6->value_cb2("dB");
+}
+
+void slider_equalizer7_cb(double v)
+{
+    static char str[10];
+    cfg.dsp.gain7 = v;
+    snprintf(str, 10, "%+.1f", v);
+    fl_g->equalizerGain7->label(str);
+    fl_g->equalizerSlider7->value_cb2("dB");
+}
+
+void slider_equalizer8_cb(double v)
+{
+    static char str[10];
+    cfg.dsp.gain8 = v;
+    snprintf(str, 10, "%+.1f", v);
+    fl_g->equalizerGain8->label(str);
+    fl_g->equalizerSlider8->value_cb2("dB");
+}
+
+void slider_equalizer9_cb(double v)
+{
+    static char str[10];
+    cfg.dsp.gain9 = v;
+    snprintf(str, 10, "%+.1f", v);
+    fl_g->equalizerGain9->label(str);
+    fl_g->equalizerSlider9->value_cb2("dB");
+}
+
+void slider_equalizer10_cb(double v)
+{
+    static char str[10];
+    cfg.dsp.gain10 = v;
+    snprintf(str, 10, "%+.1f", v);
+    fl_g->equalizerGain10->label(str);
+    fl_g->equalizerSlider10->value_cb2("dB");
 }
 
 

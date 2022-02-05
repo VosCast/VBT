@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: butt 0.1.30\n"
 "Report-Msgid-Bugs-To: butt@danielnoethen.de\n"
-"POT-Creation-Date: 2021-05-14 10:32+0200\n"
+"POT-Creation-Date: 2021-07-10 18:14+0200\n"
 "PO-Revision-Date: 2021-05-06 22:35+0200\n"
 "Last-Translator: cacatoès <cacatoes@tuxfamily.org>\n"
 "Language-Team: French\n"
@@ -209,8 +209,9 @@ msgstr ""
 "Client iPhone/iPad : https://izicast.de\n"
 "Donations : paypal@danielnoethen.de\n"
 
-#: src/butt.cpp:561 src/FLTK/fl_callbacks.cpp:83 src/FLTK/fl_callbacks.cpp:95
-#: src/FLTK/fl_callbacks.cpp:674 src/FLTK/fl_callbacks.cpp:756
+#: src/butt.cpp:561 src/FLTK/fl_callbacks.cpp:83 src/FLTK/fl_callbacks.cpp:97
+#: src/FLTK/fl_callbacks.cpp:681 src/FLTK/fl_callbacks.cpp:765
+#: src/FLTK/fl_funcs.cpp:478
 msgid "idle"
 msgstr "inactif"
 
@@ -225,7 +226,7 @@ msgid "Warning: could not start command server on port %d\n"
 msgstr ""
 "Attention : impossible démarrer le serveur de commande sur le port %d\n"
 
-#: src/butt.cpp:609 src/FLTK/fl_callbacks.cpp:3462
+#: src/butt.cpp:609 src/FLTK/fl_callbacks.cpp:3482
 #, c-format
 msgid ""
 "New version available: %s\n"
@@ -234,11 +235,15 @@ msgstr ""
 "Nouvelle version disponible : %s\n"
 "Vous disposez de la version %s"
 
-#: src/butt.cpp:609 src/FLTK/fl_callbacks.cpp:3462
+#: src/butt.cpp:609
+msgid "Don't ask again"
+msgstr "ne plus demander"
+
+#: src/butt.cpp:609 src/FLTK/fl_callbacks.cpp:3482
 msgid "Cancel"
 msgstr "Annuler"
 
-#: src/butt.cpp:609 src/FLTK/fl_callbacks.cpp:3462
+#: src/butt.cpp:609 src/FLTK/fl_callbacks.cpp:3482
 msgid "Get new version"
 msgstr "Obtenir la nouvelle version"
 
@@ -247,12 +252,12 @@ msgstr "Obtenir la nouvelle version"
 msgid "Could not write to file: %s"
 msgstr "Impossible d'écrire dans le fichier : %s"
 
-#: src/cfg.cpp:367
+#: src/cfg.cpp:377
 #, c-format
 msgid "Config written to %s"
 msgstr "Configuration écrite dans %s"
 
-#: src/cfg.cpp:553
+#: src/cfg.cpp:563
 msgid ""
 "error while parsing config. Illegal value (-1) for num_of_srv.\n"
 "butt is going to close now"
@@ -261,7 +266,7 @@ msgstr ""
 "num_of_srv.\n"
 "butt va fermer maintenant"
 
-#: src/cfg.cpp:562
+#: src/cfg.cpp:572
 msgid ""
 "error while parsing config. Missing main/server entry.\n"
 "butt is going to close now"
@@ -269,7 +274,7 @@ msgstr ""
 "erreur de lecture de la configuration. L'entrée main/server est manquante.\n"
 "butt va fermer maintenant"
 
-#: src/cfg.cpp:569
+#: src/cfg.cpp:579
 msgid ""
 "error while parsing config. Missing main/srv_ent entry.\n"
 "butt is going to close now"
@@ -277,7 +282,7 @@ msgstr ""
 "erreur de lecture de la configuration. L'entrée main/srv_ent est manquante.\n"
 "butt va fermer maintenant"
 
-#: src/cfg.cpp:589
+#: src/cfg.cpp:599
 #, c-format
 msgid ""
 "error while parsing config. Missing address entry for server \"%s\".\n"
@@ -287,7 +292,7 @@ msgstr ""
 "manquante.\n"
 "butt va fermer maintenant"
 
-#: src/cfg.cpp:597
+#: src/cfg.cpp:607
 #, c-format
 msgid ""
 "error while parsing config. Missing port entry for server \"%s\".\n"
@@ -297,7 +302,7 @@ msgstr ""
 "manquant.\n"
 "butt va fermer maintenant"
 
-#: src/cfg.cpp:605
+#: src/cfg.cpp:615
 #, c-format
 msgid ""
 "error while parsing config. Missing password entry for server \"%s\".\n"
@@ -307,7 +312,7 @@ msgstr ""
 "manquant.\n"
 "butt va fermer maintenant"
 
-#: src/cfg.cpp:613
+#: src/cfg.cpp:623
 #, c-format
 msgid ""
 "error while parsing config. Missing type entry for server \"%s\".\n"
@@ -317,7 +322,7 @@ msgstr ""
 "manquant.\n"
 "butt va fermer maintenant"
 
-#: src/cfg.cpp:621
+#: src/cfg.cpp:631
 #, c-format
 msgid ""
 "error while parsing config. Missing mount entry for server \"%s\".\n"
@@ -327,7 +332,7 @@ msgstr ""
 "est manquant.\n"
 "butt va fermer maintenant"
 
-#: src/cfg.cpp:660
+#: src/cfg.cpp:670
 msgid ""
 "error while parsing config. Illegal value (-1) for num_of_icy.\n"
 "butt is going to close now"
@@ -336,7 +341,7 @@ msgstr ""
 "num_of_icy.\n"
 "butt va fermer maintenant"
 
-#: src/cfg.cpp:670
+#: src/cfg.cpp:680
 msgid ""
 "error while parsing config. Missing main/icy entry.\n"
 "butt is going to close now"
@@ -345,7 +350,7 @@ msgstr ""
 "manquante.\n"
 "butt va fermer maintenant"
 
-#: src/cfg.cpp:676
+#: src/cfg.cpp:686
 msgid ""
 "error while parsing config. Missing main/icy_ent entry.\n"
 "butt is going to close now"
@@ -353,7 +358,7 @@ msgstr ""
 "erreur de lecture de la configuration. L'entrée main/icy_ent est manquante.\n"
 "butt va fermer maintenant"
 
-#: src/cfg.cpp:702
+#: src/cfg.cpp:712
 #, c-format
 msgid ""
 "error while parsing config. Missing pub entry for icy \"%s\".\n"
@@ -363,549 +368,557 @@ msgstr ""
 "manquante.\n"
 "butt va fermer maintenant"
 
-#: src/FLTK/flgui.cpp:1123
+#: src/FLTK/flgui.cpp:2689
 msgid "Bitcoin address has been copied to clipboard."
 msgstr "L'adresse Bitcoin a été copiée dans le presse papier."
 
-#: src/FLTK/flgui.cpp:1134
+#: src/FLTK/flgui.cpp:2700
 msgid "Dash address has been copied to clipboard."
 msgstr "L'adresse Dash a été copiée dans le presse papier."
 
-#: src/FLTK/flgui.cpp:1145
+#: src/FLTK/flgui.cpp:2711
 msgid "Monero address has been copied to clipboard."
 msgstr "L'adresse Monero a été copiée dans le presse papier."
 
-#: src/FLTK/flgui.cpp:1171
+#: src/FLTK/flgui.cpp:2737
 msgid "press left mouse to toggle lcd info"
 msgstr "Faire un clic gauche pour activer les informations du LCD"
 
-#: src/FLTK/flgui.cpp:1183
+#: src/FLTK/flgui.cpp:2749
 msgid "@> "
 msgstr "@> "
 
-#: src/FLTK/flgui.cpp:1184
+#: src/FLTK/flgui.cpp:2750
 msgid "connect to server"
 msgstr "connexion au serveur"
 
-#: src/FLTK/flgui.cpp:1194
+#: src/FLTK/flgui.cpp:2760
 msgid "@-3square"
 msgstr "@-3square"
 
-#: src/FLTK/flgui.cpp:1195
+#: src/FLTK/flgui.cpp:2761
 msgid "disconnect from server"
 msgstr "déconnexion du serveur"
 
-#: src/FLTK/flgui.cpp:1205
+#: src/FLTK/flgui.cpp:2771
 msgid "@-3circle"
 msgstr "@-3circle"
 
-#: src/FLTK/flgui.cpp:1206
+#: src/FLTK/flgui.cpp:2772
 msgid "start/stop recording"
 msgstr "démarrer/arrêter l'enregistrement"
 
-#: src/FLTK/flgui.cpp:1216 src/FLTK/fl_callbacks.cpp:976
+#: src/FLTK/flgui.cpp:2782 src/FLTK/fl_callbacks.cpp:987
 msgid "Show log"
 msgstr "Journal"
 
-#: src/FLTK/flgui.cpp:1217
+#: src/FLTK/flgui.cpp:2783
 msgid "show/hide info window"
 msgstr "montrer/cacher la fenêtre d'informations"
 
-#: src/FLTK/flgui.cpp:1242
+#: src/FLTK/flgui.cpp:2808
 msgid "Settings"
 msgstr "Paramètres"
 
-#: src/FLTK/flgui.cpp:1243
+#: src/FLTK/flgui.cpp:2809
 msgid "show/hide config window"
 msgstr "montrer/cacher la fenêtre de configuration"
 
-#: src/FLTK/flgui.cpp:1250
+#: src/FLTK/flgui.cpp:2816
 msgid "-24 dB"
 msgstr "-24 dB"
 
-#: src/FLTK/flgui.cpp:1253 src/FLTK/flgui.cpp:1254
+#: src/FLTK/flgui.cpp:2819 src/FLTK/flgui.cpp:2820
 msgid "Gain"
 msgstr "Gain"
 
-#: src/FLTK/flgui.cpp:1271
+#: src/FLTK/flgui.cpp:2837
 msgid "+24 dB"
 msgstr "+24 dB"
 
-#: src/FLTK/flgui.cpp:1277
+#: src/FLTK/flgui.cpp:2848
 msgid "butt settings"
 msgstr "Paramètres de butt"
 
-#: src/FLTK/flgui.cpp:1290
+#: src/FLTK/flgui.cpp:2861
 msgid "Main"
 msgstr "Principal"
 
-#: src/FLTK/flgui.cpp:1292
+#: src/FLTK/flgui.cpp:2863
 msgid "Server Settings"
 msgstr "Paramètres du serveur"
 
-#: src/FLTK/flgui.cpp:1295
+#: src/FLTK/flgui.cpp:2866
 msgid "Server"
 msgstr "Serveur"
 
-#: src/FLTK/flgui.cpp:1296
+#: src/FLTK/flgui.cpp:2867
 msgid "Server to connect to"
 msgstr "Serveur auquel se connecter"
 
-#: src/FLTK/flgui.cpp:1301 src/FLTK/flgui.cpp:1322
+#: src/FLTK/flgui.cpp:2872 src/FLTK/flgui.cpp:2893
 msgid "ADD"
 msgstr "Ajout."
 
-#: src/FLTK/flgui.cpp:1302 src/FLTK/flgui.cpp:2233
+#: src/FLTK/flgui.cpp:2873 src/FLTK/flgui.cpp:3929
 msgid "Add server"
 msgstr "Ajouter un serveur"
 
-#: src/FLTK/flgui.cpp:1306 src/FLTK/flgui.cpp:1327
+#: src/FLTK/flgui.cpp:2877 src/FLTK/flgui.cpp:2898
 msgid "EDIT"
 msgstr "Modif."
 
-#: src/FLTK/flgui.cpp:1307
+#: src/FLTK/flgui.cpp:2878
 msgid "Edit selected server"
 msgstr "Modifier le serveur sélectionné"
 
-#: src/FLTK/flgui.cpp:1311 src/FLTK/flgui.cpp:1332
+#: src/FLTK/flgui.cpp:2882 src/FLTK/flgui.cpp:2903
 msgid "DEL"
 msgstr "Suppr."
 
-#: src/FLTK/flgui.cpp:1312
+#: src/FLTK/flgui.cpp:2883
 msgid "Delete selected server"
 msgstr "Supprimer le serveur sélectionné"
 
-#: src/FLTK/flgui.cpp:1316
+#: src/FLTK/flgui.cpp:2887
 msgid "Stream Infos"
 msgstr "Informations du flux"
 
-#: src/FLTK/flgui.cpp:1317
+#: src/FLTK/flgui.cpp:2888
 msgid "Stream info that shall be used"
 msgstr "Informations du flux devant être utilisé"
 
-#: src/FLTK/flgui.cpp:1323 src/FLTK/flgui.cpp:2307
+#: src/FLTK/flgui.cpp:2894 src/FLTK/flgui.cpp:4003
 msgid "Add stream info"
 msgstr "Ajouter les informations du flux"
 
-#: src/FLTK/flgui.cpp:1328
+#: src/FLTK/flgui.cpp:2899
 msgid "Edit stream info"
 msgstr "Modifier les informations du flux"
 
-#: src/FLTK/flgui.cpp:1333
+#: src/FLTK/flgui.cpp:2904
 msgid "Delete stream info"
 msgstr "Supprimer les informations du flux"
 
-#: src/FLTK/flgui.cpp:1339
+#: src/FLTK/flgui.cpp:2910
 msgid "Log File"
 msgstr "Fichier du journal"
 
-#: src/FLTK/flgui.cpp:1343
+#: src/FLTK/flgui.cpp:2914
 msgid "Log file path"
 msgstr "Chemin vers le fichier du journal"
 
-#: src/FLTK/flgui.cpp:1348
+#: src/FLTK/flgui.cpp:2919
 msgid "Select log file"
 msgstr "Sélectionnez le fichier du journal"
 
-#: src/FLTK/flgui.cpp:1355
+#: src/FLTK/flgui.cpp:2926
 msgid "Configuration"
 msgstr "Configuration"
 
-#: src/FLTK/flgui.cpp:1358 src/FLTK/fl_callbacks.cpp:3367
+#: src/FLTK/flgui.cpp:2929 src/FLTK/fl_callbacks.cpp:3387
 msgid "Import..."
 msgstr "Importer…"
 
-#: src/FLTK/flgui.cpp:1359
+#: src/FLTK/flgui.cpp:2930
 msgid "Import settings from config file"
 msgstr "Importer les paramètres depuis le fichier de configuration"
 
-#: src/FLTK/flgui.cpp:1363 src/FLTK/flgui.cpp:2283 src/FLTK/flgui.cpp:2349
+#: src/FLTK/flgui.cpp:2934 src/FLTK/flgui.cpp:3979 src/FLTK/flgui.cpp:4045
 msgid "&Save"
 msgstr "&Sauvegarder"
 
-#: src/FLTK/flgui.cpp:1364
+#: src/FLTK/flgui.cpp:2935
 msgid "Save settings"
 msgstr "Sauvegarder les paramètres"
 
-#: src/FLTK/flgui.cpp:1368
+#: src/FLTK/flgui.cpp:2939
 msgid "Export..."
 msgstr "Exporter…"
 
-#: src/FLTK/flgui.cpp:1369
+#: src/FLTK/flgui.cpp:2940
 msgid "export settings"
 msgstr "Exporter les paramètres"
 
-#: src/FLTK/flgui.cpp:1375
+#: src/FLTK/flgui.cpp:2946
 msgid "Updates"
 msgstr "Mises à jour"
 
-#: src/FLTK/flgui.cpp:1378
+#: src/FLTK/flgui.cpp:2949
 msgid "Check now"
 msgstr "Vérifier"
 
-#: src/FLTK/flgui.cpp:1379
+#: src/FLTK/flgui.cpp:2950
 msgid "Check if a new version is available"
 msgstr "Vérifier si une mise à jour est disponible"
 
-#: src/FLTK/flgui.cpp:1383
+#: src/FLTK/flgui.cpp:2954
 msgid "Check at startup"
 msgstr "Vérifier au démarrage"
 
-#: src/FLTK/flgui.cpp:1384
+#: src/FLTK/flgui.cpp:2955
 msgid "Check for updates at start"
 msgstr "Vérifier les mises à jour au démarrage"
 
-#: src/FLTK/flgui.cpp:1390
+#: src/FLTK/flgui.cpp:2961
 msgid "Butt Agent"
 msgstr "Agent Butt"
 
-#: src/FLTK/flgui.cpp:1393
+#: src/FLTK/flgui.cpp:2964
 msgid "Start agent at startup"
 msgstr "Démarrer au démarrage du système"
 
-#: src/FLTK/flgui.cpp:1394
+#: src/FLTK/flgui.cpp:2965
 msgid "Start the butt agent when butt starts"
 msgstr "Démarrer l'agent au démarrage de butt"
 
-#: src/FLTK/flgui.cpp:1398 src/FLTK/flgui.cpp:1399
+#: src/FLTK/flgui.cpp:2969 src/FLTK/flgui.cpp:2970
 msgid "Minimize butt to tray"
 msgstr "Réduire butt dans le systray"
 
-#: src/FLTK/flgui.cpp:1403
+#: src/FLTK/flgui.cpp:2974
 msgid "Start Agent"
 msgstr "Démarrer"
 
-#: src/FLTK/flgui.cpp:1404
+#: src/FLTK/flgui.cpp:2975
 msgid "Start the butt agent now"
 msgstr "Démarrer l'agent maintenant"
 
-#: src/FLTK/flgui.cpp:1408
+#: src/FLTK/flgui.cpp:2979
 msgid "Stop Agent"
 msgstr "Fermer"
 
-#: src/FLTK/flgui.cpp:1409
+#: src/FLTK/flgui.cpp:2980
 msgid "Stop the butt agent"
 msgstr "Fermer l'agent butt"
 
-#: src/FLTK/flgui.cpp:1417
+#: src/FLTK/flgui.cpp:2988
 msgid "Audio"
 msgstr "Audio"
 
-#: src/FLTK/flgui.cpp:1419
+#: src/FLTK/flgui.cpp:2990
 msgid "Main Audio Settings"
 msgstr "Paramètres audio principaux"
 
-#: src/FLTK/flgui.cpp:1422
+#: src/FLTK/flgui.cpp:2993
 msgid "Audio Device"
 msgstr "Périphérique audio"
 
-#: src/FLTK/flgui.cpp:1423
+#: src/FLTK/flgui.cpp:2994
 msgid "select your sound card device"
 msgstr "Sélectionnez votre carte son"
 
-#: src/FLTK/flgui.cpp:1428
+#: src/FLTK/flgui.cpp:2999
 msgid "Channel mode"
 msgstr "Mode du canal"
 
-#: src/FLTK/flgui.cpp:1429
+#: src/FLTK/flgui.cpp:3000
 msgid "Select input channel"
 msgstr "Sélectionnez le canal d'entrée"
 
-#: src/FLTK/flgui.cpp:1442
+#: src/FLTK/flgui.cpp:3013
 msgid "Samplerate"
 msgstr "Taux échantillonnage"
 
-#: src/FLTK/flgui.cpp:1443
+#: src/FLTK/flgui.cpp:3014
 msgid "Select input sample rate"
 msgstr "Sélectionnez le taux d'échantillonnage de l'entrée"
 
-#: src/FLTK/flgui.cpp:1448
+#: src/FLTK/flgui.cpp:3019
 msgid "Left"
 msgstr "Gauche"
 
-#: src/FLTK/flgui.cpp:1453
+#: src/FLTK/flgui.cpp:3024
 msgid "Right"
 msgstr "Droite"
 
-#: src/FLTK/flgui.cpp:1458
+#: src/FLTK/flgui.cpp:3029
 msgid "Remember Device by"
 msgstr "Se souvenir du périph. par"
 
-#: src/FLTK/flgui.cpp:1461
+#: src/FLTK/flgui.cpp:3032
 msgid "ID"
 msgstr "ID"
 
-#: src/FLTK/flgui.cpp:1466
+#: src/FLTK/flgui.cpp:3037
 msgid "Name"
 msgstr "Nom"
 
-#: src/FLTK/flgui.cpp:1474
+#: src/FLTK/flgui.cpp:3045
 msgid "Rescan audio devices"
 msgstr "Détecter les périphériques audio"
 
-#: src/FLTK/flgui.cpp:1481 src/FLTK/flgui.cpp:1686
+#: src/FLTK/flgui.cpp:3052 src/FLTK/flgui.cpp:3257
 msgid "Streaming"
 msgstr "Diffusion"
 
-#: src/FLTK/flgui.cpp:1484 src/FLTK/flgui.cpp:1524
+#: src/FLTK/flgui.cpp:3055 src/FLTK/flgui.cpp:3095
 msgid "Codec"
 msgstr "Codec"
 
-#: src/FLTK/flgui.cpp:1485
+#: src/FLTK/flgui.cpp:3056
 msgid "Select streaming codec"
 msgstr "Sélectionnez le codec du flux"
 
-#: src/FLTK/flgui.cpp:1498 src/FLTK/flgui.cpp:1538
+#: src/FLTK/flgui.cpp:3069 src/FLTK/flgui.cpp:3109
 msgid "Bitrate"
 msgstr "Bitrate"
 
-#: src/FLTK/flgui.cpp:1499
+#: src/FLTK/flgui.cpp:3070
 msgid "Select streaming bitrate"
 msgstr "Sélectionnez le bitrate du flux"
 
-#: src/FLTK/flgui.cpp:1513
+#: src/FLTK/flgui.cpp:3084
 msgid "Convert Mono to Stereo"
 msgstr "Convertir du Mono vers Stéréo"
 
-#: src/FLTK/flgui.cpp:1514
+#: src/FLTK/flgui.cpp:3085
 msgid "Copies a mono channel to both stereo channels"
 msgstr "Copie un canal mono vers chaque canal stéréo"
 
-#: src/FLTK/flgui.cpp:1521 src/FLTK/flgui.cpp:1775
+#: src/FLTK/flgui.cpp:3092 src/FLTK/flgui.cpp:3365
 msgid "Recording"
 msgstr "Enregistrement"
 
-#: src/FLTK/flgui.cpp:1525
+#: src/FLTK/flgui.cpp:3096
 msgid "Select recording codec"
 msgstr "Sélectionnez le codec d'enregistrement"
 
-#: src/FLTK/flgui.cpp:1539
+#: src/FLTK/flgui.cpp:3110
 msgid "Select recording bitrate"
 msgstr "Sélectionnez le bitrate d'enregistrement"
 
-#: src/FLTK/flgui.cpp:1554
+#: src/FLTK/flgui.cpp:3125
 msgid "Advanced..."
 msgstr "Avancé…"
 
-#: src/FLTK/flgui.cpp:1560
+#: src/FLTK/flgui.cpp:3131
 msgid "Buffer (ms)"
 msgstr "Tampon (ms)"
 
-#: src/FLTK/flgui.cpp:1569
+#: src/FLTK/flgui.cpp:3140
 msgid "Resample Quality"
 msgstr "Qualité du rééchantillonnage"
 
-#: src/FLTK/flgui.cpp:1584
+#: src/FLTK/flgui.cpp:3155
 msgid "Signal detection levels"
 msgstr "Détection des niveaux du signal"
 
-#: src/FLTK/flgui.cpp:1587
+#: src/FLTK/flgui.cpp:3158
 msgid "Signal present"
 msgstr "Signal présent"
 
-#: src/FLTK/flgui.cpp:1594
+#: src/FLTK/flgui.cpp:3165
 msgid "Signal absent"
 msgstr "Signal absent"
 
-#: src/FLTK/flgui.cpp:1601 src/FLTK/flgui.cpp:1604
+#: src/FLTK/flgui.cpp:3172 src/FLTK/flgui.cpp:3175
 msgid "dB"
 msgstr "dB"
 
-#: src/FLTK/flgui.cpp:1611
+#: src/FLTK/flgui.cpp:3182
 msgid "Stream"
 msgstr "Flux"
 
-#: src/FLTK/flgui.cpp:1613
+#: src/FLTK/flgui.cpp:3184
 msgid "Update song name from file"
 msgstr "Mettre à jour le titre du morceau depuis un fichier"
 
-#: src/FLTK/flgui.cpp:1617
+#: src/FLTK/flgui.cpp:3188
 msgid "Filename that holds the current song name"
 msgstr "Fichier contenant le titre du morceau actuel"
 
-#: src/FLTK/flgui.cpp:1623
+#: src/FLTK/flgui.cpp:3194
 msgid "Select file that holds the current song name"
 msgstr "Sélectionnez le fichier contenant le titre du morceau actuel"
 
-#: src/FLTK/flgui.cpp:1628 src/FLTK/flgui.cpp:1662 src/FLTK/flgui.cpp:1857
-#: src/FLTK/flgui.cpp:1976
+#: src/FLTK/flgui.cpp:3199 src/FLTK/flgui.cpp:3233 src/FLTK/flgui.cpp:3447
+#: src/FLTK/flgui.cpp:3672
 msgid "Activate"
 msgstr "Activer"
 
-#: src/FLTK/flgui.cpp:1629 src/FLTK/flgui.cpp:1634
+#: src/FLTK/flgui.cpp:3200 src/FLTK/flgui.cpp:3205
 msgid "Activate auto update song name from file"
 msgstr "Activer la mise à jour automatique du nom du morceau depuis un fichier"
 
-#: src/FLTK/flgui.cpp:1633
+#: src/FLTK/flgui.cpp:3204
 msgid "Read last line instead of first"
 msgstr "Dernière ligne plutôt que la première"
 
-#: src/FLTK/flgui.cpp:1640
+#: src/FLTK/flgui.cpp:3211
 msgid "Update song name manually"
 msgstr "Mettre à jour le titre du morceau manuellement"
 
-#: src/FLTK/flgui.cpp:1644
+#: src/FLTK/flgui.cpp:3215
 msgid "Current song name"
 msgstr "Titre du morceau actuel"
 
-#: src/FLTK/flgui.cpp:1650
+#: src/FLTK/flgui.cpp:3221
 msgid "OK"
 msgstr "OK"
 
-#: src/FLTK/flgui.cpp:1651
+#: src/FLTK/flgui.cpp:3222
 msgid "Send current song name to the server"
 msgstr "Envoyer le titre du morceau actuel vers le serveur"
 
-#: src/FLTK/flgui.cpp:1659
+#: src/FLTK/flgui.cpp:3230
 msgid "Update song name from application"
 msgstr "Mettre à jour le titre du morceau depuis une application"
 
-#: src/FLTK/flgui.cpp:1667
+#: src/FLTK/flgui.cpp:3238
 msgid "Changes the song through an running application"
 msgstr "Change le morceau depuis une application en cours d'exécution"
 
-#: src/FLTK/flgui.cpp:1672
+#: src/FLTK/flgui.cpp:3243
 msgid "Title - Artist"
 msgstr "Titre - Artiste"
 
-#: src/FLTK/flgui.cpp:1677
+#: src/FLTK/flgui.cpp:3248
 msgid "Artist - Title"
 msgstr "Artiste - Titre"
 
-#: src/FLTK/flgui.cpp:1689
+#: src/FLTK/flgui.cpp:3260
 msgid "Start streaming after launch"
 msgstr "Commencer la diffusion au démarrage"
 
-#: src/FLTK/flgui.cpp:1690
+#: src/FLTK/flgui.cpp:3261
 msgid "Connect automatically to a server after launch"
 msgstr "Se connecter automatiquement au serveur après le démarrage"
 
-#: src/FLTK/flgui.cpp:1700 src/FLTK/flgui.cpp:1703 src/FLTK/flgui.cpp:1791
-#: src/FLTK/flgui.cpp:1802
+#: src/FLTK/flgui.cpp:3271 src/FLTK/flgui.cpp:3274 src/FLTK/flgui.cpp:3381
+#: src/FLTK/flgui.cpp:3392
 msgid "seconds"
 msgstr "secondes"
 
-#: src/FLTK/flgui.cpp:1706 src/FLTK/flgui.cpp:1805
+#: src/FLTK/flgui.cpp:3277 src/FLTK/flgui.cpp:3395
 msgid "Start if signal is present for"
 msgstr "Démarrer si signal présent pdt."
 
-#: src/FLTK/flgui.cpp:1709 src/FLTK/flgui.cpp:1808
+#: src/FLTK/flgui.cpp:3280 src/FLTK/flgui.cpp:3398
 msgid "Stop if signal is absent for"
 msgstr "Arrêter si signal absent pdt."
 
-#: src/FLTK/flgui.cpp:1712
+#: src/FLTK/flgui.cpp:3283
 msgid "Force reconnecting"
 msgstr "Forcer la reconnexion"
 
-#: src/FLTK/flgui.cpp:1713
+#: src/FLTK/flgui.cpp:3284
 msgid "If enabled butt keeps reconnecting regardless of the error message"
 msgstr "Si activé butt se reconnecte sans tenir compte du message d'erreur"
 
-#: src/FLTK/flgui.cpp:1719
+#: src/FLTK/flgui.cpp:3290
 msgid "Extend song name"
 msgstr "Étendre le nom du morceau"
 
-#: src/FLTK/flgui.cpp:1722
+#: src/FLTK/flgui.cpp:3293
 msgid "Prefix:"
 msgstr "Préfixe :"
 
-#: src/FLTK/flgui.cpp:1727
+#: src/FLTK/flgui.cpp:3298
 msgid "Suffix:"
 msgstr "Suffixe :"
 
-#: src/FLTK/flgui.cpp:1736
+#: src/FLTK/flgui.cpp:3305
+msgid "Update song name delay"
+msgstr "Retard du titre de la chanson"
+
+#: src/FLTK/flgui.cpp:3309
+msgid "Introduces a delay until the song name is actually updated"
+msgstr "Retarde la mise à jour de la chanson"
+
+#: src/FLTK/flgui.cpp:3326
 msgid "Record"
 msgstr "Enregistr."
 
-#: src/FLTK/flgui.cpp:1738
+#: src/FLTK/flgui.cpp:3328
 msgid "Record File Name:"
 msgstr "Nom du fichier de l'enregistrement :"
 
-#: src/FLTK/flgui.cpp:1739
+#: src/FLTK/flgui.cpp:3329
 msgid "Record file name"
 msgstr "Nom du fichier de l'enregistrement"
 
-#: src/FLTK/flgui.cpp:1744
+#: src/FLTK/flgui.cpp:3334
 msgid "Record Directory:"
 msgstr "Répertoire de l'enregistrement :"
 
-#: src/FLTK/flgui.cpp:1745
+#: src/FLTK/flgui.cpp:3335
 msgid "Directory of recordings"
 msgstr "Répertoire des enregistrements"
 
-#: src/FLTK/flgui.cpp:1751
+#: src/FLTK/flgui.cpp:3341
 msgid "Select recording directory"
 msgstr "Sélectionnez le répertoire d'enregistrement"
 
-#: src/FLTK/flgui.cpp:1756
+#: src/FLTK/flgui.cpp:3346
 msgid "Split file"
 msgstr "Scinder le fichier"
 
-#: src/FLTK/flgui.cpp:1759
+#: src/FLTK/flgui.cpp:3349
 msgid "every"
 msgstr "Chaque"
 
-#: src/FLTK/flgui.cpp:1762
+#: src/FLTK/flgui.cpp:3352
 msgid "minutes"
 msgstr "minutes"
 
-#: src/FLTK/flgui.cpp:1764 src/FLTK/flgui.cpp:1765
+#: src/FLTK/flgui.cpp:3354 src/FLTK/flgui.cpp:3355
 msgid "Sync to full hour"
 msgstr "Synchroniser aux heures pleines"
 
-#: src/FLTK/flgui.cpp:1769
+#: src/FLTK/flgui.cpp:3359
 msgid "Split now"
 msgstr "Scinder"
 
-#: src/FLTK/flgui.cpp:1778 src/FLTK/flgui.cpp:1779
+#: src/FLTK/flgui.cpp:3368 src/FLTK/flgui.cpp:3369
 msgid "Start recording when connected"
 msgstr "Démarrer l'enregistrement une fois connecté"
 
-#: src/FLTK/flgui.cpp:1783 src/FLTK/flgui.cpp:1784
+#: src/FLTK/flgui.cpp:3373 src/FLTK/flgui.cpp:3374
 msgid "Start recording after launch"
 msgstr "Démarrer l'enregistrement au lancement"
 
-#: src/FLTK/flgui.cpp:1794
+#: src/FLTK/flgui.cpp:3384
 msgid "Stop recording when disconnected"
 msgstr "Arrêter l'enregistrement à la déconnexion"
 
-#: src/FLTK/flgui.cpp:1795
+#: src/FLTK/flgui.cpp:3385
 msgid "Start recording when disconnected"
 msgstr "Démarrer l'enregistrement à la déconnexion"
 
-#: src/FLTK/flgui.cpp:1815
+#: src/FLTK/flgui.cpp:3405
 msgid "TLS"
 msgstr "TLS"
 
-#: src/FLTK/flgui.cpp:1817 src/FLTK/flgui.cpp:2292
+#: src/FLTK/flgui.cpp:3407 src/FLTK/flgui.cpp:3988
 msgid "SSL/TLS"
 msgstr "SSL/TLS"
 
-#: src/FLTK/flgui.cpp:1820
+#: src/FLTK/flgui.cpp:3410
 msgid "CA Certificate File:"
 msgstr "Fichier du Certificat d'Autorité (CA) :"
 
-#: src/FLTK/flgui.cpp:1821
+#: src/FLTK/flgui.cpp:3411
 msgid "Certificate file"
 msgstr "Fichier du certificat"
 
-#: src/FLTK/flgui.cpp:1826
+#: src/FLTK/flgui.cpp:3416
 msgid "CA Certificate Directory:"
 msgstr "Répertoire du Certificat d'Autorité :"
 
-#: src/FLTK/flgui.cpp:1827
+#: src/FLTK/flgui.cpp:3417
 msgid "Certificate directory"
 msgstr "Répertoire du certificat"
 
-#: src/FLTK/flgui.cpp:1833
+#: src/FLTK/flgui.cpp:3423
 msgid "Select certificate directory"
 msgstr "Sélectionnez le répertoire du certificat"
 
-#: src/FLTK/flgui.cpp:1839
+#: src/FLTK/flgui.cpp:3429
 msgid "Select certificate file"
 msgstr "Sélectionnez le fichier du certificat"
 
-#: src/FLTK/flgui.cpp:1844
+#: src/FLTK/flgui.cpp:3434
 msgid ""
 "If your server uses a certificate from\n"
 "Let's Encrypt or another well known\n"
@@ -915,155 +928,175 @@ msgstr ""
 "Let's Encrypt ou d'une autre CA bien connue,\n"
 "vous pouvez laisser ces champs vides."
 
-#: src/FLTK/flgui.cpp:1852
+#: src/FLTK/flgui.cpp:3442
 msgid "DSP"
 msgstr "DSP"
 
-#: src/FLTK/flgui.cpp:1854
+#: src/FLTK/flgui.cpp:3444
 msgid "Equalizer"
 msgstr "Égaliseur"
 
-#: src/FLTK/flgui.cpp:1861
-msgid "100Hz"
-msgstr "100Hz"
+#: src/FLTK/flgui.cpp:3451
+msgid "32Hz"
+msgstr "32Hz"
 
-#: src/FLTK/flgui.cpp:1878
-msgid "350Hz"
-msgstr "350Hz"
+#: src/FLTK/flgui.cpp:3469
+msgid "64Hz"
+msgstr "64Hz"
 
-#: src/FLTK/flgui.cpp:1895
-msgid "1kHz"
-msgstr "1kHz"
+#: src/FLTK/flgui.cpp:3486
+msgid "125Hz"
+msgstr "125Hz"
 
-#: src/FLTK/flgui.cpp:1912
-msgid "3.5kHz"
-msgstr "3.5kHz"
+#: src/FLTK/flgui.cpp:3503
+msgid "250Hz"
+msgstr "250Hz"
 
-#: src/FLTK/flgui.cpp:1929
-msgid "10kHz"
-msgstr "10kHz"
+#: src/FLTK/flgui.cpp:3520
+msgid "500Hz"
+msgstr "500Hz"
 
-#: src/FLTK/flgui.cpp:1946 src/FLTK/flgui.cpp:1950 src/FLTK/flgui.cpp:1954
-#: src/FLTK/flgui.cpp:1958 src/FLTK/flgui.cpp:1962 src/FLTK/flgui.cpp:2050
-#: src/FLTK/flgui.cpp:2054 src/FLTK/flgui.cpp:2088
+#: src/FLTK/flgui.cpp:3537 src/FLTK/flgui.cpp:3541 src/FLTK/flgui.cpp:3545
+#: src/FLTK/flgui.cpp:3549 src/FLTK/flgui.cpp:3553 src/FLTK/flgui.cpp:3647
+#: src/FLTK/flgui.cpp:3651 src/FLTK/flgui.cpp:3655 src/FLTK/flgui.cpp:3659
+#: src/FLTK/flgui.cpp:3663 src/FLTK/flgui.cpp:3746 src/FLTK/flgui.cpp:3750
+#: src/FLTK/flgui.cpp:3784
 msgid "+0.0"
 msgstr "+0.0"
 
-#: src/FLTK/flgui.cpp:1966 src/FLTK/flgui.cpp:2066
+#: src/FLTK/flgui.cpp:3557 src/FLTK/flgui.cpp:3762
 msgid "Reset"
 msgstr "Réinit."
 
-#: src/FLTK/flgui.cpp:1973
+#: src/FLTK/flgui.cpp:3562
+msgid "1kHz"
+msgstr "1kHz"
+
+#: src/FLTK/flgui.cpp:3579
+msgid "2kHz"
+msgstr "2KHz"
+
+#: src/FLTK/flgui.cpp:3596
+msgid "4kHz"
+msgstr "4kHz"
+
+#: src/FLTK/flgui.cpp:3613
+msgid "8kHz"
+msgstr "8kHz"
+
+#: src/FLTK/flgui.cpp:3630
+msgid "16kHz"
+msgstr "16kHz"
+
+#: src/FLTK/flgui.cpp:3669
 msgid "Dynamic Range Compressor"
 msgstr "Compresseur"
 
-#: src/FLTK/flgui.cpp:1980
+#: src/FLTK/flgui.cpp:3676
 msgid "Threshold"
 msgstr "Seuil"
 
-#: src/FLTK/flgui.cpp:1997
+#: src/FLTK/flgui.cpp:3693
 msgid "Ratio"
 msgstr "Ratio"
 
-#: src/FLTK/flgui.cpp:2014
+#: src/FLTK/flgui.cpp:3710
 msgid "Attack"
 msgstr "Attaque"
 
-#: src/FLTK/flgui.cpp:2032
+#: src/FLTK/flgui.cpp:3728
 msgid "Release"
 msgstr "Relâche"
 
-#: src/FLTK/flgui.cpp:2058 src/FLTK/flgui.cpp:2062
+#: src/FLTK/flgui.cpp:3754 src/FLTK/flgui.cpp:3758
 msgid "+0.00"
 msgstr "+0.00"
 
-#: src/FLTK/flgui.cpp:2071
-msgid ""
-"Makeup\n"
-"Gain"
-msgstr "Gain"
+#: src/FLTK/flgui.cpp:3767
+msgid "MakeupGain"
+msgstr "MakeupGain"
 
-#: src/FLTK/flgui.cpp:2092
+#: src/FLTK/flgui.cpp:3788
 msgid "Aggressive Mode"
 msgstr "Mode agressif"
 
-#: src/FLTK/flgui.cpp:2112
+#: src/FLTK/flgui.cpp:3808
 msgid "GUI"
 msgstr "GUI"
 
-#: src/FLTK/flgui.cpp:2114
+#: src/FLTK/flgui.cpp:3810
 msgid "Display Color"
 msgstr "Couleurs d'affichage"
 
-#: src/FLTK/flgui.cpp:2117 src/FLTK/flgui.cpp:2118
+#: src/FLTK/flgui.cpp:3813 src/FLTK/flgui.cpp:3814
 msgid "Select text color"
 msgstr "Sélectionnez la couleur du texte"
 
-#: src/FLTK/flgui.cpp:2124 src/FLTK/flgui.cpp:2125
+#: src/FLTK/flgui.cpp:3820 src/FLTK/flgui.cpp:3821
 msgid "Select background color"
 msgstr "Sélectionnez la couleur du fond"
 
-#: src/FLTK/flgui.cpp:2133
+#: src/FLTK/flgui.cpp:3829
 msgid "Misc"
 msgstr "Divers"
 
-#: src/FLTK/flgui.cpp:2136
+#: src/FLTK/flgui.cpp:3832
 msgid "Attach settings window to main window"
 msgstr "Lier la fenêtre de paramètres à la principale"
 
-#: src/FLTK/flgui.cpp:2137
+#: src/FLTK/flgui.cpp:3833
 msgid "Attach this window to the butt window"
 msgstr "Lier cette fenêtre à la fenêtre butt"
 
-#: src/FLTK/flgui.cpp:2141 src/FLTK/flgui.cpp:2142
+#: src/FLTK/flgui.cpp:3837 src/FLTK/flgui.cpp:3838
 msgid "Stay always on top"
 msgstr "Rester toujours au dessus"
 
-#: src/FLTK/flgui.cpp:2146 src/FLTK/flgui.cpp:2147
+#: src/FLTK/flgui.cpp:3842 src/FLTK/flgui.cpp:3843
 msgid "Change display mode every 5 seconds"
 msgstr "Changer le mode d'affichage toutes les 5 secs"
 
-#: src/FLTK/flgui.cpp:2151 src/FLTK/flgui.cpp:2152
+#: src/FLTK/flgui.cpp:3847 src/FLTK/flgui.cpp:3848
 msgid "Hide log window after start up"
 msgstr "Masquer la fenêtre des journaux au démarrage"
 
-#: src/FLTK/flgui.cpp:2156 src/FLTK/flgui.cpp:2157
+#: src/FLTK/flgui.cpp:3852 src/FLTK/flgui.cpp:3853
 msgid "Remember main window position"
 msgstr "Se souvenir de la position de la fenêtre principale"
 
-#: src/FLTK/flgui.cpp:2161
+#: src/FLTK/flgui.cpp:3857
 msgid "Start minimized"
 msgstr "Démarrer réduit"
 
-#: src/FLTK/flgui.cpp:2162
+#: src/FLTK/flgui.cpp:3858
 msgid "Minimize butt at startup"
 msgstr "Réduire butt au démarrage"
 
-#: src/FLTK/flgui.cpp:2168
+#: src/FLTK/flgui.cpp:3864
 msgid "Language"
 msgstr "Langue"
 
-#: src/FLTK/flgui.cpp:2185
+#: src/FLTK/flgui.cpp:3881
 msgid "VU meter"
 msgstr "VU mètre"
 
-#: src/FLTK/flgui.cpp:2188
+#: src/FLTK/flgui.cpp:3884
 msgid "Gradient colors"
 msgstr "Couleurs du dégradé"
 
-#: src/FLTK/flgui.cpp:2193
+#: src/FLTK/flgui.cpp:3889
 msgid "Solid colors"
 msgstr "Couleurs solides"
 
-#: src/FLTK/flgui.cpp:2202
+#: src/FLTK/flgui.cpp:3898
 msgid "Donate"
 msgstr "Don"
 
-#: src/FLTK/flgui.cpp:2204
+#: src/FLTK/flgui.cpp:3900
 msgid "Donation"
 msgstr "Faire un don"
 
-#: src/FLTK/flgui.cpp:2207
+#: src/FLTK/flgui.cpp:3903
 msgid ""
 "Keeping this software up to date, adding\n"
 "new features and answering support mails\n"
@@ -1081,132 +1114,132 @@ msgstr ""
 "\n"
 "Merci !"
 
-#: src/FLTK/flgui.cpp:2212
+#: src/FLTK/flgui.cpp:3908
 msgid "&Donate via PayPal"
 msgstr "&Donner via PayPal"
 
-#: src/FLTK/flgui.cpp:2216
+#: src/FLTK/flgui.cpp:3912
 msgid "Become a &patron"
 msgstr "Devenir un &patron"
 
-#: src/FLTK/flgui.cpp:2220
+#: src/FLTK/flgui.cpp:3916
 msgid "Bitcoin && Co"
 msgstr "Bitcoin && Co"
 
-#: src/FLTK/flgui.cpp:2235 src/FLTK/flgui.cpp:2309
+#: src/FLTK/flgui.cpp:3931 src/FLTK/flgui.cpp:4005
 msgid "Name:"
 msgstr "Nom :"
 
-#: src/FLTK/flgui.cpp:2239
+#: src/FLTK/flgui.cpp:3935
 msgid "Address:"
 msgstr "Adresse :"
 
-#: src/FLTK/flgui.cpp:2243
+#: src/FLTK/flgui.cpp:3939
 msgid "Port:"
 msgstr "Port :"
 
-#: src/FLTK/flgui.cpp:2247
+#: src/FLTK/flgui.cpp:3943
 msgid "Password:"
 msgstr "Mot de passe :"
 
-#: src/FLTK/flgui.cpp:2252
+#: src/FLTK/flgui.cpp:3948
 msgid "IceCast mountpoint:"
 msgstr "Point de montage IceCast :"
 
-#: src/FLTK/flgui.cpp:2256
+#: src/FLTK/flgui.cpp:3952
 msgid "IceCast user:"
 msgstr "Utilisateur IceCast :"
 
-#: src/FLTK/flgui.cpp:2260
+#: src/FLTK/flgui.cpp:3956
 msgid "Type"
 msgstr "Type"
 
-#: src/FLTK/flgui.cpp:2263
+#: src/FLTK/flgui.cpp:3959
 msgid "ShoutCast"
 msgstr "ShoutCast"
 
-#: src/FLTK/flgui.cpp:2268
+#: src/FLTK/flgui.cpp:3964
 msgid "IceCast"
 msgstr "IceCast"
 
-#: src/FLTK/flgui.cpp:2275 src/FLTK/flgui.cpp:2341
+#: src/FLTK/flgui.cpp:3971 src/FLTK/flgui.cpp:4037
 msgid "&Cancel"
 msgstr "Annuler"
 
-#: src/FLTK/flgui.cpp:2279 src/FLTK/flgui.cpp:2345
+#: src/FLTK/flgui.cpp:3975 src/FLTK/flgui.cpp:4041
 msgid "&ADD"
 msgstr "&Ajouter"
 
-#: src/FLTK/flgui.cpp:2287 src/FLTK/fl_callbacks.cpp:1015
-#: src/FLTK/fl_callbacks.cpp:1047 src/FLTK/fl_callbacks.cpp:1321
+#: src/FLTK/flgui.cpp:3983 src/FLTK/fl_callbacks.cpp:1026
+#: src/FLTK/fl_callbacks.cpp:1058 src/FLTK/fl_callbacks.cpp:1338
 msgid "Show"
 msgstr "Afficher"
 
-#: src/FLTK/flgui.cpp:2288
+#: src/FLTK/flgui.cpp:3984
 msgid "show/hide password"
 msgstr "afficher/masquer le mot de passe"
 
-#: src/FLTK/flgui.cpp:2295
+#: src/FLTK/flgui.cpp:3991
 msgid "Use SSL/TLS"
 msgstr "Utiliser SSL/TLS"
 
-#: src/FLTK/flgui.cpp:2298
+#: src/FLTK/flgui.cpp:3994
 msgid "Revoke certificate trust"
 msgstr "Révoquer la confiance dans le certificat"
 
-#: src/FLTK/flgui.cpp:2310
+#: src/FLTK/flgui.cpp:4006
 msgid "The name of your new ICY-entrie"
 msgstr "Le nom de votre ICY-entrie"
 
-#: src/FLTK/flgui.cpp:2314
+#: src/FLTK/flgui.cpp:4010
 msgid "Description:"
 msgstr "Description :"
 
-#: src/FLTK/flgui.cpp:2318
+#: src/FLTK/flgui.cpp:4014
 msgid "Genre:"
 msgstr "Genre :"
 
-#: src/FLTK/flgui.cpp:2322
+#: src/FLTK/flgui.cpp:4018
 msgid "URL:"
 msgstr "URL :"
 
-#: src/FLTK/flgui.cpp:2326
+#: src/FLTK/flgui.cpp:4022
 msgid "ICQ:"
 msgstr "ICQ :"
 
-#: src/FLTK/flgui.cpp:2330
+#: src/FLTK/flgui.cpp:4026
 msgid "IRC:"
 msgstr "IRC :"
 
-#: src/FLTK/flgui.cpp:2334
+#: src/FLTK/flgui.cpp:4030
 msgid "AIM:"
 msgstr "AIM :"
 
-#: src/FLTK/flgui.cpp:2338
+#: src/FLTK/flgui.cpp:4034
 msgid "Make server public"
 msgstr "Rendre le serveur public"
 
-#: src/FLTK/flgui.cpp:2368
+#: src/FLTK/flgui.cpp:4064
 msgid "Donate Cryptocurrency"
 msgstr "Donner par crypto-monnaie"
 
-#: src/FLTK/flgui.cpp:2379
+#: src/FLTK/flgui.cpp:4075
 msgid "Bitcoin"
 msgstr "Bitcoin"
 
-#: src/FLTK/flgui.cpp:2384 src/FLTK/flgui.cpp:2393 src/FLTK/flgui.cpp:2402
+#: src/FLTK/flgui.cpp:4080 src/FLTK/flgui.cpp:4089 src/FLTK/flgui.cpp:4098
 msgid "Copy"
 msgstr "Copier"
 
-#: src/FLTK/flgui.cpp:2388
+#: src/FLTK/flgui.cpp:4084
 msgid "Dash"
 msgstr "Dash"
 
-#: src/FLTK/flgui.cpp:2397
+#: src/FLTK/flgui.cpp:4093
 msgid "Monero"
 msgstr "Monero"
 
-#: src/FLTK/flgui.cpp:2406
+#: src/FLTK/flgui.cpp:4102
 msgid "&Close"
 msgstr "Fermer"
 
@@ -1270,7 +1303,7 @@ msgstr ""
 "Aucun nom de fichier valide trouvé pour le prochain fichier\n"
 "butt continue d'enregistrer dans le fichier actuel"
 
-#: src/FLTK/fl_timer_funcs.cpp:403 src/FLTK/fl_callbacks.cpp:902
+#: src/FLTK/fl_timer_funcs.cpp:403 src/FLTK/fl_callbacks.cpp:913
 #, c-format
 msgid ""
 "Could not open:\n"
@@ -1294,11 +1327,11 @@ msgstr ""
 "Impossible d'ouvrir : %s.\n"
 "Nouvel essai dans 5 secondes"
 
-#: src/FLTK/fl_callbacks.cpp:120
+#: src/FLTK/fl_callbacks.cpp:126
 msgid "connecting"
 msgstr "se connecte"
 
-#: src/FLTK/fl_callbacks.cpp:156
+#: src/FLTK/fl_callbacks.cpp:162
 msgid ""
 "Error: No server entry found.\n"
 "Please add a server in the settings-window."
@@ -1306,7 +1339,7 @@ msgstr ""
 "Erreur : Pas d'entrée serveur trouvée.\n"
 "Veuillez ajouter un serveur dans la fenêtre des paramètres."
 
-#: src/FLTK/fl_callbacks.cpp:162
+#: src/FLTK/fl_callbacks.cpp:168
 msgid ""
 "Error: ogg vorbis encoder doesn't support bitrates\n"
 "lower than 48kbit"
@@ -1314,45 +1347,45 @@ msgstr ""
 "Erreur: l'encodeur ogg vorbis ne gère pas les bitrates\n"
 "inférieurs à 48kbit"
 
-#: src/FLTK/fl_callbacks.cpp:171
+#: src/FLTK/fl_callbacks.cpp:177
 #, c-format
 msgid "Warning: %s is not supported by every ShoutCast version"
 msgstr "Attention : %s n'est pas géré par toutes les versions de ShoutCast"
 
-#: src/FLTK/fl_callbacks.cpp:176
+#: src/FLTK/fl_callbacks.cpp:182
 msgid "Error: FLAC is not supported by ShoutCast"
 msgstr "Erreur : FLAC n'est pas géré par ShoutCast"
 
-#: src/FLTK/fl_callbacks.cpp:183
+#: src/FLTK/fl_callbacks.cpp:189
 #, c-format
 msgid "Connecting to %s:%u (%u) ..."
 msgstr "Connexion à %s:%u (%u)…"
 
-#: src/FLTK/fl_callbacks.cpp:188
+#: src/FLTK/fl_callbacks.cpp:194
 #, c-format
 msgid "Connecting to %s:%u ..."
 msgstr "Connexion à %s:%u…"
 
-#: src/FLTK/fl_callbacks.cpp:241
+#: src/FLTK/fl_callbacks.cpp:247
 msgid "Connection established"
 msgstr "Connexion établie"
 
-#: src/FLTK/fl_callbacks.cpp:262 src/FLTK/fl_callbacks.cpp:3523
-#: src/FLTK/fl_callbacks.cpp:3530
+#: src/FLTK/fl_callbacks.cpp:268 src/FLTK/fl_callbacks.cpp:3543
+#: src/FLTK/fl_callbacks.cpp:3550
 msgid "no"
 msgstr "non"
 
-#: src/FLTK/fl_callbacks.cpp:262 src/FLTK/fl_callbacks.cpp:3523
-#: src/FLTK/fl_callbacks.cpp:3530
+#: src/FLTK/fl_callbacks.cpp:268 src/FLTK/fl_callbacks.cpp:3543
+#: src/FLTK/fl_callbacks.cpp:3550
 msgid "yes"
 msgstr "oui"
 
-#: src/FLTK/fl_callbacks.cpp:330
+#: src/FLTK/fl_callbacks.cpp:337
 #, c-format
 msgid "Connected to: %s"
 msgstr "Connecté à : %s"
 
-#: src/FLTK/fl_callbacks.cpp:384 src/FLTK/fl_callbacks.cpp:1356
+#: src/FLTK/fl_callbacks.cpp:391 src/FLTK/fl_callbacks.cpp:1373
 msgid ""
 "No mountpoint specified\n"
 "Setting mountpoint to \"stream\""
@@ -1360,7 +1393,7 @@ msgstr ""
 "Aucun point de montage spécifié\n"
 "Utilisation du point de montage \"stream\""
 
-#: src/FLTK/fl_callbacks.cpp:389 src/FLTK/fl_callbacks.cpp:1361
+#: src/FLTK/fl_callbacks.cpp:396 src/FLTK/fl_callbacks.cpp:1378
 msgid ""
 "No user specified\n"
 "Setting user to \"source\""
@@ -1368,12 +1401,12 @@ msgstr ""
 "Aucun utilisateur spécifié\n"
 "Utilisation de l'utilisateur \"source\""
 
-#: src/FLTK/fl_callbacks.cpp:394 src/FLTK/fl_callbacks.cpp:1366
-#: src/FLTK/fl_callbacks.cpp:1516 src/FLTK/fl_callbacks.cpp:2186
+#: src/FLTK/fl_callbacks.cpp:401 src/FLTK/fl_callbacks.cpp:1383
+#: src/FLTK/fl_callbacks.cpp:1532 src/FLTK/fl_callbacks.cpp:2202
 msgid "No name specified"
 msgstr "Aucun nom spécifié"
 
-#: src/FLTK/fl_callbacks.cpp:401 src/FLTK/fl_callbacks.cpp:1373
+#: src/FLTK/fl_callbacks.cpp:408 src/FLTK/fl_callbacks.cpp:1390
 msgid ""
 "The number of characters of all your server names exeeds 1000\n"
 "Please reduce the number of characters of each server name"
@@ -1381,25 +1414,25 @@ msgstr ""
 "Le nombre de caractères de l'ensemble des noms de votre serveur\n"
 "excède 1000. Veuillez raccourcir le nom de chaque serveur"
 
-#: src/FLTK/fl_callbacks.cpp:408 src/FLTK/fl_callbacks.cpp:1380
-#: src/FLTK/fl_callbacks.cpp:1530 src/FLTK/fl_callbacks.cpp:2201
+#: src/FLTK/fl_callbacks.cpp:415 src/FLTK/fl_callbacks.cpp:1397
+#: src/FLTK/fl_callbacks.cpp:1546 src/FLTK/fl_callbacks.cpp:2217
 msgid "No newline characters and ;/\\ are allowed in the name field"
 msgstr ""
 "Les caractères nouvelle ligne et ;/\\ ne sont pas autorisés dans le champ nom"
 
-#: src/FLTK/fl_callbacks.cpp:413 src/FLTK/fl_callbacks.cpp:1385
+#: src/FLTK/fl_callbacks.cpp:420 src/FLTK/fl_callbacks.cpp:1402
 msgid "No address specified"
 msgstr "Pas d'adresse spécifiée"
 
-#: src/FLTK/fl_callbacks.cpp:418 src/FLTK/fl_callbacks.cpp:1390
+#: src/FLTK/fl_callbacks.cpp:425 src/FLTK/fl_callbacks.cpp:1407
 msgid "No password specified"
 msgstr "Pas de mot de passe spécifié"
 
-#: src/FLTK/fl_callbacks.cpp:423 src/FLTK/fl_callbacks.cpp:1395
+#: src/FLTK/fl_callbacks.cpp:430 src/FLTK/fl_callbacks.cpp:1412
 msgid "No port specified"
 msgstr "Pas de port spécifié"
 
-#: src/FLTK/fl_callbacks.cpp:429 src/FLTK/fl_callbacks.cpp:1401
+#: src/FLTK/fl_callbacks.cpp:436 src/FLTK/fl_callbacks.cpp:1418
 msgid ""
 "Invalid port number\n"
 "The port number must be between 1 and 65535"
@@ -1407,65 +1440,65 @@ msgstr ""
 "Numéro de port invalide\n"
 "Le numéro de port doit être compris entre 1 et 65535"
 
-#: src/FLTK/fl_callbacks.cpp:439 src/FLTK/fl_callbacks.cpp:1412
-#: src/FLTK/fl_callbacks.cpp:2211
+#: src/FLTK/fl_callbacks.cpp:446 src/FLTK/fl_callbacks.cpp:1429
+#: src/FLTK/fl_callbacks.cpp:2227
 msgid "Server name already exist!"
 msgstr "Le nom du serveur existe déjà !"
 
-#: src/FLTK/fl_callbacks.cpp:736
+#: src/FLTK/fl_callbacks.cpp:745
 msgid "stop recording?"
 msgstr "arrêter l'enregistrement ?"
 
-#: src/FLTK/fl_callbacks.cpp:736 src/FLTK/fl_funcs.cpp:647
+#: src/FLTK/fl_callbacks.cpp:745 src/FLTK/fl_funcs.cpp:688
 msgid "No"
 msgstr "Non"
 
-#: src/FLTK/fl_callbacks.cpp:736
+#: src/FLTK/fl_callbacks.cpp:745
 msgid "Yes"
 msgstr "Oui"
 
-#: src/FLTK/fl_callbacks.cpp:790
+#: src/FLTK/fl_callbacks.cpp:801
 msgid "No recording filename specified"
 msgstr "Pas de nom de fichier d'enregistrement spécifié"
 
-#: src/FLTK/fl_callbacks.cpp:855
+#: src/FLTK/fl_callbacks.cpp:866
 msgid "Could not find a valid filename"
 msgstr "Aucun nom de fichier valide trouvé"
 
-#: src/FLTK/fl_callbacks.cpp:866
+#: src/FLTK/fl_callbacks.cpp:877
 #, c-format
 msgid "%s already exists!"
 msgstr "%s existe déjà !"
 
-#: src/FLTK/fl_callbacks.cpp:867
+#: src/FLTK/fl_callbacks.cpp:878
 msgid "cancel"
 msgstr "annuler"
 
-#: src/FLTK/fl_callbacks.cpp:867
+#: src/FLTK/fl_callbacks.cpp:878
 msgid "overwrite"
 msgstr "écraser"
 
-#: src/FLTK/fl_callbacks.cpp:867
+#: src/FLTK/fl_callbacks.cpp:878
 msgid "append"
 msgstr "compléter"
 
-#: src/FLTK/fl_callbacks.cpp:965 src/FLTK/fl_funcs.cpp:537
+#: src/FLTK/fl_callbacks.cpp:976 src/FLTK/fl_funcs.cpp:578
 msgid "Hide log"
 msgstr "Journal"
 
-#: src/FLTK/fl_callbacks.cpp:1004
+#: src/FLTK/fl_callbacks.cpp:1015
 msgid "Add Server"
 msgstr "Ajouter un serveur"
 
-#: src/FLTK/fl_callbacks.cpp:1034
+#: src/FLTK/fl_callbacks.cpp:1045
 msgid "Edit Server"
 msgstr "Modifier un serveur"
 
-#: src/FLTK/fl_callbacks.cpp:1096
+#: src/FLTK/fl_callbacks.cpp:1107
 msgid "Add Server Infos"
 msgstr "Ajouter des informations du serveur"
 
-#: src/FLTK/fl_callbacks.cpp:1164
+#: src/FLTK/fl_callbacks.cpp:1181
 #, c-format
 msgid ""
 "Updated songname to:\n"
@@ -1474,24 +1507,24 @@ msgstr ""
 "Nom du morceau mis à jour pour :\n"
 "%s\n"
 
-#: src/FLTK/fl_callbacks.cpp:1174
+#: src/FLTK/fl_callbacks.cpp:1191
 msgid "Updating songname failed"
 msgstr "Impossible de mettre à jour le nom du morceau"
 
-#: src/FLTK/fl_callbacks.cpp:1251
+#: src/FLTK/fl_callbacks.cpp:1268
 #, c-format
 msgid "Audio buffer has been set to %d ms"
 msgstr "Le tampon audio a été réglé sur %d ms"
 
-#: src/FLTK/fl_callbacks.cpp:1315
+#: src/FLTK/fl_callbacks.cpp:1332
 msgid "Hide"
 msgstr "Masquer"
 
-#: src/FLTK/fl_callbacks.cpp:1338
+#: src/FLTK/fl_callbacks.cpp:1355
 msgid "Could not revoke trust for certificate"
 msgstr "Impossible de révoquer la confiance du certificat"
 
-#: src/FLTK/fl_callbacks.cpp:1523
+#: src/FLTK/fl_callbacks.cpp:1539
 msgid ""
 "The number of characters of all your icy names exeeds 1000\n"
 "Please reduce the count of characters of each icy name"
@@ -1499,15 +1532,15 @@ msgstr ""
 "Le nombre de caractères de tous les noms icy excède 1000\n"
 "Veuillez réduire le nombre de caractères de chaque nom icy"
 
-#: src/FLTK/fl_callbacks.cpp:1541
+#: src/FLTK/fl_callbacks.cpp:1557
 msgid "Icy name already exist!"
 msgstr "Le nom icy existe déjà !"
 
-#: src/FLTK/fl_callbacks.cpp:1676 src/FLTK/fl_callbacks.cpp:1691
-#: src/FLTK/fl_callbacks.cpp:1707 src/FLTK/fl_callbacks.cpp:1724
-#: src/FLTK/fl_callbacks.cpp:1871 src/FLTK/fl_callbacks.cpp:1886
-#: src/FLTK/fl_callbacks.cpp:1902 src/FLTK/fl_callbacks.cpp:1919
-#: src/FLTK/fl_callbacks.cpp:1936
+#: src/FLTK/fl_callbacks.cpp:1692 src/FLTK/fl_callbacks.cpp:1707
+#: src/FLTK/fl_callbacks.cpp:1723 src/FLTK/fl_callbacks.cpp:1740
+#: src/FLTK/fl_callbacks.cpp:1887 src/FLTK/fl_callbacks.cpp:1902
+#: src/FLTK/fl_callbacks.cpp:1918 src/FLTK/fl_callbacks.cpp:1935
+#: src/FLTK/fl_callbacks.cpp:1952
 msgid ""
 "Warning:\n"
 "The stream Sample-/Bitrate combination is invalid"
@@ -1515,21 +1548,21 @@ msgstr ""
 "Attention :\n"
 "La combinaison Sample-/Bitrate du flux est invalide"
 
-#: src/FLTK/fl_callbacks.cpp:1682 src/FLTK/fl_callbacks.cpp:1697
-#: src/FLTK/fl_callbacks.cpp:1713 src/FLTK/fl_callbacks.cpp:1730
+#: src/FLTK/fl_callbacks.cpp:1698 src/FLTK/fl_callbacks.cpp:1713
+#: src/FLTK/fl_callbacks.cpp:1729 src/FLTK/fl_callbacks.cpp:1746
 msgid "The previous values have been set\n"
 msgstr "Les valeurs antérieures ont été restaurées\n"
 
-#: src/FLTK/fl_callbacks.cpp:1737
+#: src/FLTK/fl_callbacks.cpp:1753
 #, c-format
 msgid "Stream bitrate set to: %dk"
 msgstr "Bitrate du flux réglé sur : %dk"
 
-#: src/FLTK/fl_callbacks.cpp:1771 src/FLTK/fl_callbacks.cpp:1786
-#: src/FLTK/fl_callbacks.cpp:1802 src/FLTK/fl_callbacks.cpp:1819
-#: src/FLTK/fl_callbacks.cpp:1961 src/FLTK/fl_callbacks.cpp:1979
-#: src/FLTK/fl_callbacks.cpp:1997 src/FLTK/fl_callbacks.cpp:2016
-#: src/FLTK/fl_callbacks.cpp:2034
+#: src/FLTK/fl_callbacks.cpp:1787 src/FLTK/fl_callbacks.cpp:1802
+#: src/FLTK/fl_callbacks.cpp:1818 src/FLTK/fl_callbacks.cpp:1835
+#: src/FLTK/fl_callbacks.cpp:1977 src/FLTK/fl_callbacks.cpp:1995
+#: src/FLTK/fl_callbacks.cpp:2013 src/FLTK/fl_callbacks.cpp:2032
+#: src/FLTK/fl_callbacks.cpp:2050
 msgid ""
 "Warning:\n"
 "The record Sample-/Bitrate combination is invalid"
@@ -1537,35 +1570,35 @@ msgstr ""
 "Attention :\n"
 "La combinaison Sample-/Bitrate de l'enregistrement est invalide"
 
-#: src/FLTK/fl_callbacks.cpp:1777 src/FLTK/fl_callbacks.cpp:1792
-#: src/FLTK/fl_callbacks.cpp:1808 src/FLTK/fl_callbacks.cpp:1825
-#: src/FLTK/fl_callbacks.cpp:1877 src/FLTK/fl_callbacks.cpp:1892
-#: src/FLTK/fl_callbacks.cpp:1908 src/FLTK/fl_callbacks.cpp:1925
-#: src/FLTK/fl_callbacks.cpp:1942 src/FLTK/fl_callbacks.cpp:1969
-#: src/FLTK/fl_callbacks.cpp:1987 src/FLTK/fl_callbacks.cpp:2005
-#: src/FLTK/fl_callbacks.cpp:2024 src/FLTK/fl_callbacks.cpp:2040
+#: src/FLTK/fl_callbacks.cpp:1793 src/FLTK/fl_callbacks.cpp:1808
+#: src/FLTK/fl_callbacks.cpp:1824 src/FLTK/fl_callbacks.cpp:1841
+#: src/FLTK/fl_callbacks.cpp:1893 src/FLTK/fl_callbacks.cpp:1908
+#: src/FLTK/fl_callbacks.cpp:1924 src/FLTK/fl_callbacks.cpp:1941
+#: src/FLTK/fl_callbacks.cpp:1958 src/FLTK/fl_callbacks.cpp:1985
+#: src/FLTK/fl_callbacks.cpp:2003 src/FLTK/fl_callbacks.cpp:2021
+#: src/FLTK/fl_callbacks.cpp:2040 src/FLTK/fl_callbacks.cpp:2056
 msgid "The previous values have been set"
 msgstr "Les valeurs antérieures ont été restaurées"
 
-#: src/FLTK/fl_callbacks.cpp:1831
+#: src/FLTK/fl_callbacks.cpp:1847
 #, c-format
 msgid "Record bitrate set to: %dk"
 msgstr "Bitrate de l'enregistrement réglé sur : %dk"
 
-#: src/FLTK/fl_callbacks.cpp:2050
+#: src/FLTK/fl_callbacks.cpp:2066
 #, c-format
 msgid "Samplerate set to: %dHz"
 msgstr "Taux d'échantillonnage réglé sur : %dHz"
 
-#: src/FLTK/fl_callbacks.cpp:2110
+#: src/FLTK/fl_callbacks.cpp:2126
 msgid "Channels set to: stereo"
 msgstr "Canaux réglés sur : stéréo"
 
-#: src/FLTK/fl_callbacks.cpp:2164
+#: src/FLTK/fl_callbacks.cpp:2180
 msgid "Channels set to: mono"
 msgstr "Canaux réglés sur : mono"
 
-#: src/FLTK/fl_callbacks.cpp:2194
+#: src/FLTK/fl_callbacks.cpp:2210
 msgid ""
 "The number of characters of all your icy names exeeds 1000\n"
 "Please reduce the number of characters of each icy name"
@@ -1573,11 +1606,11 @@ msgstr ""
 "Le nombre de caractères des noms icy excède 1000\n"
 "Veuillez réduire le nombre de caractères pour chaque nom icy"
 
-#: src/FLTK/fl_callbacks.cpp:2307
+#: src/FLTK/fl_callbacks.cpp:2323
 msgid "Edit Server Infos"
 msgstr "Modifier les informations du serveur"
 
-#: src/FLTK/fl_callbacks.cpp:2410 src/FLTK/fl_callbacks.cpp:2549
+#: src/FLTK/fl_callbacks.cpp:2426 src/FLTK/fl_callbacks.cpp:2565
 msgid ""
 "MP3 encoder doesn't support current\n"
 "Sample-/Bitrate combination"
@@ -1585,11 +1618,11 @@ msgstr ""
 "L'encodeur MP3 ne gère pas la combinaison\n"
 "Sample-/Bitrate actuelle"
 
-#: src/FLTK/fl_callbacks.cpp:2425
+#: src/FLTK/fl_callbacks.cpp:2441
 msgid "Stream codec set to mp3"
 msgstr "Codec du flux réglé sur mp3"
 
-#: src/FLTK/fl_callbacks.cpp:2434 src/FLTK/fl_callbacks.cpp:2581
+#: src/FLTK/fl_callbacks.cpp:2450 src/FLTK/fl_callbacks.cpp:2597
 msgid ""
 "OGG Vorbis encoder doesn't support current\n"
 "Sample-/Bitrate combination"
@@ -1597,11 +1630,11 @@ msgstr ""
 "L'encodeur OGG Vorbis ne gère pas la combinaison\n"
 "Sample-/Bitrate actuelle"
 
-#: src/FLTK/fl_callbacks.cpp:2449
+#: src/FLTK/fl_callbacks.cpp:2465
 msgid "Stream codec set to ogg/vorbis"
 msgstr "Codec du flux réglé sur ogg/vorbis"
 
-#: src/FLTK/fl_callbacks.cpp:2458 src/FLTK/fl_callbacks.cpp:2612
+#: src/FLTK/fl_callbacks.cpp:2474 src/FLTK/fl_callbacks.cpp:2628
 msgid ""
 "Opus encoder doesn't support current\n"
 "Sample-/Bitrate combination"
@@ -1609,11 +1642,11 @@ msgstr ""
 "L'encodeur Opus ne gère pas la combinaison\n"
 "Sample-/Bitrate actuelle"
 
-#: src/FLTK/fl_callbacks.cpp:2473
+#: src/FLTK/fl_callbacks.cpp:2489
 msgid "Stream codec set to opus"
 msgstr "Codec du flux réglé sur opus"
 
-#: src/FLTK/fl_callbacks.cpp:2484 src/FLTK/fl_callbacks.cpp:2645
+#: src/FLTK/fl_callbacks.cpp:2500 src/FLTK/fl_callbacks.cpp:2661
 msgid ""
 "Could not find aac library.\n"
 "Please follow the instructions in the manual for adding aac support."
@@ -1621,7 +1654,7 @@ msgstr ""
 "Impossible de trouver la bibliothèque AAC\n"
 "Veuillez suivre les instructions du manuel pour ajouter la gestion de AAC."
 
-#: src/FLTK/fl_callbacks.cpp:2498 src/FLTK/fl_callbacks.cpp:2659
+#: src/FLTK/fl_callbacks.cpp:2514 src/FLTK/fl_callbacks.cpp:2675
 msgid ""
 "AAC encoder doesn't support current\n"
 "Sample-/Bitrate combination"
@@ -1629,103 +1662,103 @@ msgstr ""
 "L'encodeur AAC ne gère pas la combinaison\n"
 "Sample-/Bitrate actuelle"
 
-#: src/FLTK/fl_callbacks.cpp:2513
+#: src/FLTK/fl_callbacks.cpp:2529
 msgid "Stream codec set to aac"
 msgstr "Codec du flux réglée sur aac"
 
-#: src/FLTK/fl_callbacks.cpp:2525 src/FLTK/fl_callbacks.cpp:2695
+#: src/FLTK/fl_callbacks.cpp:2541 src/FLTK/fl_callbacks.cpp:2711
 msgid "ERROR: While initializing flac settings"
 msgstr "ERREUR : Lors de l'initialisation des paramètres de FLAC"
 
-#: src/FLTK/fl_callbacks.cpp:2539
+#: src/FLTK/fl_callbacks.cpp:2555
 msgid "Stream codec set to flac"
 msgstr "Codec du flux réglé sur flac"
 
-#: src/FLTK/fl_callbacks.cpp:2572
+#: src/FLTK/fl_callbacks.cpp:2588
 msgid "Record codec set to mp3"
 msgstr "Codec de l'enregistrement réglé sur mp3"
 
-#: src/FLTK/fl_callbacks.cpp:2603
+#: src/FLTK/fl_callbacks.cpp:2619
 msgid "Record codec set to ogg/vorbis"
 msgstr "Codec de l'enregistrement réglé sur ogg/vorbis"
 
-#: src/FLTK/fl_callbacks.cpp:2635
+#: src/FLTK/fl_callbacks.cpp:2651
 msgid "Record codec set to opus"
 msgstr "Codec de l'enregistrement réglé sur opus"
 
-#: src/FLTK/fl_callbacks.cpp:2682
+#: src/FLTK/fl_callbacks.cpp:2698
 msgid "Record codec set to aac"
 msgstr "Codec de l'enregistrement réglé sur aac"
 
-#: src/FLTK/fl_callbacks.cpp:2716
+#: src/FLTK/fl_callbacks.cpp:2732
 msgid "Record codec set to flac"
 msgstr "Codec de l'enregistrement réglé sur flac"
 
-#: src/FLTK/fl_callbacks.cpp:2732
+#: src/FLTK/fl_callbacks.cpp:2748
 msgid "Record codec set to wav"
 msgstr "Codec de l'enregistrement réglé sur wav"
 
-#: src/FLTK/fl_callbacks.cpp:2768
+#: src/FLTK/fl_callbacks.cpp:2784
 msgid "Select certificate file..."
 msgstr "Sélectionnez le fichier du certificat…"
 
-#: src/FLTK/fl_callbacks.cpp:2773 src/FLTK/fl_callbacks.cpp:2795
-#: src/FLTK/fl_callbacks.cpp:2890 src/FLTK/fl_callbacks.cpp:2978
-#: src/FLTK/fl_callbacks.cpp:3349 src/FLTK/fl_callbacks.cpp:3372
-#: src/FLTK/fl_callbacks.cpp:3500
+#: src/FLTK/fl_callbacks.cpp:2789 src/FLTK/fl_callbacks.cpp:2811
+#: src/FLTK/fl_callbacks.cpp:2906 src/FLTK/fl_callbacks.cpp:2994
+#: src/FLTK/fl_callbacks.cpp:3369 src/FLTK/fl_callbacks.cpp:3392
+#: src/FLTK/fl_callbacks.cpp:3520
 #, c-format
 msgid "ERROR: %s"
 msgstr "ERREUR : %s"
 
-#: src/FLTK/fl_callbacks.cpp:2786
+#: src/FLTK/fl_callbacks.cpp:2802
 msgid "Select certificate directory..."
 msgstr "Sélectionnez le répertoire du certificat…"
 
-#: src/FLTK/fl_callbacks.cpp:2881
+#: src/FLTK/fl_callbacks.cpp:2897
 msgid "Record to..."
 msgstr "Enregistrer vers…"
 
-#: src/FLTK/fl_callbacks.cpp:2908
+#: src/FLTK/fl_callbacks.cpp:2924
 msgid "File splitting only works if recording is active."
 msgstr ""
 "La scission du fichier ne fonctionne que si l'enregistrement est activé."
 
-#: src/FLTK/fl_callbacks.cpp:2974
+#: src/FLTK/fl_callbacks.cpp:2990
 msgid "Select Songfile"
 msgstr "Choisissez le fichier du morceau"
 
-#: src/FLTK/fl_callbacks.cpp:3086
+#: src/FLTK/fl_callbacks.cpp:3102
 msgid "select background color"
 msgstr "Choisissez la couleur de fond"
 
-#: src/FLTK/fl_callbacks.cpp:3108
+#: src/FLTK/fl_callbacks.cpp:3125
 msgid "select text color"
 msgstr "Choisissez la couleur du texte"
 
-#: src/FLTK/fl_callbacks.cpp:3135
+#: src/FLTK/fl_callbacks.cpp:3153
 msgid "Please restart butt to apply new language."
 msgstr "Veuillez redémarrer butt pour appliquer le changement de langue."
 
-#: src/FLTK/fl_callbacks.cpp:3199 src/FLTK/fl_callbacks.cpp:3205
-#: src/FLTK/fl_callbacks.cpp:3216 src/FLTK/fl_callbacks.cpp:3222
+#: src/FLTK/fl_callbacks.cpp:3218 src/FLTK/fl_callbacks.cpp:3224
+#: src/FLTK/fl_callbacks.cpp:3235 src/FLTK/fl_callbacks.cpp:3241
 msgid "Value must be a number between -90.0 and 0"
 msgstr "La valeur doit être comprise entre -90 et 0"
 
-#: src/FLTK/fl_callbacks.cpp:3343
+#: src/FLTK/fl_callbacks.cpp:3363
 msgid "Export to..."
 msgstr "Exporter vers…"
 
-#: src/FLTK/fl_callbacks.cpp:3384
+#: src/FLTK/fl_callbacks.cpp:3404
 #, c-format
 msgid "Could not import config %s"
 msgstr "Impossible d'importer la configuration %s"
 
-#: src/FLTK/fl_callbacks.cpp:3394
+#: src/FLTK/fl_callbacks.cpp:3414
 #, c-format
 msgid "Config imported %s"
 msgstr "Configuration %s importée"
 
-#: src/FLTK/fl_callbacks.cpp:3472
+#: src/FLTK/fl_callbacks.cpp:3492
 msgid ""
 "Could not get update information.\n"
 "Reason: Network error"
@@ -1733,7 +1766,7 @@ msgstr ""
 "Impossible d'obtenir les informations de mise à jour.\n"
 "Raison : Erreur de réseau"
 
-#: src/FLTK/fl_callbacks.cpp:3475
+#: src/FLTK/fl_callbacks.cpp:3495
 msgid ""
 "Could not get update information.\n"
 "Reason: Unknown answer from server"
@@ -1741,11 +1774,11 @@ msgstr ""
 "Impossible d'obtenir les informations de mise à jour.\n"
 "Raison : Réponse du serveur inconnue"
 
-#: src/FLTK/fl_callbacks.cpp:3478
+#: src/FLTK/fl_callbacks.cpp:3498
 msgid "You have the latest version!"
 msgstr "Vous avez la dernière version !"
 
-#: src/FLTK/fl_callbacks.cpp:3481
+#: src/FLTK/fl_callbacks.cpp:3501
 msgid ""
 "Could not get update information.\n"
 "Reason: Unknown"
@@ -1753,11 +1786,11 @@ msgstr ""
 "Impossible d'obtenir les informations de mise à jour.\n"
 "Raison : Inconnue"
 
-#: src/FLTK/fl_callbacks.cpp:3494
+#: src/FLTK/fl_callbacks.cpp:3514
 msgid "Select logfile..."
 msgstr "Choisissez le fichier du journal…"
 
-#: src/FLTK/fl_callbacks.cpp:3521
+#: src/FLTK/fl_callbacks.cpp:3541
 msgid ""
 "butt is currently streaming.\n"
 "Do you really want to close butt now?"
@@ -1765,7 +1798,7 @@ msgstr ""
 "butt est en train de diffuser.\n"
 "Souhaitez-vous vraiment fermer butt maintenant ?"
 
-#: src/FLTK/fl_callbacks.cpp:3528
+#: src/FLTK/fl_callbacks.cpp:3548
 msgid ""
 "butt is currently recording.\n"
 "Do you really want to close butt now?"
@@ -1773,11 +1806,11 @@ msgstr ""
 "butt est en train d'enregistrer.\n"
 "Souhaitez-vous vraiment fermer butt maintenant ?"
 
-#: src/FLTK/fl_funcs.cpp:202
+#: src/FLTK/fl_funcs.cpp:203
 msgid "Not supported on Windows"
 msgstr "Non géré sous Windows"
 
-#: src/FLTK/fl_funcs.cpp:647
+#: src/FLTK/fl_funcs.cpp:688
 msgid "TRUST"
 msgstr "CONFIANCE"
 
@@ -1833,7 +1866,7 @@ msgstr ""
 "connexion : la connexion SSL a échoué\n"
 "Raison : %s"
 
-#: src/icecast.cpp:292
+#: src/icecast.cpp:298
 msgid ""
 "\n"
 "connect: connection timed out. Trying again..."
@@ -1841,7 +1874,7 @@ msgstr ""
 "\n"
 "connexion : la connexion n'a pas abouti. Nouvel essai…"
 
-#: src/icecast.cpp:343
+#: src/icecast.cpp:347
 msgid ""
 "\n"
 "connect: invalid user/password!\n"
@@ -1849,7 +1882,7 @@ msgstr ""
 "\n"
 "connexion : couple utilisateur/mot de passe invalide !\n"
 
-#: src/icecast.cpp:365
+#: src/icecast.cpp:369
 msgid ""
 "\n"
 "connect: server answered with 404!\n"
@@ -1857,7 +1890,7 @@ msgstr ""
 "\n"
 "connexion : le serveur a renvoyé un code d'erreur 404 !\n"
 
-#: src/icecast.cpp:373
+#: src/icecast.cpp:377
 #, c-format
 msgid ""
 "\n"
@@ -1866,7 +1899,7 @@ msgstr ""
 "\n"
 "connexion : le serveur a répondu avec %d !\n"
 
-#: src/icecast.cpp:398
+#: src/icecast.cpp:402
 msgid ""
 "\n"
 "ERROR: Opus is not supported by your\n"
@@ -1876,7 +1909,7 @@ msgstr ""
 "ERREUR : Opus non géré par la version du\n"
 "serveur Icecast (>=1.4.0 requise) !\n"
 
-#: src/icecast.cpp:474
+#: src/icecast.cpp:479
 msgid ""
 "\n"
 "update_song: could not create network socket"
@@ -1884,7 +1917,7 @@ msgstr ""
 "\n"
 "update_song : Impossible de créer le socket réseau"
 
-#: src/icecast.cpp:478
+#: src/icecast.cpp:483
 msgid ""
 "\n"
 "update_song: error resolving server address"
@@ -1910,7 +1943,7 @@ msgstr ""
 msgid "ERROR: no sound device with input channels found"
 msgstr "ERREUR : aucun périphérique son avec canaux d'entrée trouvé"
 
-#: src/port_audio.cpp:167 src/port_audio.cpp:824
+#: src/port_audio.cpp:167 src/port_audio.cpp:823
 #, c-format
 msgid "Error getting device Info (%d)"
 msgstr "Erreur d'obtention des informations du périphérique (%d)"
@@ -1950,11 +1983,11 @@ msgstr "enregistre vers :"
 msgid "recording stopped"
 msgstr "enregistrement arrêté"
 
-#: src/port_audio.cpp:805 src/port_audio.cpp:806
+#: src/port_audio.cpp:804 src/port_audio.cpp:805
 msgid "Default PCM device (default)"
 msgstr "Périphérique PCM par défaut (default)"
 
-#: src/port_audio.cpp:908 src/port_audio.cpp:924
+#: src/port_audio.cpp:907 src/port_audio.cpp:923
 msgid "ERROR: Could not initialize samplerate converter"
 msgstr ""
 "ERREUR : Impossible d'initialiser le convertisseur de taux d'échantillonnage"
@@ -2071,6 +2104,12 @@ msgstr "tls_recv : délais de lecture dépassé"
 #: src/tls.cpp:443
 msgid "tls_recv: write timeout"
 msgstr "tls_recv : délais d'écriture dépassé"
+
+#~ msgid "3.5kHz"
+#~ msgstr "3.5kHz"
+
+#~ msgid "10kHz"
+#~ msgstr "10kHz"
 
 #~ msgid "hello\n"
 #~ msgstr "salut\n"
