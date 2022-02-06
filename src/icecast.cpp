@@ -1,4 +1,4 @@
-// icecast functions for butt
+// icecast functions for VBT
 //
 // Copyright 2007-2018 by Daniel Noethen.
 //
@@ -196,7 +196,7 @@ int ic_connect(void)
         snprintf(send_buf+strlen(send_buf), sizeof(send_buf)-strlen(send_buf), "Authorization: Basic %s\r\n", b64_auth);
         
 
-        // Make butt compatible to proxies/load balancers. Thanks to boyska
+        // Make VBT compatible to proxies/load balancers. Thanks to boyska
         if(cfg.srv[cfg.selected_srv]->port == 80)
             snprintf(send_buf+strlen(send_buf), sizeof(send_buf)-strlen(send_buf), "Host: %s\r\n", cfg.srv[cfg.selected_srv]->addr);
         else

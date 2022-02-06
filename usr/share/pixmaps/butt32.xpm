@@ -1,5 +1,5 @@
 /* XPM */
-static char *butt32[] = {
+static char *VBT32[] = {
 /* columns rows colors chars-per-pixel */
 "32 32 3 1 ",
 "  c black",

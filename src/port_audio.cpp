@@ -1,4 +1,4 @@
-// portaudio functions for butt
+// portaudio functions for VBT
 //
 // Copyright 2007-2018 by Daniel Noethen.
 //

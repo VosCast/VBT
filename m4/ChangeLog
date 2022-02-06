@@ -1,21 +1,21 @@
 Version 0.1.29 (2021-03-28)
 ---------------------------
-* Added a new tool (butt Agent) which helps to minimize butt to tray and much more (Big thanks to Ivan Radolovic)
+* Added a new tool (VBT Agent) which helps to minimize VBT to tray and much more (Big thanks to Ivan Radolovic)
 * Added an indicator to the compressor which lights up if the threshold is exceeded
 * Added "Aggressive Mode" to the compressor. If activated, the signal power for threshold detection is not averraged
 * Added new command line options: -q (quit) -n (split recording) -u <songname> (update song name)
 * Added donation addresses for Bitcoin, Monero and Dash
-* Fixed crash when butt can not find any input channels
+* Fixed crash when VBT can not find any input channels
 * Fixed crash when reading song names from an UTF-8 formatted file that contains a BOM 
 * Fixed issue with icecast-kh14+ when connecting to a mountpoint which is already in use
 * Fixed issue if both checkboxes "start recording after launch" and "start recording when connected" are checked
-* Fixed butt.desktop file. Icon was not shown on GNOME panel
+* Fixed VBT.desktop file. Icon was not shown on GNOME panel
 * Attack and Release compressor labels now have 2 decimal places instead of only 1
-* butt does not send bitrate information to the icecast server anymore if FLAC is used 
-* butt now searches for a free command server port if default port is already in use
-* butt can now be started in minimized state
+* VBT does not send bitrate information to the icecast server anymore if FLAC is used 
+* VBT now searches for a free command server port if default port is already in use
+* VBT can now be started in minimized state
 * The recording file name can now contain any well known date format specifier 
-* The window class name has been renamed from FLTK to butt_FLTK
+* The window class name has been renamed from FLTK to VBT_FLTK
 
 Version 0.1.28 (2021-02-07)
 ---------------------------
@@ -25,7 +25,7 @@ Version 0.1.28 (2021-02-07)
 * Increased accuracy of recording split timer
 * VU-meter appearance can be changed to solid colors for better readability
 * Log window can be vertically resized
-* Windows: Changed default installation folder to %LOCALAPPDATA%\butt instead of %LOCALAPPDATA\butt-<version>
+* Windows: Changed default installation folder to %LOCALAPPDATA%\VBT instead of %LOCALAPPDATA\VBT-<version>
 
 
 Version 0.1.27 (2020-12-26)
@@ -66,8 +66,8 @@ Version 0.1.24 (2020-10-14)
 * The port of the command server can be specified via command line 
 * Commands can be received via network
 * It is possible to connect to a particular streaming server when sending the connect command
-* You can ask a butt instance about its current status with the -S command
-* butt can automatically check for updates after launch 
+* You can ask a VBT instance about its current status with the -S command
+* VBT can automatically check for updates after launch 
 * Update of song name works with FLAC 
 * Thresholds for signal detection can be specified
 * Added -h command line option to get an overview of all available commands
@@ -76,14 +76,14 @@ Version 0.1.24 (2020-10-14)
 Version 0.1.23 (2020-09-27)
 ---------------------------
 * Fixed crash if the server is not reachable (e.g. unstable internet connections)
-* Fixed issue with transfering song meta data from music apps to butt (MacOS)
+* Fixed issue with transfering song meta data from music apps to VBT (MacOS)
 * Improved handling of mic permissions dialog on MacOS
 
 Version 0.1.22 (2020-07-09)
 ---------------------------
 * Added Dynamic Range Compressor (thanks to Thomas P.)
 * Added ability to check for new versions
-* butt can now be controlled via command line 
+* VBT can now be controlled via command line 
 * Replaced experimental portaudio version with the stable portaudio version
 * Fixed issue with stereo audio when using the Equalizer (thanks to Thomas P.)
 * Fixed traffic calculation when using OPUS
@@ -112,10 +112,10 @@ Version 0.1.19 (2019-12-30)
 * The song name can now be read from the last line instead from the first line of a file
 * Streaming and recording can now be automatically stopped after silence has been detected 
 * The last window position can be remembered. Useful when running multiple instances
-* butt can now be started with hidden info window
+* VBT can now be started with hidden info window
 * The vu-meter runs smoother and needs less cpu 
 * VU-meter peak hold is only active for the red light
-* Closing butt while streaming or recording must be confirmed now
+* Closing VBT while streaming or recording must be confirmed now
 * Changes are now saved without asking for confirmation when closing the app
 * Removed a new line character from the server name in the title bar
 * Fixed recceiving song information from iTunes/Music in MacOS Catalina
@@ -124,7 +124,7 @@ Version 0.1.19 (2019-12-30)
 
 Version 0.1.18 (2019-05-12)
 ---------------------------
-* Added support for automatic recording after starting butt
+* Added support for automatic recording after starting VBT
 * Enabled AAC afterburner (improves audio quality)
 * Fixed issue with configure.ac and s390x architecture
 * Updated the FSF address in COPYING
@@ -140,7 +140,7 @@ Version 0.1.17 (2018-12-27)
 * Fixed connection issue with airtime
 * Fixed integer overflow when gain is set too high
 * Fixed compilation error on ubuntu 18
-* Changed color of windows icon from black to yellow. So people using Win10 can now find butt in their black taskbar ;-)
+* Changed color of windows icon from black to yellow. So people using Win10 can now find VBT in their black taskbar ;-)
 
 
 Version 0.1.16 (2017-09-17)
@@ -152,7 +152,7 @@ Version 0.1.16 (2017-09-17)
   AAC+v1: 48 kBit/s \<= bitrate < 96kBit/s	(aac_aot = 5) +
   AAC-LC: bitrate >= 96kBit/s				(aac_aot = 2) +
 * You can force the AAC codec to a specific profile by setting 
-  aac_overwrite_aot = 1 and aac_aot to the appropriate aot value {2,5,29} in buttrc
+  aac_overwrite_aot = 1 and aac_aot to the appropriate aot value {2,5,29} in VBTrc
 
 
 Version 0.1.15 (2016-05-28)
@@ -189,7 +189,7 @@ Version 0.1.13 (2014-05-02)
 ---------------------------
 * Has an icon now! - Thanks to Subrat (ipapuna) Nayak
 * Added support for lower bitrates (24k, 16k, 8k)
-* Added support for user defined configuration path e.g. "butt -c <path_to_config>"
+* Added support for user defined configuration path e.g. "VBT -c <path_to_config>"
 * Added support for user names in Icecast
 * Added gain slider. This slider multiplies the audio input samples with the given factor
 * Added .manifest file to disable the VirtualStore on Windows Vista and higher
@@ -210,11 +210,11 @@ Version 0.1.13 (2014-05-02)
 * Windows: can be installed as user without admin rights 
 * Windows: uninstallation process also removes the configuration file
 * Instead of canceling the automatic song update in case the given file is not
-readable, butt now tries to reread the file every 5 seconds
+readable, VBT now tries to reread the file every 5 seconds
 
 Version 0.1.12 (2010-04-10)
 ---------------------------
-* butt is now able to connect automatically after startup
+* VBT is now able to connect automatically after startup
 * Shortened time between connect attempts (fixes Shouted.FM connection problems)
 * Improved wrong password detection for shoutcast	
 
@@ -254,13 +254,13 @@ Version 0.1.10 (2008-05-25)
 Version 0.1.9 (2008-04-10)
 --------------------------
 * Minor GUI makeup
-* Made butt more verbose
+* Made VBT more verbose
 * Fixed possible segfault when trying to EDIT stream info
 * Fixed automatic reconnection
 * Filenames can be indexed with the %i variable now
 * Renamed "rec not until connected" checkbox to "start rec. when connected"
 * Added orange record icon for "armed" state ("start rec. when connected" = 1)
-* butt starts recording as soon as connected, when in "armed" state
+* VBT starts recording as soon as connected, when in "armed" state
 
 Version 0.1.8 (2008-03-30)
 --------------------------
@@ -277,7 +277,7 @@ Version 0.1.8 (2008-03-30)
 
 Version 0.1.7rc1 (2008-01-04)
 -----------------------------
-* butt runs on MacOS 10.4 and 10.5 now!
+* VBT runs on MacOS 10.4 and 10.5 now!
 * Added recording time to the display info
 * Fixed bug with '&' in the song string
 * Changing the display mode works only when connected now
@@ -305,8 +305,8 @@ Version 0.1.5 (2007-11-22)
 Version 0.1.5rc1 (2007-11-16)
 -----------------------------
 * Replaced ALSA by PortAudio -> OSS is supported now
-* Ported butt to Microsoft Windows (tested with win2k and win xp)
-* butt reminds the user about unsaved changes when closing now
+* Ported VBT to Microsoft Windows (tested with win2k and win xp)
+* VBT reminds the user about unsaved changes when closing now
 * Starting the recording is possible at any time now
 * Added mono encoding for OGG
 * Improved some GUI stuff
@@ -314,21 +314,21 @@ Version 0.1.5rc1 (2007-11-16)
 
 Version 0.1.4rc2 (2007-11-03)
 -----------------------------
-* butt should compile on more machines now
+* VBT should compile on more machines now
 
 Version 0.1.4rc1 (2007-11-01)
 -----------------------------
 * Added IceCast support (ogg and mp3)
 * Added ./configure script
-* butt is now able to send the "Current Song" value to the ShoutCast/IceCast server
+* VBT is now able to send the "Current Song" value to the ShoutCast/IceCast server
 * Changed stereo mode from joint-stereo to real-stereo
 * Code cleanup
 
 Version 0.1.3 (2007-10-08)
 ---------------------------
-* Bugfix: butt crashed if you press "apply" in the server/icy tab without
+* Bugfix: VBT crashed if you press "apply" in the server/icy tab without
 having an server/ICY-entry
-* Bugfix: butt crashed if you change the bitrate without having an ICY-entry
+* Bugfix: VBT crashed if you change the bitrate without having an ICY-entry
 * Bugfix: there was some uncommented code in the [DEL]-server callback-routine
 which shouldn't be uncommented 
 * Facelift: if you delete all server/ICY-entries, the input fields in the server/ICY
@@ -336,13 +336,13 @@ still showed the values of the last server/ICY-entry
 
 Version 0.1.2 (2007-10-07)
 --------------------------
-* Added a GUI for configuring butt
+* Added a GUI for configuring VBT
 * Comments behind config entries are not allowed anymore.
 * Removed the network init part. It was nonsense
 * Fixed mono playblack
 * Fixed recording problems
-* ICY entries can now be empty without causing butt to crash
-* butt shows the real port in its "connecting to..."-info line now and the "pseudeo" port in parenthesis
+* ICY entries can now be empty without causing VBT to crash
+* VBT shows the real port in its "connecting to..."-info line now and the "pseudeo" port in parenthesis
 * Fixed a bug which causes pcm data loss in some cases
 
 Version 0.1.1 (2007-09-16)

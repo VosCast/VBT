@@ -1,6 +1,6 @@
 //
 //  AskForMicPermission.h
-//  butt
+//  VBT
 //
 //  Created by Daniel Nöthen on 26.09.20.
 //  Copyright © 2020 Daniel Nöthen. All rights reserved.

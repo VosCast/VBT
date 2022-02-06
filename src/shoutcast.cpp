@@ -1,4 +1,4 @@
-// shoutcast functions for butt
+// shoutcast functions for VBT
 //
 // Copyright 2007-2018 by Daniel Noethen.
 //
@@ -108,7 +108,7 @@ int sc_connect(void)
     snprintf(send_buf, sizeof(send_buf), "%s%s", cfg.srv[cfg.selected_srv]->pwd, "\r\n");
     sock_send(stream_socket, send_buf, strlen(send_buf), SEND_TIMEOUT);
     
-    // Make butt compatible to proxies/load balancers. Thanks to boyska
+    // Make VBT compatible to proxies/load balancers. Thanks to boyska
     if(cfg.srv[cfg.selected_srv]->port == 80)
         snprintf(send_buf, sizeof(send_buf), "Host: %s\r\n", cfg.srv[cfg.selected_srv]->addr);
     else

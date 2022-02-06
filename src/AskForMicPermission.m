@@ -1,6 +1,6 @@
 //
 //  AskForMicPermission.m
-//  butt
+//  VBT
 //
 //  Created by Daniel Nöthen on 26.09.20.
 //  Copyright © 2020 Daniel Nöthen. All rights reserved.
@@ -18,7 +18,7 @@ void showAlert() {
     dispatch_async(dispatch_get_main_queue(), ^{
         NSAlert *alert = [[NSAlert alloc] init];
         [alert setMessageText:@(_("Microphone access"))];
-        [alert setInformativeText:@(_("butt needs access to your microphone\nPlease go to\nSystem Preferences->Security & Privacy->Privacy->Microphone\nand activate the check mark next to the butt entry"))];
+        [alert setInformativeText:@(_("VBT needs access to your microphone\nPlease go to\nSystem Preferences->Security & Privacy->Privacy->Microphone\nand activate the check mark next to the VBT entry"))];
         [alert addButtonWithTitle:@"Ok"];
         [alert runModal];
     });

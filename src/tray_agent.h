@@ -1,4 +1,4 @@
-// tray agent functions for butt
+// tray agent functions for VBT
 //
 // Copyright 2007-2021 by Daniel Noethen.
 //

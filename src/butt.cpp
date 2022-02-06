@@ -1,4 +1,4 @@
-// butt - broadcast using this tool
+// VBT - Vos Broadcast Tool
 //
 // Copyright 2007-2018 by Daniel Noethen.
 //
@@ -98,16 +98,16 @@ flac_enc flac_rec;
 
 
 #if defined(__APPLE__) || defined(WIN32)
- aacEncOpenPtr aacEncOpen_butt;
- aacEncoder_SetParamPtr aacEncoder_SetParam_butt;
- aacEncEncodePtr aacEncEncode_butt;
- aacEncInfoPtr aacEncInfo_butt;
- aacEncClosePtr aacEncClose_butt;
+ aacEncOpenPtr aacEncOpen_VBT;
+ aacEncoder_SetParamPtr aacEncoder_SetParam_VBT;
+ aacEncEncodePtr aacEncEncode_VBT;
+ aacEncInfoPtr aacEncInfo_VBT;
+ aacEncClosePtr aacEncClose_VBT;
 #endif
 
 void print_usage(void) 
 {
-    printf("Usage: butt [-h | -s [name] | -u <song name> | -Sdrtqn | -c <config_path>] [-A | -x] [-a <addr>] [-p <port>]\n");
+    printf("Usage: VBT [-h | -s [name] | -u <song name> | -Sdrtqn | -c <config_path>] [-A | -x] [-a <addr>] [-p <port>]\n");
     fflush(stdout);
 }
 
@@ -118,11 +118,11 @@ void load_AAC_lib(void)
     HMODULE hModule = LoadLibrary(TEXT("libfdk-aac-2.dll"));
     if (hModule != NULL)
     {
-        aacEncOpen_butt = (aacEncOpenPtr)GetProcAddress(hModule, "aacEncOpen");
-        aacEncoder_SetParam_butt = (aacEncoder_SetParamPtr)GetProcAddress(hModule, "aacEncoder_SetParam");
-        aacEncEncode_butt = (aacEncEncodePtr)GetProcAddress(hModule, "aacEncEncode");
-        aacEncInfo_butt = (aacEncInfoPtr)GetProcAddress(hModule, "aacEncInfo");
-        aacEncClose_butt = (aacEncClosePtr)GetProcAddress(hModule, "aacEncClose");
+        aacEncOpen_VBT = (aacEncOpenPtr)GetProcAddress(hModule, "aacEncOpen");
+        aacEncoder_SetParam_VBT = (aacEncoder_SetParamPtr)GetProcAddress(hModule, "aacEncoder_SetParam");
+        aacEncEncode_VBT = (aacEncEncodePtr)GetProcAddress(hModule, "aacEncEncode");
+        aacEncInfo_VBT = (aacEncInfoPtr)GetProcAddress(hModule, "aacEncInfo");
+        aacEncClose_VBT = (aacEncClosePtr)GetProcAddress(hModule, "aacEncClose");
         g_aac_lib_available = 1;
     }
 #endif
@@ -133,11 +133,11 @@ void load_AAC_lib(void)
     {
         //typedef AACENC_ERROR(WINAPI *aacEncOpenPtr)(HANDLE_AACENCODER*, UINT, UINT);
 
-        aacEncOpen_butt = (aacEncOpenPtr)dlsym(dylib, "aacEncOpen");
-        aacEncoder_SetParam_butt = (aacEncoder_SetParamPtr)dlsym(dylib, "aacEncoder_SetParam");
-        aacEncEncode_butt = (aacEncEncodePtr)dlsym(dylib, "aacEncEncode");
-        aacEncInfo_butt = (aacEncInfoPtr)dlsym(dylib, "aacEncInfo");
-        aacEncClose_butt = (aacEncClosePtr)dlsym(dylib, "aacEncClose");
+        aacEncOpen_VBT = (aacEncOpenPtr)dlsym(dylib, "aacEncOpen");
+        aacEncoder_SetParam_VBT = (aacEncoder_SetParamPtr)dlsym(dylib, "aacEncoder_SetParam");
+        aacEncEncode_VBT = (aacEncEncodePtr)dlsym(dylib, "aacEncEncode");
+        aacEncInfo_VBT = (aacEncInfoPtr)dlsym(dylib, "aacEncInfo");
+        aacEncClose_VBT = (aacEncClosePtr)dlsym(dylib, "aacEncClose");
 
         g_aac_lib_available = 1;
     }
@@ -199,13 +199,13 @@ int read_cfg(void)
     if (shift_pressed)
     {
         int rc = fl_choice(_("The shift key was held down during startup.\n"
-                             "Do you want to start butt with a new configuration file?\n"
+                             "Do you want to start VBT with a new configuration file?\n"
                              "This will overwrite your existing configuration file at\n%s"), 0, _("Start with old"), _("Start with new"), cfg_path);
         if(rc == 2)
         {
             if(cfg_create_default())
             {
-                fl_alert(_("Could not create config %s\nbutt is going to close now"), cfg_path);
+                fl_alert(_("Could not create config %s\nVBT is going to close now"), cfg_path);
                 return 1;
             }
         }
@@ -220,17 +220,17 @@ int read_cfg(void)
         fflush(stdout);
         if(cfg_create_default())
         {
-            fl_alert(_("Could not create config %s\nbutt is going to close now"), cfg_path);
+            fl_alert(_("Could not create config %s\nVBT is going to close now"), cfg_path);
             return 1;
         }
-        printf(_("butt created a default config at\n%s\n"), cfg_path);
+        printf(_("VBT created a default config at\n%s\n"), cfg_path);
         fflush(stdout);
         cfg_set_values(NULL);
     }
 
     if (cfg.audio.dev_count == 0)
     {
-        ALERT(_("Could not find any audio device with input channels.\nbutt requires at least one audio device with input channels in order to work.\nThis can either be a built-in audio device, an external audio device or a virtual audio device.\n\nbutt is going to close now."));
+        ALERT(_("Could not find any audio device with input channels.\nVBT requires at least one audio device with input channels in order to work.\nThis can either be a built-in audio device, an external audio device or a virtual audio device.\n\nVBT is going to close now."));
         return 1;
     }
     
@@ -430,16 +430,16 @@ int main(int argc, char *argv[])
                        "-r\tStart recording\n"
                        "-t\tStop recording\n"
                        "-n\tSplit recording\n"
-                       "-q\tQuit butt\n"
+                       "-q\tQuit VBT\n"
                        "-u\tupdate song name\n"
                        "-S\tRequest status\n"
-                       "-a\tAddress of the butt instance to be controlled (default: 127.0.0.1)\n"
-                       "-p\tPort of the butt instance to be controlled (default: 1256)\n")
+                       "-a\tAddress of the VBT instance to be controlled (default: 127.0.0.1)\n"
+                       "-p\tPort of the VBT instance to be controlled (default: 1256)\n")
                       );
                 fflush(stdout);
                 return 0;
             case '?':
-                printf(_("Illegal option -%c.\nType butt -h to get a list of supported options.\n"), optopt);
+                printf(_("Illegal option -%c.\nType VBT -h to get a list of supported options.\n"), optopt);
                 print_usage();
                 return 1;
             case ':':
@@ -469,7 +469,7 @@ int main(int argc, char *argv[])
         
         if (ret < 0)
         {
-            printf(_("No butt instance running on %s at port %d\n"), server_addr, port);
+            printf(_("No VBT instance running on %s at port %d\n"), server_addr, port);
             fflush(stdout);
 
             return 1;
@@ -495,7 +495,7 @@ int main(int argc, char *argv[])
 
     if(snd_init() != 0)
     {
-        ALERT(_("PortAudio init failed\nbutt is going to close now"));
+        ALERT(_("PortAudio init failed\nVBT is going to close now"));
         return 1;
     }
 
@@ -519,7 +519,7 @@ int main(int argc, char *argv[])
 #endif
 
     fl_g = new flgui();
-    fl_g->window_main->xclass("butt_FLTK");
+    fl_g->window_main->xclass("VBT_FLTK");
 
     fl_g->window_main->show();
     fl_font(fl_font(), 10);
@@ -551,9 +551,7 @@ int main(int argc, char *argv[])
 
 
     
-    snprintf(info_buf, sizeof(info_buf), _("Starting %s\nWritten by Daniel Nöthen\n"
-             "iPhone/iPad client: https://izicast.de\n"
-             "Donate: paypal@danielnoethen.de\n"), PACKAGE_STRING);
+    snprintf(info_buf, sizeof(info_buf), _("Starting %s\nWritten by Daniel Nöthen and VosCast\n"), PACKAGE_STRING);
     print_info(info_buf, 0);
 
 

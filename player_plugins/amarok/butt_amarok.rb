@@ -8,7 +8,7 @@
 # (c) 2005-2006 Mark Kretschmann <markey@web.de>
 # License: GNU General Public License V2
 #
-# modified by Daniel Nöthen for use in combination with butt
+# modified by Daniel Nöthen for use in combination with VBT
 
 
 loop do

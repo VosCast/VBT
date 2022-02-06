@@ -21,7 +21,7 @@ static bool dbus_init(void) {
             return false;
         }
         
-        ret = dbus_bus_request_name(conn, "me.melchor9000.butt",
+        ret = dbus_bus_request_name(conn, "me.melchor9000.VBT",
             DBUS_NAME_FLAG_REPLACE_EXISTING, &err);
         if(dbus_error_is_set(&err)) {
             printf("Name error: %s\n", err.message);

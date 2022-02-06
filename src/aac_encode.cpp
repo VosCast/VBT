@@ -1,4 +1,4 @@
-// aac encoding functions for butt
+// aac encoding functions for VBT
 //
 // Copyright 2007-2018 by Daniel Noethen.
 //
@@ -25,11 +25,11 @@ int g_aac_lib_available = 0;
 #ifdef HAVE_LIBFDK_AAC
 
 #if !defined(__APPLE__) && !defined(WIN32)  // LINUX
- #define aacEncOpen_butt aacEncOpen
- #define aacEncoder_SetParam_butt aacEncoder_SetParam
- #define aacEncEncode_butt aacEncEncode
- #define aacEncInfo_butt aacEncInfo
- #define aacEncClose_butt aacEncClose
+ #define aacEncOpen_VBT aacEncOpen
+ #define aacEncoder_SetParam_VBT aacEncoder_SetParam
+ #define aacEncEncode_VBT aacEncEncode
+ #define aacEncInfo_VBT aacEncInfo
+ #define aacEncClose_VBT aacEncClose
 #endif
 
 
@@ -82,28 +82,28 @@ int aac_enc_init(aac_enc *aac)
     }
 
     
-    aacEncOpen_butt(&aac->handle, 0, aac->channel);
-    aacEncoder_SetParam_butt(aac->handle, AACENC_AOT, aot);
-    aacEncoder_SetParam_butt(aac->handle, AACENC_SAMPLERATE, aac->samplerate);
-    aacEncoder_SetParam_butt(aac->handle, AACENC_CHANNELMODE, aac->channel);
-    aacEncoder_SetParam_butt(aac->handle, AACENC_CHANNELORDER, 1);
-    aacEncoder_SetParam_butt(aac->handle, AACENC_BITRATE, aac->bitrate*1000);
-    aacEncoder_SetParam_butt(aac->handle, AACENC_TRANSMUX, 2);    // taken from the example aac-enc.c
-    aacEncoder_SetParam_butt(aac->handle, AACENC_AFTERBURNER, aac->afterburner); 
+    aacEncOpen_VBT(&aac->handle, 0, aac->channel);
+    aacEncoder_SetParam_VBT(aac->handle, AACENC_AOT, aot);
+    aacEncoder_SetParam_VBT(aac->handle, AACENC_SAMPLERATE, aac->samplerate);
+    aacEncoder_SetParam_VBT(aac->handle, AACENC_CHANNELMODE, aac->channel);
+    aacEncoder_SetParam_VBT(aac->handle, AACENC_CHANNELORDER, 1);
+    aacEncoder_SetParam_VBT(aac->handle, AACENC_BITRATE, aac->bitrate*1000);
+    aacEncoder_SetParam_VBT(aac->handle, AACENC_TRANSMUX, 2);    // taken from the example aac-enc.c
+    aacEncoder_SetParam_VBT(aac->handle, AACENC_AFTERBURNER, aac->afterburner); 
 
     if (aac->bitrate_mode == 1) // VBR 
-        aacEncoder_SetParam_butt(aac->handle, AACENC_BITRATEMODE, vbr_mode); 
+        aacEncoder_SetParam_VBT(aac->handle, AACENC_BITRATEMODE, vbr_mode); 
 
 
 
-    if ((rc = aacEncEncode_butt(aac->handle, NULL, NULL, NULL, NULL)) != AACENC_OK)
+    if ((rc = aacEncEncode_VBT(aac->handle, NULL, NULL, NULL, NULL)) != AACENC_OK)
     {
         snprintf(info_buf, sizeof(info_buf), "unable to init aac params %d", rc);
         print_info(info_buf, 1);
         return 1;
     }
 
-    aacEncInfo_butt(aac->handle, &aac->info);
+    aacEncInfo_VBT(aac->handle, &aac->info);
 
 
     /*
@@ -148,7 +148,7 @@ void aac_enc_close(aac_enc *aac)
        ;
 
     if (aac->handle != NULL)
-        aacEncClose_butt(&aac->handle);
+        aacEncClose_VBT(&aac->handle);
     
     aac->handle = NULL;
 }
@@ -204,7 +204,7 @@ int aac_enc_encode(aac_enc *aac, short *pcm_buf, char *enc_buf, int samples, int
     aac->state = AAC_BUSY;
     
     
-    if ((rc = aacEncEncode_butt(aac->handle, &in_buf, &out_buf, &in_args, &out_args)) != AACENC_OK)
+    if ((rc = aacEncEncode_VBT(aac->handle, &in_buf, &out_buf, &in_args, &out_args)) != AACENC_OK)
     {
         return 0;
     }

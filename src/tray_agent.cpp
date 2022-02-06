@@ -1,5 +1,5 @@
 
-// tray agent functions for butt
+// tray agent functions for VBT
 //
 // Copyright 2007-2021 by Daniel Noethen.
 //
@@ -28,9 +28,9 @@
 #include "tray_agent.h"
 
 #define AGENT_CLASS "AutoHotkeyGUI"
-#define AGENT_TITLE "buttTrayAgent11-03-2021"
+#define AGENT_TITLE "VBTTrayAgent11-03-2021"
 #define AGENT_SHA256 "1e192da5e8b26b5ada1c967dcda68ca1886f1a275dd7c923f0a7a669bb86d4fa"
-#define AGENT_EXECUTABLE "butt_agent.exe"
+#define AGENT_EXECUTABLE "VBT_agent.exe"
     
 static char song_buf[512];
 
@@ -68,13 +68,13 @@ static int send_msg(char *cmsg)
     MyCDS.cbData = sizeof(wmsg);
     MyCDS.lpData = &wmsg;
     
-    // Get handle of butt main window
-    HWND hwButt = fl_xid(fl_g->window_main);
+    // Get handle of VBT main window
+    HWND hwVBT = fl_xid(fl_g->window_main);
     HWND hwAgent;
     
     if (tray_agent_is_running(&hwAgent) == 1)
     {
-        SendMessage(hwAgent, WM_COPYDATA, (WPARAM)(HWND) hwButt, (LPARAM)(LPVOID) &MyCDS);
+        SendMessage(hwAgent, WM_COPYDATA, (WPARAM)(HWND) hwVBT, (LPARAM)(LPVOID) &MyCDS);
 	return 0;
     }
     else

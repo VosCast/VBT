@@ -1,4 +1,4 @@
-// opus encoding functions for butt
+// opus encoding functions for VBT
 //
 // Copyright 2007-2018 by Daniel Noethen.
 //

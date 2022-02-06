@@ -393,7 +393,7 @@ void split_recording_file(void)
                 free(path);
                 free(path_for_index_loop);
                 print_info(_("Could not find a valid filename for next file"
-                        "\nbutt keeps recording to current file"), 0);
+                        "\nVBT keeps recording to current file"), 0);
                 return;
             }
         }

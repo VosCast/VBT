@@ -1,4 +1,4 @@
-// FLTK callback functions for butt
+// FLTK callback functions for VBT
 //
 // Copyright 2007-2018 by Daniel Noethen.
 //
@@ -1544,8 +1544,8 @@ void button_add_srv_get_stations_cb(void)
 {
     
 #ifdef WITH_RADIOCO
-    if (fl_choice(_("butt will open Radio.co in a new browser window.\n\n"
-                  "Login to Radio.co and allow butt access to your account."), _("Cancel"), _("OK"), NULL) == 0)
+    if (fl_choice(_("VBT will open Radio.co in a new browser window.\n\n"
+                  "Login to Radio.co and allow VBT access to your account."), _("Cancel"), _("OK"), NULL) == 0)
     { // Cancel
         return;
     }
@@ -3398,7 +3398,7 @@ void choice_gui_language_cb(void)
             break;
     }
     
-    fl_alert(_("Please restart butt to apply new language."));
+    fl_alert(_("Please restart VBT to apply new language."));
 
 }
 
@@ -3686,7 +3686,7 @@ void button_start_agent_cb(void)
     }
     else
     {
-        fl_alert("butt agent is already running.");
+        fl_alert("VBT agent is already running.");
     }
 #endif
 }
@@ -3701,7 +3701,7 @@ void button_stop_agent_cb(void)
     }
     else
     {
-        fl_alert("butt agent is currently not running.");
+        fl_alert("VBT agent is currently not running.");
     }
     
 #endif
@@ -3730,7 +3730,7 @@ void button_cfg_check_for_updates_cb(void)
             rc = fl_choice(_("New version available: %s\nYou have version %s"), _("Cancel"), _("Get new version"), NULL, new_version, VERSION);
             if(rc == 1)
             {
-                //snprintf(uri, sizeof(uri)-1, "https://sourceforge.net/projects/butt/files/butt/butt-%s/", new_version);
+                //snprintf(uri, sizeof(uri)-1, "https://sourceforge.net/projects/butt/files/butt/VBT-%s/", new_version);
                 snprintf(uri, sizeof(uri)-1, "https://danielnoethen.de/butt/index.html#_download");
                 fl_open_uri(uri);
             }
@@ -3786,15 +3786,15 @@ void window_main_close_cb(void)
         {
             
             fl_message_title("Streaming");
-            ret = fl_choice(_("butt is currently streaming.\n"
-                            "Do you really want to close butt now?"),
+            ret = fl_choice(_("VBT is currently streaming.\n"
+                            "Do you really want to close VBT now?"),
                             _("no"), _("yes"), NULL);
         }
         else
         {
             fl_message_title("Recording");
-            ret = fl_choice(_("butt is currently recording.\n"
-                            "Do you really want to close butt now?"),
+            ret = fl_choice(_("VBT is currently recording.\n"
+                            "Do you really want to close VBT now?"),
                             _("no"), _("yes"), NULL);
         }
             

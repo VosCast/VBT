@@ -1,15 +1,15 @@
 [Desktop Entry]
 Version=1.0
-Name=butt
-Comment=broadcast using this tool
+Name=VBT
+Comment=Vos Broadcast Tool
 GenericName=Streaming Tool
 Keywords=Stream,Audio,Shoutcast,Icecast,Record
-Exec=butt %u
+Exec=VBT %u
 Terminal=false
 X-MultipleArgs=false
 Type=Application
-Icon=butt
-StartupWMClass=butt_FLTK
+Icon=VBT
+StartupWMClass=VBT_FLTK
 Categories=AudioVideo;Audio;AudioVideoEditing;
 StartupNotify=true
 

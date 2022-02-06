@@ -1,6 +1,6 @@
 //
 //  dsp.cpp
-//  butt
+//  VBT
 //
 //  Created by Melchor Garau Madrigal on 16/2/16.
 //  Copyright © 2016 Daniel Noethen. All rights reserved.

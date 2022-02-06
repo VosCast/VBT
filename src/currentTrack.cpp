@@ -1,6 +1,6 @@
 //
 //  currentTrack.cpp
-//  butt
+//  VBT
 //
 //  Created by Melchor Garau Madrigal on 22/7/15.
 //  Copyright (c) 2015 Daniel Nöthen. All rights reserved.
