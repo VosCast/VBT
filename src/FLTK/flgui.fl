@@ -199,7 +199,7 @@ class flgui {open
             }
           }
           Fl_Group group_agent {
-            label {Butt Agent} open
+            label {VBT Agent} open
             xywh {37 385 326 75} box ENGRAVED_FRAME align 5
           } {
             Fl_Check_Button check_start_agent {

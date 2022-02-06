@@ -2253,7 +2253,7 @@ flgui::flgui() {
           } // Fl_Check_Button* check_update_at_startup
           o->end();
         } // Fl_Group* o
-        { group_agent = new Fl_Group(37, 385, 326, 75, gettext("Butt Agent"));
+        { group_agent = new Fl_Group(37, 385, 326, 75, gettext("VBT Agent"));
           group_agent->box(FL_ENGRAVED_FRAME);
           group_agent->align(Fl_Align(FL_ALIGN_TOP_LEFT));
           { check_start_agent = new Fl_Check_Button(43, 400, 157, 15, gettext("Start agent at startup"));

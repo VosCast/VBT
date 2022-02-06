@@ -474,7 +474,7 @@ msgid "Check for updates at start"
 msgstr ""
 
 #: src/FLTK/flgui.cpp:3740
-msgid "Butt Agent"
+msgid "VBT Agent"
 msgstr ""
 
 #: src/FLTK/flgui.cpp:3743

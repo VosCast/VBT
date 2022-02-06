@@ -69,12 +69,12 @@ static int send_msg(char *cmsg)
     MyCDS.lpData = &wmsg;
     
     // Get handle of VBT main window
-    HWND hwButt = fl_xid(fl_g->window_main);
+    HWND hwVBT = fl_xid(fl_g->window_main);
     HWND hwAgent;
     
     if (tray_agent_is_running(&hwAgent) == 1)
     {
-        SendMessage(hwAgent, WM_COPYDATA, (WPARAM)(HWND) hwButt, (LPARAM)(LPVOID) &MyCDS);
+        SendMessage(hwAgent, WM_COPYDATA, (WPARAM)(HWND) hwVBT, (LPARAM)(LPVOID) &MyCDS);
 	return 0;
     }
     else

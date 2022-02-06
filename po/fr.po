@@ -558,8 +558,8 @@ msgid "Check for updates at start"
 msgstr "Vérifier les mises à jour au démarrage"
 
 #: src/FLTK/flgui.cpp:3740
-msgid "Butt Agent"
-msgstr "Agent Butt"
+msgid "VBT Agent"
+msgstr "Agent VBT"
 
 #: src/FLTK/flgui.cpp:3743
 msgid "Start agent at startup"
