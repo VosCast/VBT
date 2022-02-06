@@ -201,10 +201,10 @@ msgstr ""
 #, c-format
 msgid ""
 "Starting %s\n"
-"Written by Daniel Nöthen & VosCast\n"
+"Written by Daniel Nöthen & VOSCAST\n"
 msgstr ""
 "Starte %s\n"
-"Entwickelt von Daniel Nöthen & VosCast\n"
+"Entwickelt von Daniel Nöthen & VOSCAST\n"
 
 #: src/butt.cpp:568 src/FLTK/fl_callbacks.cpp:88 src/FLTK/fl_callbacks.cpp:102
 #: src/FLTK/fl_callbacks.cpp:810 src/FLTK/fl_callbacks.cpp:894
