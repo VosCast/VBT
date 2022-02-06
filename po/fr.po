@@ -200,14 +200,10 @@ msgstr ""
 #, c-format
 msgid ""
 "Starting %s\n"
-"Written by Daniel Nöthen\n"
-"iPhone/iPad client: https://izicast.de\n"
-"Donate: paypal@danielnoethen.de\n"
+"Written by Daniel Nöthen & VosCast\n"
 msgstr ""
 "Démarrage de %s\n"
-"Écrit par Daniel Nöthen\n"
-"Client iPhone/iPad : https://izicast.de\n"
-"Donations : paypal@danielnoethen.de\n"
+"Écrit par Daniel Nöthen & VosCast\n"
 
 #: src/butt.cpp:568 src/FLTK/fl_callbacks.cpp:88 src/FLTK/fl_callbacks.cpp:102
 #: src/FLTK/fl_callbacks.cpp:810 src/FLTK/fl_callbacks.cpp:894

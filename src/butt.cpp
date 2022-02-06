@@ -551,9 +551,7 @@ int main(int argc, char *argv[])
 
 
     
-    snprintf(info_buf, sizeof(info_buf), _("Starting %s\nWritten by Daniel Nöthen\n"
-             "iPhone/iPad client: https://izicast.de\n"
-             "Donate: paypal@danielnoethen.de\n"), PACKAGE_STRING);
+    snprintf(info_buf, sizeof(info_buf), _("Starting %s\nWritten by Daniel Nöthen and VosCast\n"), PACKAGE_STRING);
     print_info(info_buf, 0);
 
 
