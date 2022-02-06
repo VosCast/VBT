@@ -2,7 +2,7 @@
 execute as "asciidoctor manual.txt"
 ////
 
-butt (0.1.32) Manual 
+VBT (0.1.32) Manual 
 ====================
 :author: Daniel Nöthen
 :doctype: book 
@@ -14,9 +14,9 @@ butt (0.1.32) Manual
 
 About
 -----
-butt (broadcast using this tool) is an easy to use, multi OS streaming tool. +
+VBT (Vos Broadcast Tool) is an easy to use, multi OS streaming tool. +
 It supports ShoutCast and IceCast and runs on Linux, MacOS and Windows. +
-The main purpose of butt is to stream live audio data from your computers Mic or Line input +
+The main purpose of VBT is to stream live audio data from your computers Mic or Line input +
 to an Shoutcast or Icecast server. Recording is also possible. +
 It is NOT intended to be a server by itself or automatically stream a set of audio files. +
 
@@ -24,14 +24,14 @@ It is NOT intended to be a server by itself or automatically stream a set of aud
 Install
 -------
 .OS X: 
-Mount the *butt-<version>.dmg* by double clicking and  +
-drop the butt file to the Applications folder. +
+Mount the *VBT-<version>.dmg* by double clicking and  +
+drop the VBT file to the Applications folder. +
 
 .Windows: 
-Just run the *butt-<version>-setup.exe* as usual and go through the +
+Just run the *VBT-<version>-setup.exe* as usual and go through the +
 installer pages. +
 The default installation path might be unusual, but this way it is possible to install +
-butt without administration rights. +
+VBT without administration rights. +
 
 .Linux/MinGW (Windows):
 First of all the following libraries have to be installed on your system  +
@@ -54,11 +54,11 @@ For compiling on *Windows* I recommend the msys2 x64 (www.msys2.org) environment
 They have all the needed packages in their pacman repository. Additionally you need to install the `libwinpthread-git` package. +
 Make sure that you select the x64 version of each package.
 
-After installing the above libraries you can install butt from source as usual:
+After installing the above libraries you can install VBT from source as usual:
 
-- +tar -xzf butt-<version>.tar.gz+
+- +tar -xzf VBT-<version>.tar.gz+
 
-- +cd butt-<version>+
+- +cd VBT-<version>+
 
 - +autoreconf -i+ (only on Windows/MSYS2)
 
@@ -76,9 +76,9 @@ and start with  `./configure` again.
 
 Quick start
 -----------
-When you start butt the first time, it will create a default configuration +
-file in in your home directory ('~/.buttrc') on Linux and OS X or at +
-'C:\Users\<username>\AppData\Roaming\buttrc' on Windows. +
+When you start VBT the first time, it will create a default configuration +
+file in in your home directory ('~/.VBTrc') on Linux and OS X or at +
+'C:\Users\<username>\AppData\Roaming\VBTrc' on Windows. +
 
 In order to connect to a server, you need to add a new server in the config window.  +
 Just open the settings window and click on [ADD]. +
@@ -90,20 +90,20 @@ Install AAC libraries
 ---------------------
 .Windows:
 1. Download libfdk-aac-2.dll from
-https://sourceforge.net/projects/butt/files/butt/butt-0.1.32/AAC/libfdk-aac-2.dll/download[here]
-2. Go to the installation directory of butt by typing %LOCALAPPDATA%\butt into the file explorer 
-3. Copy libfdk-aac-2.dll into the installation directory of butt
-4. Restart butt
+https://sourceforge.net/projects/butt/files/butt/VBT-0.1.32/AAC/libfdk-aac-2.dll/download[here]
+2. Go to the installation directory of VBT by typing %LOCALAPPDATA%\VBT into the file explorer 
+3. Copy libfdk-aac-2.dll into the installation directory of VBT
+4. Restart VBT
 5. Enjoy AAC Streaming
 
 .MacOS: 
 1. Download libfdk-aac.2.dylib from 
-https://sourceforge.net/projects/butt/files/butt/butt-0.1.32/AAC/libfdk-aac.2.dylib/download[here] +
+https://sourceforge.net/projects/butt/files/butt/VBT-0.1.32/AAC/libfdk-aac.2.dylib/download[here] +
 2. Open your Applications folder +
-3. Right click on butt.app +
+3. Right click on VBT.app +
 4. Select Show Package Contents +
-5. Copy libfdk-aac.2.dylib next to the butt executeable in Contents/MacOS +
-6. Restart butt
+5. Copy libfdk-aac.2.dylib next to the VBT executeable in Contents/MacOS +
+6. Restart VBT
 7. Enjoy AAC Streaming +
 
 .Linux:
@@ -116,7 +116,7 @@ Configuration
 -------------
 The command line option +-c <path_to_file>+ allows you to define a new standard configuration path.  +
 This makes it possible to have multiple instances with different configurations +
-running. In case the file does not exists, butt will create a default file. +
+running. In case the file does not exists, VBT will create a default file. +
 
 [Save]: Saves your current settings to the standard configuration +
 file or to the file that was passed to the -c option +
@@ -126,21 +126,21 @@ file or to the file that was passed to the -c option +
 CAUTION: If you use the -c command line option and import another configuration file + 
 by using the import function, pressing [Save] will overwrite the file that was passed to the -c option.
 
-In some cases the configuration file can become corrupted and butt will not be
+In some cases the configuration file can become corrupted and VBT will not be
 able to start correctly. In that case you can hold down the shift key during
-butt startup to create a new configuration file. 
+VBT startup to create a new configuration file. 
 
 
 Main Window
 -----------
-The dot matrix display shows you the current state of the butt software. +
+The dot matrix display shows you the current state of the VBT software. +
 The states are: idle, streaming, recording. +
 When in streaming and/or recording state you can cycle through the information by clicking on the display. +
 You can choose between online duration, data sent, recording duration and data recorded +
 
-The [>] symbol shines yellow if butt is connected to a server. +
+The [>] symbol shines yellow if VBT is connected to a server. +
 The [O] symbol shines orange if the +[start rec. when connected]+ checkbox is activated. +
-The [O] symbol shines red if butt is currently recording. +
+The [O] symbol shines red if VBT is currently recording. +
 
 Gain slider:
 The slider is only visible when the little +[more/less]+ button below  +
@@ -156,7 +156,7 @@ The audio settings tab allows you to select your audio interface and the desired
 If you have a multi-channel device you may also select the desired input channels for the left and + 
 right audio channel. +
 
-With the channel mode setting you tell butt if the audio stream shall be encoded to stereo or mono. +
+With the channel mode setting you tell VBT if the audio stream shall be encoded to stereo or mono. +
 This brings us to 4 possible combinations.
 
 .Channel mode = *Stereo* and *different channels* are selected for Left and Right: 
@@ -176,8 +176,8 @@ The selected channel is used as mono channel in a mono stream.
 Streaming
 ---------
 To start streaming just click the play symbol. +
-butt will try to connect to the server until you press the stop button. +
-If the connection gets lost, butt will try to reconnect until the stop button is pressed +
+VBT will try to connect to the server until you press the stop button. +
+If the connection gets lost, VBT will try to reconnect until the stop button is pressed +
 
 You can stream in 5 different audio codecs: mp3, aac+, ogg/vorbis, ogg/opus and FLAC. + 
 In case opus is selected the sample rate is always upsampled to 48 kHz. +
@@ -189,13 +189,13 @@ can do that on the +[Stream]+ tab. +
 You only need to type the song into the +Song Name+ input field +
 and hit Enter or click +[OK]+. 
 
-butt can also update the song automatically from a text file. +
+VBT can also update the song automatically from a text file. +
 The first or the last line of the file must be the name of the song. +
-As soon as butt detects that the file has been changed, it updates the +
+As soon as VBT detects that the file has been changed, it updates the +
 name of the song on the server. +
 
-If you run butt on MacOS or Linux you can even transfer the current +
-song name from an audio player to butt. +
+If you run VBT on MacOS or Linux you can even transfer the current +
+song name from an audio player to VBT. +
 Supported audio players: +
 Linux: Rhythmbox, Banshee, Clementine, Cantana, Spotify +
 MacOS: iTunes/Music, Vox, Spotify
@@ -221,10 +221,10 @@ Unfortunately, it is not possible to update stream infos during a broadcast. +
 You need to reconnect for updating the stream infos. +
 
 .Automatic streaming:
-If you activate the checkbox 'Start streaming after launch' butt will +
+If you activate the checkbox 'Start streaming after launch' VBT will +
 automatically connect to the server as soon as the application has been started.
 
-butt can also connect and disconnect depending on the audio signal level: +
+VBT can also connect and disconnect depending on the audio signal level: +
 
 To connect automatically if a signal is present for a certain amount of time +
 enter an integral number larger than 0 into the 'Start if signal is present for [...] seconds' field. 
@@ -239,30 +239,30 @@ for the present and absent signal cases in the +[Audio]+ tab.
 
 Recording
 ---------
-butt is able to record and stream simultaneously in different bit rates. +
+VBT is able to record and stream simultaneously in different bit rates. +
 For example you can stream with 96 kbit and record with 192 kbit. +
 Recording is possible in mp3, aac+, ogg/vorbis, ogg/opus, FLAC or wav. 
 
 To record your session you first need to select the destination folder and specify a file name  +
 in the +[Rec]+ tab.  +
-butt will replace specific date variables with the current time and date.
+VBT will replace specific date variables with the current time and date.
 For example +rec_(%m_%d_%y).mp3+ expands to +rec_(03_28_2008).mp3+. +
 Other possible time variables are +%H+ (hours) +%M+ (minutes) +%S+ (seconds).
 Refer to the table below for more supported date variables.
 
 With the +%i+ variable you can add an index number to your file name. +
-This means with +rec_%i.mp3+ butt first tries to record to +rec_0.mp3+. In case that +
-file already exists, butt tries +rec_1.mp3+ and so on... +
+This means with +rec_%i.mp3+ VBT first tries to record to +rec_0.mp3+. In case that +
+file already exists, VBT tries +rec_1.mp3+ and so on... +
 
 To manually start the recording simply press the record symbol. +
 To stop recording just click on the record symbol again. +
  
 .Automatic recording:
-If the 'start recording when connected' checkbox is activated butt starts the +
+If the 'start recording when connected' checkbox is activated VBT starts the +
 recording immediately after being connected to a server. +
-Vice versa butt will stop the recording if the 'Stop recording when disconnected' checkbox +
+Vice versa VBT will stop the recording if the 'Stop recording when disconnected' checkbox +
 is active. +
-Additionally you can tell butt to immediately start recording after the application has been +
+Additionally you can tell VBT to immediately start recording after the application has been +
 launched by checking the 'Start recording after launch" box. +
 
 To start recording automatically if a signal is present for a certain amount of time +
@@ -274,7 +274,7 @@ enter an integral number larger than 0 into the 'Stop if signal is absent for [.
 The default signal detection levels are set to -50.0 dB and can be independently changed+
 for the present and absent signal cases in the +[Audio]+ tab.
 
-You can also tell butt to split your recording into +
+You can also tell VBT to split your recording into +
 separat files every *n* minutes. Just enter a number higher than 0 +
 into the 'Split file every [..] minutes' field. +
 
@@ -381,7 +381,7 @@ onwards, until you have a satisfactory result. +
 
 This procedure can take some time to find the optimum settings, which +
 are determined by listening as much as by metering, but it generally +
-only needs to be done once - butt will save your settings, so once you +
+only needs to be done once - VBT will save your settings, so once you +
 have values that work well for your content, you probably don't need +
 to adjust them again. +
 
@@ -394,7 +394,7 @@ between different speakers or by not keeping a very consistent +
 distance from the microphone. +
 
 For mixed speech and music broadcasting, it is recommended to set +
-butt's compression as for music, and then have an additional +
+VBT's compression as for music, and then have an additional +
 compressor (typically a hardware module) between the microphones and +
 the final mix. +
 
@@ -412,8 +412,8 @@ To enable encryption for a certain server, you only have to activate the +
 server must be configured with SSL/TLS support in order to make this working. +
 The connection will fail if you activate SSL/TLS for a server which does not +
 support encryption. +
-If the certficicate validation fails, butt will ask you if you want to trust +
-that certificate anyway. If you click on +[TRUST]+ butt will establish the +
+If the certficicate validation fails, VBT will ask you if you want to trust +
+that certificate anyway. If you click on +[TRUST]+ VBT will establish the +
 connection and remembers the decision for that certificate and server. +
 By pressing the button '[Revoke certificate trust]' you can revoke that +
 decision. +
@@ -422,51 +422,51 @@ you can enter the path to the file or folder in the +[TLS]+ tab of the +
 settings window. Usually you should not need to enter any information there.
 
 
-The butt agent (Windows only)
+The VBT agent (Windows only)
 -----------------------------
-Version 0.1.29 has introduced the little helper tool called butt agent. + 
-The main purpose of the butt agent is to make it possible to minimize butt +
+Version 0.1.29 has introduced the little helper tool called VBT agent. + 
+The main purpose of the VBT agent is to make it possible to minimize VBT +
 into the windows system tray. +
 Minimizing to tray is not the only feature, though. You also have the + 
 ability to let it display balloon notifications for connects/disconnects + 
-and for song updates. If you want to start butt at windows start you can  +
+and for song updates. If you want to start VBT at windows start you can  +
 also enable/disable this with the agent. +
-butt starts the agent automatically if the checkbox 'Minimize to tray' +
+VBT starts the agent automatically if the checkbox 'Minimize to tray' +
 is enabled. If you want to use the balloon notifications you should activate +
 the 'Start agent at startup' checkbox in the +[Main]+ settings tab. +
 Once the agent has been started you will find it in the system tray. +
-From here you can manage the minimized butt instances and activate the  +
+From here you can manage the minimized VBT instances and activate the  +
 features mentioned above. A left click on the tray icon minimizes or raises +
-the last butt instance. A right click opens up a context menu with more +
+the last VBT instance. A right click opens up a context menu with more +
 options. +
-The butt agent closes itself if no more butt instance is running.
+The VBT agent closes itself if no more VBT instance is running.
 
 
 
 Command line control
 --------------------
-butt can be controlled from command line. +
-If you want you can even control butt from a remote computer. +
+VBT can be controlled from command line. +
+If you want you can even control VBT from a remote computer. +
 Please refer to the section below for more information on that.
 
 
 Command line options
 --------------------
-butt has several command line options which can be seperated into two modes.
+VBT has several command line options which can be seperated into two modes.
 
 .Operating Mode:
 These options change the behaviour of the instance you are about to start. +
 
 '-c <path>:' +
 This option allows you to select a different configuration path. It is useful if you + 
-want to run several butt instances with different configurations. Just pass a different + 
+want to run several VBT instances with different configurations. Just pass a different + 
 configuration file with the -c option for every instance. + 
 
 '-A:' +
-This option tells butt to accept control commands from your network or even the internet. +
+This option tells VBT to accept control commands from your network or even the internet. +
 
 CAUTION: When using this option everyone in your network or even internet may +
-control your butt instance. Please use this option only if you have secured your network appropriately.
+control your VBT instance. Please use this option only if you have secured your network appropriately.
 
 '-x:' +
 Use this option if you do not want to run a command server at all. This will also disable 
@@ -474,19 +474,19 @@ receiving commands from your local machine.
 
 '-p <port>:' +
 With this option you can define the port of the command server. The default port is 1256.
-Use this option for example if you have several butt instances that you want to control from
+Use this option for example if you have several VBT instances that you want to control from
 command line.
 
 .Control Mode:
-With these options you can send control commands to a running butt instance. +
+With these options you can send control commands to a running VBT instance. +
 
 '-s [name]:' +
 (lowercase s) +
-This command tells butt to connect to the server 'name'. If the 'name' parameter is omitted, 
-butt will connect to the currently selected server.
+This command tells VBT to connect to the server 'name'. If the 'name' parameter is omitted, 
+VBT will connect to the currently selected server.
 
 '-d:' +
-When receiving this command, butt will disconnect from the current server.
+When receiving this command, VBT will disconnect from the current server.
 
 '-r:' +
 This command starts the recording engine.
@@ -499,7 +499,7 @@ In case a recording session is active this option splits the current file +
 like it would if you press the +[Split now]+ button in the user interface. 
 
 '-q:' +
-Closes butt gracefully.
+Closes VBT gracefully.
 
 '-u <song name>:' +
 Sends a new song name to the server.
@@ -514,27 +514,27 @@ where `0` means the function is inactive and `1` means the function is active.
 
 
 '-a <address>:' +
-Use this option to control a butt instance that is running on a remote computer. +
-In order to control a remote butt instance the butt instance must have been +
+Use this option to control a VBT instance that is running on a remote computer. +
+In order to control a remote VBT instance the VBT instance must have been +
 started with the -A option. The parameter 'address' can be either a IP Address or a hostname.
 
 '-p <port>:' +
-This should be set to the same port that has been given to the butt instance you want to control. +
+This should be set to the same port that has been given to the VBT instance you want to control. +
 By default the command will be sent to port 1256.
 
 
 Uninstall
 ---------
 .MacOS: 
-Delete the *butt.app* from your 'Application' folder and +
-remove the configuration file from '/Users/<username>/.buttrc' +
+Delete the *VBT.app* from your 'Application' folder and +
+remove the configuration file from '/Users/<username>/.VBTrc' +
 
 .Windows: 
-Run the Uninstaller from the butt folder in your windows start menu. +
+Run the Uninstaller from the VBT folder in your windows start menu. +
 
 .Linux/MinGW: 
 Run +sudo make uninstall+ from the source tree and +
-remove the configuration file from '/home/<username>/.buttrc' +
+remove the configuration file from '/home/<username>/.VBTrc' +
 
 
 Contact

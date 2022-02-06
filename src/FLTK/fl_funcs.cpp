@@ -622,29 +622,29 @@ void init_main_gui_and_audio(void)
 {
     if(cfg.gui.remember_pos)
     {
-        int butt_x, butt_y, butt_w, butt_h;
+        int VBT_x, VBT_y, VBT_w, VBT_h;
 
-        butt_x = cfg.gui.x_pos;
-        butt_y = cfg.gui.y_pos;
-        butt_w = fl_g->window_main->w();
-        butt_h = fl_g->window_main->h();
+        VBT_x = cfg.gui.x_pos;
+        VBT_y = cfg.gui.y_pos;
+        VBT_w = fl_g->window_main->w();
+        VBT_h = fl_g->window_main->h();
                 
         int sx, sy, sw, sh;
         int is_visible = 0;
         for (int i = 0; i < Fl::screen_count(); i++)
         {
             Fl::screen_xywh(sx, sy, sw, sh, i);
-            if ((butt_x >= sx-butt_w+50) && (butt_x+50 < (sx+sw)) && (butt_y >= sy-butt_h+50) && (butt_y+50 < (sy+sh))) {
+            if ((VBT_x >= sx-VBT_w+50) && (VBT_x+50 < (sx+sw)) && (VBT_y >= sy-VBT_h+50) && (VBT_y+50 < (sy+sh))) {
                 is_visible = 1;
             }
         }
         
-        // Move butt window to the saved position only if at least 50 pixel of butt are visible on the screen
+        // Move VBT window to the saved position only if at least 50 pixel of VBT are visible on the screen
         if (is_visible)
             fl_g->window_main->position(cfg.gui.x_pos, cfg.gui.y_pos);
         
                 
-       // if( (butt_x+butt_w > 50) && (butt_x+50 < total_screen_width) && (butt_y+butt_h > 50) && (butt_y+50 < total_screen_height) )
+       // if( (VBT_x+VBT_w > 50) && (VBT_x+50 < total_screen_width) && (VBT_y+VBT_h > 50) && (VBT_y+50 < total_screen_height) )
     }
     
     

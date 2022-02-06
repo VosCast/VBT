@@ -2140,7 +2140,7 @@ flgui::flgui() {
     window_main->size_range(430, 155, 430); window_main->is_main_window = true;
     window_main->end();
   } // Fl_My_Double_Window* window_main
-  { window_cfg = new Fl_My_Double_Window(400, 600, gettext("butt settings"));
+  { window_cfg = new Fl_My_Double_Window(400, 600, gettext("VBT settings"));
     window_cfg->box(FL_FLAT_BOX);
     window_cfg->color(FL_BACKGROUND_COLOR);
     window_cfg->selection_color(FL_BACKGROUND_COLOR);
@@ -2257,22 +2257,22 @@ flgui::flgui() {
           group_agent->box(FL_ENGRAVED_FRAME);
           group_agent->align(Fl_Align(FL_ALIGN_TOP_LEFT));
           { check_start_agent = new Fl_Check_Button(43, 400, 157, 15, gettext("Start agent at startup"));
-            check_start_agent->tooltip(gettext("Start the butt agent when butt starts"));
+            check_start_agent->tooltip(gettext("Start the VBT agent when VBT starts"));
             check_start_agent->down_box(FL_DOWN_BOX);
             check_start_agent->callback((Fl_Callback*)cb_check_start_agent);
           } // Fl_Check_Button* check_start_agent
-          { check_minimize_to_tray = new Fl_Check_Button(43, 430, 150, 15, gettext("Minimize butt to tray"));
-            check_minimize_to_tray->tooltip(gettext("Minimize butt to tray"));
+          { check_minimize_to_tray = new Fl_Check_Button(43, 430, 150, 15, gettext("Minimize VBT to tray"));
+            check_minimize_to_tray->tooltip(gettext("Minimize VBT to tray"));
             check_minimize_to_tray->down_box(FL_DOWN_BOX);
             check_minimize_to_tray->callback((Fl_Callback*)cb_check_minimize_to_tray);
           } // Fl_Check_Button* check_minimize_to_tray
           { Fl_Button* o = new Fl_Button(248, 391, 105, 28, gettext("Start Agent"));
-            o->tooltip(gettext("Start the butt agent now"));
+            o->tooltip(gettext("Start the VBT agent now"));
             o->box(FL_ENGRAVED_BOX);
             o->callback((Fl_Callback*)cb_Start);
           } // Fl_Button* o
           { Fl_Button* o = new Fl_Button(248, 425, 105, 28, gettext("Stop Agent"));
-            o->tooltip(gettext("Stop the butt agent"));
+            o->tooltip(gettext("Stop the VBT agent"));
             o->box(FL_ENGRAVED_BOX);
             o->callback((Fl_Callback*)cb_Stop);
           } // Fl_Button* o
@@ -2586,7 +2586,7 @@ flgui::flgui() {
             o->align(Fl_Align(FL_ALIGN_LEFT|FL_ALIGN_INSIDE));
           } // Fl_Box* o
           { check_cfg_force_reconnecting = new Fl_Check_Button(42, 559, 205, 18, gettext("Force reconnecting"));
-            check_cfg_force_reconnecting->tooltip(gettext("If enabled butt keeps reconnecting regardless of the error message"));
+            check_cfg_force_reconnecting->tooltip(gettext("If enabled VBT keeps reconnecting regardless of the error message"));
             check_cfg_force_reconnecting->down_box(FL_DOWN_BOX);
             check_cfg_force_reconnecting->callback((Fl_Callback*)cb_check_cfg_force_reconnecting);
           } // Fl_Check_Button* check_cfg_force_reconnecting
@@ -3135,7 +3135,7 @@ flgui::flgui() {
           o->box(FL_ENGRAVED_FRAME);
           o->align(Fl_Align(FL_ALIGN_TOP_LEFT));
           { check_gui_attach = new Fl_Check_Button(46, 355, 300, 20, gettext("Attach settings window to main window"));
-            check_gui_attach->tooltip(gettext("Attach this window to the butt window"));
+            check_gui_attach->tooltip(gettext("Attach this window to the VBT window"));
             check_gui_attach->down_box(FL_DOWN_BOX);
             check_gui_attach->callback((Fl_Callback*)cb_check_gui_attach);
           } // Fl_Check_Button* check_gui_attach
@@ -3160,7 +3160,7 @@ flgui::flgui() {
             check_gui_remember_pos->callback((Fl_Callback*)cb_check_gui_remember_pos);
           } // Fl_Check_Button* check_gui_remember_pos
           { check_gui_start_minimized = new Fl_Check_Button(46, 480, 149, 20, gettext("Start minimized"));
-            check_gui_start_minimized->tooltip(gettext("Minimize butt at startup"));
+            check_gui_start_minimized->tooltip(gettext("Minimize VBT at startup"));
             check_gui_start_minimized->down_box(FL_DOWN_BOX);
             check_gui_start_minimized->callback((Fl_Callback*)cb_check_gui_start_minimized);
           } // Fl_Check_Button* check_gui_start_minimized

@@ -7,8 +7,8 @@ AM_CPPFLAGS += -D_="gettext"
 #
 # # this lists the binaries to produce, the (non-PHONY, binary) targets in
 # # the previous manual Makefile
-bin_PROGRAMS = butt 
-butt_SOURCES = butt.cpp butt.h cfg.cpp cfg.h icecast.cpp icecast.h lame_encode.cpp tls.cpp tls.h \
+bin_PROGRAMS = VBT 
+VBT_SOURCES = butt.cpp butt.h cfg.cpp cfg.h icecast.cpp icecast.h lame_encode.cpp tls.cpp tls.h \
 			   lame_encode.h parseconfig.cpp parseconfig.h port_audio.cpp \
 			   port_audio.h ringbuffer.cpp ringbuffer.h shoutcast.cpp shoutcast.h \
 			   sockfuncs.cpp sockfuncs.h strfuncs.cpp strfuncs.h timer.cpp timer.h \
@@ -24,25 +24,25 @@ butt_SOURCES = butt.cpp butt.h cfg.cpp cfg.h icecast.cpp icecast.h lame_encode.c
 			   FLTK/Fl_LED.cpp FLTK/Fl_LED.h
 			   
 if WITH_RADIOCO
-nodist_butt_SOURCES = radioco.cpp radioco.h oauth.cpp oauth.h cJSON.cpp cJSON.h url.cpp url.h			  
+nodist_VBT_SOURCES = radioco.cpp radioco.h oauth.cpp oauth.h cJSON.cpp cJSON.h url.cpp url.h			  
 endif
 
 if WINDOWS
-butt_SOURCES += resource.rc currentTrack.h currentTrack.cpp
+VBT_SOURCES += resource.rc currentTrack.h currentTrack.cpp
 AM_CPPFLAGS += -DHAVE_LIBFDK_AAC
 LDADD = -lintl
 endif
 
 if OSX
-butt_SOURCES += CurrentTrackOSX.h CurrentTrackOSX.m
+VBT_SOURCES += CurrentTrackOSX.h CurrentTrackOSX.m
 endif
 
 if LINUX
-butt_SOURCES += currentTrack.h currentTrackLinux.cpp
+VBT_SOURCES += currentTrack.h currentTrackLinux.cpp
 endif
 
 if FREEBSD
-butt_SOURCES += currentTrack.h currentTrackLinux.cpp
+VBT_SOURCES += currentTrack.h currentTrackLinux.cpp
 endif
 
 # used only under MinGW to compile the resource.rc file (manifest and program icon)

@@ -22,7 +22,7 @@ int update_check_for_new_version(void)
     
     
     snprintf(request, sizeof(request), "%s",
-             "GET /latest_butt HTTP/1.0\r\n"
+             "GET /latest_VBT HTTP/1.0\r\n"
              "Host: danielnoethen.de\r\n"
              "Connection: close\r\n\r\n"
              );

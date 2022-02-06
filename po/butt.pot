@@ -1,12 +1,12 @@
 # SOME DESCRIPTIVE TITLE.
 # Copyright (C) YEAR Daniel Nöthen
-# This file is distributed under the same license as the butt package.
+# This file is distributed under the same license as the VBT package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
 #, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: butt 0.1.32\n"
+"Project-Id-Version: VBT 0.1.32\n"
 "Report-Msgid-Bugs-To: butt@danielnoethen.de\n"
 "POT-Creation-Date: 2021-11-13 09:15+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
@@ -23,10 +23,10 @@ msgstr ""
 
 #: src/AskForMicPermission.m:21
 msgid ""
-"butt needs access to your microphone\n"
+"VBT needs access to your microphone\n"
 "Please go to\n"
 "System Preferences->Security & Privacy->Privacy->Microphone\n"
-"and activate the check mark next to the butt entry"
+"and activate the check mark next to the VBT entry"
 msgstr ""
 
 #: src/butt.cpp:188
@@ -37,7 +37,7 @@ msgstr ""
 #, c-format
 msgid ""
 "The shift key was held down during startup.\n"
-"Do you want to start butt with a new configuration file?\n"
+"Do you want to start VBT with a new configuration file?\n"
 "This will overwrite your existing configuration file at\n"
 "%s"
 msgstr ""
@@ -54,7 +54,7 @@ msgstr ""
 #, c-format
 msgid ""
 "Could not create config %s\n"
-"butt is going to close now"
+"VBT is going to close now"
 msgstr ""
 
 #: src/butt.cpp:214
@@ -70,19 +70,19 @@ msgstr ""
 #: src/butt.cpp:226
 #, c-format
 msgid ""
-"butt created a default config at\n"
+"VBT created a default config at\n"
 "%s\n"
 msgstr ""
 
 #: src/butt.cpp:233
 msgid ""
 "Could not find any audio device with input channels.\n"
-"butt requires at least one audio device with input channels in order to "
+"VBT requires at least one audio device with input channels in order to "
 "work.\n"
 "This can either be a built-in audio device, an external audio device or a "
 "virtual audio device.\n"
 "\n"
-"butt is going to close now."
+"VBT is going to close now."
 msgstr ""
 
 #: src/butt.cpp:407
@@ -107,18 +107,18 @@ msgid ""
 "-r\tStart recording\n"
 "-t\tStop recording\n"
 "-n\tSplit recording\n"
-"-q\tQuit butt\n"
+"-q\tQuit VBT\n"
 "-u\tupdate song name\n"
 "-S\tRequest status\n"
-"-a\tAddress of the butt instance to be controlled (default: 127.0.0.1)\n"
-"-p\tPort of the butt instance to be controlled (default: 1256)\n"
+"-a\tAddress of the VBT instance to be controlled (default: 127.0.0.1)\n"
+"-p\tPort of the VBT instance to be controlled (default: 1256)\n"
 msgstr ""
 
 #: src/butt.cpp:442
 #, c-format
 msgid ""
 "Illegal option -%c.\n"
-"Type butt -h to get a list of supported options.\n"
+"Type VBT -h to get a list of supported options.\n"
 msgstr ""
 
 #: src/butt.cpp:450
@@ -133,7 +133,7 @@ msgstr ""
 
 #: src/butt.cpp:472
 #, c-format
-msgid "No butt instance running on %s at port %d\n"
+msgid "No VBT instance running on %s at port %d\n"
 msgstr ""
 
 #: src/butt.cpp:486
@@ -147,7 +147,7 @@ msgstr ""
 #: src/butt.cpp:498
 msgid ""
 "PortAudio init failed\n"
-"butt is going to close now"
+"VBT is going to close now"
 msgstr ""
 
 #: src/butt.cpp:554
@@ -208,79 +208,79 @@ msgstr ""
 #: src/cfg.cpp:673
 msgid ""
 "error while parsing config. Illegal value (-1) for num_of_srv.\n"
-"butt is going to close now"
+"VBT is going to close now"
 msgstr ""
 
 #: src/cfg.cpp:682
 msgid ""
 "error while parsing config. Missing main/server entry.\n"
-"butt is going to close now"
+"VBT is going to close now"
 msgstr ""
 
 #: src/cfg.cpp:689
 msgid ""
 "error while parsing config. Missing main/srv_ent entry.\n"
-"butt is going to close now"
+"VBT is going to close now"
 msgstr ""
 
 #: src/cfg.cpp:709
 #, c-format
 msgid ""
 "error while parsing config. Missing address entry for server \"%s\".\n"
-"butt is going to close now"
+"VBT is going to close now"
 msgstr ""
 
 #: src/cfg.cpp:717
 #, c-format
 msgid ""
 "error while parsing config. Missing port entry for server \"%s\".\n"
-"butt is going to close now"
+"VBT is going to close now"
 msgstr ""
 
 #: src/cfg.cpp:725
 #, c-format
 msgid ""
 "error while parsing config. Missing password entry for server \"%s\".\n"
-"butt is going to close now"
+"VBT is going to close now"
 msgstr ""
 
 #: src/cfg.cpp:733
 #, c-format
 msgid ""
 "error while parsing config. Missing type entry for server \"%s\".\n"
-"butt is going to close now"
+"VBT is going to close now"
 msgstr ""
 
 #: src/cfg.cpp:741
 #, c-format
 msgid ""
 "error while parsing config. Missing mount entry for server \"%s\".\n"
-"butt is going to close now"
+"VBT is going to close now"
 msgstr ""
 
 #: src/cfg.cpp:780
 msgid ""
 "error while parsing config. Illegal value (-1) for num_of_icy.\n"
-"butt is going to close now"
+"VBT is going to close now"
 msgstr ""
 
 #: src/cfg.cpp:790
 msgid ""
 "error while parsing config. Missing main/icy entry.\n"
-"butt is going to close now"
+"VBT is going to close now"
 msgstr ""
 
 #: src/cfg.cpp:796
 msgid ""
 "error while parsing config. Missing main/icy_ent entry.\n"
-"butt is going to close now"
+"VBT is going to close now"
 msgstr ""
 
 #: src/cfg.cpp:822
 #, c-format
 msgid ""
 "error while parsing config. Missing pub entry for icy \"%s\".\n"
-"butt is going to close now"
+"VBT is going to close now"
 msgstr ""
 
 #: src/FLTK/flgui.cpp:2804
@@ -352,7 +352,7 @@ msgid "+24 dB"
 msgstr ""
 
 #: src/FLTK/flgui.cpp:3627
-msgid "butt settings"
+msgid "VBT settings"
 msgstr ""
 
 #: src/FLTK/flgui.cpp:3640
@@ -484,11 +484,11 @@ msgid "Start agent at startup"
 msgstr ""
 
 #: src/FLTK/flgui.cpp:3744
-msgid "Start the butt agent when butt starts"
+msgid "Start the VBT agent when VBT starts"
 msgstr ""
 
 #: src/FLTK/flgui.cpp:3748 src/FLTK/flgui.cpp:3749
-msgid "Minimize butt to tray"
+msgid "Minimize VBT to tray"
 msgstr ""
 
 #: src/FLTK/flgui.cpp:3753
@@ -496,7 +496,7 @@ msgid "Start Agent"
 msgstr ""
 
 #: src/FLTK/flgui.cpp:3754
-msgid "Start the butt agent now"
+msgid "Start the VBT agent now"
 msgstr ""
 
 #: src/FLTK/flgui.cpp:3758
@@ -504,7 +504,7 @@ msgid "Stop Agent"
 msgstr ""
 
 #: src/FLTK/flgui.cpp:3759
-msgid "Stop the butt agent"
+msgid "Stop the VBT agent"
 msgstr ""
 
 #: src/FLTK/flgui.cpp:3767
@@ -718,7 +718,7 @@ msgid "Force reconnecting"
 msgstr ""
 
 #: src/FLTK/flgui.cpp:4073
-msgid "If enabled butt keeps reconnecting regardless of the error message"
+msgid "If enabled VBT keeps reconnecting regardless of the error message"
 msgstr ""
 
 #: src/FLTK/flgui.cpp:4079
@@ -957,7 +957,7 @@ msgid "Attach settings window to main window"
 msgstr ""
 
 #: src/FLTK/flgui.cpp:4622
-msgid "Attach this window to the butt window"
+msgid "Attach this window to the VBT window"
 msgstr ""
 
 #: src/FLTK/flgui.cpp:4626 src/FLTK/flgui.cpp:4627
@@ -981,7 +981,7 @@ msgid "Start minimized"
 msgstr ""
 
 #: src/FLTK/flgui.cpp:4647
-msgid "Minimize butt at startup"
+msgid "Minimize VBT at startup"
 msgstr ""
 
 #: src/FLTK/flgui.cpp:4653
@@ -1284,7 +1284,7 @@ msgstr ""
 #: src/FLTK/fl_timer_funcs.cpp:395
 msgid ""
 "Could not find a valid filename for next file\n"
-"butt keeps recording to current file"
+"VBT keeps recording to current file"
 msgstr ""
 
 #: src/FLTK/fl_timer_funcs.cpp:406 src/FLTK/fl_callbacks.cpp:1044
@@ -1490,9 +1490,9 @@ msgstr ""
 
 #: src/FLTK/fl_callbacks.cpp:1547
 msgid ""
-"butt will open Radio.co in a new browser window.\n"
+"VBT will open Radio.co in a new browser window.\n"
 "\n"
-"Login to Radio.co and allow butt access to your account."
+"Login to Radio.co and allow VBT access to your account."
 msgstr ""
 
 #: src/FLTK/fl_callbacks.cpp:1574
@@ -1700,7 +1700,7 @@ msgid "select text color"
 msgstr ""
 
 #: src/FLTK/fl_callbacks.cpp:3401
-msgid "Please restart butt to apply new language."
+msgid "Please restart VBT to apply new language."
 msgstr ""
 
 #: src/FLTK/fl_callbacks.cpp:3466 src/FLTK/fl_callbacks.cpp:3472
@@ -1750,14 +1750,14 @@ msgstr ""
 
 #: src/FLTK/fl_callbacks.cpp:3789
 msgid ""
-"butt is currently streaming.\n"
-"Do you really want to close butt now?"
+"VBT is currently streaming.\n"
+"Do you really want to close VBT now?"
 msgstr ""
 
 #: src/FLTK/fl_callbacks.cpp:3796
 msgid ""
-"butt is currently recording.\n"
-"Do you really want to close butt now?"
+"VBT is currently recording.\n"
+"Do you really want to close VBT now?"
 msgstr ""
 
 #: src/FLTK/fl_funcs.cpp:217

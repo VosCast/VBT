@@ -1,4 +1,4 @@
-// command functions for butt
+// command functions for VBT
 //
 // Copyright 2007-2020 by Daniel Noethen.
 //

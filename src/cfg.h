@@ -1,4 +1,4 @@
-// config functions for butt
+// config functions for VBT
 //
 // Copyright 2007-2018 by Daniel Noethen.
 //

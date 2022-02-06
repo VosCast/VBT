@@ -2,7 +2,7 @@
 # Process this file with autoconf to produce a configure script.
 
 AC_PREREQ([2.68])
-AC_INIT([butt], [0.1.32], [BUG-REPORT-ADDRESS])
+AC_INIT([VBT], [0.1.32], [BUG-REPORT-ADDRESS])
 AM_INIT_AUTOMAKE([subdir-objects foreign])
 AC_CANONICAL_HOST
 

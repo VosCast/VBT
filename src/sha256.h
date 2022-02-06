@@ -1,4 +1,4 @@
-// sha256 functions for butt
+// sha256 functions for VBT
 //
 // Copyright 2007-2021 by Daniel Noethen.
 //

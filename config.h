@@ -150,19 +150,19 @@
 #define HAVE__BOOL 1
 
 /* Name of package */
-#define PACKAGE "butt"
+#define PACKAGE "VBT"
 
 /* Define to the address where bug reports for this package should be sent. */
 #define PACKAGE_BUGREPORT "BUG-REPORT-ADDRESS"
 
 /* Define to the full name of this package. */
-#define PACKAGE_NAME "butt"
+#define PACKAGE_NAME "VBT"
 
 /* Define to the full name and version of this package. */
-#define PACKAGE_STRING "butt 0.1.32"
+#define PACKAGE_STRING "VBT 0.1.32"
 
 /* Define to the one symbol short name of this package. */
-#define PACKAGE_TARNAME "butt"
+#define PACKAGE_TARNAME "VBT"
 
 /* Define to the home page for this package. */
 #define PACKAGE_URL ""

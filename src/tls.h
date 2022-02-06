@@ -1,4 +1,4 @@
-// OpenSSL functions for butt
+// OpenSSL functions for VBT
 //
 // Copyright 2020 by Daniel Noethen.
 //

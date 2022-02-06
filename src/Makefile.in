@@ -90,7 +90,7 @@ PRE_UNINSTALL = :
 POST_UNINSTALL = :
 build_triplet = @build@
 host_triplet = @host@
-bin_PROGRAMS = butt$(EXEEXT)
+bin_PROGRAMS = VBT$(EXEEXT)
 @WINDOWS_TRUE@am__append_1 = resource.rc currentTrack.h currentTrack.cpp
 @WINDOWS_TRUE@am__append_2 = -DHAVE_LIBFDK_AAC
 @OSX_TRUE@am__append_3 = CurrentTrackOSX.h CurrentTrackOSX.m
@@ -113,7 +113,7 @@ CONFIG_CLEAN_FILES =
 CONFIG_CLEAN_VPATH_FILES =
 am__installdirs = "$(DESTDIR)$(bindir)"
 PROGRAMS = $(bin_PROGRAMS)
-am__butt_SOURCES_DIST = butt.cpp butt.h cfg.cpp cfg.h icecast.cpp \
+am__VBT_SOURCES_DIST = butt.cpp butt.h cfg.cpp cfg.h icecast.cpp \
 	icecast.h lame_encode.cpp tls.cpp tls.h lame_encode.h \
 	parseconfig.cpp parseconfig.h port_audio.cpp port_audio.h \
 	ringbuffer.cpp ringbuffer.h shoutcast.cpp shoutcast.h \
@@ -140,7 +140,7 @@ am__dirstamp = $(am__leading_dot)dirstamp
 @OSX_TRUE@am__objects_2 = CurrentTrackOSX.$(OBJEXT)
 @LINUX_TRUE@am__objects_3 = currentTrackLinux.$(OBJEXT)
 @FREEBSD_TRUE@am__objects_4 = currentTrackLinux.$(OBJEXT)
-am_butt_OBJECTS = butt.$(OBJEXT) cfg.$(OBJEXT) icecast.$(OBJEXT) \
+am_VBT_OBJECTS = butt.$(OBJEXT) cfg.$(OBJEXT) icecast.$(OBJEXT) \
 	lame_encode.$(OBJEXT) tls.$(OBJEXT) parseconfig.$(OBJEXT) \
 	port_audio.$(OBJEXT) ringbuffer.$(OBJEXT) shoutcast.$(OBJEXT) \
 	sockfuncs.$(OBJEXT) strfuncs.$(OBJEXT) timer.$(OBJEXT) \
@@ -154,12 +154,12 @@ am_butt_OBJECTS = butt.$(OBJEXT) cfg.$(OBJEXT) icecast.$(OBJEXT) \
 	FLTK/Fl_vu_meter.$(OBJEXT) FLTK/fl_timer_funcs.$(OBJEXT) \
 	aac_encode.$(OBJEXT) FLTK/Fl_LED.$(OBJEXT) $(am__objects_1) \
 	$(am__objects_2) $(am__objects_3) $(am__objects_4)
-@WITH_RADIOCO_TRUE@nodist_butt_OBJECTS = radioco.$(OBJEXT) \
+@WITH_RADIOCO_TRUE@nodist_VBT_OBJECTS = radioco.$(OBJEXT) \
 @WITH_RADIOCO_TRUE@	oauth.$(OBJEXT) cJSON.$(OBJEXT) \
 @WITH_RADIOCO_TRUE@	url.$(OBJEXT)
-butt_OBJECTS = $(am_butt_OBJECTS) $(nodist_butt_OBJECTS)
-butt_LDADD = $(LDADD)
-butt_DEPENDENCIES =
+VBT_OBJECTS = $(am_VBT_OBJECTS) $(nodist_VBT_OBJECTS)
+VBT_LDADD = $(LDADD)
+VBT_DEPENDENCIES =
 AM_V_P = $(am__v_P_@AM_V@)
 am__v_P_ = $(am__v_P_@AM_DEFAULT_V@)
 am__v_P_0 = false
@@ -177,7 +177,7 @@ depcomp = $(SHELL) $(top_srcdir)/depcomp
 am__maybe_remake_depfiles = depfiles
 am__depfiles_remade = ./$(DEPDIR)/Biquad.Po \
 	./$(DEPDIR)/CurrentTrackOSX.Po ./$(DEPDIR)/aac_encode.Po \
-	./$(DEPDIR)/butt.Po ./$(DEPDIR)/cJSON.Po ./$(DEPDIR)/cfg.Po \
+	./$(DEPDIR)/VBT.Po ./$(DEPDIR)/cJSON.Po ./$(DEPDIR)/cfg.Po \
 	./$(DEPDIR)/command.Po ./$(DEPDIR)/currentTrack.Po \
 	./$(DEPDIR)/currentTrackLinux.Po ./$(DEPDIR)/dsp.Po \
 	./$(DEPDIR)/flac_encode.Po ./$(DEPDIR)/icecast.Po \
@@ -235,8 +235,8 @@ AM_V_CCLD = $(am__v_CCLD_@AM_V@)
 am__v_CCLD_ = $(am__v_CCLD_@AM_DEFAULT_V@)
 am__v_CCLD_0 = @echo "  CCLD    " $@;
 am__v_CCLD_1 = 
-SOURCES = $(butt_SOURCES) $(nodist_butt_SOURCES)
-DIST_SOURCES = $(am__butt_SOURCES_DIST)
+SOURCES = $(VBT_SOURCES) $(nodist_VBT_SOURCES)
+DIST_SOURCES = $(am__VBT_SOURCES_DIST)
 am__can_run_installinfo = \
   case $$AM_UPDATE_INFO_DIR in \
     n|no|NO) false;; \
@@ -395,7 +395,7 @@ top_builddir = @top_builddir@
 top_srcdir = @top_srcdir@
 AM_CPPFLAGS = -IFLTK -DLOCALEDIR='"$(localedir)"' -D_="gettext" \
 	$(am__append_2)
-butt_SOURCES = butt.cpp butt.h cfg.cpp cfg.h icecast.cpp icecast.h \
+VBT_SOURCES = butt.cpp butt.h cfg.cpp cfg.h icecast.cpp icecast.h \
 	lame_encode.cpp tls.cpp tls.h lame_encode.h parseconfig.cpp \
 	parseconfig.h port_audio.cpp port_audio.h ringbuffer.cpp \
 	ringbuffer.h shoutcast.cpp shoutcast.h sockfuncs.cpp \
@@ -415,7 +415,7 @@ butt_SOURCES = butt.cpp butt.h cfg.cpp cfg.h icecast.cpp icecast.h \
 	FLTK/fl_timer_funcs.h aac_encode.cpp aac_encode.h \
 	FLTK/Fl_LED.cpp FLTK/Fl_LED.h $(am__append_1) $(am__append_3) \
 	$(am__append_4) $(am__append_5)
-@WITH_RADIOCO_TRUE@nodist_butt_SOURCES = radioco.cpp radioco.h oauth.cpp oauth.h cJSON.cpp cJSON.h url.cpp url.h			  
+@WITH_RADIOCO_TRUE@nodist_VBT_SOURCES = radioco.cpp radioco.h oauth.cpp oauth.h cJSON.cpp cJSON.h url.cpp url.h			  
 @WINDOWS_TRUE@LDADD = -lintl
 all: all-am
 
@@ -515,9 +515,9 @@ FLTK/fl_timer_funcs.$(OBJEXT): FLTK/$(am__dirstamp) \
 FLTK/Fl_LED.$(OBJEXT): FLTK/$(am__dirstamp) \
 	FLTK/$(DEPDIR)/$(am__dirstamp)
 
-butt$(EXEEXT): $(butt_OBJECTS) $(butt_DEPENDENCIES) $(EXTRA_butt_DEPENDENCIES) 
-	@rm -f butt$(EXEEXT)
-	$(AM_V_CXXLD)$(CXXLINK) $(butt_OBJECTS) $(butt_LDADD) $(LIBS)
+VBT$(EXEEXT): $(VBT_OBJECTS) $(VBT_DEPENDENCIES) $(EXTRA_VBT_DEPENDENCIES) 
+	@rm -f VBT$(EXEEXT)
+	$(AM_V_CXXLD)$(CXXLINK) $(VBT_OBJECTS) $(VBT_LDADD) $(LIBS)
 
 mostlyclean-compile:
 	-rm -f *.$(OBJEXT)
@@ -529,7 +529,7 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/Biquad.Po@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/CurrentTrackOSX.Po@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/aac_encode.Po@am__quote@ # am--include-marker
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/butt.Po@am__quote@ # am--include-marker
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/VBT.Po@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/cJSON.Po@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/cfg.Po@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/command.Po@am__quote@ # am--include-marker
@@ -752,7 +752,7 @@ distclean: distclean-am
 		-rm -f ./$(DEPDIR)/Biquad.Po
 	-rm -f ./$(DEPDIR)/CurrentTrackOSX.Po
 	-rm -f ./$(DEPDIR)/aac_encode.Po
-	-rm -f ./$(DEPDIR)/butt.Po
+	-rm -f ./$(DEPDIR)/VBT.Po
 	-rm -f ./$(DEPDIR)/cJSON.Po
 	-rm -f ./$(DEPDIR)/cfg.Po
 	-rm -f ./$(DEPDIR)/command.Po
@@ -837,7 +837,7 @@ maintainer-clean: maintainer-clean-am
 		-rm -f ./$(DEPDIR)/Biquad.Po
 	-rm -f ./$(DEPDIR)/CurrentTrackOSX.Po
 	-rm -f ./$(DEPDIR)/aac_encode.Po
-	-rm -f ./$(DEPDIR)/butt.Po
+	-rm -f ./$(DEPDIR)/VBT.Po
 	-rm -f ./$(DEPDIR)/cJSON.Po
 	-rm -f ./$(DEPDIR)/cfg.Po
 	-rm -f ./$(DEPDIR)/command.Po

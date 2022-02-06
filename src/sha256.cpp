@@ -1,6 +1,6 @@
 //
 //  sha256.cpp
-//  butt
+//  VBT
 //
 //  Created by Daniel Nöthen on 17.03.21.
 //  Copyright © 2021 Daniel Nöthen. All rights reserved.

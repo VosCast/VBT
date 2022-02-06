@@ -87,7 +87,7 @@ class flgui {open
       }
     }
     Fl_Window window_cfg {
-      label {butt settings}
+      label {VBT settings}
       callback {if(window_cfg->shown())
 {
     window_cfg->hide();
@@ -205,22 +205,22 @@ class flgui {open
             Fl_Check_Button check_start_agent {
               label {Start agent at startup}
               callback {check_start_agent_cb();}
-              tooltip {Start the butt agent when butt starts} xywh {43 400 157 15} down_box DOWN_BOX
+              tooltip {Start the VBT agent when VBT starts} xywh {43 400 157 15} down_box DOWN_BOX
             }
             Fl_Check_Button check_minimize_to_tray {
-              label {Minimize butt to tray}
+              label {Minimize VBT to tray}
               callback {check_minimize_to_tray_cb();}
-              tooltip {Minimize butt to tray} xywh {43 430 150 15} down_box DOWN_BOX
+              tooltip {Minimize VBT to tray} xywh {43 430 150 15} down_box DOWN_BOX
             }
             Fl_Button {} {
               label {Start Agent}
               callback {button_start_agent_cb();}
-              tooltip {Start the butt agent now} xywh {248 391 105 28} box ENGRAVED_BOX
+              tooltip {Start the VBT agent now} xywh {248 391 105 28} box ENGRAVED_BOX
             }
             Fl_Button {} {
               label {Stop Agent}
               callback {button_stop_agent_cb();}
-              tooltip {Stop the butt agent} xywh {248 425 105 28} box ENGRAVED_BOX
+              tooltip {Stop the VBT agent} xywh {248 425 105 28} box ENGRAVED_BOX
             }
           }
         }
@@ -705,7 +705,7 @@ else
             Fl_Check_Button check_cfg_force_reconnecting {
               label {Force reconnecting}
               callback {check_cfg_force_reconnecting_cb();}
-              tooltip {If enabled butt keeps reconnecting regardless of the error message} xywh {42 559 205 18} down_box DOWN_BOX
+              tooltip {If enabled VBT keeps reconnecting regardless of the error message} xywh {42 559 205 18} down_box DOWN_BOX
             }
           }
           Fl_Group {} {
@@ -1168,7 +1168,7 @@ slider_makeup_cb(0);}
             Fl_Check_Button check_gui_attach {
               label {Attach settings window to main window}
               callback {check_gui_attach_cb();}
-              tooltip {Attach this window to the butt window} xywh {46 355 300 20} down_box DOWN_BOX
+              tooltip {Attach this window to the VBT window} xywh {46 355 300 20} down_box DOWN_BOX
             }
             Fl_Check_Button check_gui_ontop {
               label {Stay always on top}
@@ -1193,7 +1193,7 @@ slider_makeup_cb(0);}
             Fl_Check_Button check_gui_start_minimized {
               label {Start minimized}
               callback {check_gui_start_minimized_cb();}
-              tooltip {Minimize butt at startup} xywh {46 480 149 20} down_box DOWN_BOX
+              tooltip {Minimize VBT at startup} xywh {46 480 149 20} down_box DOWN_BOX
             }
           }
           Fl_Group {} {
